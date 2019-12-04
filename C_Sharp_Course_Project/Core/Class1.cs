@@ -8,5 +8,11 @@ namespace Core
 {
     public class Class1
     {
+        private int variable1;
+        public int Prop1
+        {
+            get;
+            set;
+        }
     }
 }
