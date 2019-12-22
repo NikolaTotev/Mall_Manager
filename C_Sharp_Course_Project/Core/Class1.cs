@@ -14,6 +14,6 @@ namespace Core
             get;
             set;
         }
-        //Slack commit notification test
+        //Slack commit notification test 1
     }
 }
