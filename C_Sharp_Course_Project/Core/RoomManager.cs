@@ -8,6 +8,6 @@ namespace Core
 {
     public class RoomManager
     {
-        public List<string> Types { get; set; }
+        public List<string> RoomTypes { get; set; }
     }
 }

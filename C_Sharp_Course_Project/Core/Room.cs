@@ -18,3 +18,4 @@ namespace Core
         //TODO constructors, and methods for editing rooms and deleting, and list of activities for this room
     }
 }
+ 

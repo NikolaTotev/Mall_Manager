@@ -21,17 +21,20 @@ namespace Core
 {
     public static class SerializationManager
     {
-        static string m_LocalAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        static string m_ProgramFolder = System.IO.Path.Combine(m_LocalAppDataPath, "MallManager_DATA");
-        static string m_ActivityManagerSave = System.IO.Path.Combine(m_ProgramFolder, "ActivityManager.json");
+        static readonly string m_LocalAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        static readonly string m_ProgramFolder = System.IO.Path.Combine(m_LocalAppDataPath, "MallManager_DATA");
+        static readonly string m_ActivityManagerSave = System.IO.Path.Combine(m_ProgramFolder, "ActivityManager.json");
+        //TODO create path for room serializationFile
 
-
-
-        public static void SerializeRoom() //TODO Add room parameter;
+        public static void SerializeRoomManager() //TODO Add room parameter;
         {
             //Create serialization code;
         }
 
+        /// <summary>
+        /// Saves the activity that is passed to the function.
+        /// </summary>
+        /// <param name="managerToSave"></param>
         public static void SaveActivityManager(ActivityManager managerToSave)
         {
             using (StreamWriter file = File.CreateText(m_ActivityManagerSave))
@@ -41,6 +44,10 @@ namespace Core
             }
         }
 
+        /// <summary>
+        /// Gets last save of activity manager. If no save is found a new one is created.
+        /// </summary>
+        /// <returns></returns>
         public static ActivityManager GetActivityManager()
         {
 
