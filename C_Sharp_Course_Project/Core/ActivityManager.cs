@@ -15,7 +15,7 @@ namespace Core
 
     public class ActivityManager
     {
-        private  ProgramManager m_CurrentManager;
+        private ProgramManager m_CurrentManager;
 
         public List<string> Categories { get; set; }
         public List<string> Templates { get; set; }
@@ -26,10 +26,32 @@ namespace Core
             m_CurrentManager = currentManager;
         }
 
-        public ActivityManager()
+        public ActivityManager() : this(new ProgramManager())
         {
 
         }
+
+        public void AddNewCategory()
+        {
+            //TODO create new category
+        }
+
+        public void AddNewTemplate()
+        {
+            //TODO crete new template
+        }
+
+        public List<string> GetCreateActivityData()
+        {
+            throw new NotImplementedException();
+            //TODO get info from the UI
+        }
+
+        public void AddActivity()
+        {
+            List<string> data = GetCreateActivityData();
+            //Create Activity and assign it to a room
+        } 
 
         public void Save()
         {
