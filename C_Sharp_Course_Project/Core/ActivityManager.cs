@@ -26,6 +26,11 @@ namespace Core
             m_CurrentManager = currentManager;
         }
 
+        public ActivityManager()
+        {
+
+        }
+
         public void Save()
         {
             SerializationManager.SaveActivityManager(this);

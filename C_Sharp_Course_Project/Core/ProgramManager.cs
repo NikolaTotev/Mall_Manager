@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core
 {
-    class ProgramManager
+    public class ProgramManager
     {
 
     }
