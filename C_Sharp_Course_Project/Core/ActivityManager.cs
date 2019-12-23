@@ -15,6 +15,11 @@ namespace Core
 
     class ActivityManager
     {
-       
+        private ProgramManager m_CurrentManager;
+
+        ActivityManager(ProgramManager currentManager)
+        {
+            m_CurrentManager = currentManager;
+        }
     }
 }
