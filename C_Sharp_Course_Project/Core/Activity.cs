@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core
 {
-    class Activity
+    public class Activity
     {
         public string Category { get; set; }
         public string Description { get; set; }

@@ -46,7 +46,9 @@
   <ItemGroup>
     <Compile Include="Activity.cs" />
     <Compile Include="ActivityManager.cs" />
+    <Compile Include="ProgramManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SerializationManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

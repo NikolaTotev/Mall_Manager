@@ -6,20 +6,29 @@ using System.Threading.Tasks;
 
 namespace Core
 {
-    enum ActivityStatus
+    public enum ActivityStatus
     {
         Scheduled,
         InProgress,
         Finished
     }
 
-    class ActivityManager
+    public class ActivityManager
     {
-        private ProgramManager m_CurrentManager;
+        private  ProgramManager m_CurrentManager;
 
-        ActivityManager(ProgramManager currentManager)
+        public List<string> Categories { get; set; }
+        public List<string> Templates { get; set; }
+
+
+        public ActivityManager(ProgramManager currentManager)
         {
             m_CurrentManager = currentManager;
+        }
+
+        public void Save()
+        {
+            SerializationManager.SaveActivityManager(this);
         }
     }
 }
