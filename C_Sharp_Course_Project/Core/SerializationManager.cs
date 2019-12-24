@@ -53,7 +53,7 @@ namespace Core
 
             if (!File.Exists(m_ActivityManagerSave))
             {
-                ActivityManager managerToReturn = new ActivityManager();
+                ActivityManager managerToReturn = new ActivityManager(ProgramManager.GetInstance());
                 ExceptionManager.OnFileNotFound(m_ActivityManagerSave);
                 SaveActivityManager(managerToReturn);
                 return managerToReturn;
