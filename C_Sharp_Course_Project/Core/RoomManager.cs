@@ -8,6 +8,7 @@ namespace Core
 {
     public class RoomManager
     {
+        ///TODO Implement singleton pattern (see program manager for example)
         public List<string> RoomTypes { get; set; }
     }
 }
