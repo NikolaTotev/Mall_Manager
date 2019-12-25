@@ -16,25 +16,25 @@ namespace Core
     public class ActivityManager
     {
         private ProgramManager m_CurrentManager;
-        private static ActivityManager instance;
+        private static ActivityManager m_Instance;
         public List<string> Categories { get; set; }
         public List<string> Templates { get; set; }
 
 
-        public ActivityManager(ProgramManager currentManager)
+        private ActivityManager()
         {
-            instance = this;
-            m_CurrentManager = currentManager;
+            m_Instance = this;
+            m_CurrentManager = ProgramManager.GetInstance();
         }
 
         public static ActivityManager GetInstance()
         {
-            if (instance == null)
+            if (m_Instance == null)
             {
-                instance = new ActivityManager(ProgramManager.GetInstance());
+                m_Instance = new ActivityManager();
             }
 
-            return instance;
+            return m_Instance;
         }
      
         public void AddNewCategory()

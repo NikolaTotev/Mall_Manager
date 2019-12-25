@@ -10,20 +10,20 @@ namespace Core
 
     public class ProgramManager
     {
-        private static ProgramManager instance;
+        private static ProgramManager m_Instance;
 
-        public ProgramManager()
+        private ProgramManager()
         {
-
+            m_Instance = this;
         }
 
         public static ProgramManager GetInstance()
         {
-            if (instance == null)
+            if (m_Instance == null)
             {
-                instance = new ProgramManager();
+                m_Instance = new ProgramManager();
             }
-            return instance;
+            return m_Instance;
         }
     }
 }
