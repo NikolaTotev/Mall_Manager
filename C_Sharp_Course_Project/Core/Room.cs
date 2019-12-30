@@ -63,11 +63,20 @@ namespace Core
             }
         }
 
-        public Room(string name, string description, string id = null)
+        public Room(string name, string description, string id, DateTime createDate, DateTime lastEditDate)
         {
             Name = name;
             Description = description;
             ID = id == null ? Guid.NewGuid() : Guid.Parse(id);
+            CreateDate = createDate;
+            LastEditDate = lastEditDate;
+        }
+
+        public Room(string name, string description)
+        {
+            Name = name;
+            Description = description;
+            ID = Guid.NewGuid();
             CreateDate = DateTime.UtcNow;
             LastEditDate = DateTime.UtcNow;
         }
