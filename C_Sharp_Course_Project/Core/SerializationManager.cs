@@ -14,16 +14,24 @@ namespace Core
 {
     public static class SerializationManager
     {
-        static readonly string m_LocalAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        static readonly string m_ProgramFolder = System.IO.Path.Combine(m_LocalAppDataPath, "MallManager_DATA");
-        static readonly string m_ActivityManagerSave = System.IO.Path.Combine(m_ProgramFolder, "ActivityManager.json");
-        //TODO create path for room serializationFile
-        static readonly string m_RoomManagerSave = System.IO.Path.Combine(m_ProgramFolder, "RoomManager.json");
+        public static readonly string LocalAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        public static readonly string ProgramFolder = System.IO.Path.Combine(LocalAppDataPath, "MallManager_DATA");
+        public static readonly string ActivityManagerSave = System.IO.Path.Combine(ProgramFolder, "ActivityManager.json");
+        public static readonly string ActivityConfigSave = System.IO.Path.Combine(ProgramFolder, "ActivityConfig.json");
+        public static readonly string RoomManagerSave = System.IO.Path.Combine(ProgramFolder, "RoomManager.json");
+
+        public static void CheckForDirectory()
+        {
+            if (!Directory.Exists(ProgramFolder))
+            {
+                Directory.CreateDirectory(ProgramFolder);
+            }
+        }
 
         public static void SaveRoomManager(RoomManager managerToSave) //TODO Add room parameter;
         {
             //Create serialization code;
-            using (StreamWriter file = File.CreateText(m_RoomManagerSave))
+            using (StreamWriter file = File.CreateText(RoomManagerSave))
             {
                 JsonSerializer serializer = new JsonSerializer();
                 serializer.Serialize(file, managerToSave);
@@ -36,15 +44,15 @@ namespace Core
         /// <returns></returns>
         public static RoomManager GetRoomManager()
         {
-            if (!File.Exists(m_RoomManagerSave))
+            if (!File.Exists(RoomManagerSave))
             {
                 RoomManager managerToReturn = RoomManager.GetInstance();
-                ExceptionManager.OnFileNotFound(m_RoomManagerSave);
+                ExceptionManager.OnFileNotFound(RoomManagerSave);
                 SaveRoomManager(managerToReturn);
                 return managerToReturn;
             }
 
-            using (StreamReader file = File.OpenText(m_RoomManagerSave))
+            using (StreamReader file = File.OpenText(RoomManagerSave))
             {
                 JsonSerializer serializer = new JsonSerializer();
                 return (RoomManager)serializer.Deserialize(file, typeof(RoomManager));
@@ -57,7 +65,7 @@ namespace Core
         /// <param name="managerToSave"></param>
         public static void SaveActivityManager(ActivityManager managerToSave)
         {
-            using (StreamWriter file = File.CreateText(m_ActivityManagerSave))
+            using (StreamWriter file = File.CreateText(ActivityManagerSave))
             {
                 JsonSerializer serializer = new JsonSerializer();
                 serializer.Serialize(file, managerToSave);
@@ -71,19 +79,31 @@ namespace Core
         public static ActivityManager GetActivityManager()
         {
 
-            if (!File.Exists(m_ActivityManagerSave))
+            if (!File.Exists(ActivityManagerSave))
             {
                 ActivityManager managerToReturn = ActivityManager.GetInstance();
-                ExceptionManager.OnFileNotFound(m_ActivityManagerSave);
+                ExceptionManager.OnFileNotFound(ActivityManagerSave);
                 SaveActivityManager(managerToReturn);
                 return managerToReturn;
             }
 
-            using (StreamReader file = File.OpenText(m_ActivityManagerSave))
+            using (StreamReader file = File.OpenText(ActivityManagerSave))
             {
                 JsonSerializer serializer = new JsonSerializer();
                 return (ActivityManager)serializer.Deserialize(file, typeof(ActivityManager));
             }
         }
+
+        public static void SaveActivityConfigFile(ActivityConfig configToSave)
+        {
+            CheckForDirectory();
+            using (StreamWriter file = File.CreateText(ActivityConfigSave))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Serialize(file, configToSave);
+            }
+        }
+
+        //TODO Create read configFile method.
     }
 }
