@@ -10,13 +10,15 @@ namespace Core
     {
         Scheduled,
         InProgress,
-        Finished
+        Finished,
+        Undefined
     }
 
     public class ActivityManager
     {
         private ProgramManager m_CurrentManager;
         private static ActivityManager m_Instance;
+        //Setup  class
         public List<string> Categories { get; set; }
         public List<string> Templates { get; set; }
 
@@ -25,6 +27,7 @@ namespace Core
         {
             m_Instance = this;
             m_CurrentManager = ProgramManager.GetInstance();
+            //Deserialize setup class file.
         }
 
         public static ActivityManager GetInstance()
