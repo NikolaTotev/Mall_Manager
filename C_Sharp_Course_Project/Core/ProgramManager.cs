@@ -15,6 +15,7 @@ namespace Core
         private ProgramManager()
         {
             m_Instance = this;
+            SerializationManager.CheckForDirectory();
         }
 
         public static ProgramManager GetInstance()
