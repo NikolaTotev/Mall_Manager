@@ -19,14 +19,16 @@ namespace Core
         private ProgramManager m_CurrentManager;
         private static ActivityManager m_Instance;
         //Setup  class
-        public List<string> Categories { get; set; }
-        public List<string> Templates { get; set; }
+        private ActivityConfig m_Config;
+        //public List<string> Categories { get; set; }
+        //public List<string> Templates { get; set; }
 
 
         private ActivityManager()
         {
             m_Instance = this;
             m_CurrentManager = ProgramManager.GetInstance();
+            m_Config = SerializationManager.GetActivityConfig();
             //Deserialize setup class file.
         }
 
@@ -40,9 +42,17 @@ namespace Core
             return m_Instance;
         }
      
-        public void AddNewCategory()
+        public bool AddNewCategory(string category)
         {
             //TODO create new category
+            if(m_Config.Categories.Contains(category))
+            {
+                ExceptionManager.OnAttemptToCreateDuplicateActivityCategory(category);
+                return false;
+            }
+            m_Config.Categories.Add(category);
+            SerializationManager.SaveActivityConfigFile(m_Config);
+            return true;
         }
 
         public void AddNewTemplate()

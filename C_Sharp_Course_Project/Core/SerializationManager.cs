@@ -104,6 +104,10 @@ namespace Core
             }
         }
 
+        public static ActivityConfig GetActivityConfig()
+        {
+            throw new NotImplementedException();
+        }
         //TODO Create read configFile method.
     }
 }
