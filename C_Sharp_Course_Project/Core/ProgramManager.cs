@@ -11,11 +11,14 @@ namespace Core
     public class ProgramManager
     {
         private static ProgramManager m_Instance;
-
+        private static ActivityManager m_ActivityManagerInstance;
+        private static RoomManager m_RoomManagerInstance;
         private ProgramManager()
         {
             m_Instance = this;
             SerializationManager.CheckForDirectory();
+            m_ActivityManagerInstance = ActivityManager.GetInstance();
+            m_RoomManagerInstance = RoomManager.GetInstance();
         }
 
         public static ProgramManager GetInstance()

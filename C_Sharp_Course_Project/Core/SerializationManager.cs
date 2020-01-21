@@ -28,7 +28,7 @@ namespace Core
             }
         }
 
-        public static void SaveRoomManager(RoomManager managerToSave) //TODO Add room parameter;
+        public static void SaveRoomManager(RoomManager managerToSave)
         {
             //Create serialization code;
             using (StreamWriter file = File.CreateText(RoomManagerSave))
