@@ -16,7 +16,7 @@ namespace Core
         private ProgramManager()
         {
             m_Instance = this;
-            SerializationManager.CheckForDirectory();
+            SerializationManager.CheckForDirectories();
             m_ActivityManagerInstance = ActivityManager.GetInstance();
             m_RoomManagerInstance = RoomManager.GetInstance();
         }

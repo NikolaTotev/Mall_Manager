@@ -26,7 +26,14 @@ namespace UnitTests
             newConfig.Categories = newCategories;
             newConfig.Templates = newTemplates;
             SerializationManager.SaveActivityConfigFile(newConfig);
+            //int result = 1;
+            //Assert.AreEqual(0, result);
         }
 
+        [Test]
+        public void GenInitialDirectories()
+        {
+            SerializationManager.CheckForDirectories();
+        }
     }
 }

@@ -8,10 +8,11 @@ namespace Core
 {
     public class Room
     {
-        private string m_Name;
+        private string m_Name; 
         private string m_Description;
         private string m_Type;
         public readonly Guid ID;
+        public List<Guid> Activities { get; set; }
         public DateTime CreateDate { get; private set; }
         public DateTime LastEditDate { get; private set; }
 
@@ -63,16 +64,7 @@ namespace Core
             }
         }
 
-        public Room(string name, string description, string id, DateTime createDate, DateTime lastEditDate)
-        {
-            Name = name;
-            Description = description;
-            ID = id == null ? Guid.NewGuid() : Guid.Parse(id);
-            CreateDate = createDate;
-            LastEditDate = lastEditDate;
-        }
-
-        public Room(string name, string description)
+       public Room(string name, string description)
         {
             Name = name;
             Description = description;
