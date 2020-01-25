@@ -47,7 +47,7 @@ namespace Core
             //TODO create new category
             if(m_Config.Categories.Contains(category))
             {
-                ExceptionManager.OnAttemptToCreateDuplicateActivityCategory(category);
+                ExceptionManager.OnCreateDuplicateCategory(category);
                 return false;
             }
             m_Config.Categories.Add(category);
