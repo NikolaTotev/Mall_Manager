@@ -8,8 +8,9 @@ namespace Core
 {
     public class Mall
     {
-        public string Uuid { get; set; }
-
-     
+        public Guid MallId { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public List<Guid> AssociatedActivities { get; set; }
     }
 }

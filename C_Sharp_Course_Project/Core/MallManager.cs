@@ -13,6 +13,7 @@ namespace Core
 {
     public class MallManager
     {
+ 
         public Mall CurrentMall { get; set; }
     }
 }

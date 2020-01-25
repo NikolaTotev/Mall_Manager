@@ -12,7 +12,8 @@ namespace Core
         public string Description { get; set; }
         public int CorrespondingRoom { get; set; }
         public ActivityStatus CurActivityStatus { get; set; }
-        public DateTime ScheduleDateTime { get; set; }
+        public DateTime EndTime { get; set; }
+        public DateTime StartTime { get; set; }
         public bool IsTemplate { get; set; }
 
         public Activity(string category = " ", bool isTemplate = false, string description = " ", int corespRoom = -1, ActivityStatus status = ActivityStatus.Undefined, DateTime scheduleDate = new DateTime())
@@ -22,7 +23,7 @@ namespace Core
             Description = description;
             CorrespondingRoom = corespRoom;
             CurActivityStatus = status;
-            ScheduleDateTime = scheduleDate;
+            EndTime = scheduleDate;
         }
     }
 }
