@@ -52,7 +52,7 @@ namespace Core
 
             if(m_Config.Categories.Contains(category))
             {
-                ExceptionManager.OnAttemptToCreateDuplicate(category);
+                ExceptionManager.OnCreateDuplicateCategory(category);
                 return false;
             }
             m_Config.Categories.Add(category);
