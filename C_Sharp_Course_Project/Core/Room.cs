@@ -8,66 +8,23 @@ namespace Core
 {
     public class Room
     {
-        private string m_Name; 
-        private string m_Description;
-        private string m_Type;
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string Type { get; set; }
+        public int Floor { get; set; }
+        public int RoomNumber { get; set; }
         public readonly Guid ID;
         public List<Guid> Activities { get; set; }
         public DateTime CreateDate { get; private set; }
         public DateTime LastEditDate { get; private set; }
 
-        public string Name
-        {
-            get => m_Name;
-            set
-            {
-                if (value == null)
-                {
-                    m_Name = string.Empty;
-                }
-                else
-                {
-                    m_Name = value;
-                }
-            }
-        }
-
-        public string Description
-        {
-            get => m_Description;
-            set
-            {
-                if (value == null)
-                {
-                    m_Description = string.Empty;
-                }
-                else
-                {
-                    m_Description = value;
-                }
-            }
-        }
-
-        public string Type
-        {
-            get => m_Type;
-            set
-            {
-                if (value == null)
-                {
-                    m_Type = string.Empty;
-                }
-                else
-                {
-                    m_Type = value;
-                }
-            }
-        }
-
-       public Room(string name, string description)
+        public Room(string name, string description, string type, int roomNumber, int floorNumber)
         {
             Name = name;
             Description = description;
+            Type = type;
+            Floor = floorNumber;
+            RoomNumber = roomNumber;
             ID = Guid.NewGuid();
             CreateDate = DateTime.UtcNow;
             LastEditDate = DateTime.UtcNow;
@@ -78,15 +35,15 @@ namespace Core
             LastEditDate = DateTime.UtcNow;
             if (name != null)
             {
-                m_Name = name;
+                Name = name;
             }
             if (description != null)
             {
-                m_Description = description;
+                Description = description;
             }
             if (type != null)
             {
-                m_Type = type;
+                Type = type;
             }
         }
         //TODO constructors, and methods for editing rooms and deleting, and list of activities for this room
