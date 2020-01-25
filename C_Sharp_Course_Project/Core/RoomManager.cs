@@ -10,12 +10,12 @@ namespace Core
     {
         private static RoomManager m_Instance;
         public List<string> RoomTypes { get; set; }
-        public Dictionary<Guid, Room> Rooms { get; set; }
+        public Dictionary<string, Room> Rooms { get; set; }
 
         private RoomManager()
         {
             m_Instance = this;
-            Rooms = new Dictionary<Guid, Room>();
+            Rooms = SerializationManager.GetRooms();
         }
 
         public static RoomManager GetInstance()
@@ -36,7 +36,7 @@ namespace Core
         /// <param name="floorNumber"></param>
         /// <param name="roomNumber"></param>
         /// <returns>Returns true if the operation completed successfully and false if it failed.</returns>
-        public bool CreateRoom(string name, string description, string roomType, int floorNumber, int roomNumber)
+        public bool CreateRoom(string name, string description, string roomType, int floorNumber, int roomNumber, string newRoomGuid)
         {
             if (name == null || description == null || roomType == null)
             {
@@ -44,16 +44,15 @@ namespace Core
                 return false;
             }
 
-            Room newRoom = new Room(name, description, roomType, floorNumber, roomNumber);
-            Guid newRoomGuid = newRoom.ID;
+            Room newRoom = new Room(name, description, roomType, roomNumber, floorNumber, newRoomGuid);
 
             //If statement just in case.
-            if (Rooms.ContainsKey(newRoomGuid))
+            if (Rooms.ContainsKey(newRoomGuid.ToString()))
             {
                 return false;
             }
 
-            Rooms.Add(newRoomGuid, newRoom);
+            Rooms.Add(newRoomGuid.ToString(), newRoom);
             SerializationManager.SaveRooms(Rooms);
             return true;
         }
@@ -68,7 +67,7 @@ namespace Core
         /// <param name="roomType"></param>
         /// <param name="floorNumber"></param>
         /// <param name="roomNumber"></param>
-        public void EditRoom(Guid roomToEdit, string name, string description, string roomType, int floorNumber=Int32.MaxValue, int roomNumber= Int32.MaxValue)
+        public void EditRoom(string roomToEdit, string name, string description, string roomType, int floorNumber = Int32.MaxValue, int roomNumber = Int32.MaxValue)
         {
             Room currentRoom = Rooms[roomToEdit];
 
@@ -91,7 +90,7 @@ namespace Core
             {
                 currentRoom.RoomNumber = roomNumber;
             }
-            
+
             if (roomType != null)
             {
                 currentRoom.Type = roomType;
@@ -105,7 +104,7 @@ namespace Core
         /// </summary>
         /// <param name="roomToRemove"></param>
         /// <returns>Returns true if the operation completed successfully and false if it failed.</returns>
-        public bool DeleteRoom(Guid roomToRemove)
+        public bool DeleteRoom(string roomToRemove)
         {
             if (!Rooms.ContainsKey(roomToRemove))
             {
@@ -124,7 +123,7 @@ namespace Core
         /// <param name="roomToAddTo"></param>
         /// <param name="activityToAdd"></param>
         /// <returns>Returns true if the operation completed successfully and false if it failed.</returns>
-        public bool AddActivity(Guid roomToAddTo, Guid activityToAdd)
+        public bool AddActivity(string roomToAddTo, string activityToAdd)
         {
             if (!Rooms.ContainsKey(roomToAddTo))
             {
@@ -144,7 +143,7 @@ namespace Core
         /// <param name="roomToRemoveFrom"></param>
         /// <param name="activityToRemove"></param>
         /// <returns>Returns true if the operation completed successfully and false if it failed.</returns>
-        public bool DeleteActivity(Guid roomToRemoveFrom, Guid activityToRemove)
+        public bool DeleteActivity(string roomToRemoveFrom, string activityToRemove)
         {
             if (!Rooms.ContainsKey(roomToRemoveFrom))
             {
@@ -179,7 +178,7 @@ namespace Core
                 sb.Append(room.Value.Floor.ToString());
                 sb.Append("Room Number: ");
                 sb.Append(room.Value.RoomNumber.ToString());
-                roomDictionary.Add(room.Value.ID.ToString(), sb.ToString());
+                roomDictionary.Add(room.Value.Id, sb.ToString());
             }
 
             return roomDictionary;

@@ -23,9 +23,10 @@ namespace Core
 
         public static readonly string ActivityManagerSave = System.IO.Path.Combine(ProgramFolder, "ActivityManager.json");
         public static readonly string ActivityConfigSave = System.IO.Path.Combine(ProgramFolder, "ActivityConfig.json");
-        public static readonly string RoomSaveFile = System.IO.Path.Combine(ProgramFolder, "Rooms.json");
+        public static readonly string RoomSaveFile = System.IO.Path.Combine(RoomSaves, "Rooms.json");
         private static  JsonSerializer serializer = new JsonSerializer();
 
+      
         public static void CheckForDirectories()
         {
             if (!Directory.Exists(ProgramFolder))
@@ -51,7 +52,7 @@ namespace Core
 
         
 
-        public static void SaveRooms(Dictionary<Guid, Room> roomsToSave)
+        public static void SaveRooms(Dictionary<string, Room> roomsToSave)
         {
             //Create serialization code;
             using (StreamWriter file = File.CreateText(RoomSaveFile))
@@ -63,12 +64,12 @@ namespace Core
         /// <summary>
         /// Gets last save of the room dictionary. If no save is found a new one is created.
         /// </summary>
-        /// <returns> </returns>
-        public static Dictionary<Guid, Room> GetRooms()
+        /// <returns></returns>
+        public static Dictionary<string, Room> GetRooms()
         {
             if (!File.Exists(RoomSaveFile))
             {
-                Dictionary<Guid, Room> dictionaryToReturn = new Dictionary<Guid, Room>();
+                Dictionary<string, Room> dictionaryToReturn = new Dictionary<string, Room>();
                 ExceptionManager.OnFileNotFound(RoomSaveFile);
                 SaveRooms(dictionaryToReturn);
                 return dictionaryToReturn;
@@ -76,7 +77,7 @@ namespace Core
 
             using (StreamReader file = File.OpenText(RoomSaveFile))
             {
-                return (Dictionary<Guid, Room>)serializer.Deserialize(file, typeof(Dictionary<Guid, Room>));
+                return (Dictionary<string, Room>)serializer.Deserialize(file, typeof(Dictionary<string, Room>));
             }
         }
 
