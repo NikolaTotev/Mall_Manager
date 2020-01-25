@@ -20,7 +20,7 @@ namespace UnitTests
             List<string> newCategories = new List<string>(){"Light Maintenance","Heavy Maintenance", "Cleaning", "Inspection"};
             List<Activity> newTemplates = new List<Activity>();
             
-            Activity newTemplate = new Activity(isTemplate:true, category:"Cleaning", status:ActivityStatus.Scheduled,scheduleDate:new DateTime(2020,12,12) );
+            Activity newTemplate = new Activity(isTemplate:true, category:"Cleaning", status:ActivityStatus.Scheduled,startDate:new DateTime(2020,12,12) );
 
             newTemplates.Add(newTemplate);
             newConfig.Categories = newCategories;

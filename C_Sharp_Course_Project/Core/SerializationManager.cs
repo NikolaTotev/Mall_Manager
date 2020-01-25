@@ -21,7 +21,7 @@ namespace Core
         public static readonly string ActivitySaves = System.IO.Path.Combine(ProgramFolder, "ActivitySaves");
         public static readonly string RoomSaves = System.IO.Path.Combine(ProgramFolder, "RoomSaves");
 
-        public static readonly string ActivityManagerSave = System.IO.Path.Combine(ProgramFolder, "ActivityManager.json");
+        public static readonly string ActivitySaveFile = System.IO.Path.Combine(ProgramFolder, "ActivityManager.json");
         public static readonly string ActivityConfigSave = System.IO.Path.Combine(ProgramFolder, "ActivityConfig.json");
         public static readonly string RoomSaveFile = System.IO.Path.Combine(RoomSaves, "Rooms.json");
         private static  JsonSerializer serializer = new JsonSerializer();
@@ -81,36 +81,31 @@ namespace Core
             }
         }
 
-        /// <summary>
-        /// Saves the activity that is passed to the function.
-        /// </summary>
-        /// <param name="managerToSave"></param>
-        public static void SaveActivityManager(ActivityManager managerToSave)
+        public static void SaveActivities(Dictionary<string, Activity> activitiesToSave)
         {
-            using (StreamWriter file = File.CreateText(ActivityManagerSave))
+            using (StreamWriter file = File.CreateText(ActivitySaveFile))
             {
-                serializer.Serialize(file, managerToSave);
+                serializer.Serialize(file, activitiesToSave);
             }
         }
 
         /// <summary>
-        /// Gets last save of activity manager. If no save is found a new one is created.
+        /// Gets last save of the activity dictionary. If no save is found a new one is created.
         /// </summary>
         /// <returns></returns>
-        public static ActivityManager GetActivityManager()
+        public static Dictionary<string, Activity> GetActivities()
         {
-
-            if (!File.Exists(ActivityManagerSave))
+            if (!File.Exists(ActivitySaveFile))
             {
-                ActivityManager managerToReturn = ActivityManager.GetInstance();
-                ExceptionManager.OnFileNotFound(ActivityManagerSave);
-                SaveActivityManager(managerToReturn);
-                return managerToReturn;
+                Dictionary<string, Activity> dictionaryToReturn = new Dictionary<string, Activity>();
+                ExceptionManager.OnFileNotFound(ActivitySaveFile);
+                SaveActivities(dictionaryToReturn);
+                return dictionaryToReturn;
             }
 
-            using (StreamReader file = File.OpenText(ActivityManagerSave))
+            using (StreamReader file = File.OpenText(ActivitySaveFile))
             {
-                return (ActivityManager)serializer.Deserialize(file, typeof(ActivityManager));
+                return (Dictionary<string, Activity>)serializer.Deserialize(file, typeof(Dictionary<string, Activity>));
             }
         }
 
@@ -125,7 +120,18 @@ namespace Core
 
         public static ActivityConfig GetActivityConfig()
         {
-            throw new NotImplementedException();
+            if (!File.Exists(ActivityConfigSave))
+            {
+                ActivityConfig activityConfigToReturn = new ActivityConfig();
+                ExceptionManager.OnFileNotFound(ActivityConfigSave);
+                SaveActivityConfigFile(activityConfigToReturn);
+                return activityConfigToReturn;
+            }
+
+            using (StreamReader file = File.OpenText(ActivityConfigSave))
+            {
+                return (ActivityConfig)serializer.Deserialize(file, typeof(ActivityConfig));
+            }
         }
         //TODO Create read configFile method.
     }
