@@ -44,10 +44,15 @@ namespace Core
      
         public bool AddNewCategory(string category)
         {
-            //TODO create new category
+            if (category == null)
+            {
+                ExceptionManager.OnNullParamsToFunction(nameof(AddNewCategory));
+                return false;
+            }
+
             if(m_Config.Categories.Contains(category))
             {
-                ExceptionManager.OnAttemptToCreateDuplicateActivityCategory(category);
+                ExceptionManager.OnAttemptToCreateDuplicate(category);
                 return false;
             }
             m_Config.Categories.Add(category);
@@ -60,15 +65,8 @@ namespace Core
             //TODO crete new template
         }
 
-        public List<string> GetCreateActivityData()
-        {
-            throw new NotImplementedException();
-            //TODO get info from the UI
-        }
-
         public void AddActivity()
         {
-            List<string> data = GetCreateActivityData();
             //Create Activity and assign it to a room
         } 
 
