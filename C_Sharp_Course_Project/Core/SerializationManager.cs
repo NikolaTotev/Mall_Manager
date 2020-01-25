@@ -23,7 +23,7 @@ namespace Core
 
         public static readonly string ActivityManagerSave = System.IO.Path.Combine(ProgramFolder, "ActivityManager.json");
         public static readonly string ActivityConfigSave = System.IO.Path.Combine(ProgramFolder, "ActivityConfig.json");
-        public static readonly string RoomManagerSave = System.IO.Path.Combine(ProgramFolder, "RoomManager.json");
+        public static readonly string RoomSaveFile = System.IO.Path.Combine(ProgramFolder, "Rooms.json");
         private static  JsonSerializer serializer = new JsonSerializer();
 
         public static void CheckForDirectories()
@@ -51,32 +51,32 @@ namespace Core
 
         
 
-        public static void SaveRoomManager(RoomManager managerToSave)
+        public static void SaveRooms(Dictionary<Guid, Room> roomsToSave)
         {
             //Create serialization code;
-            using (StreamWriter file = File.CreateText(RoomManagerSave))
+            using (StreamWriter file = File.CreateText(RoomSaveFile))
             {
-                serializer.Serialize(file, managerToSave);
+                serializer.Serialize(file, roomsToSave);
             }
         }
 
         /// <summary>
-        /// Gets last save of room manager. If no save is found a new one is created.
+        /// Gets last save of the room dictionary. If no save is found a new one is created.
         /// </summary>
-        /// <returns></returns>
-        public static RoomManager GetRoomManager()
+        /// <returns> </returns>
+        public static Dictionary<Guid, Room> GetRooms()
         {
-            if (!File.Exists(RoomManagerSave))
+            if (!File.Exists(RoomSaveFile))
             {
-                RoomManager managerToReturn = RoomManager.GetInstance();
-                ExceptionManager.OnFileNotFound(RoomManagerSave);
-                SaveRoomManager(managerToReturn);
-                return managerToReturn;
+                Dictionary<Guid, Room> dictionaryToReturn = new Dictionary<Guid, Room>();
+                ExceptionManager.OnFileNotFound(RoomSaveFile);
+                SaveRooms(dictionaryToReturn);
+                return dictionaryToReturn;
             }
 
-            using (StreamReader file = File.OpenText(RoomManagerSave))
+            using (StreamReader file = File.OpenText(RoomSaveFile))
             {
-                return (RoomManager)serializer.Deserialize(file, typeof(RoomManager));
+                return (Dictionary<Guid, Room>)serializer.Deserialize(file, typeof(Dictionary<Guid, Room>));
             }
         }
 
