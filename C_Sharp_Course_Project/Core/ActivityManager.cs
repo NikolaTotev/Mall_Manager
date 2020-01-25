@@ -81,7 +81,7 @@ namespace Core
             }
 
             int dateTimeComparison = DateTime.Compare(startDate, endDate); //validate date
-            if (dateTimeComparison >= 0)
+            if (dateTimeComparison > 0)
             {
                 ExceptionManager.OnNullParamsToFunction("Add activity"); //Maybe other exception Invalid Date
                 return false;
