@@ -8,11 +8,8 @@ namespace Core
 {
     public class RoomManager
     {
-        ///TODO Implement singleton pattern (see program manager for example)
-
         private static RoomManager m_Instance;
         public List<string> RoomTypes { get; set; }
-
         public Dictionary<Guid, Room> Rooms { get; set; }
 
         private RoomManager()
@@ -30,6 +27,15 @@ namespace Core
             return m_Instance;
         }
 
+        /// <summary>
+        /// Creates a room only if all the input parameters are valid.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
+        /// <param name="roomType"></param>
+        /// <param name="floorNumber"></param>
+        /// <param name="roomNumber"></param>
+        /// <returns>Returns true if the operation completed successfully and false if it failed.</returns>
         public bool CreateRoom(string name, string description, string roomType, int floorNumber, int roomNumber)
         {
             if (name == null || description == null || roomType == null)
@@ -48,9 +54,119 @@ namespace Core
             }
 
             Rooms.Add(newRoomGuid, newRoom);
+            SerializationManager.SaveRooms(Rooms);
             return true;
         }
 
+        /// <summary>
+        /// Changes values of a given room only if they have a valid value.
+        /// If they don't they are skipped.
+        /// </summary>
+        /// <param name="roomToEdit"></param>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
+        /// <param name="roomType"></param>
+        /// <param name="floorNumber"></param>
+        /// <param name="roomNumber"></param>
+        public void EditRoom(Guid roomToEdit, string name, string description, string roomType, int floorNumber=Int32.MaxValue, int roomNumber= Int32.MaxValue)
+        {
+            Room currentRoom = Rooms[roomToEdit];
+
+            if (name != null)
+            {
+                currentRoom.Name = name;
+            }
+
+            if (description != null)
+            {
+                currentRoom.Description = description;
+            }
+
+            if (floorNumber != Int32.MaxValue)
+            {
+                currentRoom.Floor = floorNumber;
+            }
+
+            if (roomNumber != Int32.MaxValue)
+            {
+                currentRoom.RoomNumber = roomNumber;
+            }
+            
+            if (roomType != null)
+            {
+                currentRoom.Type = roomType;
+            }
+
+            SerializationManager.SaveRooms(Rooms);
+        }
+
+        /// <summary>
+        /// Deletes a room from the Rooms and then saves the updated dictionary.
+        /// </summary>
+        /// <param name="roomToRemove"></param>
+        /// <returns>Returns true if the operation completed successfully and false if it failed.</returns>
+        public bool DeleteRoom(Guid roomToRemove)
+        {
+            if (!Rooms.ContainsKey(roomToRemove))
+            {
+                return false;
+            }
+
+            Rooms.Remove(roomToRemove);
+            SerializationManager.SaveRooms(Rooms);
+            return true;
+        }
+
+        /// <summary>
+        /// AddActivity method, adds activity from the list of activities of the specified room.
+        /// Called from ActivityManager when an activity is created.
+        /// </summary>
+        /// <param name="roomToAddTo"></param>
+        /// <param name="activityToAdd"></param>
+        /// <returns>Returns true if the operation completed successfully and false if it failed.</returns>
+        public bool AddActivity(Guid roomToAddTo, Guid activityToAdd)
+        {
+            if (!Rooms.ContainsKey(roomToAddTo))
+            {
+                return false;
+            }
+
+            Room roomToEdit = Rooms[roomToAddTo];
+            roomToEdit.Activities.Add(activityToAdd);
+            SerializationManager.SaveRooms(Rooms);
+            return true;
+        }
+
+        /// <summary>
+        /// DeleteActivity method, deletes activity from the list of activities of the specified room.
+        /// Called by ActivityManager when an activity is deleted.
+        /// </summary>
+        /// <param name="roomToRemoveFrom"></param>
+        /// <param name="activityToRemove"></param>
+        /// <returns>Returns true if the operation completed successfully and false if it failed.</returns>
+        public bool DeleteActivity(Guid roomToRemoveFrom, Guid activityToRemove)
+        {
+            if (!Rooms.ContainsKey(roomToRemoveFrom))
+            {
+                return false;
+            }
+
+            Room roomToEdit = Rooms[roomToRemoveFrom];
+
+            if (!roomToEdit.Activities.Contains(activityToRemove))
+            {
+                return false;
+            }
+
+            roomToEdit.Activities.Remove(activityToRemove);
+            SerializationManager.SaveRooms(Rooms);
+            return true;
+        }
+
+        /// <summary>
+        /// Returns a dictionary containing basic information about every room in the rooms dictionary.
+        /// </summary>
+        /// <returns>Dictionary[string,string] where they key is the room id and the second the name, floor number & room number</returns>
         public Dictionary<string, string> GetRooms()
         {
             Dictionary<string, string> roomDictionary = new Dictionary<string, string>();
