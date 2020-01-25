@@ -8,6 +8,7 @@ namespace Core
 {
     public class Activity
     {
+        public Guid Id { get; set; }
         public string Category { get; set; }
         public string Description { get; set; }
         public int CorrespondingRoom { get; set; }
