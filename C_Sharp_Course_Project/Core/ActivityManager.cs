@@ -20,6 +20,7 @@ namespace Core
         private static ActivityManager m_Instance;
         //Setup  class
         private ActivityConfig m_Config;
+        public Dictionary<Guid, Activity> Activities { get; set; }
         //public List<string> Categories { get; set; }
         //public List<string> Templates { get; set; }
 
@@ -68,7 +69,24 @@ namespace Core
         public void AddActivity()
         {
             //Create Activity and assign it to a room
-        } 
+        }
+
+        public Dictionary<string, string> GetActivities()
+        {
+            Dictionary<string, string> activityDictionary = new Dictionary<string, string>();
+            StringBuilder sb = new StringBuilder("");
+            foreach (var activity in Activities)
+            {
+                sb.Clear();
+                sb.Append(activity.Value.Category);
+                sb.Append("Corresponding room: ");
+                sb.Append(activity.Value.CorrespondingRoom.ToString());
+                sb.Append("Current status: ");
+                sb.Append(activity.Value.CurActivityStatus.ToString());
+                activityDictionary.Add(activity.Key.ToString(), sb.ToString());
+            }
+            return activityDictionary;
+        }
 
         public void Save()
         {
