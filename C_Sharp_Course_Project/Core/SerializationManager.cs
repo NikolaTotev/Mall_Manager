@@ -21,7 +21,7 @@ namespace Core
         public static readonly string ActivitySaves = System.IO.Path.Combine(ProgramFolder, "ActivitySaves");
         public static readonly string RoomSaves = System.IO.Path.Combine(ProgramFolder, "RoomSaves");
 
-        public static readonly string ActivitySaveFile = System.IO.Path.Combine(ProgramFolder, "ActivityManager.json");
+        public static readonly string ActivitySaveFile = System.IO.Path.Combine(ProgramFolder, "Activities.json");
         public static readonly string ActivityConfigSave = System.IO.Path.Combine(ProgramFolder, "ActivityConfig.json");
         public static readonly string RoomSaveFile = System.IO.Path.Combine(RoomSaves, "Rooms.json");
         private static  JsonSerializer serializer = new JsonSerializer();

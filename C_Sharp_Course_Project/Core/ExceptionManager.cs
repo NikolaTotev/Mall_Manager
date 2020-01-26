@@ -28,5 +28,10 @@ namespace Core
 
         }
 
+        public static void OnInvalidDate()
+        {
+            MessageBox.Show(string.Format("Warning Code: InvD - Invalid dates entered "));
+        }
+
     }
 }
