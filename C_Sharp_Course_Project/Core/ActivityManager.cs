@@ -26,8 +26,8 @@ namespace Core
         {
             m_Instance = this;
             m_CurrentManager = ProgramManager.GetInstance();
-            m_Config = SerializationManager.GetActivityConfig();
-            Activities = SerializationManager.GetActivities();
+            m_Config = SerializationManager.GetActivityConfig(MallManager.GetInstance().CurrentMall.ToString());
+            Activities = SerializationManager.GetActivities(MallManager.GetInstance().CurrentMall.ToString());
         }
 
         public static ActivityManager GetInstance()
@@ -40,7 +40,7 @@ namespace Core
             return m_Instance;
         }
 
-        public bool AddNewCategory(string category)
+        public bool AddNewCategory(string category,string mallName)
         {
             if (category == null)
             {
@@ -54,11 +54,11 @@ namespace Core
                 return false;
             }
             m_Config.Categories.Add(category);
-            SerializationManager.SaveActivityConfigFile(m_Config);
+            SerializationManager.SaveActivityConfigFile(m_Config, mallName);
             return true;
         }
 
-        public bool AddNewTemplate(string category, string description)
+        public bool AddNewTemplate(string category, string description,string mallName)
         {
             if (category == null || description == null)
             {
@@ -68,11 +68,11 @@ namespace Core
 
             Activity newActivityTemplate = new Activity("template", category, true, description);
             m_Config.Templates.Add(newActivityTemplate);
-            SerializationManager.SaveActivityConfigFile(m_Config);
+            SerializationManager.SaveActivityConfigFile(m_Config, mallName);
             return true;
         }
 
-        public bool AddActivity(string newId, string category, string description, string corespRoom, ActivityStatus status, DateTime startDate, DateTime endDate)
+        public bool AddActivity(string mallName, string newId, string category, string description, string corespRoom, ActivityStatus status, DateTime startDate, DateTime endDate)
         {
             if (newId == null || category == null || description == null || corespRoom == null)
             {
@@ -89,17 +89,17 @@ namespace Core
 
             Activity newActivity = new Activity(newId, category, false, description, corespRoom, status, startDate, endDate);
             RoomManager roomManager = RoomManager.GetInstance();
-            if(Activities.ContainsKey(newActivity.Id) || !roomManager.AddActivity(newActivity.CorrespondingRoom, newActivity.Id))
+            if(Activities.ContainsKey(newActivity.Id) || !roomManager.AddActivity(newActivity.CorrespondingRoom, newActivity.Id,mallName))
             {
                 return false;
             }
 
             Activities.Add(newActivity.Id, newActivity);
-            SerializationManager.SaveActivities(Activities);
+            SerializationManager.SaveActivities(Activities,mallName);
             return true;
         }
 
-        public void EditActivity(string activityId, string category = null, string description = null, ActivityStatus status = ActivityStatus.Undefined, DateTime startDate = default(DateTime), DateTime endDate = default(DateTime))
+        public void EditActivity(string mallName, string activityId, string category = null, string description = null, ActivityStatus status = ActivityStatus.Undefined, DateTime startDate = default(DateTime), DateTime endDate = default(DateTime))
         {
             Activity activityToEdit = Activities[activityId];
             if (category != null)
@@ -120,10 +120,10 @@ namespace Core
                 activityToEdit.EndTime = endDate;
             }
 
-            SerializationManager.SaveActivities(Activities);
+            SerializationManager.SaveActivities(Activities, mallName);
         }
 
-        public bool DeleteActivity(string activityId)
+        public bool DeleteActivity(string activityId,string mallName)
         {
             if (!Activities.ContainsKey(activityId))
             {
@@ -131,13 +131,13 @@ namespace Core
             }
 
             RoomManager roomManager = RoomManager.GetInstance();
-            if(!roomManager.DeleteActivity(Activities[activityId].CorrespondingRoom, activityId))
+            if(!roomManager.DeleteActivity(Activities[activityId].CorrespondingRoom, activityId, mallName))
             {
                 return false;
             }
 
             Activities.Remove(activityId);
-            SerializationManager.SaveActivities(Activities);
+            SerializationManager.SaveActivities(Activities, mallName);
             return true;
             
         }

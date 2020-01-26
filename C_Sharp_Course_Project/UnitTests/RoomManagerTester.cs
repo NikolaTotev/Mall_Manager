@@ -16,11 +16,12 @@ namespace UnitTests
     {
         private RoomManager m_CurretManager = RoomManager.GetInstance();
         readonly string m_TestId = Guid.NewGuid().ToString();
+        readonly string m_TestMall = "TstMall";
 
-       [Test]
+        [Test]
         public void TestForRoomsSaveFile()
         {
-            Assert.IsTrue(File.Exists(SerializationManager.RoomSaveFile), "File not created.");
+            Assert.IsTrue(File.Exists(SerializationManager.GenRoomSaveName(m_TestMall)), "File not created.");
         }
 
         [Test]
@@ -32,7 +33,7 @@ namespace UnitTests
             int testFloorNumber = 10;
             int testRoomNumber = 102;
 
-            m_CurretManager.CreateRoom(testName, testDescription, testType, testFloorNumber, testRoomNumber, m_TestId);
+            m_CurretManager.CreateRoom(testName, testDescription, testType, testFloorNumber, testRoomNumber, m_TestId,m_TestMall);
 
             Assert.IsTrue(m_CurretManager.Rooms.ContainsKey(m_TestId));
             Assert.IsTrue(m_CurretManager.Rooms[m_TestId].Name==testName);
@@ -42,7 +43,7 @@ namespace UnitTests
             Assert.IsTrue(m_CurretManager.Rooms[m_TestId].RoomNumber==testRoomNumber);
             Assert.IsTrue(m_CurretManager.Rooms[m_TestId].Id==m_TestId);
 
-            Dictionary<string, Room> testDictionary = SerializationManager.GetRooms();
+            Dictionary<string, Room> testDictionary = SerializationManager.GetRooms(m_TestMall);
 
             Assert.AreEqual(1, testDictionary.Count);
             Assert.IsTrue(testDictionary.ContainsKey(m_TestId));
@@ -64,10 +65,10 @@ namespace UnitTests
         //[Test]
         public void RemoveRoom()
         {
-            m_CurretManager.DeleteRoom(m_TestId);
+            m_CurretManager.DeleteRoom(m_TestId, m_TestMall);
 
             Assert.AreEqual(0, m_CurretManager.Rooms.Count);
-            Dictionary<string, Room> testDictionary = SerializationManager.GetRooms();
+            Dictionary<string, Room> testDictionary = SerializationManager.GetRooms(m_TestMall);
             Assert.AreEqual(0, testDictionary.Count);
         }
 

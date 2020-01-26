@@ -17,11 +17,12 @@ namespace UnitTests
         private ActivityManager m_CurrentManager = ActivityManager.GetInstance();
         readonly string m_TestRoomId = Guid.NewGuid().ToString();
         readonly string m_TestActivityId = Guid.NewGuid().ToString();
+        readonly string m_TestMall = "TstMall";
 
         [Test]
         public void TestForActivitiesSaveFile()
         {
-            Assert.IsTrue(File.Exists(SerializationManager.ActivitySaveFile), "File not created.");
+            Assert.IsTrue(File.Exists(SerializationManager.GenActivitySaveName(m_TestMall)), "File not created.");
         }
 
         [Test]
@@ -34,7 +35,7 @@ namespace UnitTests
             int testRoomNumber = 102;
 
             RoomManager roomManager = RoomManager.GetInstance();
-            roomManager.CreateRoom(testRoomName, testRoomDescription, testRoomType, testFloorNumber, testRoomNumber, m_TestRoomId);
+            roomManager.CreateRoom(testRoomName, testRoomDescription, testRoomType, testFloorNumber, testRoomNumber, m_TestRoomId,m_TestMall);
 
             string testActivityCatgory = "Test Category";
             string testActivityDescription = "Test description";
@@ -42,7 +43,7 @@ namespace UnitTests
             DateTime testStartTime = default;
             DateTime testEndTime = default;
 
-            m_CurrentManager.AddActivity(m_TestActivityId, testActivityCatgory, testActivityDescription, m_TestRoomId, testActivityStatus, testStartTime, testEndTime);
+            m_CurrentManager.AddActivity(m_TestMall,m_TestActivityId, testActivityCatgory, testActivityDescription, m_TestRoomId, testActivityStatus, testStartTime, testEndTime);
 
             Assert.IsTrue(m_CurrentManager.Activities.ContainsKey(m_TestActivityId));
             Assert.IsTrue(m_CurrentManager.Activities[m_TestActivityId].Category == testActivityCatgory);
@@ -52,7 +53,7 @@ namespace UnitTests
             Assert.IsTrue(m_CurrentManager.Activities[m_TestActivityId].EndTime == testEndTime);
             Assert.IsTrue(m_CurrentManager.Activities[m_TestActivityId].Id == m_TestActivityId);
 
-            Dictionary<string, Activity> testDictionary = SerializationManager.GetActivities();
+            Dictionary<string, Activity> testDictionary = SerializationManager.GetActivities(m_TestMall);
 
             Assert.AreEqual(1, testDictionary.Count);
             Assert.IsTrue(testDictionary.ContainsKey(m_TestActivityId));

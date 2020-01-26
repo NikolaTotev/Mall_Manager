@@ -15,7 +15,7 @@ namespace Core
         private RoomManager()
         {
             m_Instance = this;
-            Rooms = SerializationManager.GetRooms();
+            Rooms = SerializationManager.GetRooms(MallManager.GetInstance().CurrentMall.Name);
         }
 
         public static RoomManager GetInstance()
@@ -36,7 +36,7 @@ namespace Core
         /// <param name="floorNumber"></param>
         /// <param name="roomNumber"></param>
         /// <returns>Returns true if the operation completed successfully and false if it failed.</returns>
-        public bool CreateRoom(string name, string description, string roomType, int floorNumber, int roomNumber, string newRoomGuid)
+        public bool CreateRoom(string name, string description, string roomType, int floorNumber, int roomNumber, string newRoomGuid, string mallName)
         {
             if (name == null || description == null || roomType == null)
             {
@@ -53,7 +53,7 @@ namespace Core
             }
 
             Rooms.Add(newRoomGuid.ToString(), newRoom);
-            SerializationManager.SaveRooms(Rooms);
+            SerializationManager.SaveRooms(Rooms, mallName);
             return true;
         }
 
@@ -67,7 +67,7 @@ namespace Core
         /// <param name="roomType"></param>
         /// <param name="floorNumber"></param>
         /// <param name="roomNumber"></param>
-        public void EditRoom(string roomToEdit, string name, string description, string roomType, int floorNumber = Int32.MaxValue, int roomNumber = Int32.MaxValue)
+        public void EditRoom(string mallName, string roomToEdit, string name, string description, string roomType, int floorNumber = Int32.MaxValue, int roomNumber = Int32.MaxValue)
         {
             Room currentRoom = Rooms[roomToEdit];
 
@@ -96,7 +96,7 @@ namespace Core
                 currentRoom.Type = roomType;
             }
 
-            SerializationManager.SaveRooms(Rooms);
+            SerializationManager.SaveRooms(Rooms, mallName);
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace Core
         /// </summary>
         /// <param name="roomToRemove"></param>
         /// <returns>Returns true if the operation completed successfully and false if it failed.</returns>
-        public bool DeleteRoom(string roomToRemove)
+        public bool DeleteRoom(string roomToRemove, string mallName)
         {
             if (!Rooms.ContainsKey(roomToRemove))
             {
@@ -112,7 +112,7 @@ namespace Core
             }
 
             Rooms.Remove(roomToRemove);
-            SerializationManager.SaveRooms(Rooms);
+            SerializationManager.SaveRooms(Rooms, mallName);
             return true;
         }
 
@@ -123,7 +123,7 @@ namespace Core
         /// <param name="roomToAddTo"></param>
         /// <param name="activityToAdd"></param>
         /// <returns>Returns true if the operation completed successfully and false if it failed.</returns>
-        public bool AddActivity(string roomToAddTo, string activityToAdd)
+        public bool AddActivity(string roomToAddTo, string activityToAdd, string mallName)
         {
             if (!Rooms.ContainsKey(roomToAddTo))
             {
@@ -132,7 +132,7 @@ namespace Core
 
             Room roomToEdit = Rooms[roomToAddTo];
             roomToEdit.Activities.Add(activityToAdd);
-            SerializationManager.SaveRooms(Rooms);
+            SerializationManager.SaveRooms(Rooms, mallName);
             return true;
         }
 
@@ -143,7 +143,7 @@ namespace Core
         /// <param name="roomToRemoveFrom"></param>
         /// <param name="activityToRemove"></param>
         /// <returns>Returns true if the operation completed successfully and false if it failed.</returns>
-        public bool DeleteActivity(string roomToRemoveFrom, string activityToRemove)
+        public bool DeleteActivity(string roomToRemoveFrom, string activityToRemove, string mallName)
         {
             if (!Rooms.ContainsKey(roomToRemoveFrom))
             {
@@ -158,7 +158,7 @@ namespace Core
             }
 
             roomToEdit.Activities.Remove(activityToRemove);
-            SerializationManager.SaveRooms(Rooms);
+            SerializationManager.SaveRooms(Rooms, mallName);
             return true;
         }
 

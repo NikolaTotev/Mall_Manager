@@ -14,19 +14,25 @@ namespace Core
 {
     public static class SerializationManager
     {
+        //Base save path
         public static readonly string LocalAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-
         public static readonly string ProgramFolder = System.IO.Path.Combine(LocalAppDataPath, "MallManager_DATA");
+
+        //Folder paths
         public static readonly string MallSaves = System.IO.Path.Combine(ProgramFolder, "MallSaves");
         public static readonly string ActivitySaves = System.IO.Path.Combine(ProgramFolder, "ActivitySaves");
+        public static readonly string ConfigFiles = System.IO.Path.Combine(ProgramFolder, "Config");
         public static readonly string RoomSaves = System.IO.Path.Combine(ProgramFolder, "RoomSaves");
 
-        public static readonly string ActivitySaveFile = System.IO.Path.Combine(ProgramFolder, "Activities.json");
-        public static readonly string ActivityConfigSave = System.IO.Path.Combine(ProgramFolder, "ActivityConfig.json");
-        public static readonly string RoomSaveFile = System.IO.Path.Combine(RoomSaves, "Rooms.json");
-        private static  JsonSerializer serializer = new JsonSerializer();
+        //Base file names
+        public static readonly string ActivitySaveFileBase = "Activities.json";
+        public static readonly string ActivityConfigSaveBase = "ActivityConfig.json";
+        public static readonly string RoomsSaveBase = "Rooms.json";
 
-      
+        //Utility variables
+        private static JsonSerializer m_Serializer = new JsonSerializer();
+        private static StringBuilder m_StringBuilder = new StringBuilder("");
+
         public static void CheckForDirectories()
         {
             if (!Directory.Exists(ProgramFolder))
@@ -50,14 +56,39 @@ namespace Core
             }
         }
 
-        
-
-        public static void SaveRooms(Dictionary<string, Room> roomsToSave)
+        #region Name gen functions
+        public static string GenRoomSaveName(string mallName)
         {
-            //Create serialization code;
-            using (StreamWriter file = File.CreateText(RoomSaveFile))
+            m_StringBuilder.Clear();
+            m_StringBuilder.Append(mallName);
+            m_StringBuilder.Append(RoomsSaveBase);
+            return System.IO.Path.Combine(RoomSaves, m_StringBuilder.ToString());
+        }
+
+        public static string GenActivitySaveName(string mallName)
+        {
+            m_StringBuilder.Clear();
+            m_StringBuilder.Append(mallName);
+            m_StringBuilder.Append(ActivitySaveFileBase);
+            return System.IO.Path.Combine(ActivitySaves, m_StringBuilder.ToString());
+        }
+
+        public static string GenActivityConfigName(string mallName)
+        {
+            m_StringBuilder.Clear();
+            m_StringBuilder.Append(mallName);
+            m_StringBuilder.Append(ActivityConfigSaveBase);
+            return System.IO.Path.Combine(ConfigFiles, m_StringBuilder.ToString());
+        }
+
+        #endregion
+
+        #region Room read/write functions
+        public static void SaveRooms(Dictionary<string, Room> roomsToSave, string mallName)
+        {
+            using (StreamWriter file = File.CreateText(GenRoomSaveName(mallName)))
             {
-                serializer.Serialize(file, roomsToSave);
+                m_Serializer.Serialize(file, roomsToSave);
             }
         }
 
@@ -65,27 +96,32 @@ namespace Core
         /// Gets last save of the room dictionary. If no save is found a new one is created.
         /// </summary>
         /// <returns></returns>
-        public static Dictionary<string, Room> GetRooms()
+        public static Dictionary<string, Room> GetRooms(string mallName)
         {
-            if (!File.Exists(RoomSaveFile))
+
+            if (!File.Exists(GenRoomSaveName(mallName)))
             {
                 Dictionary<string, Room> dictionaryToReturn = new Dictionary<string, Room>();
-                ExceptionManager.OnFileNotFound(RoomSaveFile);
-                SaveRooms(dictionaryToReturn);
+                ExceptionManager.OnFileNotFound(GenRoomSaveName(mallName));
+                SaveRooms(dictionaryToReturn, mallName);
                 return dictionaryToReturn;
             }
 
-            using (StreamReader file = File.OpenText(RoomSaveFile))
+            using (StreamReader file = File.OpenText(GenRoomSaveName(mallName)))
             {
-                return (Dictionary<string, Room>)serializer.Deserialize(file, typeof(Dictionary<string, Room>));
+                return (Dictionary<string, Room>)m_Serializer.Deserialize(file, typeof(Dictionary<string, Room>));
             }
         }
 
-        public static void SaveActivities(Dictionary<string, Activity> activitiesToSave)
+        #endregion
+
+        #region Activity read/write functions
+        public static void SaveActivities(Dictionary<string, Activity> activitiesToSave, string mallName)
         {
-            using (StreamWriter file = File.CreateText(ActivitySaveFile))
+
+            using (StreamWriter file = File.CreateText(GenActivitySaveName(mallName)))
             {
-                serializer.Serialize(file, activitiesToSave);
+                m_Serializer.Serialize(file, activitiesToSave);
             }
         }
 
@@ -93,46 +129,52 @@ namespace Core
         /// Gets last save of the activity dictionary. If no save is found a new one is created.
         /// </summary>
         /// <returns></returns>
-        public static Dictionary<string, Activity> GetActivities()
+        public static Dictionary<string, Activity> GetActivities(string mallName)
         {
-            if (!File.Exists(ActivitySaveFile))
+            if (!File.Exists(GenActivitySaveName(mallName)))
             {
                 Dictionary<string, Activity> dictionaryToReturn = new Dictionary<string, Activity>();
-                ExceptionManager.OnFileNotFound(ActivitySaveFile);
-                SaveActivities(dictionaryToReturn);
+                ExceptionManager.OnFileNotFound(GenActivitySaveName(mallName));
+                SaveActivities(dictionaryToReturn, mallName);
                 return dictionaryToReturn;
             }
 
-            using (StreamReader file = File.OpenText(ActivitySaveFile))
+            using (StreamReader file = File.OpenText(GenActivitySaveName(mallName)))
             {
-                return (Dictionary<string, Activity>)serializer.Deserialize(file, typeof(Dictionary<string, Activity>));
+                return (Dictionary<string, Activity>)m_Serializer.Deserialize(file, typeof(Dictionary<string, Activity>));
             }
         }
 
-        public static void SaveActivityConfigFile(ActivityConfig configToSave)
+        #endregion
+
+        #region Config read/write functions
+        public static void SaveActivityConfigFile(ActivityConfig configToSave, string mallName)
         {
             CheckForDirectories();
-            using (StreamWriter file = File.CreateText(ActivityConfigSave))
+            using (StreamWriter file = File.CreateText(GenActivityConfigName(mallName)))
             {
-                serializer.Serialize(file, configToSave);
+                m_Serializer.Serialize(file, configToSave);
             }
         }
 
-        public static ActivityConfig GetActivityConfig()
+        public static ActivityConfig GetActivityConfig(string mallName)
         {
-            if (!File.Exists(ActivityConfigSave))
+            if (!File.Exists(GenActivityConfigName(mallName)))
             {
                 ActivityConfig activityConfigToReturn = new ActivityConfig();
-                ExceptionManager.OnFileNotFound(ActivityConfigSave);
-                SaveActivityConfigFile(activityConfigToReturn);
+                ExceptionManager.OnFileNotFound(GenActivityConfigName(mallName));
+                SaveActivityConfigFile(activityConfigToReturn, mallName);
                 return activityConfigToReturn;
             }
 
-            using (StreamReader file = File.OpenText(ActivityConfigSave))
+            using (StreamReader file = File.OpenText(GenActivityConfigName(mallName)))
             {
-                return (ActivityConfig)serializer.Deserialize(file, typeof(ActivityConfig));
+                return (ActivityConfig)m_Serializer.Deserialize(file, typeof(ActivityConfig));
             }
         }
-        //TODO Create read configFile method.
+
+
+        #endregion
+
     }
 }
