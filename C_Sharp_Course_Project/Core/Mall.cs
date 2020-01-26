@@ -3,14 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Core
 {
     public class Mall
     {
-        public Guid MallId { get; set; }
+        [JsonProperty]
+        public readonly string Id;
         public string Name { get; set; }
         public string Description { get; set; }
         public List<Guid> AssociatedActivities { get; set; }
+
+        public Mall(string id, string name, string description)
+        {
+            Id = id;
+            Name = name;
+            Description = description;
+        }
     }
 }
