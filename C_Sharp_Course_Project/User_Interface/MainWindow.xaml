@@ -10,12 +10,15 @@
     <DockPanel x:Name="p_StartPanel">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="155*"></RowDefinition>
+                <RowDefinition Height="103*"></RowDefinition>
+                <RowDefinition Height="363*"></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="Welcome!" TextAlignment="Center" Margin="52,90,48,10" FontSize="36" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Regular"/>
-            <TextBox Grid.Row="1" Text="Select Location" TextAlignment="Center"  FontSize="50" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="SemiBold"/>
+            <TextBlock Grid.Row="0" Foreground="{StaticResource NavyBlueBase}" Text="Welcome!" TextAlignment="Center" Margin="52,90,52,10" FontSize="40" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Regular"/>
+            <TextBlock Grid.Row="1" Foreground="{StaticResource NavyBlueBase}" Text="Select Location" TextAlignment="Center"  FontSize="64" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="SemiBold" Margin="0,0,0,10" />
+            <Button Grid.Row="2" Style="{StaticResource RoundedButton}" Tag="/Resources/Icons/Event_Icon.png">
+                <Image Source="Resources/Icons/Event_Icon.png" Width="150" Height="150" Stretch="Fill"/>
+            </Button>
         </Grid>
     </DockPanel>
 </Window>

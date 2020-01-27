@@ -23,10 +23,15 @@ namespace User_Interface
         public MainWindow()
         {
             InitializeComponent();
-            Dashboard d = new Dashboard();
-            d.test = 2;
-            p_StartPanel.Children.Clear();
-            p_StartPanel.Children.Add(d);
+         //   Dashboard d = new Dashboard();
+          //  d.test = 2;
+         //   p_StartPanel.Children.Clear();
+         //   p_StartPanel.Children.Add(d);
+        }
+
+        private void BigButton_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
