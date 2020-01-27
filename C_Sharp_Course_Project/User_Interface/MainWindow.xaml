@@ -5,9 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:User_Interface"
         mc:Ignorable="d"
-        Title="MainWindow" Height="650" Width="1000">
-    <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="234,125,0,0" VerticalAlignment="Top" Width="378" Height="167"/>
+        Title="Mall Manager" Height="650" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
 
-    </Grid>
+    <DockPanel x:Name="p_StartPanel">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Text="Welcome!" TextAlignment="Center" Margin="50" FontSize="36" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Regular"/>
+        </Grid>
+    </DockPanel>
 </Window>

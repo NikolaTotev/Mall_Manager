@@ -90,6 +90,24 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Resource Include="Resources\Fonts\Montserrat-Black.ttf" />
+    <Resource Include="Resources\Fonts\Montserrat-BlackItalic.ttf" />
+    <Resource Include="Resources\Fonts\Montserrat-Bold.ttf" />
+    <Resource Include="Resources\Fonts\Montserrat-BoldItalic.ttf" />
+    <Resource Include="Resources\Fonts\Montserrat-ExtraBold.ttf" />
+    <Resource Include="Resources\Fonts\Montserrat-ExtraBoldItalic.ttf" />
+    <Resource Include="Resources\Fonts\Montserrat-ExtraLight.ttf" />
+    <Resource Include="Resources\Fonts\Montserrat-ExtraLightItalic.ttf" />
+    <Resource Include="Resources\Fonts\Montserrat-Italic.ttf" />
+    <Resource Include="Resources\Fonts\Montserrat-Light.ttf" />
+    <Resource Include="Resources\Fonts\Montserrat-LightItalic.ttf" />
+    <Resource Include="Resources\Fonts\Montserrat-Medium.ttf" />
+    <Resource Include="Resources\Fonts\Montserrat-MediumItalic.ttf" />
+    <Resource Include="Resources\Fonts\Montserrat-Regular.ttf" />
+    <Resource Include="Resources\Fonts\Montserrat-SemiBold.ttf" />
+    <Resource Include="Resources\Fonts\Montserrat-SemiBoldItalic.ttf" />
+    <Resource Include="Resources\Fonts\Montserrat-Thin.ttf" />
+    <Resource Include="Resources\Fonts\Montserrat-ThinItalic.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
