@@ -15,7 +15,7 @@ namespace UnitTests
         [Test]
         public void CreateActivityConfigFile()
         {
-            string savePath = SerializationManager.ActivityConfigSave;
+            string savePath = SerializationManager.ActivityConfigSaveBase;
             ActivityConfig newConfig = new ActivityConfig();
             List<string> newCategories = new List<string>(){"Light Maintenance","Heavy Maintenance", "Cleaning", "Inspection"};
             List<Activity> newTemplates = new List<Activity>();
@@ -25,7 +25,7 @@ namespace UnitTests
             newTemplates.Add(newTemplate);
             newConfig.Categories = newCategories;
             newConfig.Templates = newTemplates;
-            SerializationManager.SaveActivityConfigFile(newConfig);
+            SerializationManager.SaveActivityConfigFile(newConfig, "Err Suppression");
             //int result = 1;
             //Assert.AreEqual(0, result);
         }
