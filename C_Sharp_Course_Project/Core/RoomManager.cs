@@ -14,17 +14,12 @@ namespace Core
 
         private RoomManager()
         {
-            m_Instance = this;
             Rooms = SerializationManager.GetRooms(MallManager.GetInstance().CurrentMall.Name);
         }
 
         public static RoomManager GetInstance()
         {
-            if (m_Instance == null)
-            {
-                m_Instance = new RoomManager();
-            }
-            return m_Instance;
+            return m_Instance ?? (m_Instance = new RoomManager());
         }
 
         /// <summary>

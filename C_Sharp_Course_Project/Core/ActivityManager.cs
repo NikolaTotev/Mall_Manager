@@ -80,8 +80,7 @@ namespace Core
                 return false;
             }
 
-            int dateTimeComparison = DateTime.Compare(startDate, endDate); //validate date
-            if (dateTimeComparison > 0)
+            if (startDate > endDate)
             {
                 ExceptionManager.OnInvalidDate(); //Maybe other exception Invalid Date
                 return false;

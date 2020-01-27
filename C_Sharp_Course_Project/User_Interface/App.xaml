@@ -5,5 +5,12 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <FontFamily x:Key="Montserrat">pack://application:,,,/Resources/Fonts/#Montserrat</FontFamily>
-    </Application.Resources>
+        <Color x:Key="OrangeAccent">#FFA630</Color>
+        <Color x:Key="NavyBlueBase">#3C4F76</Color>
+
+        <Color x:Key="ScheduledTask">#62B6CB</Color>
+        <Color x:Key="InProgressTask">#BEE9e8</Color>
+        <Color x:Key="Completed">#CAE9ff</Color>
+        <Color x:Key="FailedTask">#F5AC72</Color>
+</Application.Resources>
 </Application>

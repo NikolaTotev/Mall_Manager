@@ -16,17 +16,13 @@ using System.Windows.Shapes;
 namespace User_Interface
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Dashboard.xaml
     /// </summary>
-    public partial class MainWindow : Window
-    {
-        public MainWindow()
+    public partial class Dashboard : UserControl
+    { public int test { get; set; }
+        public Dashboard()
         {
             InitializeComponent();
-            Dashboard d = new Dashboard();
-            d.test = 2;
-            p_StartPanel.Children.Clear();
-            p_StartPanel.Children.Add(d);
         }
     }
 }

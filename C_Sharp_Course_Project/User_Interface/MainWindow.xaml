@@ -11,9 +11,11 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="2*"></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="Welcome!" TextAlignment="Center" Margin="50" FontSize="36" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Regular"/>
+            <TextBlock Grid.Row="0" Text="Welcome!" TextAlignment="Center" Margin="52,90,48,10" FontSize="36" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Regular"/>
+            <TextBox Grid.Row="1" Text="Select Location" TextAlignment="Center"  FontSize="50" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="SemiBold"/>
         </Grid>
     </DockPanel>
 </Window>
