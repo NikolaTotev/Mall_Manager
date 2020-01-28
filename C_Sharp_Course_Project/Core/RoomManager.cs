@@ -10,7 +10,7 @@ namespace Core
     {
         private static RoomManager m_Instance;
         public List<string> RoomTypes { get; set; }
-        public Dictionary<string, Room> Rooms { get; set; }
+        public Dictionary<Guid, Room> Rooms { get; set; }
 
         private RoomManager()
         {
@@ -31,7 +31,7 @@ namespace Core
         /// <param name="floorNumber"></param>
         /// <param name="roomNumber"></param>
         /// <returns>Returns true if the operation completed successfully and false if it failed.</returns>
-        public bool CreateRoom(string name, string description, string roomType, int floorNumber, int roomNumber, string newRoomGuid, string mallName)
+        public bool CreateRoom(string name, string description, string roomType, int floorNumber, int roomNumber, Guid newRoomGuid, string mallName)
         {
             if (name == null || description == null || roomType == null)
             {
@@ -42,12 +42,12 @@ namespace Core
             Room newRoom = new Room(name, description, roomType, roomNumber, floorNumber, newRoomGuid);
 
             //If statement just in case.
-            if (Rooms.ContainsKey(newRoomGuid.ToString()))
+            if (Rooms.ContainsKey(newRoomGuid))
             {
                 return false;
             }
 
-            Rooms.Add(newRoomGuid.ToString(), newRoom);
+            Rooms.Add(newRoomGuid, newRoom);
             SerializationManager.SaveRooms(Rooms, mallName);
             return true;
         }
@@ -62,7 +62,7 @@ namespace Core
         /// <param name="roomType"></param>
         /// <param name="floorNumber"></param>
         /// <param name="roomNumber"></param>
-        public void EditRoom(string mallName, string roomToEdit, string name, string description, string roomType, int floorNumber = Int32.MaxValue, int roomNumber = Int32.MaxValue)
+        public void EditRoom(string mallName, Guid roomToEdit, string name, string description, string roomType, int floorNumber = Int32.MaxValue, int roomNumber = Int32.MaxValue)
         {
             Room currentRoom = Rooms[roomToEdit];
 
@@ -99,7 +99,7 @@ namespace Core
         /// </summary>
         /// <param name="roomToRemove"></param>
         /// <returns>Returns true if the operation completed successfully and false if it failed.</returns>
-        public bool DeleteRoom(string roomToRemove, string mallName)
+        public bool DeleteRoom(Guid roomToRemove, string mallName)
         {
             if (!Rooms.ContainsKey(roomToRemove))
             {
@@ -118,7 +118,7 @@ namespace Core
         /// <param name="roomToAddTo"></param>
         /// <param name="activityToAdd"></param>
         /// <returns>Returns true if the operation completed successfully and false if it failed.</returns>
-        public bool AddActivity(string roomToAddTo, string activityToAdd, string mallName)
+        public bool AddActivity(Guid roomToAddTo, Guid activityToAdd, string mallName)
         {
             if (!Rooms.ContainsKey(roomToAddTo))
             {
@@ -138,7 +138,7 @@ namespace Core
         /// <param name="roomToRemoveFrom"></param>
         /// <param name="activityToRemove"></param>
         /// <returns>Returns true if the operation completed successfully and false if it failed.</returns>
-        public bool DeleteActivity(string roomToRemoveFrom, string activityToRemove, string mallName)
+        public bool DeleteActivity(Guid roomToRemoveFrom, Guid activityToRemove, string mallName)
         {
             if (!Rooms.ContainsKey(roomToRemoveFrom))
             {
@@ -161,9 +161,9 @@ namespace Core
         /// Returns a dictionary containing basic information about every room in the rooms dictionary.
         /// </summary>
         /// <returns>Dictionary[string,string] where they key is the room id and the second the name, floor number & room number</returns>
-        public Dictionary<string, string> GetRooms()
+        public Dictionary<Guid, string> GetRooms()
         {
-            Dictionary<string, string> roomDictionary = new Dictionary<string, string>();
+            Dictionary<Guid, string> roomDictionary = new Dictionary<Guid, string>();
             StringBuilder sb = new StringBuilder("");
             foreach (var room in Rooms)
             {

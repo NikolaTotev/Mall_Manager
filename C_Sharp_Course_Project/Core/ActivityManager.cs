@@ -19,25 +19,20 @@ namespace Core
         private ProgramManager m_CurrentManager;
         private static ActivityManager m_Instance;
         private ActivityConfig m_Config;
-        public Dictionary<string, Activity> Activities { get; set; }
+        public Dictionary<Guid, Activity> Activities { get; set; }
 
 
         private ActivityManager()
         {
             m_Instance = this;
             m_CurrentManager = ProgramManager.GetInstance();
-            m_Config = SerializationManager.GetActivityConfig(MallManager.GetInstance().CurrentMall.ToString());
-            Activities = SerializationManager.GetActivities(MallManager.GetInstance().CurrentMall.ToString());
+            m_Config = SerializationManager.GetActivityConfig(MallManager.GetInstance().CurrentMall.Name.ToString());
+            Activities = SerializationManager.GetActivities(MallManager.GetInstance().CurrentMall.Name.ToString());
         }
 
         public static ActivityManager GetInstance()
         {
-            if (m_Instance == null)
-            {
-                m_Instance = new ActivityManager();
-            }
-
-            return m_Instance;
+            return m_Instance ?? (m_Instance = new ActivityManager());
         }
 
         public bool AddNewCategory(string category,string mallName)
@@ -66,13 +61,13 @@ namespace Core
                 return false;
             }
 
-            Activity newActivityTemplate = new Activity("template", category, true, description);
+            Activity newActivityTemplate = new Activity(Guid.Empty , Guid.Empty, category, true, description);
             m_Config.Templates.Add(newActivityTemplate);
             SerializationManager.SaveActivityConfigFile(m_Config, mallName);
             return true;
         }
 
-        public bool AddActivity(string mallName, string newId, string category, string description, string corespRoom, ActivityStatus status, DateTime startDate, DateTime endDate)
+        public bool AddActivity(string mallName, Guid newId, string category, string description, Guid corespRoom, ActivityStatus status, DateTime startDate, DateTime endDate)
         {
             if (newId == null || category == null || description == null || corespRoom == null)
             {
@@ -86,7 +81,7 @@ namespace Core
                 return false;
             }
 
-            Activity newActivity = new Activity(newId, category, false, description, corespRoom, status, startDate, endDate);
+            Activity newActivity = new Activity(newId, corespRoom, category, false, description, status, startDate, endDate);
             RoomManager roomManager = RoomManager.GetInstance();
             if(Activities.ContainsKey(newActivity.Id) || !roomManager.AddActivity(newActivity.CorrespondingRoom, newActivity.Id,mallName))
             {
@@ -98,7 +93,7 @@ namespace Core
             return true;
         }
 
-        public void EditActivity(string mallName, string activityId, string category = null, string description = null, ActivityStatus status = ActivityStatus.Undefined, DateTime startDate = default(DateTime), DateTime endDate = default(DateTime))
+        public void EditActivity(string mallName, Guid activityId, string category = null, string description = null, ActivityStatus status = ActivityStatus.Undefined, DateTime startDate = default(DateTime), DateTime endDate = default(DateTime))
         {
             Activity activityToEdit = Activities[activityId];
             if (category != null)
@@ -122,7 +117,7 @@ namespace Core
             SerializationManager.SaveActivities(Activities, mallName);
         }
 
-        public bool DeleteActivity(string activityId,string mallName)
+        public bool DeleteActivity(Guid activityId,string mallName)
         {
             if (!Activities.ContainsKey(activityId))
             {
@@ -141,9 +136,9 @@ namespace Core
             
         }
 
-        public Dictionary<string, string> GetActivities()
+        public Dictionary<Guid, string> GetActivities()
         {
-            Dictionary<string, string> activityDictionary = new Dictionary<string, string>();
+            Dictionary<Guid, string> activityDictionary = new Dictionary<Guid, string>();
             StringBuilder sb = new StringBuilder("");
             foreach (var activity in Activities)
             {

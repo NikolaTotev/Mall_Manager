@@ -10,16 +10,17 @@ namespace Core
     public class Mall
     {
         [JsonProperty]
-        public readonly string Id;
+        public readonly Guid Id;
         public string Name { get; set; }
         public string Description { get; set; }
         public List<Guid> AssociatedActivities { get; set; }
 
-        public Mall(string id, string name, string description)
+        public Mall(Guid id, string name, string description)
         {
             Id = id;
             Name = name;
             Description = description;
+            AssociatedActivities = new List<Guid>();
         }
     }
 }

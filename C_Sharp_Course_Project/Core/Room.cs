@@ -10,17 +10,17 @@ namespace Core
     public class Room
     {
         [JsonProperty]
-        public readonly string Id;
+        public readonly Guid Id;
         public string Name { get; set; }
         public string Description { get; set; }
         public string Type { get; set; }
         public int Floor { get; set; }
         public int RoomNumber { get; set; }
-        public List<string> Activities { get; set; }
+        public List<Guid> Activities { get; set; }
         public DateTime CreateDate { get; private set; }
         public DateTime LastEditDate { get; private set; }
 
-        public Room(string name, string description, string type, int roomNumber, int floorNumber, string newId)
+        public Room(string name, string description, string type, int roomNumber, int floorNumber, Guid newId)
         {
             Name = name;
             Description = description;
@@ -30,7 +30,7 @@ namespace Core
             Id = newId;
             CreateDate = DateTime.UtcNow;
             LastEditDate = DateTime.UtcNow;
-            Activities = new List<string>(); 
+            Activities = new List<Guid>(); 
         }
 
         public void EditRoom(string name = null, string description = null, string type = null)

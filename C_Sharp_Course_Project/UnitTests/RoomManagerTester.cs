@@ -15,7 +15,7 @@ namespace UnitTests
     class RoomManagerTester
     {
         private RoomManager m_CurretManager = RoomManager.GetInstance();
-        readonly string m_TestId = Guid.NewGuid().ToString();
+        readonly Guid m_TestId = Guid.NewGuid();
         readonly string m_TestMall = "TstMall";
 
         [Test]
@@ -43,7 +43,7 @@ namespace UnitTests
             Assert.IsTrue(m_CurretManager.Rooms[m_TestId].RoomNumber==testRoomNumber);
             Assert.IsTrue(m_CurretManager.Rooms[m_TestId].Id==m_TestId);
 
-            Dictionary<string, Room> testDictionary = SerializationManager.GetRooms(m_TestMall);
+            Dictionary<Guid, Room> testDictionary = SerializationManager.GetRooms(m_TestMall);
 
             Assert.AreEqual(1, testDictionary.Count);
             Assert.IsTrue(testDictionary.ContainsKey(m_TestId));
@@ -58,7 +58,7 @@ namespace UnitTests
         [Test]
         public void TestGetRooms()
         {
-            Dictionary<string, string > currentRooms = m_CurretManager.GetRooms();
+            Dictionary<Guid, string > currentRooms = m_CurretManager.GetRooms();
             Assert.IsTrue(currentRooms[m_TestId] == "Test roomFloor Number: 10Room Number: 102");
         }
 
@@ -68,7 +68,7 @@ namespace UnitTests
             m_CurretManager.DeleteRoom(m_TestId, m_TestMall);
 
             Assert.AreEqual(0, m_CurretManager.Rooms.Count);
-            Dictionary<string, Room> testDictionary = SerializationManager.GetRooms(m_TestMall);
+            Dictionary<Guid, Room> testDictionary = SerializationManager.GetRooms(m_TestMall);
             Assert.AreEqual(0, testDictionary.Count);
         }
 

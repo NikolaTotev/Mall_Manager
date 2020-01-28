@@ -23,6 +23,7 @@ namespace Core
         public static readonly string ActivitySaves = System.IO.Path.Combine(ProgramFolder, "ActivitySaves");
         public static readonly string ConfigFiles = System.IO.Path.Combine(ProgramFolder, "Config");
         public static readonly string RoomSaves = System.IO.Path.Combine(ProgramFolder, "RoomSaves");
+        public static readonly string MallSavesFile = System.IO.Path.Combine(MallSaves, "Malls.json");
 
         //Base file names
         public static readonly string ActivitySaveFileBase = "Activities.json";
@@ -54,6 +55,10 @@ namespace Core
             {
                 Directory.CreateDirectory(RoomSaves);
             }
+            if (!Directory.Exists(ConfigFiles))
+            {
+                Directory.CreateDirectory(ConfigFiles);
+            }
         }
 
         #region Name gen functions
@@ -83,8 +88,38 @@ namespace Core
 
         #endregion
 
+
+        public static void SaveMalls(Dictionary<Guid, Mall> mallsToSave)
+        {
+            using (StreamWriter file = File.CreateText(MallSavesFile))
+            {
+                m_Serializer.Serialize(file, mallsToSave);
+            }
+        }
+
+        /// <summary>
+        /// Gets last save of the room dictionary. If no save is found a new one is created.
+        /// </summary>
+        /// <returns></returns>
+        public static Dictionary<Guid, Mall> GetMalls()
+        {
+
+            if (!File.Exists(MallSavesFile))
+            {
+                Dictionary<Guid, Mall> dictionaryToReturn = new Dictionary<Guid, Mall>();
+                ExceptionManager.OnFileNotFound(MallSavesFile);
+                SaveMalls(dictionaryToReturn);
+                return dictionaryToReturn;
+            }
+
+            using (StreamReader file = File.OpenText(MallSavesFile))
+            {
+                return (Dictionary<Guid, Mall>)m_Serializer.Deserialize(file, typeof(Dictionary<Guid, Mall>));
+            }
+        }
+
         #region Room read/write functions
-        public static void SaveRooms(Dictionary<string, Room> roomsToSave, string mallName)
+        public static void SaveRooms(Dictionary<Guid, Room> roomsToSave, string mallName)
         {
             using (StreamWriter file = File.CreateText(GenRoomSaveName(mallName)))
             {
@@ -96,12 +131,12 @@ namespace Core
         /// Gets last save of the room dictionary. If no save is found a new one is created.
         /// </summary>
         /// <returns></returns>
-        public static Dictionary<string, Room> GetRooms(string mallName)
+        public static Dictionary<Guid, Room> GetRooms(string mallName)
         {
 
             if (!File.Exists(GenRoomSaveName(mallName)))
             {
-                Dictionary<string, Room> dictionaryToReturn = new Dictionary<string, Room>();
+                Dictionary<Guid, Room> dictionaryToReturn = new Dictionary<Guid, Room>();
                 ExceptionManager.OnFileNotFound(GenRoomSaveName(mallName));
                 SaveRooms(dictionaryToReturn, mallName);
                 return dictionaryToReturn;
@@ -109,14 +144,14 @@ namespace Core
 
             using (StreamReader file = File.OpenText(GenRoomSaveName(mallName)))
             {
-                return (Dictionary<string, Room>)m_Serializer.Deserialize(file, typeof(Dictionary<string, Room>));
+                return (Dictionary<Guid, Room>)m_Serializer.Deserialize(file, typeof(Dictionary<Guid, Room>));
             }
         }
 
         #endregion
 
         #region Activity read/write functions
-        public static void SaveActivities(Dictionary<string, Activity> activitiesToSave, string mallName)
+        public static void SaveActivities(Dictionary<Guid, Activity> activitiesToSave, string mallName)
         {
 
             using (StreamWriter file = File.CreateText(GenActivitySaveName(mallName)))
@@ -129,11 +164,11 @@ namespace Core
         /// Gets last save of the activity dictionary. If no save is found a new one is created.
         /// </summary>
         /// <returns></returns>
-        public static Dictionary<string, Activity> GetActivities(string mallName)
+        public static Dictionary<Guid, Activity> GetActivities(string mallName)
         {
             if (!File.Exists(GenActivitySaveName(mallName)))
             {
-                Dictionary<string, Activity> dictionaryToReturn = new Dictionary<string, Activity>();
+                Dictionary<Guid, Activity> dictionaryToReturn = new Dictionary<Guid, Activity>();
                 ExceptionManager.OnFileNotFound(GenActivitySaveName(mallName));
                 SaveActivities(dictionaryToReturn, mallName);
                 return dictionaryToReturn;
@@ -141,7 +176,7 @@ namespace Core
 
             using (StreamReader file = File.OpenText(GenActivitySaveName(mallName)))
             {
-                return (Dictionary<string, Activity>)m_Serializer.Deserialize(file, typeof(Dictionary<string, Activity>));
+                return (Dictionary<Guid, Activity>)m_Serializer.Deserialize(file, typeof(Dictionary<Guid, Activity>));
             }
         }
 

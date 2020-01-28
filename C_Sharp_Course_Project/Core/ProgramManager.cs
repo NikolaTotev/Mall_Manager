@@ -20,9 +20,11 @@ namespace Core
             m_Instance = this;
             SerializationManager.CheckForDirectories();
             m_MallManagerInstance = MallManager.GetInstance();
-            //TODO ensure there is a mall and that it has a name. 
-            m_ActivityManagerInstance = ActivityManager.GetInstance();
-            m_RoomManagerInstance = RoomManager.GetInstance();
+            if (MallManager.GetInstance().Malls.Count != 0)
+            {
+                m_ActivityManagerInstance = ActivityManager.GetInstance();
+                m_RoomManagerInstance = RoomManager.GetInstance();
+            }
         }
 
         public static ProgramManager GetInstance()
@@ -32,6 +34,12 @@ namespace Core
                 m_Instance = new ProgramManager();
             }
             return m_Instance;
+        }
+
+        public void CompleteInitialization()
+        {
+            m_ActivityManagerInstance = ActivityManager.GetInstance();
+            m_RoomManagerInstance = RoomManager.GetInstance();
         }
     }
 }

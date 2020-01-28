@@ -15,23 +15,21 @@ namespace Core
     {
         private static MallManager m_Instance;
         public Mall CurrentMall { get; private set; }
-        public Dictionary<string, Mall> Malls { get; set; }
-
+        public Dictionary<Guid, Mall> Malls { get; set; }
+        
         private MallManager()
         {
             m_Instance = this;
+            Malls = SerializationManager.GetMalls();
+            
         }
 
         public static MallManager GetInstance()
         {
-            if (m_Instance == null)
-            {
-                m_Instance = new MallManager();
-            }
-            return m_Instance;
+            return m_Instance ?? (m_Instance = new MallManager());
         }
 
-        public bool AddMall(string mallId, string mallName, string mallDescription)
+        public bool AddMall(Guid mallId, string mallName, string mallDescription)
         {
             if (mallId == null || mallName == null || mallDescription == null)
             {
@@ -47,11 +45,13 @@ namespace Core
             }
 
             Malls.Add(newMall.Id, newMall);
-            //Serialization Manager save
+            CurrentMall = Malls[newMall.Id];
+            SerializationManager.SaveMalls(Malls);
+            ProgramManager.GetInstance().CompleteInitialization();
             return true;
         }
 
-        public bool RemoveMall(string mallId)
+        public bool RemoveMall(Guid mallId)
         {
             if (!Malls.ContainsKey(mallId))
             {
@@ -63,7 +63,7 @@ namespace Core
             return true;
         }
 
-        public void EditMall(string mallId, string mallName = null, string mallDescription = null)
+        public void EditMall(Guid mallId, string mallName = null, string mallDescription = null)
         {
             Mall mallToEdit = Malls[mallId];
             if (mallName != null)
@@ -79,7 +79,7 @@ namespace Core
             //Serialization Manager Save;
         }
 
-        public bool ChangeCurrentMall(string mallId)
+        public bool ChangeCurrentMall(Guid mallId)
         {
             if (!Malls.ContainsKey(mallId))
             {
@@ -90,9 +90,9 @@ namespace Core
             return true;
         }
 
-        public Dictionary<string, string> GetMalls()
+        public Dictionary<Guid, string> GetMalls()
         {
-            Dictionary<string, string> mallDictionary = new Dictionary<string, string>();
+            Dictionary<Guid, string> mallDictionary = new Dictionary<Guid, string>();
             StringBuilder sb = new StringBuilder("");
             foreach (var mall in Malls)
             {
