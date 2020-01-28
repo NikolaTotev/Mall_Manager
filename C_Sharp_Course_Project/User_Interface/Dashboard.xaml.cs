@@ -12,17 +12,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using Core;
+using 
 namespace User_Interface
 {
     /// <summary>
     /// Interaction logic for Dashboard.xaml
     /// </summary>
     public partial class Dashboard : UserControl
-    { public int test { get; set; }
+    {
+        private ProgramManager CurrentManager;
+        
         public Dashboard()
         {
             InitializeComponent();
+            CurrentManager = ProgramManager.GetInstance();
         }
     }
 }

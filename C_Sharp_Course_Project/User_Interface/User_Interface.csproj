@@ -122,5 +122,23 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\Event_Icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Add_Icon.png" />
+    <Resource Include="Resources\Icons\Cancel_Icon.png" />
+    <Resource Include="Resources\Icons\Delete_Icon.png" />
+    <Resource Include="Resources\Icons\Deselect_Icon.png" />
+    <Resource Include="Resources\Icons\Info_Icon.png" />
+    <Resource Include="Resources\Icons\Save_Icon.png" />
+    <Resource Include="Resources\Icons\SelectAll_Icon.png" />
+    <Resource Include="Resources\Icons\SortAlpha_Icon.png" />
+    <Resource Include="Resources\Icons\Statistics_Icon.png" />
+    <Resource Include="Resources\Icons\StoreFront_Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{933c7b3f-b72b-4c30-b667-29de72550a29}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

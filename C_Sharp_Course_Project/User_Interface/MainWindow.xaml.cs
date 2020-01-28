@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Core;
 
 namespace User_Interface
 {
@@ -20,8 +21,10 @@ namespace User_Interface
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ProgramManager CurrentManager = ProgramManager.GetInstance();
         public MainWindow()
         {
+                        
             InitializeComponent();
          //   Dashboard d = new Dashboard();
           //  d.test = 2;

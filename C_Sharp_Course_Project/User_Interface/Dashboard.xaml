@@ -5,8 +5,28 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:User_Interface"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="650" d:DesignWidth="1000" Background="White">
     <Grid>
-            <TextBlock Text="Test"></TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="155*"></RowDefinition>
+            <RowDefinition Height="103*"></RowDefinition>
+            <RowDefinition Height="363*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Foreground="{StaticResource NavyBlueBase}" Text="Welcome!" TextAlignment="Center" Margin="52,90,52,10" FontSize="40" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Regular"/>
+        <TextBlock Grid.Row="1" Foreground="{StaticResource NavyBlueBase}" Text="Select Location" TextAlignment="Center"  FontSize="64" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="SemiBold" Margin="0,0,0,10" />
+        <ListView HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled" HorizontalAlignment="Center" Height="244" Margin="177,51,177,51" Grid.Row="2" VerticalAlignment="Center"  Width="648" >
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Background="Transparent" Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <Button Style="{StaticResource RoundedButton}" Margin="5">
+                <StackPanel>
+                    <Image Source="Resources/Icons/Add_Icon.png" Width="130" Height="130" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="Add" TextAlignment="Center" FontSize="40" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Regular" Margin="0,0,0,20"/>
+                </StackPanel>
+
+            </Button>
+        </ListView>
     </Grid>
 </UserControl>
