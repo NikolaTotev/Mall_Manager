@@ -27,8 +27,7 @@ namespace User_Interface
             InitializeComponent();
             CurrentManager = ProgramManager.GetInstance();
             Dashboard startDash = new Dashboard();
-            p_StartPanel.Children.Clear();
-            p_StartPanel.Children.Add(startDash);
+            ChangeView(startDash);
         }
 
         private void BigButton_Loaded(object sender, RoutedEventArgs e)

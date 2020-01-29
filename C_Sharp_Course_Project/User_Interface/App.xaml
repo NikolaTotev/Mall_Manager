@@ -17,7 +17,7 @@
         <Brush x:Key="Completed">#CAE9ff</Brush>
         <Brush x:Key="FailedTask">#F5AC72</Brush>
         
-        <Style x:Key="RoundedButton" TargetType="{x:Type Button}">
+        <Style x:Key="BigRoundedButton" TargetType="{x:Type Button}">
             <Setter Property="Width" Value="200"></Setter>
             <Setter Property="Height" Value="200"></Setter>
             <Setter Property="Background" Value="White"></Setter>
@@ -62,5 +62,50 @@
             </ControlTemplate.Triggers>
         </ControlTemplate>
 
+
+        <Style x:Key="TextRoundedButton" TargetType="{x:Type Button}">
+            <Setter Property="Width" Value="350"></Setter>
+            <Setter Property="Height" Value="150"></Setter>
+            <Setter Property="Background" Value="White"></Setter>
+            <Setter Property="Margin" Value="5"></Setter>
+            <Setter Property="Template" Value="{DynamicResource RoundedTextButtonTemplate}"></Setter>
+        </Style>
+
+        <ControlTemplate x:Key="RoundedTextButtonTemplate" TargetType="{x:Type Button}">
+
+            <Grid Height="150" Width="350">
+                <Image Source="{TemplateBinding Tag}" Stretch="Fill"/>
+                <Border x:Name="border" CornerRadius="30" BorderBrush="Transparent" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                    <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+                    </Border.Effect>
+                </Border>
+
+            </Grid>
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="Button.IsDefaulted" Value="True" >
+                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" TargetName="border" Value="{DynamicResource OrangeButtonHighlight}" />
+                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource OrangeAccent}"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" TargetName="border" Value="{DynamicResource OrangeButtonPressed}"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource NavyBlueBase}"/>
+                </Trigger>
+                <Trigger Property="ToggleButton.IsChecked" Value="True">
+                    <Setter Property="Background" TargetName="border" Value="#FFBCDDEE"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="#FF245A83"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" TargetName="border" Value="#FFF4F4F4"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="#FFADB2B5"/>
+                    <Setter Property="Foreground" Value="#FF838383"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
     </Application.Resources>
 </Application>

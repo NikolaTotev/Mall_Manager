@@ -16,19 +16,18 @@ using System.Windows.Shapes;
 namespace User_Interface
 {
     /// <summary>
-    /// Interaction logic for AddMallMenu.xaml
+    /// Interaction logic for TextButton.xaml
     /// </summary>
-    public partial class AddMallMenu : UserControl, IAppView
+    public partial class TextButton : UserControl
     {
-        private MainWindow CurrentMainWindow;
-        public AddMallMenu()
+        public TextButton()
         {
             InitializeComponent();
         }
 
-        public void SetMainWindow(MainWindow currentWindow)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            CurrentMainWindow = currentWindow;
+
         }
     }
 }

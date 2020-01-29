@@ -20,7 +20,7 @@
                     <StackPanel Background="Transparent" Orientation="Horizontal" />
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
-            <Button Style="{StaticResource RoundedButton}" Margin="5" Click="OnClick_Add">
+            <Button Style="{StaticResource BigRoundedButton}" Margin="5" Click="OnClick_Add">
                 <StackPanel>
                     <Image Source="Resources/Icons/Add_Icon.png" Width="130" Height="130" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <TextBlock Text="Add" TextAlignment="Center" FontSize="40" Foreground="{StaticResource NavyBlueBase}" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Regular" Margin="0,0,0,20"/>
