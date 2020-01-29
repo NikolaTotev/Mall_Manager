@@ -6,20 +6,6 @@
              xmlns:local="clr-namespace:User_Interface"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="1000" Background="White">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="100*"></RowDefinition>
-            <RowDefinition Height="550*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Label x:Name="Lbl_MallName" Content="Some mall name" Grid.Row="0" Grid.ColumnSpan="3" Background="{StaticResource NavyBlueBase}"  FontSize="45" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" Foreground="AliceBlue" FontWeight="SemiBold" Margin="0,0,0,10" Padding="10,15,0,0" />
-        <Button x:Name="Btn_RentalSpaces" Content="Rental Spaces" Grid.Column="0" Grid.Row="1" Margin="40,80,30,80"/>
-        <Button x:Name="Btn_ActivityOverview" Content="Activity Overview" Grid.Column="1" Grid.Row="1" Margin="40,80,30,80"/>
-        <Button x:Name="Btn_Statistics" Content="Statistics" Grid.Column="2" Grid.Row="1" Margin="40,80,30,80"/>
-    </Grid>
+   
 
 </UserControl>
