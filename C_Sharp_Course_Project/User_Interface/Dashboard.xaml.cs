@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Core;
-using 
+ 
 namespace User_Interface
 {
     /// <summary>
@@ -26,7 +26,14 @@ namespace User_Interface
         public Dashboard()
         {
             InitializeComponent();
-            CurrentManager = ProgramManager.GetInstance();
+            LoadMallList();
+        }
+
+        public void LoadMallList()
+        {
+            string mallName = MallManager.GetInstance().GetMalls().Values.ToList()[0].Split()[0];
+            BigButton newBigButton = new BigButton("pack://application:,,,/Resources/Icons/StoreFront_Icon.png", mallName);
+            Lv_Malls.Items.Add(newBigButton);
         }
     }
 }

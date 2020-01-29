@@ -21,7 +21,7 @@ namespace Core
         {
             m_Instance = this;
             Malls = SerializationManager.GetMalls();
-            
+            CurrentMall = null;
         }
 
         public static MallManager GetInstance()
@@ -87,6 +87,7 @@ namespace Core
             }
 
             CurrentMall = Malls[mallId];
+            ProgramManager.GetInstance().CompleteInitialization();
             return true;
         }
 
@@ -97,9 +98,8 @@ namespace Core
             foreach (var mall in Malls)
             {
                 sb.Clear();
-                sb.Append("Mall Name: ");
                 sb.Append(mall.Value.Name);
-                sb.Append("Mall Description: ");
+                sb.Append(" ");
                 sb.Append(mall.Value.Description);
                 mallDictionary.Add(mall.Value.Id, sb.ToString());
             }

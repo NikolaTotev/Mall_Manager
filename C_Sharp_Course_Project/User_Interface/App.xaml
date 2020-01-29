@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:User_Interface"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+
         <FontFamily x:Key="Montserrat">pack://application:,,,/Resources/Fonts/#Montserrat</FontFamily>
         <Brush x:Key="OrangeAccent">#FFA630</Brush>
         <Brush x:Key="NavyBlueBase">#3C4F76</Brush>

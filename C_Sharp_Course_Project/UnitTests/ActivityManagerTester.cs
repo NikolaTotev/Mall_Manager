@@ -15,8 +15,8 @@ namespace UnitTests
     class ActivityManagerTester
     {
         private ActivityManager m_CurrentManager = ActivityManager.GetInstance();
-        readonly string m_TestRoomId = Guid.NewGuid().ToString();
-        readonly string m_TestActivityId = Guid.NewGuid().ToString();
+        readonly Guid m_TestRoomId = Guid.NewGuid();
+        readonly Guid m_TestActivityId = Guid.NewGuid();
         readonly string m_TestMall = "TstMall";
 
         [Test]
@@ -53,7 +53,7 @@ namespace UnitTests
             Assert.IsTrue(m_CurrentManager.Activities[m_TestActivityId].EndTime == testEndTime);
             Assert.IsTrue(m_CurrentManager.Activities[m_TestActivityId].Id == m_TestActivityId);
 
-            Dictionary<string, Activity> testDictionary = SerializationManager.GetActivities(m_TestMall);
+            Dictionary<Guid, Activity> testDictionary = SerializationManager.GetActivities(m_TestMall);
 
             Assert.AreEqual(1, testDictionary.Count);
             Assert.IsTrue(testDictionary.ContainsKey(m_TestActivityId));

@@ -20,11 +20,6 @@ namespace Core
             m_Instance = this;
             SerializationManager.CheckForDirectories();
             m_MallManagerInstance = MallManager.GetInstance();
-            if (MallManager.GetInstance().Malls.Count != 0)
-            {
-                m_ActivityManagerInstance = ActivityManager.GetInstance();
-                m_RoomManagerInstance = RoomManager.GetInstance();
-            }
         }
 
         public static ProgramManager GetInstance()

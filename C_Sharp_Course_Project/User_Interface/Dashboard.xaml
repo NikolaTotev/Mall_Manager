@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Foreground="{StaticResource NavyBlueBase}" Text="Welcome!" TextAlignment="Center" Margin="52,90,52,10" FontSize="40" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Regular"/>
         <TextBlock Grid.Row="1" Foreground="{StaticResource NavyBlueBase}" Text="Select Location" TextAlignment="Center"  FontSize="64" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="SemiBold" Margin="0,0,0,10" />
-        <ListView HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled" HorizontalAlignment="Center" Height="244" Margin="177,51,177,51" Grid.Row="2" VerticalAlignment="Center"  Width="648" >
+        <ListView x:Name="Lv_Malls" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled" HorizontalAlignment="Center" Height="244" Margin="177,51,177,51" Grid.Row="2" VerticalAlignment="Center"  Width="648" >
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Background="Transparent" Orientation="Horizontal" />
@@ -23,9 +23,8 @@
             <Button Style="{StaticResource RoundedButton}" Margin="5">
                 <StackPanel>
                     <Image Source="Resources/Icons/Add_Icon.png" Width="130" Height="130" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <TextBlock Text="Add" TextAlignment="Center" FontSize="40" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Regular" Margin="0,0,0,20"/>
+                    <TextBlock Text="Add" TextAlignment="Center" FontSize="40" Foreground="{StaticResource NavyBlueBase}" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Regular" Margin="0,0,0,20"/>
                 </StackPanel>
-
             </Button>
         </ListView>
     </Grid>

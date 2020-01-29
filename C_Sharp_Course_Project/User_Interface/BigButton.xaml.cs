@@ -12,28 +12,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Core;
 
 namespace User_Interface
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for UserControl1.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class BigButton : UserControl
     {
-        private ProgramManager CurrentManager;
-        public MainWindow()
+        private string ImagePath;
+        private string ButtonText;
+        public BigButton(string imageSource, string buttonText)
         {
             InitializeComponent();
-            CurrentManager = ProgramManager.GetInstance();
-            Dashboard startDash = new Dashboard();
-            p_StartPanel.Children.Clear();
-            p_StartPanel.Children.Add(startDash);
-        }
+            ImagePath = imageSource;
+            ButtonText = buttonText;
 
-        private void BigButton_Loaded(object sender, RoutedEventArgs e)
-        {
-
+            Tb_ButtonName.Text = ButtonText;
+            Img_ButtonImage.Source = new BitmapImage(new Uri(ImagePath)); 
         }
     }
 }
