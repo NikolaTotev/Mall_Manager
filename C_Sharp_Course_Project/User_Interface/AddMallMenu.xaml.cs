@@ -48,7 +48,10 @@ namespace User_Interface
         {
             Mall mallToAdd = new Mall(Guid.NewGuid(), TxtB_MallName.Text, TxtB_MallDesc.Text);
             MallManager.GetInstance().AddMall(mallToAdd);
-            m_CurrentMainWindow.ChangeView(m_PreviousElement, this);
+            Dashboard newDash = new Dashboard();
+            newDash.SetPreviousView(this);
+            newDash.SetMainWindow(m_CurrentMainWindow);
+            m_CurrentMainWindow.ChangeView(newDash, this);
         }
     }
 }
