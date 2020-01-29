@@ -31,10 +31,11 @@ namespace User_Interface
 
         public void LoadMallList()
         {
-            foreach (string mall in MallManager.GetInstance().GetMalls().Values.ToList())
+            foreach (var mall in MallManager.GetInstance().GetMalls())
             {
-                string mallName = mall.Split()[0];
-                BigButton newBigButton = new BigButton("pack://application:,,,/Resources/Icons/StoreFront_Icon.png", mallName);
+                string mallName = mall.Value.Split()[0];
+                BigButton newBigButton = new BigButton("pack://application:,,,/Resources/Icons/StoreFront_Icon.png", mallName, mall.Key);
+                newBigButton.Button_Click;
                 Lv_Malls.Items.Add(newBigButton);
             }
         }

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Core;
 
 namespace User_Interface
 {
@@ -21,6 +22,8 @@ namespace User_Interface
     public partial class BigButton : UserControl
     {
         private Guid m_MallId;
+        //public delegate bool ChangeMall (Guid mallId);
+        //ChangeMall handler;
         public BigButton(string imageSource, string buttonText, Guid mallId)
         {
             InitializeComponent();
@@ -29,5 +32,9 @@ namespace User_Interface
             Img_ButtonImage.Source = new BitmapImage(new Uri(imageSource));
         }
 
+        public void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MallManager.GetInstance().ChangeCurrentMall(m_MallId);
+        }
     }
 }
