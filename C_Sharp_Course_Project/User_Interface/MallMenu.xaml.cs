@@ -18,9 +18,9 @@ namespace User_Interface
     /// <summary>
     /// Interaction logic for Mall.xaml
     /// </summary>
-    public partial class Mall : UserControl
+    public partial class MallMenu : UserControl
     {
-        public Mall(string mallName)
+        public MallMenu(string mallName)
         {
             InitializeComponent();
             Lbl_MallName.Content = mallName;

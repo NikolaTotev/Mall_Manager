@@ -62,8 +62,8 @@
     <Compile Include="BigButton.xaml.cs">
       <DependentUpon>BigButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Mall.xaml.cs">
-      <DependentUpon>Mall.xaml</DependentUpon>
+    <Compile Include="MallMenu.xaml.cs">
+      <DependentUpon>MallMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="TextButton.xaml.cs">
       <DependentUpon>TextButton.xaml</DependentUpon>
@@ -95,7 +95,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Mall.xaml">
+    <Page Include="MallMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
