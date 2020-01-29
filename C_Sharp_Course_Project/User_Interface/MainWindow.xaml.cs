@@ -35,5 +35,14 @@ namespace User_Interface
         {
 
         }
+
+        public void ChangeView(IAppView viewToLoad)
+        {
+            p_StartPanel.Children.Clear();
+            if (viewToLoad is UIElement elementToAdd)
+            {
+                p_StartPanel.Children.Add(elementToAdd);
+            }
+        }
     }
 }

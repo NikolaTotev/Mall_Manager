@@ -55,9 +55,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddMallMenu.xaml.cs">
+      <DependentUpon>AddMallMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="IAppView.cs" />
     <Compile Include="BigButton.xaml.cs">
       <DependentUpon>BigButton.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddMallMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dashboard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

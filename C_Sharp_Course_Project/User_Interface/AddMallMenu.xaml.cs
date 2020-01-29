@@ -16,16 +16,13 @@ using System.Windows.Shapes;
 namespace User_Interface
 {
     /// <summary>
-    /// Interaction logic for UserControl1.xaml
+    /// Interaction logic for AddMallMenu.xaml
     /// </summary>
-    public partial class BigButton : UserControl
+    public partial class AddMallMenu : UserControl
     {
-        public BigButton(string imageSource, string buttonText)
+        public AddMallMenu()
         {
             InitializeComponent();
-
-            Tb_ButtonName.Text = buttonText;
-            Img_ButtonImage.Source = new BitmapImage(new Uri(imageSource));
         }
     }
 }

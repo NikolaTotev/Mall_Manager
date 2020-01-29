@@ -19,10 +19,10 @@ namespace User_Interface
     /// <summary>
     /// Interaction logic for Dashboard.xaml
     /// </summary>
-    public partial class Dashboard : UserControl
+    public partial class Dashboard : UserControl, IAppView
     {
         private ProgramManager CurrentManager;
-        
+        private MainWindow CurrentMainWindow;
         public Dashboard()
         {
             InitializeComponent();
@@ -34,6 +34,16 @@ namespace User_Interface
             string mallName = MallManager.GetInstance().GetMalls().Values.ToList()[0].Split()[0];
             BigButton newBigButton = new BigButton("pack://application:,,,/Resources/Icons/StoreFront_Icon.png", mallName);
             Lv_Malls.Items.Add(newBigButton);
+        }
+
+        private void OnClick_Add(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        public void SetMainWindow(MainWindow currentWindow)
+        {
+            CurrentMainWindow = currentWindow;
         }
     }
 }
