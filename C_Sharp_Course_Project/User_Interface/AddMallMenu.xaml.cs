@@ -21,9 +21,10 @@ namespace User_Interface
     public partial class AddMallMenu : UserControl, IAppView
     {
         private MainWindow CurrentMainWindow;
-        public AddMallMenu()
+        public AddMallMenu(string mallName)
         {
             InitializeComponent();
+            Lbl_MallName.Content = mallName;
         }
 
         public void SetMainWindow(MainWindow currentWindow)

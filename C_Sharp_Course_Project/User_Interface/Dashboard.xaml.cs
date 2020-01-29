@@ -38,7 +38,7 @@ namespace User_Interface
 
         private void OnClick_Add(object sender, RoutedEventArgs e)
         {
-            AddMallMenu addMall = new AddMallMenu();
+            AddMallMenu addMall = new AddMallMenu("MallName");
             CurrentMainWindow.ChangeView(addMall);
         }
 
