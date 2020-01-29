@@ -27,7 +27,7 @@ namespace User_Interface
             InitializeComponent();
             CurrentManager = ProgramManager.GetInstance();
             Dashboard startDash = new Dashboard();
-            ChangeView(startDash);
+            ChangeView(startDash, null);
         }
 
         private void BigButton_Loaded(object sender, RoutedEventArgs e)
@@ -35,12 +35,17 @@ namespace User_Interface
 
         }
 
-        public void ChangeView(IAppView viewToLoad)
+        public void ChangeView(IAppView viewToLoad, IAppView previousToSave)
         {
-            p_StartPanel.Children.Clear();
-            if (viewToLoad is UIElement elementToAdd)
+            if (viewToLoad != null)
             {
-                p_StartPanel.Children.Add(elementToAdd);
+                p_StartPanel.Children.Clear();
+                viewToLoad.SetMainWindow(this);
+                viewToLoad.SetPreviousView(previousToSave);
+                if (viewToLoad is UIElement elementToAdd)
+                {
+                    p_StartPanel.Children.Add(elementToAdd);
+                }
             }
         }
     }

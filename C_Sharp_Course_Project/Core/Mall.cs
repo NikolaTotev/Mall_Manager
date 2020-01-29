@@ -22,5 +22,11 @@ namespace Core
             Description = description;
             AssociatedActivities = new List<Guid>();
         }
+
+        public bool HasValidData()
+        {
+            //TODO Implement validation method.
+            return true;
+        }
     }
 }

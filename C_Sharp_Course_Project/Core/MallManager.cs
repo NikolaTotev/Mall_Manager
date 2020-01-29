@@ -16,7 +16,7 @@ namespace Core
         private static MallManager m_Instance;
         public Mall CurrentMall { get; private set; }
         public Dictionary<Guid, Mall> Malls { get; set; }
-        
+
         private MallManager()
         {
             m_Instance = this;
@@ -29,23 +29,21 @@ namespace Core
             return m_Instance ?? (m_Instance = new MallManager());
         }
 
-        public bool AddMall(Guid mallId, string mallName, string mallDescription)
+        public bool AddMall(Mall mallToAdd)
         {
-            if (mallId == null || mallName == null || mallDescription == null)
+            if (!mallToAdd.HasValidData())
             {
                 ExceptionManager.OnNullParamsToFunction("Add mall");
                 return false;
             }
-
-            Mall newMall = new Mall(mallId, mallName, mallDescription);
-
-            if (Malls.ContainsKey(newMall.Id))
+            
+            if (Malls.ContainsKey(mallToAdd.Id))
             {
                 return false;
             }
 
-            Malls.Add(newMall.Id, newMall);
-            CurrentMall = Malls[newMall.Id];
+            Malls.Add(mallToAdd.Id, mallToAdd);
+            CurrentMall = Malls[mallToAdd.Id];
             SerializationManager.SaveMalls(Malls);
             ProgramManager.GetInstance().CompleteInitialization();
             return true;
