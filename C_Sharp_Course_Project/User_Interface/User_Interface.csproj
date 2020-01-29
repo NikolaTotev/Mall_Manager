@@ -62,6 +62,9 @@
     <Compile Include="BigButton.xaml.cs">
       <DependentUpon>BigButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Mall.xaml.cs">
+      <DependentUpon>Mall.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TextButton.xaml.cs">
       <DependentUpon>TextButton.xaml</DependentUpon>
     </Compile>
@@ -89,6 +92,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="BigButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Mall.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
