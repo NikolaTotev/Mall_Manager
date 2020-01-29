@@ -21,8 +21,8 @@ namespace User_Interface
     /// </summary>
     public partial class Dashboard : UserControl, IAppView
     {
-        private ProgramManager CurrentManager;
-        private MainWindow CurrentMainWindow;
+        private MainWindow m_CurrentMainWindow;
+        private IAppView m_PreviousView;
         public Dashboard()
         {
             InitializeComponent();
@@ -31,20 +31,28 @@ namespace User_Interface
 
         public void LoadMallList()
         {
-            string mallName = MallManager.GetInstance().GetMalls().Values.ToList()[0].Split()[0];
-            BigButton newBigButton = new BigButton("pack://application:,,,/Resources/Icons/StoreFront_Icon.png", mallName);
-            Lv_Malls.Items.Add(newBigButton);
+            foreach (string mall in MallManager.GetInstance().GetMalls().Values.ToList())
+            {
+                string mallName = mall.Split()[0];
+                BigButton newBigButton = new BigButton("pack://application:,,,/Resources/Icons/StoreFront_Icon.png", mallName);
+                Lv_Malls.Items.Add(newBigButton);
+            }
         }
 
         private void OnClick_Add(object sender, RoutedEventArgs e)
         {
             AddMallMenu addMall = new AddMallMenu();
-            CurrentMainWindow.ChangeView(addMall);
+            m_CurrentMainWindow.ChangeView(addMall,this);
         }
 
         public void SetMainWindow(MainWindow currentWindow)
         {
-            CurrentMainWindow = currentWindow;
+            m_CurrentMainWindow = currentWindow;
+        }
+
+        public void SetPreviousView(IAppView previousElement)
+        {
+            m_PreviousView = previousElement;
         }
     }
 }

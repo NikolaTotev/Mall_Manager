@@ -6,6 +6,12 @@
              xmlns:local="clr-namespace:User_Interface"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="1000" Background="White">
-   
+    <Canvas HorizontalAlignment="Left" Height="650" VerticalAlignment="Top" Width="1000">
+        <Button x:Name="Btn_Add" Content="Add" Canvas.Left="302" Canvas.Top="550" Width="176" Height="47" Click="AddButton_OnClick"/>
+        <Button x:Name="Btn_Cancel" Content="Cancel" Canvas.Left="510" Canvas.Top="550" Width="176" Height="47" Click="CancelButton_Onclick"/>
+        <TextBox x:Name="TxtB_MallName" Height="22" Canvas.Left="302" TextWrapping="Wrap" Text="Mall Name" Canvas.Top="346" Width="384"/>
+        <TextBox x:Name="TxtB_MallDesc" Height="28" Canvas.Left="302" TextWrapping="Wrap" Text="Mall Desc" Canvas.Top="404" Width="384"/>
+    </Canvas>
+
 
 </UserControl>

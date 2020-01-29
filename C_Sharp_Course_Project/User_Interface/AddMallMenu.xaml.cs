@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Core;
 
 namespace User_Interface
 {
@@ -20,7 +21,8 @@ namespace User_Interface
     /// </summary>
     public partial class AddMallMenu : UserControl, IAppView
     {
-        private MainWindow CurrentMainWindow;
+        private MainWindow m_CurrentMainWindow;
+        private IAppView m_PreviousElement;
         public AddMallMenu()
         {
             InitializeComponent();
@@ -28,7 +30,25 @@ namespace User_Interface
 
         public void SetMainWindow(MainWindow currentWindow)
         {
-            CurrentMainWindow = currentWindow;
+            m_CurrentMainWindow = currentWindow;
+        }
+
+        public void SetPreviousView(IAppView previousElement)
+        {
+            m_PreviousElement = previousElement;
+        }
+
+        private void CancelButton_Onclick(object sender, RoutedEventArgs e)
+        {
+            
+            m_CurrentMainWindow.ChangeView(m_PreviousElement,this);
+        }
+
+        private void AddButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Mall mallToAdd = new Mall(Guid.NewGuid(), TxtB_MallName.Text, TxtB_MallDesc.Text);
+            MallManager.GetInstance().AddMall(mallToAdd);
+            m_CurrentMainWindow.ChangeView(m_PreviousElement, this);
         }
     }
 }
