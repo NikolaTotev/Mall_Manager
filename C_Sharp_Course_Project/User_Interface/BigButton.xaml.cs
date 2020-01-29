@@ -20,12 +20,14 @@ namespace User_Interface
     /// </summary>
     public partial class BigButton : UserControl
     {
-        public BigButton(string imageSource, string buttonText)
+        private Guid m_MallId;
+        public BigButton(string imageSource, string buttonText, Guid mallId)
         {
             InitializeComponent();
-
+            m_MallId = mallId;
             Tb_ButtonName.Text = buttonText;
             Img_ButtonImage.Source = new BitmapImage(new Uri(imageSource));
         }
+
     }
 }
