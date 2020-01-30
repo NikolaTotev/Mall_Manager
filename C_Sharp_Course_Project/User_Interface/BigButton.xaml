@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:User_Interface"
              mc:Ignorable="d" Height="224" Width="222">
-    <Button Style="{StaticResource BigRoundedButton}" Margin="5">
+    <Button Style="{StaticResource BigRoundedButton}" Margin="5" Click="Button_Click">
         <StackPanel>
             <Image x:Name="Img_ButtonImage" Source="{Binding ImageSource, UpdateSourceTrigger=PropertyChanged}" Width="130" Height="130" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBlock x:Name="Tb_ButtonName" TextWrapping="Wrap"  TextAlignment="Center" FontSize="30" Foreground="{StaticResource NavyBlueBase}" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Regular" Margin="0,0,0,20"/>
