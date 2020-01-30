@@ -17,16 +17,15 @@ using Core;
 namespace User_Interface
 {
     /// <summary>
-    /// Interaction logic for Mall.xaml
+    /// Interaction logic for AddRoomMenu.xaml
     /// </summary>
-    public partial class MallMenu : UserControl, IAppView
+    public partial class AddRoomMenu : UserControl, IAppView
     {
         private MainWindow m_CurrentMainWindow;
-        private IAppView m_PreviousView;
-        public MallMenu()
+        private IAppView m_PreviousElement;
+        public AddRoomMenu()
         {
             InitializeComponent();
-            Lbl_MallName.Content = MallManager.GetInstance().CurrentMall.Name;
         }
 
         public void SetMainWindow(MainWindow currentWindow)
@@ -36,13 +35,21 @@ namespace User_Interface
 
         public void SetPreviousView(IAppView previousElement)
         {
-            m_PreviousView = previousElement;
+            m_PreviousElement = previousElement;
         }
 
-        private void Btn_RentalSpaces_Click(object sender, RoutedEventArgs e)
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            RoomsMenu rooms = new RoomsMenu();
-            m_CurrentMainWindow.ChangeView(rooms, this);
+            m_CurrentMainWindow.ChangeView(m_PreviousElement, this);
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            RoomManager.GetInstance().CreateRoom(txtBoxName.Text, txtBoxDesc.Text, txtBoxType.Text,
+                int.Parse(txtBoxFloor.Text), int.Parse(txtBoxNumber.Text), Guid.NewGuid(),
+                MallManager.GetInstance().CurrentMall.Name);
+            RoomsMenu menu = new RoomsMenu();
+            m_CurrentMainWindow.ChangeView(menu, this);
         }
     }
 }

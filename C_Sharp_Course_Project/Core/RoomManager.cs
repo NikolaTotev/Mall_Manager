@@ -169,9 +169,9 @@ namespace Core
             {
                 sb.Clear();
                 sb.Append(room.Value.Name);
-                sb.Append("Floor Number: ");
+                sb.Append(" Floor Number: ");
                 sb.Append(room.Value.Floor.ToString());
-                sb.Append("Room Number: ");
+                sb.Append(" Room Number: ");
                 sb.Append(room.Value.RoomNumber.ToString());
                 roomDictionary.Add(room.Value.Id, sb.ToString());
             }
