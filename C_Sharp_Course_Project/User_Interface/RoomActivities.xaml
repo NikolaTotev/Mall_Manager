@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="User_Interface.RoomActivities"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:User_Interface"
+             mc:Ignorable="d" 
+             d:DesignHeight="650" d:DesignWidth="1000" Background="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="85*"></RowDefinition>
+            <RowDefinition Height="500*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.9*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Rectangle Grid.Column="1" Fill="Gainsboro" Margin="27,20,27,20"></Rectangle>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2.5*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <ListView Grid.Column="0" Grid.Row="0" Background="Gainsboro" Margin="20"></ListView>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="1.8*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" Margin="20,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Button Margin="0,0,20,25" Grid.Row="0" Grid.Column="0"> <Image Source="Resources/Icons/SelectAll_Icon.png"></Image></Button>
+                        <Button Margin="0,0,20,25" Grid.Row="0" Grid.Column="1"> <Rectangle  Height="35" Width="35" Fill="{StaticResource ScheduledTask}"/> </Button>
+                        <Button Margin="0,0,20,25" Grid.Row="0" Grid.Column="2"><Rectangle  Height="35" Width="35" Fill="{StaticResource InProgressTask}"/></Button>
+                        
+                        <Button Margin="0,0,20,25" Grid.Row="1" Grid.Column="0"> <Image Source="Resources/Icons/Deselect_Icon.png"></Image></Button>
+                        <Button Margin="0,0,20,25" Grid.Row="1" Grid.Column="1"> <Rectangle  Height="35" Width="35" Fill="{StaticResource Completed}"/></Button>
+                        <Button Margin="0,0,20,25" Grid.Row="1" Grid.Column="2"><Rectangle  Height="35" Width="35" Fill="{StaticResource FailedTask}"/></Button>
+                    </Grid>
+                    <Grid Grid.Column="1"></Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+        <Label x:Name="Lbl_MallName" Content="Some mall name" Grid.Row="0" Background="{StaticResource NavyBlueBase}"  FontSize="45" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" Foreground="AliceBlue" FontWeight="SemiBold" Margin="0,0,0,10" Padding="10,15,0,0" />
+
+    </Grid>
+</UserControl>
