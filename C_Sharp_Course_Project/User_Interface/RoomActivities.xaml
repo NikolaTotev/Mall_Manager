@@ -39,15 +39,27 @@
                             <RowDefinition Height="*"></RowDefinition>
                             <RowDefinition Height="*"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Button Margin="0,0,20,25" Grid.Row="0" Grid.Column="0"> <Image Source="Resources/Icons/SelectAll_Icon.png"></Image></Button>
-                        <Button Margin="0,0,20,25" Grid.Row="0" Grid.Column="1"> <Rectangle  Height="35" Width="35" Fill="{StaticResource ScheduledTask}"/> </Button>
-                        <Button Margin="0,0,20,25" Grid.Row="0" Grid.Column="2"><Rectangle  Height="35" Width="35" Fill="{StaticResource InProgressTask}"/></Button>
-                        
-                        <Button Margin="0,0,20,25" Grid.Row="1" Grid.Column="0"> <Image Source="Resources/Icons/Deselect_Icon.png"></Image></Button>
-                        <Button Margin="0,0,20,25" Grid.Row="1" Grid.Column="1"> <Rectangle  Height="35" Width="35" Fill="{StaticResource Completed}"/></Button>
-                        <Button Margin="0,0,20,25" Grid.Row="1" Grid.Column="2"><Rectangle  Height="35" Width="35" Fill="{StaticResource FailedTask}"/></Button>
+                        <Button Margin="0,0,20,25" Grid.Row="0" Grid.Column="0" Background="White"> <Image Source="Resources/Icons/SelectAll_Icon.png"></Image></Button>
+                        <Button Margin="0,0,20,25" Grid.Row="0" Grid.Column="1" Background="White"> <Rectangle  Height="35" Width="35" Fill="{StaticResource ScheduledTask}"/> </Button>
+                        <Button Margin="0,0,20,25" Grid.Row="0" Grid.Column="2" Background="White"><Rectangle  Height="35" Width="35" Fill="{StaticResource InProgressTask}"/></Button>
+
+                        <Button Margin="0,0,20,25" Grid.Row="1" Grid.Column="0" Background="White"> <Image Source="Resources/Icons/Deselect_Icon.png"></Image></Button>
+                        <Button Margin="0,0,20,25" Grid.Row="1" Grid.Column="1" Background="White"> <Rectangle  Height="35" Width="35" Fill="{StaticResource Completed}"/></Button>
+                        <Button Margin="0,0,20,25" Grid.Row="1" Grid.Column="2" Background="White" ><Rectangle  Height="35" Width="35" Fill="{StaticResource FailedTask}"/></Button>
                     </Grid>
-                    <Grid Grid.Column="1"></Grid>
+                    <Grid Grid.Column="1" Margin="0,0,20,25">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Button Margin="10" Background="White" Content="Add"></Button>
+                        <Button Margin="10" Grid.Column="1" Background="White" Content="Stats"></Button>
+                        <Button Margin="10" Grid.Row="1" Background="White" Content="Delete"></Button>
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>
