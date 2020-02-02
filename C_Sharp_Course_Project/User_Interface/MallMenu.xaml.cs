@@ -44,5 +44,15 @@ namespace User_Interface
             RoomsMenu rooms = new RoomsMenu();
             m_CurrentMainWindow.ChangeView(rooms, this);
         }
+
+        private void Btn_Statistics_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Btn_ActivityOverview_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

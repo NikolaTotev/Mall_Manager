@@ -12,7 +12,7 @@
         <TextBox x:Name="txtBoxType" HorizontalAlignment="Left" Height="25" Margin="395,192,0,0" TextWrapping="Wrap" Text="RoomType" VerticalAlignment="Top" Width="209"/>
         <TextBox x:Name="txtBoxFloor" HorizontalAlignment="Left" Height="25" Margin="395,239,0,0" TextWrapping="Wrap" Text="Floor" VerticalAlignment="Top" Width="209"/>
         <TextBox x:Name="txtBoxNumber" HorizontalAlignment="Left" Height="25" Margin="395,288,0,0" TextWrapping="Wrap" Text="RoomNumber" VerticalAlignment="Top" Width="209"/>
-        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Height="69" Margin="267,383,0,0" VerticalAlignment="Top" Width="225" Click="btnAdd_Click"/>
-        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Height="69" Margin="555,383,0,0" VerticalAlignment="Top" Width="225" Click="btnCancel_Click"/>
+        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Height="69" Margin="267,383,0,0" VerticalAlignment="Top" Width="225" Click="BtnAdd_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}"/>
+        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Height="69" Margin="555,383,0,0" VerticalAlignment="Top" Width="225" Click="BtnCancel_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}"/>
     </Grid>
 </UserControl>

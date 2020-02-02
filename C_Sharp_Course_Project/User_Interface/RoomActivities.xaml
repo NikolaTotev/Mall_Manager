@@ -39,13 +39,28 @@
                             <RowDefinition Height="*"></RowDefinition>
                             <RowDefinition Height="*"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Button Margin="0,0,20,25" Grid.Row="0" Grid.Column="0" Background="White"> <Image Source="Resources/Icons/SelectAll_Icon.png"></Image></Button>
-                        <Button Margin="0,0,20,25" Grid.Row="0" Grid.Column="1" Background="White"> <Rectangle  Height="35" Width="35" Fill="{StaticResource ScheduledTask}"/> </Button>
-                        <Button Margin="0,0,20,25" Grid.Row="0" Grid.Column="2" Background="White"><Rectangle  Height="35" Width="35" Fill="{StaticResource InProgressTask}"/></Button>
+                        <Button x:Name="Btn_SelectAll" Click="Btn_SelectAll_OnClick" Margin="0,0,20,25" Grid.Row="0" Grid.Column="0" Background="White">
+                            <Image Source="Resources/Icons/SelectAll_Icon.png"></Image>
+                        </Button>
+                        <Button x:Name="Btn_MarkAsScheduled" Click="Btn_MarkAsScheduled_OnClick" Margin="0,0,20,25" Grid.Row="0" Grid.Column="1" Background="White">
+                            <Rectangle  Height="35" Width="35" Fill="{StaticResource ScheduledTask}"/>
+                        </Button>
 
-                        <Button Margin="0,0,20,25" Grid.Row="1" Grid.Column="0" Background="White"> <Image Source="Resources/Icons/Deselect_Icon.png"></Image></Button>
-                        <Button Margin="0,0,20,25" Grid.Row="1" Grid.Column="1" Background="White"> <Rectangle  Height="35" Width="35" Fill="{StaticResource Completed}"/></Button>
-                        <Button Margin="0,0,20,25" Grid.Row="1" Grid.Column="2" Background="White" ><Rectangle  Height="35" Width="35" Fill="{StaticResource FailedTask}"/></Button>
+                        <Button x:Name="Btn_MarkAsInProgress" Click="Btn_MarkAsInProgress_OnClick" Margin="0,0,20,25" Grid.Row="0" Grid.Column="2" Background="White">
+                            <Rectangle  Height="35" Width="35" Fill="{StaticResource InProgressTask}"/>
+                        </Button>
+
+                        <Button x:Name="Btn_Deselect" Click="Btn_Deselect_OnClick" Margin="0,0,20,25" Grid.Row="1" Grid.Column="0" Background="White">
+                            <Image Source="Resources/Icons/Deselect_Icon.png"></Image>
+                        </Button>
+
+                        <Button x:Name="Btn_MarkAsCompleted" Click="Btn_MarkAsCompleted_OnClick" Margin="0,0,20,25" Grid.Row="1" Grid.Column="1" Background="White">
+                            <Rectangle  Height="35" Width="35" Fill="{StaticResource Completed}"/>
+                        </Button>
+
+                        <Button x:Name="Btn_MarkAsFailed" Click="Btn_MarkAsFailed_OnClick" Margin="0,0,20,25" Grid.Row="1" Grid.Column="2" Background="White" >
+                            <Rectangle  Height="35" Width="35" Fill="{StaticResource FailedTask}"/>
+                        </Button>
                     </Grid>
                     <Grid Grid.Column="1" Margin="0,0,20,25">
                         <Grid.ColumnDefinitions>
@@ -56,14 +71,14 @@
                             <RowDefinition Height="*"></RowDefinition>
                             <RowDefinition Height="*"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Button Margin="10" Background="White" Content="Add"></Button>
-                        <Button Margin="10" Grid.Column="1" Background="White" Content="Stats"></Button>
-                        <Button Margin="10" Grid.Row="1" Background="White" Content="Delete"></Button>
+                        <Button x:Name="Btn_Add"    Click="Btn_Add_OnClick"    Margin="10" Background="White" Content="Add" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}"></Button>
+                        <Button x:Name="Btn_Stats"  Click="Btn_Stats_OnClick"  Margin="10" Grid.Row="0" Grid.Column="1" Background="White" Content="Stats" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}"></Button>
+                        <Button x:Name="Btn_Delete" Click="Btn_Delete_OnClick" Margin="10" Grid.Row="1" Grid.Column="0" Background="White" Content="Delete" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}"></Button>
                     </Grid>
                 </Grid>
             </Grid>
         </Grid>
-        <Label x:Name="Lbl_MallName" Content="Some mall name" Grid.Row="0" Background="{StaticResource NavyBlueBase}"  FontSize="45" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" Foreground="AliceBlue" FontWeight="SemiBold" Margin="0,0,0,10" Padding="10,15,0,0" />
+        <Label x:Name="Lbl_MallName" Content="Space name - Space Activities" Grid.Row="0" Background="{StaticResource NavyBlueBase}"  FontSize="45" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" Foreground="AliceBlue" FontWeight="SemiBold" Margin="0,0,0,10" Padding="20,15,0,0" />
 
     </Grid>
 </UserControl>

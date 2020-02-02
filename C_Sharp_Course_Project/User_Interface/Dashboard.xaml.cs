@@ -40,7 +40,7 @@ namespace User_Interface
             }
         }
 
-        private void OnClick_Add(object sender, RoutedEventArgs e)
+        private void Btn_Add_OnClick(object sender, RoutedEventArgs e)
         {
             AddMallMenu addMall = new AddMallMenu();
             m_CurrentMainWindow.ChangeView(addMall,this);

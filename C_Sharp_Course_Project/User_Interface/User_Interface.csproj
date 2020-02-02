@@ -68,6 +68,12 @@
     <Compile Include="MallMenu.xaml.cs">
       <DependentUpon>MallMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RoomActivities.xaml.cs">
+      <DependentUpon>RoomActivities.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RoomInfoPage.xaml.cs">
+      <DependentUpon>RoomInfoPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RoomsMenu.xaml.cs">
       <DependentUpon>RoomsMenu.xaml</DependentUpon>
     </Compile>
@@ -109,6 +115,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MallMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RoomActivities.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RoomInfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

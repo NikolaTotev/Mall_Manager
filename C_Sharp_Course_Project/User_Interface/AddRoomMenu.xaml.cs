@@ -37,19 +37,19 @@ namespace User_Interface
         {
             m_PreviousElement = previousElement;
         }
-
-        private void btnCancel_Click(object sender, RoutedEventArgs e)
-        {
-            m_CurrentMainWindow.ChangeView(m_PreviousElement, this);
-        }
-
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        
+        private void BtnAdd_OnClick(object sender, RoutedEventArgs e)
         {
             RoomManager.GetInstance().CreateRoom(txtBoxName.Text, txtBoxDesc.Text, txtBoxType.Text,
                 int.Parse(txtBoxFloor.Text), int.Parse(txtBoxNumber.Text), Guid.NewGuid(),
                 MallManager.GetInstance().CurrentMall.Name);
             RoomsMenu menu = new RoomsMenu();
             m_CurrentMainWindow.ChangeView(menu, this);
+        }
+
+        private void BtnCancel_OnClick(object sender, RoutedEventArgs e)
+        {
+            m_CurrentMainWindow.ChangeView(m_PreviousElement, this);
         }
     }
 }

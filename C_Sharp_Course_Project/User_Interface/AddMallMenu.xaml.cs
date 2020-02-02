@@ -38,13 +38,13 @@ namespace User_Interface
             m_PreviousElement = previousElement;
         }
 
-        private void CancelButton_Onclick(object sender, RoutedEventArgs e)
+        private void Btn_Cancel_OnClick(object sender, RoutedEventArgs e)
         {
             
             m_CurrentMainWindow.ChangeView(m_PreviousElement,this);
         }
 
-        private void AddButton_OnClick(object sender, RoutedEventArgs e)
+        private void Btn_Add_OnClick(object sender, RoutedEventArgs e)
         {
             Mall mallToAdd = new Mall(Guid.NewGuid(), TxtB_MallName.Text, TxtB_MallDesc.Text);
             MallManager.GetInstance().AddMall(mallToAdd);
