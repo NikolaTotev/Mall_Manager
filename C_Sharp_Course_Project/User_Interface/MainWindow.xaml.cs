@@ -21,11 +21,11 @@ namespace User_Interface
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ProgramManager CurrentManager;
+        private ProgramManager m_CurrentManager;
         public MainWindow()
         {
             InitializeComponent();
-            CurrentManager = ProgramManager.GetInstance();
+            m_CurrentManager = ProgramManager.GetInstance();
             Dashboard startDash = new Dashboard();
             ChangeView(startDash, null);
         }

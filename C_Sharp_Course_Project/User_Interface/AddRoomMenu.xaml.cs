@@ -37,8 +37,8 @@ namespace User_Interface
         {
             m_PreviousElement = previousElement;
         }
-        
-        private void BtnAdd_OnClick(object sender, RoutedEventArgs e)
+
+        private void Btn_Add_OnClick(object sender, RoutedEventArgs e)
         {
             RoomManager.GetInstance().CreateRoom(txtBoxName.Text, txtBoxDesc.Text, txtBoxType.Text,
                 int.Parse(txtBoxFloor.Text), int.Parse(txtBoxNumber.Text), Guid.NewGuid(),
@@ -47,7 +47,7 @@ namespace User_Interface
             m_CurrentMainWindow.ChangeView(menu, this);
         }
 
-        private void BtnCancel_OnClick(object sender, RoutedEventArgs e)
+        private void Btn_Cancel_OnClick(object sender, RoutedEventArgs e)
         {
             m_CurrentMainWindow.ChangeView(m_PreviousElement, this);
         }
