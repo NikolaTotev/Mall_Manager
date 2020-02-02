@@ -35,7 +35,7 @@ namespace User_Interface
             {
                 string mallName = mall.Value.Split()[0];
                 BigButton newBigButton = new BigButton("pack://application:,,,/Resources/Icons/StoreFront_Icon.png", mallName, mall.Key);
-                newBigButton.Button_Click;
+                
                 Lv_Malls.Items.Add(newBigButton);
             }
         }
