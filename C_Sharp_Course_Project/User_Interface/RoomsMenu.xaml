@@ -15,11 +15,7 @@
         <Label x:Name="Lbl_MallName" Content="Some mall name" Grid.Row="0" Background="{StaticResource NavyBlueBase}"  FontSize="45" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" Foreground="AliceBlue" FontWeight="SemiBold" Margin="0,0,0,10" Padding="10,15,0,0" />
         <Button x:Name="Btn_AddRentalSpace" Content="Add" Grid.Row="1" FontSize="30" Click="Btn_AddRentalSpace_Click" Height="50" Margin="0,0,0,499.6" Grid.RowSpan="2" VerticalAlignment="Bottom"/>
         <ListView x:Name="Lv_RentalSpaces" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" Grid.Row="2" SelectionChanged="Lv_RentalSpaces_SelectionChanged">
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Background="Transparent" Orientation="Vertical" />
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
+           
         </ListView>
     </Grid>
 </UserControl>

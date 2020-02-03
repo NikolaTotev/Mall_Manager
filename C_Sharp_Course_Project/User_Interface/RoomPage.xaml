@@ -19,7 +19,7 @@
             <Button x:Name="Btn_Activities" Margin="100" Grid.Column="0" Content="Activities" Click="Btn_Activities_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}"></Button>
             <Button x:Name="Btn_SpaceInfo" Margin="100" Grid.Column="1" Content="Space Info" Click="Btn_SpaceInfo_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}"></Button>
         </Grid>
-        <Label x:Name="Lbl_MallName" Content="Space Name" Grid.Row="0" Background="{StaticResource NavyBlueBase}"  FontSize="45" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" Foreground="AliceBlue" FontWeight="SemiBold" Margin="0,0,0,10" Padding="20,15,0,0" />
+        <Label x:Name="Lb_RoomName" Content="Space Name" Grid.Row="0" Background="{StaticResource NavyBlueBase}"  FontSize="45" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" Foreground="AliceBlue" FontWeight="SemiBold" Margin="0,0,0,10" Padding="20,15,0,0" />
 
 </Grid>
 </UserControl>

@@ -19,10 +19,12 @@ namespace User_Interface
     /// <summary>
     /// Interaction logic for RoomActivities.xaml
     /// </summary>
-    public partial class RoomActivities : UserControl
+    public partial class RoomActivities : UserControl, IAppView
     {
-        private Room m_CurrentRoom;
-        public RoomActivities(Room currentRoom)
+        private MainWindow m_CurrentMainWindow;
+        private IAppView m_PreviousView;
+        private Guid m_CurrentRoom;
+        public RoomActivities(Guid currentRoom)
         {
             InitializeComponent();
             m_CurrentRoom = currentRoom;
@@ -71,6 +73,16 @@ namespace User_Interface
         private void Btn_SelectAll_OnClick(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();
+        }
+
+        public void SetMainWindow(MainWindow currentWindow)
+        {
+            m_CurrentMainWindow = currentWindow;
+        }
+
+        public void SetPreviousView(IAppView previousElement)
+        {
+            m_PreviousView = previousElement;
         }
     }
 }

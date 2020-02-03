@@ -34,9 +34,16 @@ namespace User_Interface
         public void LoadRentalSpaces()
         {
             Lv_RentalSpaces.Items.Clear();
-            foreach (var rentalSpce in RoomManager.GetInstance().GetRooms())
+            foreach (var rentalSpace in RoomManager.GetInstance().Rooms)
             {
-                Lv_RentalSpaces.Items.Add(rentalSpce);
+                ListViewItem itemToAdd = new ListViewItem();
+                itemToAdd.Tag = rentalSpace.Key;
+                
+                if (rentalSpace.Value is Room currentRoom)
+                {
+                    itemToAdd.Content = currentRoom.Name;
+                }
+                Lv_RentalSpaces.Items.Add(itemToAdd);
             }
         }
 
@@ -60,10 +67,14 @@ namespace User_Interface
         {
             if (Lv_RentalSpaces.SelectedIndex >= 0 && Lv_RentalSpaces.SelectedIndex < Lv_RentalSpaces.Items.Count)
             {
-                RoomPage room = new RoomPage();
-                room.SetMainWindow(m_CurrentMainWindow);
-                room.SetPreviousView(this);
-                m_CurrentMainWindow.ChangeView(room, this);
+                if (Lv_RentalSpaces.SelectedItem is ListViewItem currentSelection)
+                {
+                    RoomPage room = new RoomPage((Guid)currentSelection.Tag);
+                    room.SetMainWindow(m_CurrentMainWindow);
+                    room.SetPreviousView(this);
+                    m_CurrentMainWindow.ChangeView(room, this);
+                }
+                
             }
         }
     }

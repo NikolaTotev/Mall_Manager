@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Core;
 
 namespace User_Interface
 {
@@ -20,29 +21,40 @@ namespace User_Interface
     /// </summary>
     public partial class RoomPage : UserControl, IAppView
     {
-        public RoomPage()
+        private MainWindow m_CurrentMainWindow;
+        private IAppView m_PreviousView;
+        private readonly Guid m_CurrentRoomID;
+        private readonly Room m_CurrentRoom;
+        public RoomPage(Guid currentRoomId)
         {
             InitializeComponent();
+            m_CurrentRoomID = currentRoomId;
+            m_CurrentRoom = RoomManager.GetInstance().Rooms[currentRoomId];
+            Lb_RoomName.Content = m_CurrentRoom.Name;
         }
 
         public void SetMainWindow(MainWindow currentWindow)
         {
-            throw new NotImplementedException();
+            m_CurrentMainWindow = currentWindow;
         }
 
         public void SetPreviousView(IAppView previousElement)
         {
-            throw new NotImplementedException();
+            m_PreviousView = previousElement;
         }
 
         private void Btn_Activities_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            RoomActivities activitiesPageToLoad = new RoomActivities(m_CurrentRoomID);
+            activitiesPageToLoad.SetMainWindow(m_CurrentMainWindow);
+            m_CurrentMainWindow.ChangeView(activitiesPageToLoad,this);
         }
 
         private void Btn_SpaceInfo_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            RoomInfoPage infoPageToLoad = new RoomInfoPage(m_CurrentRoom);
+            infoPageToLoad.SetMainWindow(m_CurrentMainWindow);
+            m_CurrentMainWindow.ChangeView(infoPageToLoad, this);
         }
     }
 }
