@@ -23,6 +23,7 @@ namespace User_Interface
     {
         private MainWindow m_CurrentMainWindow;
         private IAppView m_PreviousView;
+
         public Dashboard()
         {
             InitializeComponent();
@@ -35,9 +36,15 @@ namespace User_Interface
             {
                 string mallName = mall.Value.Split()[0];
                 BigButton newBigButton = new BigButton("pack://application:,,,/Resources/Icons/StoreFront_Icon.png", mallName, mall.Key);
-                
+                this.AddHandler(BigButton.ClickChangeEvent, new RoutedEventHandler(OnButtonClick));
                 Lv_Malls.Items.Add(newBigButton);
             }
+        }
+
+        private void OnButtonClick(object sender, RoutedEventArgs args)
+        {
+            MallMenu mallMenu = new MallMenu();
+            m_CurrentMainWindow.ChangeView(mallMenu, this);
         }
 
         private void Btn_Add_OnClick(object sender, RoutedEventArgs e)

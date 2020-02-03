@@ -18,11 +18,21 @@ namespace User_Interface
     /// <summary>
     /// Interaction logic for UserControl1.xaml
     /// </summary>
-    public partial class UserControl1 : UserControl
+    public partial class RoomPage : UserControl, IAppView
     {
-        public UserControl1()
+        public RoomPage()
         {
             InitializeComponent();
+        }
+
+        public void SetMainWindow(MainWindow currentWindow)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetPreviousView(IAppView previousElement)
+        {
+            throw new NotImplementedException();
         }
 
         private void Btn_Activities_OnClick(object sender, RoutedEventArgs e)

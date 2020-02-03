@@ -42,7 +42,7 @@ namespace UnitTests
 
             ProgramManager currentManager = ProgramManager.GetInstance();
             Mall testMall = new Mall(Guid.NewGuid(), "Test Mall 1", "First test mall");
-            MallManager.GetInstance().AddMall(testMall.Id, testMall.Name, testMall.Description);
+            MallManager.GetInstance().AddMall(testMall);
             RoomManager.GetInstance().CreateRoom("Test room", "Test Desc", "Store", 1, 20, Guid.NewGuid(),MallManager.GetInstance().CurrentMall.Name);
             ActivityManager.GetInstance().AddActivity(MallManager.GetInstance().CurrentMall.Name, Guid.NewGuid(), "Cl",
                 "tstDesc", RoomManager.GetInstance().GetRooms().Keys.ToList()[0], ActivityStatus.Scheduled, DateTime.Now,

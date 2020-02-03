@@ -55,5 +55,16 @@ namespace User_Interface
             AddRoomMenu addRoom = new AddRoomMenu();
             m_CurrentMainWindow.ChangeView(addRoom, this);
         }
+
+        private void Lv_RentalSpaces_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Lv_RentalSpaces.SelectedIndex >= 0 && Lv_RentalSpaces.SelectedIndex < Lv_RentalSpaces.Items.Count)
+            {
+                RoomPage room = new RoomPage();
+                room.SetMainWindow(m_CurrentMainWindow);
+                room.SetPreviousView(this);
+                m_CurrentMainWindow.ChangeView(room, this);
+            }
+        }
     }
 }
