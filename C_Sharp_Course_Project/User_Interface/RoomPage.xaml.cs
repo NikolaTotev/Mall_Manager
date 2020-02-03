@@ -45,7 +45,7 @@ namespace User_Interface
 
         private void Btn_Activities_OnClick(object sender, RoutedEventArgs e)
         {
-            RoomActivities activitiesPageToLoad = new RoomActivities(m_CurrentRoomID);
+            RoomActivities activitiesPageToLoad = new RoomActivities(m_CurrentRoomID, m_CurrentRoom);
             activitiesPageToLoad.SetMainWindow(m_CurrentMainWindow);
             m_CurrentMainWindow.ChangeView(activitiesPageToLoad,this);
         }

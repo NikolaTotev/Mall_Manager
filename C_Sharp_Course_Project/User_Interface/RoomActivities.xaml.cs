@@ -23,11 +23,27 @@ namespace User_Interface
     {
         private MainWindow m_CurrentMainWindow;
         private IAppView m_PreviousView;
-        private Guid m_CurrentRoom;
-        public RoomActivities(Guid currentRoom)
+        private Guid m_CurrentRoomID;
+        private Room m_CurrentRoom;
+        public RoomActivities(Guid currentRoomId, Room currentRoom)
         {
             InitializeComponent();
+            m_CurrentRoomID = currentRoomId;
             m_CurrentRoom = currentRoom;
+
+
+            ActivityManager.GetInstance().AddActivity("TestMall", Guid.NewGuid(), "Maint", "Test", m_CurrentRoomID,
+                ActivityStatus.Scheduled, DateTime.Now, new DateTime(2020, 02, 23));
+            foreach (var activityId in m_CurrentRoom.Activities)
+            {
+                
+                Activity currentActivity = ActivityManager.GetInstance().Activities[activityId];
+                ListViewItem itemToAdd = new ListViewItem();
+                itemToAdd.Tag = activityId;
+                itemToAdd.Content = currentActivity.Description;
+                itemToAdd.Name = currentActivity.CurActivityStatus.ToString();
+                Lv_Activities.Items.Add(itemToAdd);
+            }
         }
 
         private void Btn_Add_OnClick(object sender, RoutedEventArgs e)
