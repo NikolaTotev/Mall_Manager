@@ -30,9 +30,13 @@ namespace User_Interface
             InitializeComponent();
             m_CurrentRoomID = currentRoomId;
             m_CurrentRoom = currentRoom;
+            Lv_Activities.SelectionMode = SelectionMode.Multiple;
 
-
-            ActivityManager.GetInstance().AddActivity("TestMall", Guid.NewGuid(), "Maint", "Test", m_CurrentRoomID,
+            ActivityManager.GetInstance().AddActivity("TestMall", Guid.NewGuid(), "Maint", "Test1", m_CurrentRoomID,
+                ActivityStatus.Scheduled, DateTime.Now, new DateTime(2020, 02, 23));
+            ActivityManager.GetInstance().AddActivity("TestMall", Guid.NewGuid(), "Maint", "Test2", m_CurrentRoomID,
+                ActivityStatus.Scheduled, DateTime.Now, new DateTime(2020, 02, 23));
+            ActivityManager.GetInstance().AddActivity("TestMall", Guid.NewGuid(), "Maint", "Test3", m_CurrentRoomID,
                 ActivityStatus.Scheduled, DateTime.Now, new DateTime(2020, 02, 23));
             foreach (var activityId in m_CurrentRoom.Activities)
             {
@@ -58,17 +62,35 @@ namespace User_Interface
 
         private void Btn_Delete_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (Lv_Activities.SelectedItems.Count <= 0) return;
+            for (var i = Lv_Activities.SelectedItems.Count - 1; i >= 0; i--)
+            {
+                ListViewItem itemToDelete = (ListViewItem)Lv_Activities.SelectedItems[i];
+                ActivityManager.GetInstance().DeleteActivity((Guid)itemToDelete.Tag, "TestMall");//Should change to CurrentMall.Name
+                Lv_Activities.Items.Remove(itemToDelete);
+            }
         }
 
         private void Btn_MarkAsFailed_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (Lv_Activities.SelectedItems.Count <= 0) return;
+            for (var i = Lv_Activities.SelectedItems.Count - 1; i >= 0; i--)
+            {
+                ListViewItem item = (ListViewItem)Lv_Activities.SelectedItems[i];
+                ActivityManager.GetInstance().Activities[(Guid) item.Tag].CurActivityStatus =
+                    ActivityStatus.Failed;  //Should change to CurrentMall.Name
+            }
         }
 
         private void Btn_MarkAsCompleted_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (Lv_Activities.SelectedItems.Count <= 0) return;
+            for (var i = Lv_Activities.SelectedItems.Count - 1; i >= 0; i--)
+            {
+                ListViewItem item = (ListViewItem)Lv_Activities.SelectedItems[i];
+                ActivityManager.GetInstance().Activities[(Guid)item.Tag].CurActivityStatus =
+                    ActivityStatus.Finished;  //Should change to CurrentMall.Name
+            }
         }
 
         private void Btn_Deselect_OnClick(object sender, RoutedEventArgs e)
@@ -78,17 +100,30 @@ namespace User_Interface
 
         private void Btn_MarkAsInProgress_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (Lv_Activities.SelectedItems.Count <= 0) return;
+            for (var i = Lv_Activities.SelectedItems.Count - 1; i >= 0; i--)
+            {
+                ListViewItem item = (ListViewItem)Lv_Activities.SelectedItems[i];
+                ActivityManager.GetInstance().Activities[(Guid)item.Tag].CurActivityStatus =
+                    ActivityStatus.InProgress;  //Should change to CurrentMall.Name
+            }
         }
 
         private void Btn_MarkAsScheduled_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (Lv_Activities.SelectedItems.Count <= 0) return;
+            for (var i = Lv_Activities.SelectedItems.Count - 1; i >= 0; i--)
+            {
+                ListViewItem item = (ListViewItem)Lv_Activities.SelectedItems[i];
+                ActivityManager.GetInstance().Activities[(Guid)item.Tag].CurActivityStatus =
+                    ActivityStatus.Scheduled;  //Should change to CurrentMall.Name
+            }
         }
 
         private void Btn_SelectAll_OnClick(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
+        { 
+            Lv_Activities.SelectAll();
+            //It selects every item but they are not marked in the UI
         }
 
         public void SetMainWindow(MainWindow currentWindow)

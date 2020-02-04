@@ -11,6 +11,7 @@ namespace Core
         Scheduled,
         InProgress,
         Finished,
+        Failed,
         Undefined
     }
 
