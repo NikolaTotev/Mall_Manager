@@ -32,27 +32,24 @@ namespace User_Interface
             m_CurrentRoom = currentRoom;
             Lv_Activities.SelectionMode = SelectionMode.Multiple;
 
-            ActivityManager.GetInstance().AddActivity("TestMall", Guid.NewGuid(), "Maint", "Test1", m_CurrentRoomID,
-                ActivityStatus.Scheduled, DateTime.Now, new DateTime(2020, 02, 23));
-            ActivityManager.GetInstance().AddActivity("TestMall", Guid.NewGuid(), "Maint", "Test2", m_CurrentRoomID,
-                ActivityStatus.Scheduled, DateTime.Now, new DateTime(2020, 02, 23));
-            ActivityManager.GetInstance().AddActivity("TestMall", Guid.NewGuid(), "Maint", "Test3", m_CurrentRoomID,
-                ActivityStatus.Scheduled, DateTime.Now, new DateTime(2020, 02, 23));
-            foreach (var activityId in m_CurrentRoom.Activities)
+           foreach (var activityId in m_CurrentRoom.Activities)
             {
                 
                 Activity currentActivity = ActivityManager.GetInstance().Activities[activityId];
-                ListViewItem itemToAdd = new ListViewItem();
-                itemToAdd.Tag = activityId;
-                itemToAdd.Content = currentActivity.Description;
-                itemToAdd.Name = currentActivity.CurActivityStatus.ToString();
+                ListViewItem itemToAdd = new ListViewItem
+                {
+                    Tag = activityId,
+                    Content = currentActivity.Description,
+                    Name = currentActivity.CurActivityStatus.ToString()
+                };
                 Lv_Activities.Items.Add(itemToAdd);
             }
         }
 
         private void Btn_Add_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            AddActivityMenu menuToDisplay = new AddActivityMenu(m_CurrentRoomID);
+            m_CurrentMainWindow.ChangeView(menuToDisplay, this);
         }
 
         private void Btn_Stats_OnClick(object sender, RoutedEventArgs e)
@@ -66,7 +63,7 @@ namespace User_Interface
             for (var i = Lv_Activities.SelectedItems.Count - 1; i >= 0; i--)
             {
                 ListViewItem itemToDelete = (ListViewItem)Lv_Activities.SelectedItems[i];
-                ActivityManager.GetInstance().DeleteActivity((Guid)itemToDelete.Tag, "TestMall");//Should change to CurrentMall.Name
+                ActivityManager.GetInstance().DeleteActivity((Guid)itemToDelete.Tag, MallManager.GetInstance().CurrentMall.Name);
                 Lv_Activities.Items.Remove(itemToDelete);
             }
         }

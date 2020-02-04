@@ -68,28 +68,27 @@ namespace Core
             return true;
         }
 
-        public bool AddActivity(string mallName, Guid newId, string category, string description, Guid corespRoom, ActivityStatus status, DateTime startDate, DateTime endDate)
+        public bool AddActivity(Activity activityToAdd,string mallName)
         {
-            if (newId == null || category == null || description == null || corespRoom == null)
-            {
-                ExceptionManager.OnNullParamsToFunction("Add activity");
-                return false;
-            }
+            //if (newId == null || category == null || description == null || corespRoom == null)
+            //{
+            //    ExceptionManager.OnNullParamsToFunction("Add activity");
+            //    return false;
+            //}
 
-            if (startDate > endDate)
-            {
-                ExceptionManager.OnInvalidDate(); //Maybe other exception Invalid Date
-                return false;
-            }
+            //if (startDate > endDate)
+            //{
+            //    ExceptionManager.OnInvalidDate(); //Maybe other exception Invalid Date
+            //    return false;
+            //}
 
-            Activity newActivity = new Activity(newId, corespRoom, category, false, description, status, startDate, endDate);
             RoomManager roomManager = RoomManager.GetInstance();
-            if(Activities.ContainsKey(newActivity.Id) || !roomManager.AddActivity(newActivity.CorrespondingRoom, newActivity.Id,mallName))
+            if(Activities.ContainsKey(activityToAdd.Id) || !roomManager.AddActivity(activityToAdd.CorrespondingRoom, activityToAdd.Id,mallName))
             {
                 return false;
             }
 
-            Activities.Add(newActivity.Id, newActivity);
+            Activities.Add(activityToAdd.Id, activityToAdd);
             SerializationManager.SaveActivities(Activities,mallName);
             return true;
         }
