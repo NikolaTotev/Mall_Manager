@@ -42,8 +42,8 @@ namespace UnitTests
             ActivityStatus testActivityStatus = ActivityStatus.InProgress;
             DateTime testStartTime = default;
             DateTime testEndTime = default;
-
-            m_CurrentManager.AddActivity(m_TestMall,m_TestActivityId, testActivityCatgory, testActivityDescription, m_TestRoomId, testActivityStatus, testStartTime, testEndTime);
+            Activity testActivity = new Activity(m_TestActivityId, m_TestRoomId, testActivityCatgory,false ,testActivityDescription, testActivityStatus, testStartTime, testEndTime);
+            m_CurrentManager.AddActivity(testActivity, m_TestMall);
 
             Assert.IsTrue(m_CurrentManager.Activities.ContainsKey(m_TestActivityId));
             Assert.IsTrue(m_CurrentManager.Activities[m_TestActivityId].Category == testActivityCatgory);

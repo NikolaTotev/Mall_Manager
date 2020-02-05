@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="User_Interface.MallActivities"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:User_Interface"
+             mc:Ignorable="d" 
+             d:DesignHeight="650" d:DesignWidth="1000" Background="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="85*"></RowDefinition>
+            <RowDefinition Height="500*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.9*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Rectangle Grid.Column="1" Fill="Gainsboro" Margin="27,20,27,20"></Rectangle>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2.5*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <ListView x:Name="Lv_Activities" Grid.Column="0" Grid.Row="0" Background="Gainsboro" Margin="20"></ListView>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="1.8*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" Margin="20,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Button x:Name="Btn_SelectAll" Click="Btn_SelectAll_OnClick" Margin="0,0,20,25" Grid.Row="0" Grid.Column="0" Background="White">
+                            <Image Source="Resources/Icons/SelectAll_Icon.png"></Image>
+                        </Button>
+                        <Button x:Name="Btn_MarkAsScheduled" Click="Btn_MarkAsScheduled_OnClick" Margin="0,0,20,25" Grid.Row="0" Grid.Column="1" Background="White">
+                            <Rectangle  Height="35" Width="35" Fill="{StaticResource ScheduledTask}"/>
+                        </Button>
+
+                        <Button x:Name="Btn_MarkAsInProgress" Click="Btn_MarkAsInProgress_OnClick" Margin="0,0,20,25" Grid.Row="0" Grid.Column="2" Background="White">
+                            <Rectangle  Height="35" Width="35" Fill="{StaticResource InProgressTask}"/>
+                        </Button>
+
+                        <Button x:Name="Btn_Deselect" Click="Btn_Deselect_OnClick" Margin="0,0,20,25" Grid.Row="1" Grid.Column="0" Background="White">
+                            <Image Source="Resources/Icons/Deselect_Icon.png"></Image>
+                        </Button>
+
+                        <Button x:Name="Btn_MarkAsCompleted" Click="Btn_MarkAsCompleted_OnClick" Margin="0,0,20,25" Grid.Row="1" Grid.Column="1" Background="White">
+                            <Rectangle  Height="35" Width="35" Fill="{StaticResource Completed}"/>
+                        </Button>
+
+                        <Button x:Name="Btn_MarkAsFailed" Click="Btn_MarkAsFailed_OnClick" Margin="0,0,20,25" Grid.Row="1" Grid.Column="2" Background="White" >
+                            <Rectangle  Height="35" Width="35" Fill="{StaticResource FailedTask}"/>
+                        </Button>
+                    </Grid>
+                    <Grid Grid.Column="1" Margin="0,0,20,25">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Button x:Name="Btn_Add"    Click="Btn_Add_OnClick"    Margin="10" Background="White" Content="Add" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}"></Button>
+                        <Button x:Name="Btn_Stats"  Click="Btn_Stats_OnClick"  Margin="10" Grid.Row="0" Grid.Column="1" Background="White" Content="Stats" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}"></Button>
+                        <Button x:Name="Btn_Delete" Click="Btn_Delete_OnClick" Margin="10" Grid.Row="1" Grid.Column="0" Background="White" Content="Delete" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}"></Button>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+        <Label x:Name="Lbl_MallName" Content="Mall name - Mall Activities" Grid.Row="0" Background="{StaticResource NavyBlueBase}"  FontSize="45" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" Foreground="AliceBlue" FontWeight="SemiBold" Margin="0,0,0,10" Padding="20,15,0,0" />
+
+    </Grid>
+</UserControl>

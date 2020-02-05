@@ -52,7 +52,8 @@ namespace User_Interface
 
         private void Btn_ActivityOverview_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+           MallActivities mallActivities = new MallActivities();
+           m_CurrentMainWindow.ChangeView(mallActivities, this);
         }
     }
 }

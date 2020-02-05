@@ -74,6 +74,9 @@
     <Compile Include="BigButton.xaml.cs">
       <DependentUpon>BigButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MallActivities.xaml.cs">
+      <DependentUpon>MallActivities.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MallMenu.xaml.cs">
       <DependentUpon>MallMenu.xaml</DependentUpon>
     </Compile>
@@ -124,6 +127,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="BigButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MallActivities.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
