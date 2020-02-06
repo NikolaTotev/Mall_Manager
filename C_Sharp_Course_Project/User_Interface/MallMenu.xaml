@@ -16,9 +16,54 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Label x:Name="Lbl_MallName" Content="Mall Name" Grid.Row="0" Grid.ColumnSpan="3" Background="{StaticResource NavyBlueBase}"  FontSize="45" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" Foreground="AliceBlue" FontWeight="SemiBold" Margin="0,0,0,10" Padding="20,15,0,0" />
-        <Button x:Name="Btn_RentalSpaces"     Click="Btn_RentalSpaces_Click" Content="Rental Spaces" Grid.Column="0" Grid.Row="1" Margin="40,80,30,80"  Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" />
-        <Button x:Name="Btn_ActivityOverview" Click="Btn_ActivityOverview_OnClick" Content="Activity Overview" Grid.Column="1" Grid.Row="1" Margin="40,80,30,80" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}"/>
-        <Button x:Name="Btn_Statistics"       Click="Btn_Statistics_OnClick" Content="Statistics" Grid.Column="2" Grid.Row="1" Margin="40,80,30,80" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}"/>
+        <Label x:Name="Lbl_MallName" Content="Mall Name" VerticalContentAlignment="Center" Grid.Row="0" Grid.ColumnSpan="3" Background="{StaticResource NavyBlueBase}"  FontSize="45" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" Foreground="AliceBlue" FontWeight="SemiBold" Margin="0,0,0,10" Padding="20,15,0,0" >
+            <Label.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="0,0,30,30"></Setter>
+                </Style>
+            </Label.Resources>
+        </Label>
+        <Button x:Name="Btn_RentalSpaces"   BorderBrush="Transparent"   Click="Btn_RentalSpaces_Click" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="45,10,45,5" Grid.Column="0" Grid.Row="1"   Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Light" FontSize="35" Foreground="{StaticResource NavyBlueBase}"  Width="260" Height="260">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="70"/>
+                </Style>
+            </Button.Resources>
+            <Button.Effect>
+                <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+            </Button.Effect>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image Source="Resources/Icons/StoreFront_Icon.png" VerticalAlignment="Center"  Height="120"></Image>
+                <TextBlock Text="Rental Spaces" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,10,0,0"  TextAlignment="Center"></TextBlock>
+            </StackPanel>
+        </Button>
+        <Button x:Name="Btn_ActivityOverview" Click="Btn_ActivityOverview_OnClick"  VerticalAlignment="Center" BorderBrush="Transparent" HorizontalAlignment="Center" Padding="45,10,45,5" Grid.Column="1" Grid.Row="1"   Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Light" FontSize="35" Foreground="{StaticResource NavyBlueBase}"  Width="260" Height="260">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="70"/>
+                </Style>
+            </Button.Resources>
+            <Button.Effect>
+                <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+            </Button.Effect>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image Source="Resources/Icons/Event_Icon.png" VerticalAlignment="Center"  Height="135"></Image>
+                <TextBlock Text="Activity Overview" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Center"></TextBlock>
+            </StackPanel>
+        </Button>
+        <Button x:Name="Btn_Statistics"       Click="Btn_Statistics_OnClick" VerticalAlignment="Center" BorderBrush="Transparent" HorizontalAlignment="Center" Padding="45,10,45,5" Grid.Column="2" Grid.Row="1"   Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Light" FontSize="35" Foreground="{StaticResource NavyBlueBase}"  Width="260" Height="260">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="70"/>
+                </Style>
+            </Button.Resources>
+            <Button.Effect>
+                <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+            </Button.Effect>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image Source="Resources/Icons/Statistics_Icon.png" VerticalAlignment="Center"  Height="135"></Image>
+                <TextBlock Text="Statistics" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Center"></TextBlock>
+            </StackPanel>
+        </Button>
     </Grid>
 </UserControl>
