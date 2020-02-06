@@ -56,19 +56,25 @@ namespace User_Interface
 
         private void Tb_Name_GotFocus(object sender, RoutedEventArgs e)
         {
-            Tb_MallName.Text = "";
+            if (Tb_MallName.Text == "Mall Name")
+            {
+                Tb_MallName.Text = "";
+            }
         }
 
         private void Tb_Desc_GotFocus(object sender, RoutedEventArgs e)
         {
-            Tb_MallDesc.Text = "";
+            if (Tb_MallDesc.Text == "Mall Description")
+            {
+                Tb_MallDesc.Text = "";
+            }
         }
 
         private void Tb_Name_LostFocus(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(Tb_MallName.Text))
             {
-                Tb_MallName.Text = "Mall description";
+                Tb_MallName.Text = "Mall Description";
             }
         }
 
@@ -76,7 +82,7 @@ namespace User_Interface
         {
             if (string.IsNullOrEmpty(Tb_MallDesc.Text))
             {
-                Tb_MallDesc.Text = "Mall description";
+                Tb_MallDesc.Text = "Mall Description";
             }
         }
 
@@ -93,7 +99,7 @@ namespace User_Interface
         {
             if (Tb_MallDesc != null && Tb_MallName != null && Btn_Add != null)
             {
-                if (Tb_MallName.Text != "Mall name" && !string.IsNullOrEmpty(Tb_MallName.Text) && Tb_MallDesc.Text != "Mall description" && !string.IsNullOrEmpty(Tb_MallDesc.Text))
+                if (Tb_MallName.Text != "Mall name" && !string.IsNullOrEmpty(Tb_MallName.Text) && Tb_MallDesc.Text != "Mall Description" && !string.IsNullOrEmpty(Tb_MallDesc.Text))
                 {
                     Btn_Add.IsEnabled = true;
                 }

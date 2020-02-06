@@ -30,7 +30,7 @@
         </StackPanel>
         <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Label Content="Write a short description of the mall." FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Light" FontSize="15" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent"/>
-            <TextBox x:Name="Tb_MallDesc" Height="32" TextWrapping="Wrap" Padding="5" VerticalContentAlignment="Center" Text="Mall Desc" Canvas.Top="361" Width="384" BorderBrush="Transparent" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="15" Foreground="{StaticResource TextboxPrompt}" GotFocus="Tb_Desc_GotFocus" LostFocus="Tb_MallDesc_LostFocus" TextChanged="Tb_MallDesc_TextChanged" >
+            <TextBox x:Name="Tb_MallDesc" Height="32" TextWrapping="Wrap" Padding="5" VerticalContentAlignment="Center" Text="Mall Description" Canvas.Top="361" Width="384" BorderBrush="Transparent" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="15" Foreground="{StaticResource TextboxPrompt}" GotFocus="Tb_Desc_GotFocus" LostFocus="Tb_MallDesc_LostFocus" TextChanged="Tb_MallDesc_TextChanged" >
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="3"/>

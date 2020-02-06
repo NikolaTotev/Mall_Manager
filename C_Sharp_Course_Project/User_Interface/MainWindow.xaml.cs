@@ -22,12 +22,15 @@ namespace User_Interface
     public partial class MainWindow : Window
     {
         private ProgramManager m_CurrentManager;
+        public readonly ResourceDictionary Strings = new ResourceDictionary();
+        
         public MainWindow()
         {
             InitializeComponent();
             m_CurrentManager = ProgramManager.GetInstance();
             Dashboard startDash = new Dashboard();
             ChangeView(startDash, null);
+            Strings.Source= new Uri("pack://application:,,,/Resources/StringResources.xaml");
         }
 
         private void BigButton_Loaded(object sender, RoutedEventArgs e)
