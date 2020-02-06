@@ -61,6 +61,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ActivityListItem.cs" />
     <Compile Include="AddActivityMenu.xaml.cs">
       <DependentUpon>AddActivityMenu.xaml</DependentUpon>
     </Compile>
@@ -89,12 +90,14 @@
     <Compile Include="RoomsMenu.xaml.cs">
       <DependentUpon>RoomsMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SpaceActivitiesContext.cs" />
     <Compile Include="TextButton.xaml.cs">
       <DependentUpon>TextButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="SpacePage.xaml.cs">
       <DependentUpon>SpacePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="URIManager.cs" />
     <Page Include="AddActivityMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

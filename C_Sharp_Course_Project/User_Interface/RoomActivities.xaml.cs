@@ -31,19 +31,19 @@ namespace User_Interface
             m_CurrentRoomID = currentRoomId;
             m_CurrentRoom = currentRoom;
             Lv_Activities.SelectionMode = SelectionMode.Multiple;
-
-           foreach (var activityId in m_CurrentRoom.Activities)
+            List<ActivityListItem> activities = new List<ActivityListItem>();
+            foreach (var activityId in m_CurrentRoom.Activities)
             {
-                
+                ActivityListItem itemToAdd = new ActivityListItem();
                 Activity currentActivity = ActivityManager.GetInstance().Activities[activityId];
-                ListViewItem itemToAdd = new ListViewItem
-                {
-                    Tag = activityId,
-                    Content = currentActivity.Description,
-                    Name = currentActivity.CurActivityStatus.ToString()
-                };
-                Lv_Activities.Items.Add(itemToAdd);
+                itemToAdd.ActivityId = currentActivity.Id;
+                itemToAdd.Description = currentActivity.Description;
+                itemToAdd.Category = currentActivity.Category;
+                itemToAdd.SetStatusColor(currentActivity.CurActivityStatus);
+                activities.Add(itemToAdd);
             }
+
+            DataContext = activities;
         }
 
         private void Btn_Add_OnClick(object sender, RoutedEventArgs e)
@@ -74,7 +74,7 @@ namespace User_Interface
             for (var i = Lv_Activities.SelectedItems.Count - 1; i >= 0; i--)
             {
                 ListViewItem item = (ListViewItem)Lv_Activities.SelectedItems[i];
-                ActivityManager.GetInstance().Activities[(Guid) item.Tag].CurActivityStatus =
+                ActivityManager.GetInstance().Activities[(Guid)item.Tag].CurActivityStatus =
                     ActivityStatus.Failed;  //Should change to CurrentMall.Name
             }
         }
@@ -118,7 +118,7 @@ namespace User_Interface
         }
 
         private void Btn_SelectAll_OnClick(object sender, RoutedEventArgs e)
-        { 
+        {
             Lv_Activities.SelectAll();
             //It selects every item but they are not marked in the UI
         }
@@ -131,6 +131,11 @@ namespace User_Interface
         public void SetPreviousView(IAppView previousElement)
         {
             m_PreviousView = previousElement;
+        }
+
+        private void Lv_Activities_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

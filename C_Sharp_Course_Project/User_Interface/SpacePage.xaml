@@ -11,7 +11,7 @@
             <RowDefinition Height="85*"></RowDefinition>
             <RowDefinition Height="500*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label x:Name="Lb_RoomName" Content="Space Name" Grid.Row="0" VerticalContentAlignment="Center" Background="{StaticResource NavyBlueBase}"  FontSize="45" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" Foreground="AliceBlue" FontWeight="SemiBold" Margin="0,0,0,10" Padding="25,0,0,0" >
+        <Label x:Name="Lb_RoomName" Content="Space Name" Grid.Row="0" VerticalContentAlignment="Center" Background="{StaticResource NavyBlueBase}"  FontSize="45" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" Foreground="AliceBlue" FontWeight="SemiBold" Margin="0,0,0,10" Padding="25,0,0,0" Effect="{StaticResource DropShadow}" >
             <Label.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="0,0,30,30"></Setter>

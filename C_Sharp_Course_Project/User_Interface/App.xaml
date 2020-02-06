@@ -13,10 +13,14 @@
         <Brush x:Key="BorderButtonPressed">#00A7E1</Brush>
         <Brush x:Key="TextboxPrompt">#A2A9B9</Brush>
 
+        
+
         <Brush x:Key="ScheduledTask">#62B6CB</Brush>
         <Brush x:Key="InProgressTask">#BEE9e8</Brush>
         <Brush x:Key="Completed">#CAE9ff</Brush>
         <Brush x:Key="FailedTask">#F5AC72</Brush>
+        <Brush x:Key="UndefinedTask">#A2A9B9</Brush>
+
         <ToolTip x:Key="BtnAddMallTip" Content="Adds a new mall based on your input."></ToolTip>
         <ToolTip x:Key="CancelTip" Content="Returns to previous page."></ToolTip>
         <ToolTip x:Key="BtnOpenAddMenu" Content="Opens add menu"></ToolTip>

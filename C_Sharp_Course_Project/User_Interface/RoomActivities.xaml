@@ -29,13 +29,82 @@
                     <RowDefinition Height="2.5*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <ListView x:Name="Lv_Activities" Grid.Column="0" Grid.Row="0" Background="White" Effect="{StaticResource DropShadow}"  Margin="20">
+                <ListView ItemsSource="{Binding}" x:Name="Lv_Activities" Grid.Column="0" Grid.Row="0" Background="White" Effect="{StaticResource DropShadow}"  Margin="20" SelectionChanged="Lv_Activities_SelectionChanged">
                     <ListView.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="15"></Setter>
                         </Style>
                     </ListView.Resources>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="IsSelected" Value="{Binding IsSelected}"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+
+                    <ListView.View>
+                        <GridView>
+                            <GridView.ColumnHeaderContainerStyle>
+                                <Style TargetType="{x:Type GridViewColumnHeader}">
+                                    <Setter Property="Background" Value="White"></Setter>
+                                    <Setter Property="Foreground" Value="{StaticResource NavyBlueBase}"></Setter>
+                                    <Setter Property="BorderBrush" Value="{x:Null}"></Setter>
+                                    <Setter Property="BorderThickness" Value="0"></Setter>
+                                    <Setter Property="Margin" Value="0"></Setter>
+                                    <Setter Property="Padding" Value="0"></Setter>
+                                    <Setter Property="FontFamily" Value="{StaticResource Montserrat}"></Setter>
+                                    <Setter Property="FontWeight" Value="Medium"></Setter>
+                                    <Setter Property="FontSize" Value="20"></Setter>
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource OrangeButtonHighlight}" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+
+                            </GridView.ColumnHeaderContainerStyle>
+                            <GridViewColumn Width="40">
+                                <GridViewColumn.CellTemplate >
+                                    <DataTemplate>
+                                        <CheckBox IsChecked="{Binding IsSelected}" BorderBrush="{StaticResource OrangeAccent}" BorderThickness="3" FontSize="20" >
+                                            <CheckBox.Resources>
+                                                <Style TargetType="Border">
+                                                    <Setter Property="CornerRadius" Value="3"></Setter>
+                                                </Style>
+                                            </CheckBox.Resources>
+                                        </CheckBox>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Description" Width="270">
+
+                                <GridViewColumn.CellTemplate>
+
+                                    <DataTemplate>
+
+                                        <TextBlock x:Name="Description" HorizontalAlignment="Center" Text="{Binding Description}" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="20" Foreground="{StaticResource NavyBlueBase}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Category"  Width="200">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock x:Name="Category" HorizontalAlignment="Center" Text="{Binding Category}" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="20" Foreground="{StaticResource NavyBlueBase}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Status" Width="90">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Rectangle x:Name="Status" Fill="{StaticResource FailedTask}" VerticalAlignment="Center" HorizontalAlignment="Center"  Width="20" Height="20"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+
                 </ListView>
+
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
@@ -127,7 +196,7 @@
                             <Rectangle  Height="30" Width="30" Fill="{StaticResource FailedTask}"/>
                         </Button>
 
-                      </Grid>
+                    </Grid>
                     <Grid Grid.Column="1" Margin="0,0,20,25">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
