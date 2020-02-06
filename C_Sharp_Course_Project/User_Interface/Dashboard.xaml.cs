@@ -32,12 +32,19 @@ namespace User_Interface
 
         public void LoadMallList()
         {
+            if (MallManager.GetInstance().Malls.Count == 2)
+            {
+                Btn_Add.IsEnabled = false;
+                Btn_Add.Opacity = 0.5;
+
+            }
+
             foreach (var mall in MallManager.GetInstance().GetMalls())
             {
                 string mallName = mall.Value.Split()[0];
                 BigButton newBigButton = new BigButton("pack://application:,,,/Resources/Icons/StoreFront_Icon.png", mallName, mall.Key);
                 this.AddHandler(BigButton.ClickChangeEvent, new RoutedEventHandler(OnButtonClick));
-                Lv_Malls.Items.Add(newBigButton);
+                Sp_MallBtns.Children.Add(newBigButton);
             }
         }
 

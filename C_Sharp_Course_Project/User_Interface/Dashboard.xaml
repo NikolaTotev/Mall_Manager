@@ -14,18 +14,13 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Foreground="{StaticResource NavyBlueBase}" Text="Welcome!" TextAlignment="Center" Margin="52,90,52,10" FontSize="40" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Regular"/>
         <TextBlock Grid.Row="1" Foreground="{StaticResource NavyBlueBase}" Text="Select Location" TextAlignment="Center"  FontSize="64" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="SemiBold" Margin="0,0,0,10" />
-        <ListView x:Name="Lv_Malls" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled" HorizontalAlignment="Center" Height="244" Margin="177,51,177,51" Grid.Row="2" VerticalAlignment="Center"  Width="648" >
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Background="Transparent" Orientation="Horizontal" />
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-            <Button x:Name="Btn_Add" Style="{StaticResource BigRoundedButton}" Margin="5" Click="Btn_Add_OnClick">
-                <StackPanel>
-                    <Image Source="Resources/Icons/Add_Icon.png" Width="130" Height="130" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <TextBlock Text="Add" TextAlignment="Center" FontSize="40" Foreground="{StaticResource NavyBlueBase}" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Regular" Margin="0,0,0,20"/>
-                </StackPanel>
-            </Button>
-        </ListView>
+       <StackPanel x:Name="Sp_MallBtns" Grid.Row="2" Margin="0,50,0,50" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+           <Button x:Name="Btn_Add" Style="{StaticResource BigRoundedButton}" Margin="5" Click="Btn_Add_OnClick">
+               <StackPanel>
+                   <Image Source="Resources/Icons/Add_Icon.png" Width="130" Height="130" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                   <TextBlock Text="Add" TextAlignment="Center" FontSize="40" Foreground="{StaticResource NavyBlueBase}" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Regular" Margin="0,0,0,20"/>
+               </StackPanel>
+           </Button>
+        </StackPanel>
     </Grid>
 </UserControl>

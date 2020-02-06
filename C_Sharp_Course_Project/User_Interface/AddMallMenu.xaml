@@ -6,12 +6,81 @@
              xmlns:local="clr-namespace:User_Interface"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="1000" Background="White">
-    <Canvas HorizontalAlignment="Left" Height="650" VerticalAlignment="Top" Width="1000">
-        <Button x:Name="Btn_Add" Content="Add" Canvas.Left="302" Canvas.Top="550" Width="176" Height="47" Click="Btn_Add_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}"/>
-        <Button x:Name="Btn_Cancel" Content="Cancel" Canvas.Left="510" Canvas.Top="550" Width="176" Height="47" Click="Btn_Cancel_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}"/>
-        <TextBox x:Name="TxtB_MallName" Height="22" Canvas.Left="302" TextWrapping="Wrap" Text="Mall Name" Canvas.Top="346" Width="384"/>
-        <TextBox x:Name="TxtB_MallDesc" Height="28" Canvas.Left="302" TextWrapping="Wrap" Text="Mall Desc" Canvas.Top="404" Width="384"/>
-    </Canvas>
 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="4*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Content="Create mall" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Canvas.Left="302" Canvas.Top="116" HorizontalContentAlignment="Center" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="50" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" Width="384" Margin="308,82,308,65"/>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label Content="Please name your mall." FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Light" FontSize="15" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent"/>
+            <TextBox x:Name="TxtB_MallName" Height="32" TextWrapping="Wrap" Text="Mall Name" Width="384" Padding="5" VerticalContentAlignment="Center" BorderBrush="Transparent" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="15" Foreground="{StaticResource TextboxPrompt}" >
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="3"/>
+                    </Style>
+                </TextBox.Resources>
+                <TextBox.Effect>
+                    <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+                </TextBox.Effect>
+            </TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Label Content="Write a short description of the mall." FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Light" FontSize="15" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent"/>
+            <TextBox x:Name="TxtB_MallDesc" Height="28" TextWrapping="Wrap" Padding="5" VerticalContentAlignment="Center" Text="Mall Desc" Canvas.Top="361" Width="384" BorderBrush="Transparent" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="15" Foreground="{StaticResource TextboxPrompt}" >
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="3"/>
+                    </Style>
+                </TextBox.Resources>
+                <TextBox.Effect>
+                    <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+                </TextBox.Effect>
+            </TextBox>
+        </StackPanel>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Button Grid.Row="0" Grid.Column="1" x:Name="Btn_Add" VerticalAlignment="Center" HorizontalAlignment="Center" Width="186" Height="47" Click="Btn_Add_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Effect>
+                    <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+                </Button.Effect>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,5,0">
+                    <Image Source="Resources/Icons/Add_Icon.png" VerticalAlignment="Center" Margin="0,0,5,0" Height="40"></Image>
+                    <TextBlock Text="Add" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Button>
 
+            <Button Grid.Row="0" Grid.Column="2" x:Name="Btn_Cancel" VerticalAlignment="Center" HorizontalAlignment="Center" Width="176" Height="47" Click="Btn_Cancel_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource CancelTip}">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Effect>
+                    <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+                </Button.Effect>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Image Source="Resources/Icons/Cancel_Icon.png" VerticalAlignment="Center" Margin="0,0,5,0" Height="40"></Image>
+                    <TextBlock Text="Cancel" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Button>
+        </Grid>
+    </Grid>
 </UserControl>

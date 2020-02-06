@@ -11,12 +11,15 @@
         <Brush x:Key="OrangeButtonHighlight">#FFEFE2</Brush>
         <Brush x:Key="OrangeButtonPressed">#FFDEC3</Brush>
         <Brush x:Key="BorderButtonPressed">#00A7E1</Brush>
+        <Brush x:Key="TextboxPrompt">#A2A9B9</Brush>
 
         <Brush x:Key="ScheduledTask">#62B6CB</Brush>
         <Brush x:Key="InProgressTask">#BEE9e8</Brush>
         <Brush x:Key="Completed">#CAE9ff</Brush>
         <Brush x:Key="FailedTask">#F5AC72</Brush>
-        
+        <ToolTip x:Key="BtnAddMallTip" Content="Adds a new mall based on your input."></ToolTip>
+        <ToolTip x:Key="CancelTip" Content="Returns to previous page."></ToolTip>
+
         <Style x:Key="BigRoundedButton" TargetType="{x:Type Button}">
             <Setter Property="Width" Value="200"></Setter>
             <Setter Property="Height" Value="200"></Setter>
@@ -73,7 +76,7 @@
 
         <ControlTemplate x:Key="RoundedTextButtonTemplate" TargetType="{x:Type Button}">
 
-            <Grid Height="150" Width="350">
+            <Grid>
                 <Image Source="{TemplateBinding Tag}" Stretch="Fill"/>
                 <Border x:Name="border" CornerRadius="30" BorderBrush="Transparent" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
                     <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
