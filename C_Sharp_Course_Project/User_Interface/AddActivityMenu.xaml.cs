@@ -30,16 +30,6 @@ namespace User_Interface
             m_CurrentRoomID = currentRoomId;
         }
 
-        private void Btn_Save_OnClick(object sender, RoutedEventArgs e)
-        {
-            string descText = Tb_Desc.Text;
-            string catText = Tb_Category.Text;
-            Activity activityToAdd = new Activity(Guid.NewGuid(), m_CurrentRoomID, catText, false, descText, ActivityStatus.Scheduled, DateTime.Now, new DateTime(2020, 12, 30));
-            ActivityManager.GetInstance().AddActivity(activityToAdd, MallManager.GetInstance().CurrentMall.Name);
-            RoomActivities newActivitiesPage = new RoomActivities(m_CurrentRoomID, RoomManager.GetInstance().Rooms[m_CurrentRoomID]);
-            m_CurrentMainWindow.ChangeView(newActivitiesPage, this);
-        }
-
         public void SetMainWindow(MainWindow currentWindow)
         {
             m_CurrentMainWindow = currentWindow;
@@ -55,14 +45,80 @@ namespace User_Interface
             m_CurrentMainWindow.ChangeView(m_PreviousView, this);
         }
 
-        private void Tb_Category_GotFocus(object sender, RoutedEventArgs e)
+
+        private void Tb_Desc_OnGotFocus(object sender, RoutedEventArgs e)
         {
-            Tb_Category.Text = "";
+            if (Tb_Desc.Text == "Activity Description")
+            {
+                Tb_Desc.Text = "";
+            }
         }
 
-        private void Tb_Desc_GotFocus(object sender, RoutedEventArgs e)
+        private void Tb_Desc_OnLostFocus(object sender, RoutedEventArgs e)
         {
-            Tb_Desc.Text = "";
+            if (string.IsNullOrEmpty(Tb_Desc.Text))
+            {
+                Tb_Desc.Text = "Activity Description";
+            }
+        }
+
+        private void Tb_Desc_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            Validate();
+        }
+
+        private void Tb_Category_OnGotFocus(object sender, RoutedEventArgs e)
+        {
+            if (Tb_Category.Text == "Activity Category")
+            {
+                Tb_Category.Text = "";
+            }
+        }
+
+        private void Tb_Category_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(Tb_Category.Text))
+            {
+                Tb_Category.Text = "Activity Category";
+            }
+        }
+
+        private void Tb_Category_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            Validate();
+        }
+
+        public void Validate()
+        {
+            if (Tb_Desc != null && Tb_Category != null && Btn_Add != null)
+            {
+                bool descOk = Tb_Desc.Text != "Activity Description" && !string.IsNullOrEmpty(Tb_Desc.Text);
+                bool catOk = Tb_Category.Text != "Activity Category" && !string.IsNullOrEmpty(Tb_Category.Text);
+                if (descOk && catOk)
+                {
+                    Btn_Add.IsEnabled = true;
+
+                    Lb_DescError.Content = "";
+                    Lb_CategoryError.Content = "";
+                }
+                else
+                {
+                    Btn_Add.IsEnabled = false;
+
+                    Lb_DescError.Content = !descOk ? m_CurrentMainWindow.Strings["InvalidActivityDesc"] : "";
+                    Lb_CategoryError.Content = !catOk ? m_CurrentMainWindow.Strings["InvalidActivityCategory"] : "";
+                }
+            }
+        }
+
+        private void Btn_Add_OnClick(object sender, RoutedEventArgs e)
+        {
+            string descText = Tb_Desc.Text;
+            string catText = Tb_Category.Text;
+            Activity activityToAdd = new Activity(Guid.NewGuid(), m_CurrentRoomID, catText, false, descText, ActivityStatus.Scheduled, DateTime.Now, new DateTime(2020, 12, 30));
+            ActivityManager.GetInstance().AddActivity(activityToAdd, MallManager.GetInstance().CurrentMall.Name);
+            RoomActivities newActivitiesPage = new RoomActivities(m_CurrentRoomID, RoomManager.GetInstance().Rooms[m_CurrentRoomID]);
+            m_CurrentMainWindow.ChangeView(newActivitiesPage, this);
         }
     }
 }

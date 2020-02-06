@@ -6,6 +6,84 @@
              xmlns:local="clr-namespace:User_Interface"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="1000" Background="White">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="4*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Content="Create Activity" Grid.Row="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="50" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" Width="584" Margin="208,55,208,55" Height="109"/>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label x:Name="Lb_DescError" FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Light" FontSize="15" Foreground="{StaticResource FailedTask}" BorderBrush="Transparent"/>
+            <TextBox x:Name="Tb_Desc" Height="32" TextWrapping="Wrap" Text="Activity Description" Width="384" Padding="5" VerticalContentAlignment="Center" BorderBrush="Transparent" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="15" Foreground="{StaticResource TextboxPrompt}" GotFocus="Tb_Desc_OnGotFocus" LostFocus="Tb_Desc_OnLostFocus" TextChanged="Tb_Desc_OnTextChanged" >
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="3"/>
+                    </Style>
+                </TextBox.Resources>
+                <TextBox.Effect>
+                    <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+                </TextBox.Effect>
+            </TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Label x:Name="Lb_CategoryError" FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Light" FontSize="15" Foreground="{StaticResource FailedTask}" BorderBrush="Transparent"/>
+            <TextBox x:Name="Tb_Category" Height="32" TextWrapping="Wrap" Padding="5" VerticalContentAlignment="Center" Text="Activity Category" Canvas.Top="361" Width="384" BorderBrush="Transparent" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="15" Foreground="{StaticResource TextboxPrompt}" GotFocus="Tb_Category_OnGotFocus" LostFocus="Tb_Category_OnLostFocus" TextChanged="Tb_Category_OnTextChanged" >
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="3"/>
+                    </Style>
+                </TextBox.Resources>
+                <TextBox.Effect>
+                    <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+                </TextBox.Effect>
+            </TextBox>
+        </StackPanel>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Button Grid.Row="0" Grid.Column="1" x:Name="Btn_Add" VerticalAlignment="Center" HorizontalAlignment="Center" Width="186" Height="47" Click="Btn_Add_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center" IsEnabled="False">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Effect>
+                    <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+                </Button.Effect>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,5,0">
+                    <Image Source="Resources/Icons/Add_Icon.png" VerticalAlignment="Center" Margin="0,0,5,0" Height="40"></Image>
+                    <TextBlock Text="Add" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Button Grid.Row="0" Grid.Column="2" x:Name="Btn_Cancel" VerticalAlignment="Center" HorizontalAlignment="Center" Width="176" Height="47" Click="Btn_Cancel_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource CancelTip}">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Effect>
+                    <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+                </Button.Effect>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Image Source="Resources/Icons/Cancel_Icon.png" VerticalAlignment="Center" Margin="0,0,5,0" Height="40"></Image>
+                    <TextBlock Text="Cancel" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Button>
+        </Grid>
+    </Grid>
+    <!-- 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="85*"></RowDefinition>
@@ -27,5 +105,5 @@
                 </StackPanel>
             </StackPanel>
         </Grid>
-    </Grid>
+    </Grid> -->
 </UserControl>

@@ -198,50 +198,11 @@ namespace User_Interface
                 {
                     Btn_Add.IsEnabled = false;
 
-                    if (!nameOk)
-                    {
-                        Lb_NameError.Content = m_CurrentMainWindow.Strings["RoomNameInvalid"];
-                    }
-                    else
-                    {
-                        Lb_NameError.Content = "";
-                    }
-
-                    if (!descOk)
-                    {
-                        Lb_DescError.Content = m_CurrentMainWindow.Strings["RoomDescInvalid"];
-                    }
-                    else
-                    {
-                        Lb_DescError.Content = "";
-                    }
-
-                    if (!typeOk)
-                    {
-                        Lb_TypeError.Content = m_CurrentMainWindow.Strings["RoomTypeInvalid"];
-                    }
-                    else
-                    {
-                        Lb_TypeError.Content = "";
-                    }
-
-                    if (!numberOk)
-                    {
-                        Lb_RoomNumberError.Content = m_CurrentMainWindow.Strings["MustBeANumberError"];
-                    }
-                    else
-                    {
-                        Lb_RoomNumberError.Content = "";
-                    }
-
-                    if (!floorOk)
-                    {
-                        Lb_FloorNumberError.Content = m_CurrentMainWindow.Strings["MustBeANumberError"];
-                    }
-                    else
-                    {
-                        Lb_FloorNumberError.Content = "";
-                    }
+                    Lb_NameError.Content = !nameOk ? m_CurrentMainWindow.Strings["RoomNameInvalid"] : "";
+                    Lb_DescError.Content = !descOk ? m_CurrentMainWindow.Strings["RoomDescInvalid"] : "";
+                    Lb_TypeError.Content = !typeOk ? m_CurrentMainWindow.Strings["RoomTypeInvalid"] : "";
+                    Lb_RoomNumberError.Content = !numberOk ? m_CurrentMainWindow.Strings["MustBeANumberError"] : "";
+                    Lb_FloorNumberError.Content = !floorOk ? m_CurrentMainWindow.Strings["MustBeANumberError"] : "";
                 }
             }
         }

@@ -8,6 +8,8 @@
     <system:String x:Key="RoomDescInvalid">Invalid room description!</system:String>
     <system:String x:Key="RoomTypeInvalid">Invalid room type!</system:String>
     <system:String x:Key="MustBeANumberError">This must be a number!</system:String>
-    
+    <system:String x:Key="InvalidActivityDesc">Invalid activity description!</system:String>
+    <system:String x:Key="InvalidActivityCategory">Invalid activity category!</system:String>
+
 
 </ResourceDictionary>
