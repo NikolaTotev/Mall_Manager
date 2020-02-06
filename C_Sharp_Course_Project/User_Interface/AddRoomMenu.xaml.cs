@@ -188,6 +188,11 @@ namespace User_Interface
                 if (nameOk && descOk && typeOk && numberOk && floorOk)
                 {
                     Btn_Add.IsEnabled = true;
+                    Lb_NameError.Content = "";
+                    Lb_DescError.Content = "";
+                    Lb_TypeError.Content = "";
+                    Lb_RoomNumberError.Content = "";
+                    Lb_FloorNumberError.Content = "";
                 }
                 else
                 {

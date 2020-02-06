@@ -47,7 +47,8 @@
 
                 <TextBlock  Grid.Column="0" TextAlignment="Center" VerticalAlignment="Center" Text="Floor: " FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Light" FontSize="35" Foreground="{StaticResource NavyBlueBase}" ></TextBlock>
                 <TextBlock  Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center" Text="Store number:" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Light" FontSize="35" Foreground="{StaticResource NavyBlueBase}" ></TextBlock>
-                <ComboBox Grid.Column="1" Margin="20"></ComboBox>
+                <ComboBox Grid.Column="1" Margin="20">
+                  </ComboBox>
                 <ComboBox Grid.Column="3" Margin="20"></ComboBox>
 
             </Grid>
