@@ -23,6 +23,7 @@
         <ToolTip x:Key="BtnOpenRentalSpaces" Content="Shows all rental spaces for the mall."></ToolTip>
         <ToolTip x:Key="BtnOpenMallActivities`" Content="Opens list of activities for the mall."></ToolTip>
         <ToolTip x:Key="BtnOpenMallStats" Content="Opens statistics menu for the mall."></ToolTip>
+        <DropShadowEffect x:Key="DropShadow" ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
 
         <Style x:Key="BigRoundedButton" TargetType="{x:Type Button}">
             <Setter Property="Width" Value="200"></Setter>

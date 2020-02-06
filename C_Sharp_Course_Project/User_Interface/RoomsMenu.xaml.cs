@@ -69,13 +69,28 @@ namespace User_Interface
             {
                 if (Lv_RentalSpaces.SelectedItem is ListViewItem currentSelection)
                 {
-                    RoomPage room = new RoomPage((Guid)currentSelection.Tag);
-                    room.SetMainWindow(m_CurrentMainWindow);
-                    room.SetPreviousView(this);
-                    m_CurrentMainWindow.ChangeView(room, this);
+                    SpacePage space = new SpacePage((Guid)currentSelection.Tag);
+                    space.SetMainWindow(m_CurrentMainWindow);
+                    space.SetPreviousView(this);
+                    m_CurrentMainWindow.ChangeView(space, this);
                 }
                 
             }
+        }
+
+        private void Btn_DeleteRentalSpace_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Btn_SelectAll_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Btn_DeselectAllSelected_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

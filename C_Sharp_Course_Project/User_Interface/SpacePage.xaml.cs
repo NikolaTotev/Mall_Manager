@@ -19,16 +19,16 @@ namespace User_Interface
     /// <summary>
     /// Interaction logic for UserControl1.xaml
     /// </summary>
-    public partial class RoomPage : UserControl, IAppView
+    public partial class SpacePage : UserControl, IAppView
     {
         private MainWindow m_CurrentMainWindow;
         private IAppView m_PreviousView;
-        private readonly Guid m_CurrentRoomID;
+        private readonly Guid m_CurrentRoomId;
         private readonly Room m_CurrentRoom;
-        public RoomPage(Guid currentRoomId)
+        public SpacePage(Guid currentRoomId)
         {
             InitializeComponent();
-            m_CurrentRoomID = currentRoomId;
+            m_CurrentRoomId = currentRoomId;
             m_CurrentRoom = RoomManager.GetInstance().Rooms[currentRoomId];
             Lb_RoomName.Content = m_CurrentRoom.Name;
         }
@@ -45,7 +45,7 @@ namespace User_Interface
 
         private void Btn_Activities_OnClick(object sender, RoutedEventArgs e)
         {
-            RoomActivities activitiesPageToLoad = new RoomActivities(m_CurrentRoomID, m_CurrentRoom);
+            RoomActivities activitiesPageToLoad = new RoomActivities(m_CurrentRoomId, m_CurrentRoom);
             activitiesPageToLoad.SetMainWindow(m_CurrentMainWindow);
             m_CurrentMainWindow.ChangeView(activitiesPageToLoad,this);
         }

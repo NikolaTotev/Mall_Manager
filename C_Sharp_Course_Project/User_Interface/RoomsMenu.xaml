@@ -8,14 +8,110 @@
              d:DesignHeight="650" d:DesignWidth="1000" Background="White">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100*"></RowDefinition>
-            <RowDefinition Height="50*"></RowDefinition>
-            <RowDefinition Height="500*"></RowDefinition>
+            <RowDefinition Height="85*"></RowDefinition>
+            <RowDefinition Height="60*"></RowDefinition>
+            <RowDefinition Height="450*"></RowDefinition>
+            <RowDefinition Height="60*"></RowDefinition>
+            <RowDefinition Height="20*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label x:Name="Lbl_MallName" Content="Some mall name" Grid.Row="0" Background="{StaticResource NavyBlueBase}"  FontSize="45" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" Foreground="AliceBlue" FontWeight="SemiBold" Margin="0,0,0,10" Padding="10,15,0,0" />
-        <Button x:Name="Btn_AddRentalSpace" Content="Add" Grid.Row="1" FontSize="30" Click="Btn_AddRentalSpace_Click" Height="50" Margin="0,0,0,499.6" Grid.RowSpan="2" VerticalAlignment="Bottom"/>
-        <ListView x:Name="Lv_RentalSpaces" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" Grid.Row="2" SelectionChanged="Lv_RentalSpaces_SelectionChanged">
-           
+        <Label x:Name="Lbl_MallName" Content="/Mall Name/" VerticalContentAlignment="Center" Grid.Row="0" Background="{StaticResource NavyBlueBase}"  FontSize="45" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" Foreground="AliceBlue" FontWeight="SemiBold" Margin="0,0,0,10" Padding="20,0,0,0" >
+            <Label.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="0,0,30,30"></Setter>
+                    <Setter Property="Effect" Value="{StaticResource DropShadow}"></Setter>
+                </Style>
+            </Label.Resources>
+        </Label>
+
+        <Border BorderBrush="Transparent" Background="White" BorderThickness="2" VerticalAlignment="Center" Effect="{StaticResource DropShadow}" CornerRadius="10" Grid.Row="1" Padding="3"  Margin="300,0,300,0">
+            <StackPanel Margin="5"
+                        Orientation="Horizontal">
+
+                <Image Source="Resources/Icons/Search_Icon.png" Height="18" Opacity="0.5"/>
+                <TextBox  x:Name="Tb_Search" BorderBrush="Transparent" Text="Search"  Margin="3 0 0 0" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="15" Foreground="{StaticResource TextboxPrompt}" Width="359"/>
+
+            </StackPanel>
+
+
+        </Border>
+
+        <ListView x:Name="Lv_RentalSpaces" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" Grid.Row="2" SelectionChanged="Lv_RentalSpaces_SelectionChanged" Margin="0,0,0,20">
+            <ListView.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20"></Setter>
+                </Style>
+            </ListView.Resources>
+            <ListView.Effect>
+                <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+            </ListView.Effect>
         </ListView>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".1*"></ColumnDefinition>
+                <ColumnDefinition Width=".5*"></ColumnDefinition>
+                <ColumnDefinition Width=".5*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1.3*"></ColumnDefinition>
+                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+
+                <ColumnDefinition Width="1.3*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="Btn_AddRentalSpace" Grid.Column="4" Click="Btn_AddRentalSpace_Click"  Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Effect>
+                    <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+                </Button.Effect>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,5,0">
+                    <Image Source="Resources/Icons/Add_Icon.png" VerticalAlignment="Center" Margin="0,0,5,0" Height="40"></Image>
+                    <TextBlock Text="Add" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="Btn_DeleteRentalSpace" Grid.Column="6" Click="Btn_DeleteRentalSpace_OnClick"  Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Effect>
+                    <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+                </Button.Effect>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,5,0">
+                    <Image Source="Resources/Icons/Delete_Icon.png" VerticalAlignment="Center" Margin="0,0,5,0" Height="40"></Image>
+                    <TextBlock Text="Delete" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="Btn_SelectAll" Grid.Column="1" Click="Btn_SelectAll_OnClick" Margin="10,5,10,0" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Effect>
+                    <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+                </Button.Effect>
+                <Image Source="Resources/Icons/SelectAll_Icon.png" VerticalAlignment="Center" Margin="0,0,0,0" Height="40"></Image>
+            </Button>
+
+            <Button x:Name="Btn_DeselectAllSelected" Grid.Column="2" Click="Btn_DeselectAllSelected_OnClick" Margin="10,5,10,0" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Effect>
+                    <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+                </Button.Effect>
+                <Image Source="Resources/Icons/Deselect_Icon.png" VerticalAlignment="Center" Margin="0,0,0,0" Height="40"></Image>
+            </Button>
+
+        </Grid>
+
     </Grid>
 </UserControl>

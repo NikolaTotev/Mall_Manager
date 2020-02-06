@@ -92,8 +92,8 @@
     <Compile Include="TextButton.xaml.cs">
       <DependentUpon>TextButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RoomPage.xaml.cs">
-      <DependentUpon>RoomPage.xaml</DependentUpon>
+    <Compile Include="SpacePage.xaml.cs">
+      <DependentUpon>SpacePage.xaml</DependentUpon>
     </Compile>
     <Page Include="AddActivityMenu.xaml">
       <SubType>Designer</SubType>
@@ -154,7 +154,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="RoomPage.xaml">
+    <Page Include="SpacePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -224,6 +224,9 @@
       <Project>{933c7b3f-b72b-4c30-b667-29de72550a29}</Project>
       <Name>Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Search_Icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
