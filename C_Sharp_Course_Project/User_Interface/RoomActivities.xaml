@@ -11,18 +11,31 @@
             <RowDefinition Height="85*"></RowDefinition>
             <RowDefinition Height="500*"></RowDefinition>
         </Grid.RowDefinitions>
+        <Label x:Name="Lbl_MallName" Content="Space name - Space Activities" Grid.Row="0" VerticalContentAlignment="Center" Background="{StaticResource NavyBlueBase}"  FontSize="45" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" Foreground="AliceBlue" FontWeight="SemiBold" Margin="0,0,0,10" Padding="25,0,0,0" Effect="{StaticResource DropShadow}" >
+            <Label.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="0,0,30,30"></Setter>
+                </Style>
+            </Label.Resources>
+        </Label>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1.9*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Rectangle Grid.Column="1" Fill="Gainsboro" Margin="27,20,27,20"></Rectangle>
+            <Border Grid.Column="1" Background="White" Margin="27,20,27,20" Effect="{StaticResource DropShadow}"  CornerRadius="70"></Border>
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2.5*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <ListView x:Name="Lv_Activities" Grid.Column="0" Grid.Row="0" Background="Gainsboro" Margin="20"></ListView>
+                <ListView x:Name="Lv_Activities" Grid.Column="0" Grid.Row="0" Background="White" Effect="{StaticResource DropShadow}"  Margin="20">
+                    <ListView.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="15"></Setter>
+                        </Style>
+                    </ListView.Resources>
+                </ListView>
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
@@ -39,29 +52,82 @@
                             <RowDefinition Height="*"></RowDefinition>
                             <RowDefinition Height="*"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Button x:Name="Btn_SelectAll" Click="Btn_SelectAll_OnClick" Margin="0,0,20,25" Grid.Row="0" Grid.Column="0" Background="White">
-                            <Image Source="Resources/Icons/SelectAll_Icon.png"></Image>
-                        </Button>
-                        <Button x:Name="Btn_MarkAsScheduled" Click="Btn_MarkAsScheduled_OnClick" Margin="0,0,20,25" Grid.Row="0" Grid.Column="1" Background="White">
-                            <Rectangle  Height="35" Width="35" Fill="{StaticResource ScheduledTask}"/>
+
+                        <Button x:Name="Btn_SelectAll" Grid.Row="0" Grid.Column="0" Click="Btn_SelectAll_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+                            <Button.Effect>
+                                <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+                            </Button.Effect>
+                            <Image Source="Resources/Icons/SelectAll_Icon.png" VerticalAlignment="Center" Margin="0,0,0,0" Height="40"></Image>
                         </Button>
 
-                        <Button x:Name="Btn_MarkAsInProgress" Click="Btn_MarkAsInProgress_OnClick" Margin="0,0,20,25" Grid.Row="0" Grid.Column="2" Background="White">
-                            <Rectangle  Height="35" Width="35" Fill="{StaticResource InProgressTask}"/>
+                        <Button x:Name="Btn_MarkAsScheduled" Grid.Row="0" Grid.Column="1" Click="Btn_MarkAsScheduled_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+                            <Button.Effect>
+                                <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+                            </Button.Effect>
+                            <Rectangle  Height="30" Width="30" Fill="{StaticResource ScheduledTask}"/>
                         </Button>
 
-                        <Button x:Name="Btn_Deselect" Click="Btn_Deselect_OnClick" Margin="0,0,20,25" Grid.Row="1" Grid.Column="0" Background="White">
-                            <Image Source="Resources/Icons/Deselect_Icon.png"></Image>
+
+                        <Button x:Name="Btn_MarkAsInProgress" Grid.Row="0" Grid.Column="2" Click="Btn_MarkAsInProgress_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+                            <Button.Effect>
+                                <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+                            </Button.Effect>
+                            <Rectangle  Height="30" Width="30" Fill="{StaticResource InProgressTask}"/>
                         </Button>
 
-                        <Button x:Name="Btn_MarkAsCompleted" Click="Btn_MarkAsCompleted_OnClick" Margin="0,0,20,25" Grid.Row="1" Grid.Column="1" Background="White">
-                            <Rectangle  Height="35" Width="35" Fill="{StaticResource Completed}"/>
+                        <Button x:Name="Btn_Deselect" Grid.Row="1" Grid.Column="0" Click="Btn_Deselect_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+                            <Button.Effect>
+                                <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+                            </Button.Effect>
+                            <Image Source="Resources/Icons/Deselect_Icon.png" VerticalAlignment="Center" Margin="0,0,0,0" Height="40"></Image>
                         </Button>
 
-                        <Button x:Name="Btn_MarkAsFailed" Click="Btn_MarkAsFailed_OnClick" Margin="0,0,20,25" Grid.Row="1" Grid.Column="2" Background="White" >
-                            <Rectangle  Height="35" Width="35" Fill="{StaticResource FailedTask}"/>
+                        <Button x:Name="Btn_MarkAsCompleted" Grid.Row="1" Grid.Column="1" Click="Btn_MarkAsCompleted_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+                            <Button.Effect>
+                                <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+                            </Button.Effect>
+                            <Rectangle  Height="30" Width="30" Fill="{StaticResource Completed}"/>
                         </Button>
-                    </Grid>
+
+
+                        <Button x:Name="Btn_MarkAsFailed" Grid.Row="1" Grid.Column="2" Click="Btn_MarkAsFailed_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+                            <Button.Effect>
+                                <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+                            </Button.Effect>
+                            <Rectangle  Height="30" Width="30" Fill="{StaticResource FailedTask}"/>
+                        </Button>
+
+                      </Grid>
                     <Grid Grid.Column="1" Margin="0,0,20,25">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -71,14 +137,58 @@
                             <RowDefinition Height="*"></RowDefinition>
                             <RowDefinition Height="*"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Button x:Name="Btn_Add"    Click="Btn_Add_OnClick"    Margin="10" Background="White" Content="Add" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}"></Button>
-                        <Button x:Name="Btn_Stats"  Click="Btn_Stats_OnClick"  Margin="10" Grid.Row="0" Grid.Column="1" Background="White" Content="Stats" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}"></Button>
-                        <Button x:Name="Btn_Delete" Click="Btn_Delete_OnClick" Margin="10" Grid.Row="1" Grid.Column="0" Background="White" Content="Delete" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}"></Button>
+
+                        <Button Grid.Row="0" Grid.Column="0" x:Name="Btn_Add" VerticalAlignment="Center" HorizontalAlignment="Center" Width="176" Height="47" Click="Btn_Add_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource CancelTip}">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+                            <Button.Effect>
+                                <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+                            </Button.Effect>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Image Source="Resources/Icons/Add_Icon.png" VerticalAlignment="Center" Margin="0,0,5,0" Height="40"></Image>
+                                <TextBlock Text="Add" VerticalAlignment="Center"></TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Grid.Row="0" Grid.Column="1" x:Name="Btn_Stats" VerticalAlignment="Center" HorizontalAlignment="Center" Width="176" Height="47" Click="Btn_Stats_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource CancelTip}">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+                            <Button.Effect>
+                                <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+                            </Button.Effect>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Image Source="Resources/Icons/Statistics_Icon.png" VerticalAlignment="Center" Margin="0,0,5,0" Height="40"></Image>
+                                <TextBlock Text="Stats" VerticalAlignment="Center"></TextBlock>
+                            </StackPanel>
+                        </Button>
+
+
+                        <Button Grid.Row="1" Grid.Column="0" x:Name="Btn_Delete" VerticalAlignment="Center" HorizontalAlignment="Center" Width="176" Height="47" Click="Btn_Delete_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource CancelTip}">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+                            <Button.Effect>
+                                <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+                            </Button.Effect>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Image Source="Resources/Icons/Delete_Icon.png" VerticalAlignment="Center" Margin="0,0,5,0" Height="40"></Image>
+                                <TextBlock Text="Delete" VerticalAlignment="Center"></TextBlock>
+                            </StackPanel>
+                        </Button>
+
+
+
                     </Grid>
                 </Grid>
             </Grid>
         </Grid>
-        <Label x:Name="Lbl_MallName" Content="Space name - Space Activities" Grid.Row="0" Background="{StaticResource NavyBlueBase}"  FontSize="45" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" Foreground="AliceBlue" FontWeight="SemiBold" Margin="0,0,0,10" Padding="20,15,0,0" />
-
     </Grid>
 </UserControl>
