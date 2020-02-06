@@ -46,12 +46,32 @@ namespace User_Interface
 
         private void Btn_Add_OnClick(object sender, RoutedEventArgs e)
         {
-            Mall mallToAdd = new Mall(Guid.NewGuid(), TxtB_MallName.Text, TxtB_MallDesc.Text);
+            Mall mallToAdd = new Mall(Guid.NewGuid(), Tb_MallName.Text, Tb_MallDesc.Text);
             MallManager.GetInstance().AddMall(mallToAdd);
             Dashboard newDash = new Dashboard();
             newDash.SetPreviousView(this);
             newDash.SetMainWindow(m_CurrentMainWindow);
             m_CurrentMainWindow.ChangeView(newDash, this);
+        }
+
+        private void Tb_Name_GotFocus(object sender, RoutedEventArgs e)
+        {
+            Tb_MallName.Text = "";
+        }
+
+        private void Tb_Desc_GotFocus(object sender, RoutedEventArgs e)
+        {
+            Tb_MallDesc.Text = "";
+        }
+
+        private void Tb_Name_LostFocus(object sender, RoutedEventArgs e)
+        {
+            Tb_MallName.Text = "Mall name";
+        }
+
+        private void Tb_MallDesc_LostFocus(object sender, RoutedEventArgs e)
+        {
+            Tb_MallDesc.Text = "Mall description";
         }
     }
 }
