@@ -11,15 +11,48 @@
             <RowDefinition Height="85*"></RowDefinition>
             <RowDefinition Height="500*"></RowDefinition>
         </Grid.RowDefinitions>
+        <Label x:Name="Lb_RoomName" Content="Space Name" Grid.Row="0" VerticalContentAlignment="Center" Background="{StaticResource NavyBlueBase}"  FontSize="45" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" Foreground="AliceBlue" FontWeight="SemiBold" Margin="0,0,0,10" Padding="25,0,0,0" >
+            <Label.Resources>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="0,0,30,30"></Setter>
+            </Style>
+        </Label.Resources>
+        </Label>
+
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button x:Name="Btn_Activities" Margin="100" Grid.Column="0" Content="Activities" Click="Btn_Activities_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}"></Button>
-            <Button x:Name="Btn_SpaceInfo" Margin="100" Grid.Column="1" Content="Space Info" Click="Btn_SpaceInfo_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}"></Button>
+            
+            <Button x:Name="Btn_Activities" Margin="160,0,0,0" Grid.Column="0" BorderBrush="Transparent"  VerticalAlignment="Center" HorizontalAlignment="Center" Padding="45,10,45,5"  Grid.Row="1"   Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Light" FontSize="35" Foreground="{StaticResource NavyBlueBase}"  Width="260" Height="260">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="70"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Effect>
+                    <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+                </Button.Effect>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Image Source="Resources/Icons/Event_Icon.png" VerticalAlignment="Center"  Height="120"></Image>
+                    <TextBlock Text="Activities" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,10,0,0"  TextAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Button>
+            <Button x:Name="Btn_SpaceInfo" Margin="-160,0,0,0" Grid.Column="1" BorderBrush="Transparent"  VerticalAlignment="Center" HorizontalAlignment="Center" Padding="45,10,45,5"  Grid.Row="1"   Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Light" FontSize="35" Foreground="{StaticResource NavyBlueBase}" Width="260" Height="260">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="70"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Effect>
+                    <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+                </Button.Effect>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Image Source="Resources/Icons/Info_Icon.png" VerticalAlignment="Center"  Height="120"></Image>
+                    <TextBlock Text="Space Info" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,10,0,0"  TextAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Button>
         </Grid>
-        <Label x:Name="Lb_RoomName" Content="Space Name" Grid.Row="0" Background="{StaticResource NavyBlueBase}"  FontSize="45" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" Foreground="AliceBlue" FontWeight="SemiBold" Margin="0,0,0,10" Padding="20,15,0,0" />
-
-</Grid>
+    </Grid>
 </UserControl>
