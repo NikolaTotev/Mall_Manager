@@ -17,7 +17,7 @@
         <Label Content="Create mall" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Canvas.Left="302" Canvas.Top="116" HorizontalContentAlignment="Center" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="50" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" Width="384" Margin="308,82,308,65"/>
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label Content="Please name your mall." FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Light" FontSize="15" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent"/>
-            <TextBox x:Name="Tb_MallName" Height="32" TextWrapping="Wrap" Text="Mall Name" Width="384" Padding="5" VerticalContentAlignment="Center" BorderBrush="Transparent" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="15" Foreground="{StaticResource TextboxPrompt}" GotFocus="Tb_Name_GotFocus" LostFocus="Tb_Name_LostFocus" >
+            <TextBox x:Name="Tb_MallName" Height="32" TextWrapping="Wrap" Text="Mall Name" Width="384" Padding="5" VerticalContentAlignment="Center" BorderBrush="Transparent" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="15" Foreground="{StaticResource TextboxPrompt}" GotFocus="Tb_Name_GotFocus" LostFocus="Tb_Name_LostFocus" TextChanged="Tb_MallName_TextChanged" >
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="3"/>
@@ -30,7 +30,7 @@
         </StackPanel>
         <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Label Content="Write a short description of the mall." FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Light" FontSize="15" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent"/>
-            <TextBox x:Name="Tb_MallDesc" Height="32" TextWrapping="Wrap" Padding="5" VerticalContentAlignment="Center" Text="Mall Desc" Canvas.Top="361" Width="384" BorderBrush="Transparent" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="15" Foreground="{StaticResource TextboxPrompt}" GotFocus="Tb_Desc_GotFocus" LostFocus="Tb_MallDesc_LostFocus" >
+            <TextBox x:Name="Tb_MallDesc" Height="32" TextWrapping="Wrap" Padding="5" VerticalContentAlignment="Center" Text="Mall Desc" Canvas.Top="361" Width="384" BorderBrush="Transparent" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="15" Foreground="{StaticResource TextboxPrompt}" GotFocus="Tb_Desc_GotFocus" LostFocus="Tb_MallDesc_LostFocus" TextChanged="Tb_MallDesc_TextChanged" >
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="3"/>
@@ -52,7 +52,7 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Button Grid.Row="0" Grid.Column="1" x:Name="Btn_Add" VerticalAlignment="Center" HorizontalAlignment="Center" Width="186" Height="47" Click="Btn_Add_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
+            <Button Grid.Row="0" Grid.Column="1" x:Name="Btn_Add" VerticalAlignment="Center" HorizontalAlignment="Center" Width="186" Height="47" Click="Btn_Add_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center" IsEnabled="False">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>

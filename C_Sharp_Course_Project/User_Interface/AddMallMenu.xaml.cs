@@ -40,8 +40,8 @@ namespace User_Interface
 
         private void Btn_Cancel_OnClick(object sender, RoutedEventArgs e)
         {
-            
-            m_CurrentMainWindow.ChangeView(m_PreviousElement,this);
+
+            m_CurrentMainWindow.ChangeView(m_PreviousElement, this);
         }
 
         private void Btn_Add_OnClick(object sender, RoutedEventArgs e)
@@ -66,12 +66,42 @@ namespace User_Interface
 
         private void Tb_Name_LostFocus(object sender, RoutedEventArgs e)
         {
-            Tb_MallName.Text = "Mall name";
+            if (string.IsNullOrEmpty(Tb_MallName.Text))
+            {
+                Tb_MallName.Text = "Mall description";
+            }
         }
 
         private void Tb_MallDesc_LostFocus(object sender, RoutedEventArgs e)
         {
-            Tb_MallDesc.Text = "Mall description";
+            if (string.IsNullOrEmpty(Tb_MallDesc.Text))
+            {
+                Tb_MallDesc.Text = "Mall description";
+            }
+        }
+
+        private void Tb_MallName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ValidateInput();
+        }
+
+        private void Tb_MallDesc_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ValidateInput();
+        }
+        private void ValidateInput()
+        {
+            if (Tb_MallDesc != null && Tb_MallName != null && Btn_Add != null)
+            {
+                if (Tb_MallName.Text != "Mall name" && !string.IsNullOrEmpty(Tb_MallName.Text) && Tb_MallDesc.Text != "Mall description" && !string.IsNullOrEmpty(Tb_MallDesc.Text))
+                {
+                    Btn_Add.IsEnabled = true;
+                }
+                else
+                {
+                    Btn_Add.IsEnabled = false;
+                }
+            }
         }
     }
 }
