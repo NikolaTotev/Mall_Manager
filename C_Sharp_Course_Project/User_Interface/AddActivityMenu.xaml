@@ -9,12 +9,13 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="4*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="2.5*"></RowDefinition>
+            <RowDefinition Height="2.5*"></RowDefinition>
+            <RowDefinition Height="7*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
-            <RowDefinition Height="2*"></RowDefinition>
-            <RowDefinition Height="4*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Content="Create Activity" Grid.Row="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="50" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" Width="584" Margin="208,55,208,55" Height="109"/>
+        <Label Content="Create Activity" Grid.Row="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="50" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" Width="584" Height="109"/>
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label x:Name="Lb_DescError" FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Light" FontSize="15" Foreground="{StaticResource FailedTask}" BorderBrush="Transparent"/>
             <TextBox x:Name="Tb_Desc" Height="32" TextWrapping="Wrap" Text="Activity Description" Width="384" Padding="5" VerticalContentAlignment="Center" BorderBrush="Transparent" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="15" Foreground="{StaticResource TextboxPrompt}" GotFocus="Tb_Desc_OnGotFocus" LostFocus="Tb_Desc_OnLostFocus" TextChanged="Tb_Desc_OnTextChanged" >
@@ -36,7 +37,9 @@
             <ComboBox x:Name="Cmb_ActivityCat" Width="384"  HorizontalAlignment="Center"  HorizontalContentAlignment="Center" SelectionChanged="Cmb_ActivityCat_OnSelectionChanged"/>
         </StackPanel>
 
-        <Grid Grid.Row="3">
+
+
+        <Grid Grid.Row="3" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -44,7 +47,29 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center">
+                <Label x:Name="Lb_StartDateLabel"  Margin="0,10,0,0" Content="Start date" HorizontalContentAlignment="Center" FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Light" FontSize="15" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent"/>
+                <Calendar x:Name="Cal_StartDate" VerticalAlignment="Center" SelectedDatesChanged="Cal_StartDate_OnSelectedDatesChanged" HorizontalAlignment="Center" Margin="20,0,20,0" BorderBrush="{StaticResource OrangeAccent}" FontFamily="{StaticResource Montserrat}" FontWeight="Bold" Foreground="{StaticResource NavyBlueBase}" ></Calendar>
+            </StackPanel>
+            <StackPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Center">
+                <Label x:Name="Lb_EndDateLabel" Margin="0,10,0,0" Content="End date" HorizontalContentAlignment="Center" FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Light" FontSize="15" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent"/>
+                <Calendar  x:Name="Cal_EndDate" VerticalAlignment="Center" SelectedDatesChanged="Cal_EndDate_OnSelectedDatesChanged" HorizontalAlignment="Center" Margin="20,0,20,0" BorderBrush="{StaticResource OrangeAccent}" FontFamily="{StaticResource Montserrat}" FontWeight="Bold" Foreground="{StaticResource NavyBlueBase}"/>
+            </StackPanel>
+            <Label x:Name="Lb_DateError" Grid.Row="1" Grid.ColumnSpan="4" HorizontalContentAlignment="Center" FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Regular" FontSize="20" Foreground="{StaticResource FailedTask}" BorderBrush="Transparent"/>
+
+        </Grid>
+
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <Button Grid.Row="0" Template="{StaticResource OrangeHighLight}" Grid.Column="1" x:Name="Btn_Add" VerticalAlignment="Center" HorizontalAlignment="Center" Width="186" Height="47" Click="Btn_Add_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center" IsEnabled="False">
@@ -62,27 +87,4 @@
             </Button>
         </Grid>
     </Grid>
-    <!-- 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="85*"></RowDefinition>
-            <RowDefinition Height="500*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Label x:Name="Lbl_MallName" Content="Space name - Add Activity" Grid.Row="0" Background="{StaticResource NavyBlueBase}"  FontSize="45" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" Foreground="AliceBlue" FontWeight="SemiBold" Margin="0,0,0,10" Padding="20,15,0,0" />
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="2*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBox x:Name="Tb_Desc" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20"  Padding="100,0,100,0" Grid.Column="1" Text="Description" GotFocus="Tb_Desc_GotFocus"></TextBox>
-                <TextBox x:Name="Tb_Category" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20" Padding="100,0,100,0" Grid.Column="1" Text="Category" GotFocus="Tb_Category_GotFocus"></TextBox>
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <Button x:Name="Btn_Save" Click="Btn_Save_OnClick" Margin="10" Padding="30,10,30,10" Content="Save" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}"></Button>
-                    <Button x:Name="Btn_Cancel" Click="Btn_Cancel_OnClick" Margin="10" Padding="30,10,30,10" Content="CancelTip" Background="White"  FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}"></Button>
-                </StackPanel>
-            </StackPanel>
-        </Grid>
-    </Grid> -->
 </UserControl>

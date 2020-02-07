@@ -25,6 +25,7 @@ namespace User_Interface
         private IAppView m_PreviousView;
         private Guid m_CurrentRoomID;
         private string m_CurrentCategory;
+        private bool m_ValidDate;
         public AddActivityMenu(Guid currentRoomId)
         {
             InitializeComponent();
@@ -78,7 +79,7 @@ namespace User_Interface
             {
                 bool descOk = Tb_Desc.Text != "Activity Description" && !string.IsNullOrEmpty(Tb_Desc.Text);
                 bool catOk = !string.IsNullOrEmpty(m_CurrentCategory);
-                if (descOk && catOk)
+                if (descOk && catOk && m_ValidDate)
                 {
                     Btn_Add.IsEnabled = true;
 
@@ -98,7 +99,7 @@ namespace User_Interface
         private void Btn_Add_OnClick(object sender, RoutedEventArgs e)
         {
             string descText = Tb_Desc.Text;
-            Activity activityToAdd = new Activity(Guid.NewGuid(), m_CurrentRoomID, m_CurrentCategory, false, descText, ActivityStatus.Scheduled, DateTime.Now, new DateTime(2020, 12, 30));
+            Activity activityToAdd = new Activity(Guid.NewGuid(), m_CurrentRoomID, m_CurrentCategory, false, descText, ActivityStatus.Scheduled, Cal_StartDate.DisplayDate, Cal_EndDate.DisplayDate);
             ActivityManager.GetInstance().AddActivity(activityToAdd, MallManager.GetInstance().CurrentMall.Name);
             RoomActivities newActivitiesPage = new RoomActivities(m_CurrentRoomID, RoomManager.GetInstance().Rooms[m_CurrentRoomID]);
             m_CurrentMainWindow.ChangeView(newActivitiesPage, this);
@@ -108,5 +109,33 @@ namespace User_Interface
         {
             m_CurrentCategory = Cmb_ActivityCat.SelectedItem.ToString();
         }
+
+        private void Cal_StartDate_OnSelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ValidateDate();
+        }
+
+        private void Cal_EndDate_OnSelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ValidateDate();
+        }
+        
+        private void ValidateDate()
+        {
+            if (Cal_StartDate.SelectedDate <= Cal_EndDate.SelectedDate)
+            {
+                m_ValidDate = true;
+                Lb_DateError.Content = "";
+                Validate();
+            }
+            else
+            {
+                m_ValidDate = false;
+                Lb_DateError.Content = "Date is invalid!";
+                Validate();
+            }
+        }
+
+       
     }
 }

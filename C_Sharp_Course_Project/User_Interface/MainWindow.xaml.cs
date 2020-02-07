@@ -21,8 +21,7 @@ namespace User_Interface
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ProgramManager m_CurrentManager;
-        public readonly ResourceDictionary Strings = new ResourceDictionary();
+        private ProgramManager m_CurrentManager; public readonly ResourceDictionary Strings = new ResourceDictionary();
         
         public MainWindow()
         {
