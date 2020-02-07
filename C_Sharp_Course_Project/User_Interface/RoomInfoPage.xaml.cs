@@ -28,15 +28,10 @@ namespace User_Interface
         {
             InitializeComponent();
             m_CurrentRoom = currentRoom;
-            Txt_Name.Text = m_CurrentRoom.Name;
-            Txt_Desc.Text = m_CurrentRoom.Description;
-            Txt_DateCreated.Text = m_CurrentRoom.CreateDate.ToShortDateString();
-            Txt_LastEdited.Text = m_CurrentRoom.LastEditDate.ToShortDateString();
-        }
-
-        private void Btn_Add_OnClick(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
+            Tb_Name.Text = m_CurrentRoom.Name;
+            Tb_Desc.Text = m_CurrentRoom.Description;
+            Lb_DateCreated.Content = m_CurrentRoom.CreateDate.ToShortDateString();
+            Lb_LastEdited.Content= m_CurrentRoom.LastEditDate.ToShortDateString();
         }
 
         private void Btn_Close_OnClick(object sender, RoutedEventArgs e)
@@ -52,6 +47,19 @@ namespace User_Interface
         public void SetPreviousView(IAppView previousElement)
         {
             m_PreviousView = previousElement;
+        }
+
+        private void Btn_Save_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Tb_Desc_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+        }
+
+        private void Tb_Name_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
         }
     }
 }
