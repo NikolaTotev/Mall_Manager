@@ -385,62 +385,64 @@
             </Setter>
         </Style>
 
-        <!-- CALENDAR STYLING -->
+
+        <!--#region Calendar Styling -->
+
         <!--Control colors.-->
-        <Color x:Key="WindowColor">White</Color>
-        <Color x:Key="ContentAreaColorLight">#FFC5CBF9</Color>
-        <Color x:Key="ContentAreaColorDark">#FF7381F9</Color>
+        <Color x:Key="CalendarWindowColor">White</Color>
+        <Color x:Key="CalendarContentAreaColorLight">#FFC5CBF9</Color>
+        <Color x:Key="CalendarContentAreaColorDark">#FF7381F9</Color>
 
-        <Color x:Key="DisabledControlLightColor">#FFE8EDF9</Color>
-        <Color x:Key="DisabledControlDarkColor">#A2A9B9</Color>
-        <Color x:Key="DisabledForegroundColor">#A2A9B9</Color>
+        <Color x:Key="CalendarDisabledControlLightColor">#FFE8EDF9</Color>
+        <Color x:Key="CalendarDisabledControlDarkColor">#A2A9B9</Color>
+        <Color x:Key="CalendarDisabledForegroundColor">#A2A9B9</Color>
 
-        <Color x:Key="SelectedBackgroundColor">#FFA630</Color>
+        <Color x:Key="CalendarSelectedBackgroundColor">#FFA630</Color>
         <Color x:Key="SelectedUnfocusedColor">#FFA630</Color>
 
-        <Color x:Key="ControlLightColor">#FFEFE2</Color>
-        <Color x:Key="ControlMediumColor">#FFA630</Color>
-        <Color x:Key="ControlDarkColor">#FFA630</Color>
+        <Color x:Key="CalendarControlLightColor">#FFEFE2</Color>
+        <Color x:Key="CalendarControlMediumColor">#FFA630</Color>
+        <Color x:Key="CalendarControlDarkColor">#FFA630</Color>
 
-        <Color x:Key="ControlMouseOverColor">#FFDEC3</Color>
-        <Color x:Key="ControlPressedColor">#FFA630</Color>
+        <Color x:Key="CalendarControlMouseOverColor">#FFDEC3</Color>
+        <Color x:Key="CalendarControlPressedColor">#FFA630</Color>
 
 
-        <Color x:Key="GlyphColor">White</Color>
-        <Color x:Key="GlyphMouseOver">sc#1, 0.004391443, 0.002428215, 0.242281124</Color>
+        <Color x:Key="CalendarGlyphColor">White</Color>
+        <Color x:Key="CalendarGlyphMouseOver">sc#1, 0.004391443, 0.002428215, 0.242281124</Color>
 
         <!--Border colors-->
-        <Color x:Key="BorderLightColor">White</Color>
-        <Color x:Key="BorderMediumColor">White</Color>
-        <Color x:Key="BorderDarkColor">White</Color>
+        <Color x:Key="CalendarBorderLightColor">White</Color>
+        <Color x:Key="CalendarBorderMediumColor">White</Color>
+        <Color x:Key="CalendarBorderDarkColor">White</Color>
 
-        <Color x:Key="PressedBorderLightColor">#FF888888</Color>
-        <Color x:Key="PressedBorderDarkColor">#FF444444</Color>
+        <Color x:Key="CalendarPressedBorderLightColor">#FF888888</Color>
+        <Color x:Key="CalendarPressedBorderDarkColor">#FF444444</Color>
 
-        <Color x:Key="DisabledBorderLightColor">#FFAAAAAA</Color>
-        <Color x:Key="DisabledBorderDarkColor">#FF888888</Color>
+        <Color x:Key="CalendarDisabledBorderLightColor">#FFAAAAAA</Color>
+        <Color x:Key="CalendarDisabledBorderDarkColor">#FF888888</Color>
 
-        <Color x:Key="DefaultBorderBrushDarkColor">#3C4F76</Color>
+        <Color x:Key="CalendarDefaultBorderBrushDarkColor">#3C4F76</Color>
 
         <!--Control-specific resources.-->
-        <Color x:Key="HeaderTopColor">#FFA630</Color>
+        <Color x:Key="CalendarHeaderTopColor">#FFA630</Color>
 
 
-        <Color x:Key="DatagridCurrentCellBorderColor">#3C4F76</Color>
-        <Color x:Key="SliderTrackDarkColor">#FFEFE2</Color>
+        <Color x:Key="CalendarDatagridCurrentCellBorderColor">#3C4F76</Color>
+        <Color x:Key="CalendarSliderTrackDarkColor">#FFEFE2</Color>
 
-        <Color x:Key="NavButtonFrameColor">#FFEFE2</Color>
+        <Color x:Key="CalendarNavButtonFrameColor">#FFEFE2</Color>
 
-        <LinearGradientBrush x:Key="MenuPopupBrush"
+        <LinearGradientBrush x:Key="CalendarMenuPopupBrush"
                      EndPoint="0.5,1"
                      StartPoint="0.5,0">
-            <GradientStop Color="{DynamicResource ControlLightColor}"
+            <GradientStop Color="{DynamicResource CalendarControlLightColor}"
                 Offset="0" />
-            <GradientStop Color="{DynamicResource ControlLightColor}"
+            <GradientStop Color="{DynamicResource CalendarControlLightColor}"
                 Offset="1" />
         </LinearGradientBrush>
 
-        <LinearGradientBrush x:Key="ProgressBarIndicatorAnimatedFill"
+        <LinearGradientBrush x:Key="CalendarProgressBarIndicatorAnimatedFill"
                      StartPoint="0,0"
                      EndPoint="1,0">
             <LinearGradientBrush.GradientStops>
@@ -457,6 +459,7 @@
             </LinearGradientBrush.GradientStops>
         </LinearGradientBrush>
 
+        
 
         <!--Style for the days of a month.-->
         <Style TargetType="CalendarDayButton"
@@ -611,7 +614,7 @@
                      RadiusY="1"
                      Opacity="0">
                                 <Rectangle.Fill>
-                                    <SolidColorBrush Color="{DynamicResource SelectedBackgroundColor}" />
+                                    <SolidColorBrush Color="{DynamicResource CalendarSelectedBackgroundColor}" />
                                 </Rectangle.Fill>
                             </Rectangle>
                             <Rectangle x:Name="SelectedBackground"
@@ -619,7 +622,7 @@
                      RadiusY="1"
                      Opacity="0">
                                 <Rectangle.Fill>
-                                    <SolidColorBrush Color="{DynamicResource SelectedBackgroundColor}" />
+                                    <SolidColorBrush Color="{DynamicResource CalendarSelectedBackgroundColor}" />
                                 </Rectangle.Fill>
                             </Rectangle>
                             <Border Background="{TemplateBinding Background}"
@@ -630,7 +633,7 @@
                      RadiusY="1"
                      Opacity="0">
                                 <Rectangle.Fill>
-                                    <SolidColorBrush Color="{DynamicResource ControlMouseOverColor}" />
+                                    <SolidColorBrush Color="{DynamicResource CalendarControlMouseOverColor}" />
                                 </Rectangle.Fill>
                             </Rectangle>
                             <ContentPresenter x:Name="NormalText"
@@ -662,7 +665,7 @@
                      RadiusX="1"
                      RadiusY="1">
                                 <Rectangle.Stroke>
-                                    <SolidColorBrush Color="{DynamicResource SelectedBackgroundColor}" />
+                                    <SolidColorBrush Color="{DynamicResource CalendarSelectedBackgroundColor}" />
                                 </Rectangle.Stroke>
                             </Rectangle>
                         </Grid>
@@ -765,7 +768,7 @@
                      RadiusY="1"
                      Opacity="0">
                                 <Rectangle.Fill>
-                                    <SolidColorBrush Color="{DynamicResource SelectedBackgroundColor}" />
+                                    <SolidColorBrush Color="{DynamicResource CalendarSelectedBackgroundColor}" />
                                 </Rectangle.Fill>
                             </Rectangle>
                             <Rectangle x:Name="Background"
@@ -773,7 +776,7 @@
                      RadiusY="1"
                      Opacity="0">
                                 <Rectangle.Fill>
-                                    <SolidColorBrush Color="{DynamicResource SelectedBackgroundColor}" />
+                                    <SolidColorBrush Color="{DynamicResource CalendarSelectedBackgroundColor}" />
                                 </Rectangle.Fill>
                             </Rectangle>
                             <ContentPresenter x:Name="NormalText"
@@ -790,7 +793,7 @@
                      RadiusX="1"
                      RadiusY="1">
                                 <Rectangle.Stroke>
-                                    <SolidColorBrush Color="{DynamicResource SelectedBackgroundColor}" />
+                                    <SolidColorBrush Color="{DynamicResource CalendarSelectedBackgroundColor}" />
                                 </Rectangle.Stroke>
                             </Rectangle>
                         </Grid>
@@ -799,7 +802,7 @@
             </Setter>
             <Setter Property="Background">
                 <Setter.Value>
-                    <SolidColorBrush Color="{DynamicResource ControlMediumColor}" />
+                    <SolidColorBrush Color="{DynamicResource CalendarControlMediumColor}" />
                 </Setter.Value>
             </Setter>
         </Style>
@@ -816,7 +819,7 @@
                                 <ColorAnimation Duration="0"
                             Storyboard.TargetName="path"
                             Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
-                            To="{DynamicResource GlyphMouseOver}" />
+                            To="{DynamicResource CalendarGlyphMouseOver}" />
                             </Storyboard>
                         </VisualState>
                         <VisualState x:Name="Disabled">
@@ -840,7 +843,7 @@
             Width="6"
             Data="M288.75,232.25 L288.75,240.625 L283,236.625 z">
                         <Path.Fill>
-                            <SolidColorBrush Color="{DynamicResource GlyphColor}" />
+                            <SolidColorBrush Color="{DynamicResource CalendarGlyphColor}" />
                         </Path.Fill>
                     </Path>
                 </Grid>
@@ -857,7 +860,7 @@
                         <VisualState x:Name="MouseOver">
                             <Storyboard>
                                 <ColorAnimation Duration="0"
-                            To="{StaticResource GlyphMouseOver}"
+                            To="{StaticResource CalendarGlyphMouseOver}"
                             Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
                             Storyboard.TargetName="path" />
                             </Storyboard>
@@ -883,7 +886,7 @@
             VerticalAlignment="Center"
             Width="6">
                         <Path.Fill>
-                            <SolidColorBrush Color="{DynamicResource GlyphColor}" />
+                            <SolidColorBrush Color="{DynamicResource CalendarGlyphColor}" />
                         </Path.Fill>
                     </Path>
                 </Grid>
@@ -900,7 +903,7 @@
                         <VisualState x:Name="MouseOver">
                             <Storyboard>
                                 <ColorAnimation Duration="0"
-                            To="{DynamicResource GlyphMouseOver}"
+                            To="{DynamicResource CalendarGlyphMouseOver}"
                             Storyboard.TargetProperty="(TextElement.Foreground).
                 (SolidColorBrush.Color)"
                             Storyboard.TargetName="buttonContent" />
@@ -1115,14 +1118,14 @@
 
                         <!--The first two gradient stops specifies the background for 
             the calendar's heading and navigation buttons.-->
-                        <GradientStop Color="{DynamicResource HeaderTopColor}"
+                        <GradientStop Color="{DynamicResource CalendarHeaderTopColor}"
                       Offset="0" />
-                        <GradientStop Color="{DynamicResource ControlMediumColor}"
+                        <GradientStop Color="{DynamicResource CalendarControlMediumColor}"
                       Offset="0.16" />
 
                         <!--The next gradient stop specifies the background for 
             the calendar area.-->
-                        <GradientStop Color="{DynamicResource ControlLightColor}"
+                        <GradientStop Color="{DynamicResource CalendarControlLightColor}"
                       Offset="0.16" />
                     </LinearGradientBrush>
                 </Setter.Value>
@@ -1131,9 +1134,9 @@
                 <Setter.Value>
                     <LinearGradientBrush EndPoint="0,1"
                            StartPoint="0,0">
-                        <GradientStop Color="{DynamicResource BorderLightColor}"
+                        <GradientStop Color="{DynamicResource CalendarBorderLightColor}"
                       Offset="0" />
-                        <GradientStop Color="{DynamicResource BorderDarkColor}"
+                        <GradientStop Color="{DynamicResource CalendarBorderDarkColor}"
                       Offset="1" />
                     </LinearGradientBrush>
                 </Setter.Value>
@@ -1155,5 +1158,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-    </Application.Resources>
+        <!--#endregion-->
+
+     </Application.Resources>
 </Application>

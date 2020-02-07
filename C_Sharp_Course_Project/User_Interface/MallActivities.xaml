@@ -22,7 +22,7 @@
                     <RowDefinition Height="2.5*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <ListView x:Name="Lv_Activities" Grid.Column="0" Grid.Row="0" Background="Gainsboro" Margin="20"></ListView>
+                <ListView x:Name="Lv_Activities" Grid.Column="0" Grid.Row="0" Margin="20"></ListView>
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>

@@ -70,7 +70,18 @@
                 </TextBox>
             </StackPanel>
 
-            <ComboBox x:Name="Cmb_RoomType" Grid.Column="1" Grid.Row="2" Width="450" HorizontalAlignment="Center"  HorizontalContentAlignment="Center" Margin="0,20,0,20"/>
+            <ComboBox x:Name="Cmb_RoomType" Grid.Column="1" Grid.Row="2" Width="450" HorizontalAlignment="Center"  HorizontalContentAlignment="Center" Margin="0,20,0,20">
+                <ComboBoxItem Name="Item1">Item1</ComboBoxItem>
+                <ComboBoxItem Name="Item2">Item2</ComboBoxItem>
+                <ComboBoxItem Name="Item3">Item3</ComboBoxItem>
+                <ComboBoxItem Name="Item4">Item4</ComboBoxItem>
+                <ComboBoxItem Name="Item5">Item5</ComboBoxItem>
+                <ComboBoxItem Name="Item6">Item6</ComboBoxItem>
+                <ComboBoxItem Name="Item7">Item7</ComboBoxItem>
+                <ComboBoxItem Name="Item8">Item8</ComboBoxItem>
+                <ComboBoxItem Name="Item9">Item9</ComboBoxItem>
+                <ComboBoxItem Name="Item10">Item10</ComboBoxItem>
+            </ComboBox>
 
             <Grid Grid.Column="1" Grid.Row="3">
                 <Grid.ColumnDefinitions>
