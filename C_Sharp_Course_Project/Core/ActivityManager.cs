@@ -27,13 +27,18 @@ namespace Core
         {
             m_Instance = this;
             m_CurrentManager = ProgramManager.GetInstance();
-            m_Config = SerializationManager.GetActivityConfig(MallManager.GetInstance().CurrentMall.Name.ToString());
-            Activities = SerializationManager.GetActivities(MallManager.GetInstance().CurrentMall.Name.ToString());
+            m_Config = SerializationManager.GetActivityConfig(MallManager.GetInstance().CurrentMall.Name);
+            Activities = SerializationManager.GetActivities(MallManager.GetInstance().CurrentMall.Name);
         }
 
         public static ActivityManager GetInstance()
         {
             return m_Instance ?? (m_Instance = new ActivityManager());
+        }
+
+        public List<string> GetCategories()
+        {
+            return m_Config.Categories;
         }
 
         public bool AddNewCategory(string category,string mallName)

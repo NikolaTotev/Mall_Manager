@@ -22,8 +22,7 @@ namespace Core
             m_MallManagerInstance = MallManager.GetInstance();
         }
 
-        public static ProgramManager GetInstance()
-        {
+        public static ProgramManager GetInstance() {
             if (m_Instance == null)
             {
                 m_Instance = new ProgramManager();

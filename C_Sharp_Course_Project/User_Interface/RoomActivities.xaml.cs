@@ -25,6 +25,7 @@ namespace User_Interface
         private IAppView m_PreviousView;
         private Guid m_CurrentRoomID;
         private Room m_CurrentRoom;
+        private StringBuilder sb = new StringBuilder();
         public RoomActivities(Guid currentRoomId, Room currentRoom)
         {
             InitializeComponent();
@@ -44,6 +45,10 @@ namespace User_Interface
             }
 
             DataContext = activities;
+
+            sb.Append(m_CurrentRoom.Name);
+            sb.Append(" - activities");
+            Lb_Header.Content = sb.ToString();
         }
 
         private void Btn_Add_OnClick(object sender, RoutedEventArgs e)

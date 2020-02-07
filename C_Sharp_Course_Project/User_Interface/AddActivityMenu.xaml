@@ -28,19 +28,14 @@
                 </TextBox.Effect>
             </TextBox>
         </StackPanel>
-        <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Label x:Name="Lb_CategoryError" FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Light" FontSize="15" Foreground="{StaticResource FailedTask}" BorderBrush="Transparent"/>
-            <TextBox x:Name="Tb_Category" Height="32" TextWrapping="Wrap" Padding="5" VerticalContentAlignment="Center" Text="Activity Category" Canvas.Top="361" Width="384" BorderBrush="Transparent" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="15" Foreground="{StaticResource TextboxPrompt}" GotFocus="Tb_Category_OnGotFocus" LostFocus="Tb_Category_OnLostFocus" TextChanged="Tb_Category_OnTextChanged" >
-                <TextBox.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="3"/>
-                    </Style>
-                </TextBox.Resources>
-                <TextBox.Effect>
-                    <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
-                </TextBox.Effect>
-            </TextBox>
+        <StackPanel x:Name="Sp_ActivityCategory_Cmb" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <Label x:Name="Lb_ActivityCat" Content="Select Room type" FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Light" FontSize="15" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent"/>
+                <Label x:Name="Lb_ActivityCatError" FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Light" FontSize="15" Foreground="{StaticResource FailedTask}" BorderBrush="Transparent"/>
+            </StackPanel>
+            <ComboBox x:Name="Cmb_ActivityCat" Width="384"  HorizontalAlignment="Center"  HorizontalContentAlignment="Center" SelectionChanged="Cmb_ActivityCat_OnSelectionChanged"/>
         </StackPanel>
+
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>

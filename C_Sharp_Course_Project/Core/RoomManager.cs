@@ -12,14 +12,22 @@ namespace Core
         public List<string> RoomTypes { get; set; }
         public Dictionary<Guid, Room> Rooms { get; set; }
 
+        private RoomConfig m_Config;
+
         private RoomManager()
         {
             Rooms = SerializationManager.GetRooms(MallManager.GetInstance().CurrentMall.Name);
+            m_Config = SerializationManager.GetRoomConfig(MallManager.GetInstance().CurrentMall.Name);
         }
 
         public static RoomManager GetInstance()
         {
             return m_Instance ?? (m_Instance = new RoomManager());
+        }
+
+        public List<string> GetRoomTypes()
+        {
+            return m_Config.RoomTypes;
         }
 
         /// <summary>

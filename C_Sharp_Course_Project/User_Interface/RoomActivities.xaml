@@ -11,7 +11,7 @@
             <RowDefinition Height="85*"></RowDefinition>
             <RowDefinition Height="500*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label x:Name="Lbl_MallName" Content="Space name - Space Activities" Grid.Row="0" VerticalContentAlignment="Center" Background="{StaticResource NavyBlueBase}"  FontSize="45" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" Foreground="AliceBlue" FontWeight="SemiBold" Margin="0,0,0,10" Padding="25,0,0,0" Effect="{StaticResource DropShadow}" >
+        <Label x:Name="Lb_Header" Content="/Space name - Space Activities/" Grid.Row="0" VerticalContentAlignment="Center" Background="{StaticResource NavyBlueBase}"  FontSize="45" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" Foreground="AliceBlue" FontWeight="SemiBold" Margin="0,0,0,10" Padding="25,0,0,0" Effect="{StaticResource DropShadow}" >
             <Label.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="0,0,30,30"></Setter>
@@ -122,78 +122,28 @@
                             <RowDefinition Height="*"></RowDefinition>
                         </Grid.RowDefinitions>
 
-                        <Button x:Name="Btn_SelectAll" Grid.Row="0" Grid.Column="0" Click="Btn_SelectAll_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="10"/>
-                                </Style>
-                            </Button.Resources>
-                            <Button.Effect>
-                                <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
-                            </Button.Effect>
+                        <Button x:Name="Btn_SelectAll"  Template="{StaticResource OrangeHighLight}" Grid.Row="0" Grid.Column="0" Click="Btn_SelectAll_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
                             <Image Source="Resources/Icons/SelectAll_Icon.png" VerticalAlignment="Center" Margin="0,0,0,0" Height="40"></Image>
                         </Button>
 
-                        <Button x:Name="Btn_MarkAsScheduled" Grid.Row="0" Grid.Column="1" Click="Btn_MarkAsScheduled_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="10"/>
-                                </Style>
-                            </Button.Resources>
-                            <Button.Effect>
-                                <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
-                            </Button.Effect>
-                            <Rectangle  Height="30" Width="30" Fill="{StaticResource ScheduledTask}"/>
+                        <Button x:Name="Btn_MarkAsScheduled"  Template="{StaticResource OrangeHighLight}" Grid.Row="0" Grid.Column="1" Click="Btn_MarkAsScheduled_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
+                           <Rectangle  Height="30" Width="30" Fill="{StaticResource ScheduledTask}"/>
                         </Button>
 
-
-                        <Button x:Name="Btn_MarkAsInProgress" Grid.Row="0" Grid.Column="2" Click="Btn_MarkAsInProgress_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="10"/>
-                                </Style>
-                            </Button.Resources>
-                            <Button.Effect>
-                                <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
-                            </Button.Effect>
+                        <Button x:Name="Btn_MarkAsInProgress"  Template="{StaticResource OrangeHighLight}" Grid.Row="0" Grid.Column="2" Click="Btn_MarkAsInProgress_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
                             <Rectangle  Height="30" Width="30" Fill="{StaticResource InProgressTask}"/>
                         </Button>
 
-                        <Button x:Name="Btn_Deselect" Grid.Row="1" Grid.Column="0" Click="Btn_Deselect_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="10"/>
-                                </Style>
-                            </Button.Resources>
-                            <Button.Effect>
-                                <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
-                            </Button.Effect>
+                        <Button x:Name="Btn_Deselect"  Template="{StaticResource OrangeHighLight}" Grid.Row="1" Grid.Column="0" Click="Btn_Deselect_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
                             <Image Source="Resources/Icons/Deselect_Icon.png" VerticalAlignment="Center" Margin="0,0,0,0" Height="40"></Image>
                         </Button>
 
-                        <Button x:Name="Btn_MarkAsCompleted" Grid.Row="1" Grid.Column="1" Click="Btn_MarkAsCompleted_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="10"/>
-                                </Style>
-                            </Button.Resources>
-                            <Button.Effect>
-                                <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
-                            </Button.Effect>
-                            <Rectangle  Height="30" Width="30" Fill="{StaticResource Completed}"/>
+                        <Button x:Name="Btn_MarkAsCompleted"  Template="{StaticResource OrangeHighLight}" Grid.Row="1" Grid.Column="1" Click="Btn_MarkAsCompleted_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
+                          <Rectangle  Height="30" Width="30" Fill="{StaticResource Completed}"/>
                         </Button>
 
-
-                        <Button x:Name="Btn_MarkAsFailed" Grid.Row="1" Grid.Column="2" Click="Btn_MarkAsFailed_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="10"/>
-                                </Style>
-                            </Button.Resources>
-                            <Button.Effect>
-                                <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
-                            </Button.Effect>
-                            <Rectangle  Height="30" Width="30" Fill="{StaticResource FailedTask}"/>
+                        <Button x:Name="Btn_MarkAsFailed"  Template="{StaticResource OrangeHighLight}" Grid.Row="1" Grid.Column="2" Click="Btn_MarkAsFailed_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
+                           <Rectangle  Height="30" Width="30" Fill="{StaticResource FailedTask}"/>
                         </Button>
 
                     </Grid>
@@ -207,54 +157,26 @@
                             <RowDefinition Height="*"></RowDefinition>
                         </Grid.RowDefinitions>
 
-                        <Button Grid.Row="0" Grid.Column="0" x:Name="Btn_Add" VerticalAlignment="Center" HorizontalAlignment="Center" Width="176" Height="47" Click="Btn_Add_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource CancelTip}">
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="10"/>
-                                </Style>
-                            </Button.Resources>
-                            <Button.Effect>
-                                <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
-                            </Button.Effect>
+                        <Button Grid.Row="0" Grid.Column="0"  Template="{StaticResource OrangeHighLight}" x:Name="Btn_Add" VerticalAlignment="Center" HorizontalAlignment="Center" Width="176" Height="47" Click="Btn_Add_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource CancelTip}">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <Image Source="Resources/Icons/Add_Icon.png" VerticalAlignment="Center" Margin="0,0,5,0" Height="40"></Image>
                                 <TextBlock Text="Add" VerticalAlignment="Center"></TextBlock>
                             </StackPanel>
                         </Button>
 
-                        <Button Grid.Row="0" Grid.Column="1" x:Name="Btn_Stats" VerticalAlignment="Center" HorizontalAlignment="Center" Width="176" Height="47" Click="Btn_Stats_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource CancelTip}">
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="10"/>
-                                </Style>
-                            </Button.Resources>
-                            <Button.Effect>
-                                <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
-                            </Button.Effect>
+                        <Button Grid.Row="0" Grid.Column="1" Template="{StaticResource OrangeHighLight}" x:Name="Btn_Stats" VerticalAlignment="Center" HorizontalAlignment="Center" Width="176" Height="47" Click="Btn_Stats_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource CancelTip}">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <Image Source="Resources/Icons/Statistics_Icon.png" VerticalAlignment="Center" Margin="0,0,5,0" Height="40"></Image>
                                 <TextBlock Text="Stats" VerticalAlignment="Center"></TextBlock>
                             </StackPanel>
                         </Button>
 
-
-                        <Button Grid.Row="1" Grid.Column="0" x:Name="Btn_Delete" VerticalAlignment="Center" HorizontalAlignment="Center" Width="176" Height="47" Click="Btn_Delete_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource CancelTip}">
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="10"/>
-                                </Style>
-                            </Button.Resources>
-                            <Button.Effect>
-                                <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
-                            </Button.Effect>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Button Grid.Row="1" Grid.Column="0" Template="{StaticResource OrangeHighLight}" x:Name="Btn_Delete" VerticalAlignment="Center" HorizontalAlignment="Center" Width="176" Height="47" Click="Btn_Delete_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource CancelTip}">
+                           <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <Image Source="Resources/Icons/Delete_Icon.png" VerticalAlignment="Center" Margin="0,0,5,0" Height="40"></Image>
                                 <TextBlock Text="Delete" VerticalAlignment="Center"></TextBlock>
                             </StackPanel>
                         </Button>
-
-
-
                     </Grid>
                 </Grid>
             </Grid>

@@ -24,19 +24,30 @@ namespace User_Interface
         private MainWindow m_CurrentMainWindow;
         private IAppView m_PreviousView;
         private Room m_CurrentRoom;
+        private StringBuilder m_StringBuilder = new StringBuilder();
         public RoomInfoPage(Room currentRoom)
         {
             InitializeComponent();
             m_CurrentRoom = currentRoom;
+
+            m_StringBuilder.Append(m_CurrentRoom.Name);
+            m_StringBuilder.Append(" - Information");
+            Lb_Header.Content = m_StringBuilder.ToString();
             Tb_Name.Text = m_CurrentRoom.Name;
             Tb_Desc.Text = m_CurrentRoom.Description;
             Lb_DateCreated.Content = m_CurrentRoom.CreateDate.ToShortDateString();
             Lb_LastEdited.Content= m_CurrentRoom.LastEditDate.ToShortDateString();
+
+            foreach (var type in RoomManager.GetInstance().GetRoomTypes())
+            {
+                Cmb_RoomType.Items.Add(type);
+            }
+            Cmb_RoomType.Text = m_CurrentRoom.Type;
         }
 
         private void Btn_Close_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            m_CurrentMainWindow.ChangeView(m_PreviousView, this);
         }
 
         public void SetMainWindow(MainWindow currentWindow)

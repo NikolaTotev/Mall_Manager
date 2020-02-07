@@ -11,6 +11,15 @@
             <RowDefinition Height="85*"></RowDefinition>
             <RowDefinition Height="500*"></RowDefinition>
         </Grid.RowDefinitions>
+
+        <Label x:Name="Lb_Header" Content="/Space name/ - Information" Grid.Row="0" VerticalContentAlignment="Center" Background="{StaticResource NavyBlueBase}"  FontSize="45" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" Foreground="AliceBlue" FontWeight="SemiBold" Margin="0,0,0,10" Padding="25,0,0,0" Effect="{StaticResource DropShadow}" >
+            <Label.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="0,0,30,30"></Setter>
+                </Style>
+            </Label.Resources>
+        </Label>
+
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -61,18 +70,7 @@
                 </TextBox>
             </StackPanel>
 
-            <ComboBox Grid.Column="1" Grid.Row="2" Width="450" HorizontalAlignment="Center"  HorizontalContentAlignment="Center" Margin="0,20,0,20">
-                <ComboBoxItem Name="Item1">Item1</ComboBoxItem>
-                <ComboBoxItem Name="Item2">Item2</ComboBoxItem>
-                <ComboBoxItem Name="Item3">Item3</ComboBoxItem>
-                <ComboBoxItem Name="Item4">Item4</ComboBoxItem>
-                <ComboBoxItem Name="Item5">Item5</ComboBoxItem>
-                <ComboBoxItem Name="Item6">Item6</ComboBoxItem>
-                <ComboBoxItem Name="Item7">Item7</ComboBoxItem>
-                <ComboBoxItem Name="Item8">Item8</ComboBoxItem>
-                <ComboBoxItem Name="Item9">Item9</ComboBoxItem>
-                <ComboBoxItem Name="Item10">Item10</ComboBoxItem>
-            </ComboBox>
+            <ComboBox x:Name="Cmb_RoomType" Grid.Column="1" Grid.Row="2" Width="450" HorizontalAlignment="Center"  HorizontalContentAlignment="Center" Margin="0,20,0,20"/>
 
             <Grid Grid.Column="1" Grid.Row="3">
                 <Grid.ColumnDefinitions>
@@ -144,7 +142,5 @@
             </Grid>
 
         </Grid>
-        <Label x:Name="Lbl_MallName" Content="Space name - Space information" Grid.Row="0" Background="{StaticResource NavyBlueBase}"  FontSize="45" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" Foreground="AliceBlue" FontWeight="SemiBold" Margin="0,0,0,10" Padding="20,15,0,0" />
-
     </Grid>
 </UserControl>

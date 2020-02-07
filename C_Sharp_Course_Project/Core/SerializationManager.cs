@@ -28,6 +28,7 @@ namespace Core
         //Base file names
         public static readonly string ActivitySaveFileBase = "Activities.json";
         public static readonly string ActivityConfigSaveBase = "ActivityConfig.json";
+        public static readonly string RoomConfigSaveBase = "RoomConfig.json";
         public static readonly string RoomsSaveBase = "Rooms.json";
 
         //Utility variables
@@ -83,6 +84,14 @@ namespace Core
             m_StringBuilder.Clear();
             m_StringBuilder.Append(mallName);
             m_StringBuilder.Append(ActivityConfigSaveBase);
+            return System.IO.Path.Combine(ConfigFiles, m_StringBuilder.ToString());
+        }
+
+        public static string GenRoomConfigName(string mallName)
+        {
+            m_StringBuilder.Clear();
+            m_StringBuilder.Append(mallName);
+            m_StringBuilder.Append(RoomConfigSaveBase);
             return System.IO.Path.Combine(ConfigFiles, m_StringBuilder.ToString());
         }
 
@@ -208,7 +217,30 @@ namespace Core
             }
         }
 
+        public static void SaveRoomConfigFile(RoomConfig configToSave, string mallName)
+        {
+            CheckForDirectories();
+            using (StreamWriter file = File.CreateText(GenRoomConfigName(mallName)))
+            {
+                m_Serializer.Serialize(file, configToSave);
+            }
+        }
 
+        public static RoomConfig GetRoomConfig(string mallName)
+        {
+            if (!File.Exists(GenRoomConfigName(mallName)))
+            {
+                RoomConfig roomConfigToReturn = new RoomConfig();
+                ExceptionManager.OnFileNotFound(GenRoomConfigName(mallName));
+                SaveRoomConfigFile(roomConfigToReturn, mallName);
+                return roomConfigToReturn;
+            }
+
+            using (StreamReader file = File.OpenText(GenRoomConfigName(mallName)))
+            {
+                return (RoomConfig)m_Serializer.Deserialize(file, typeof(RoomConfig));
+            }
+        }
         #endregion
 
     }

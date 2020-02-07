@@ -30,9 +30,15 @@ namespace User_Interface
         private readonly string m_FloorDefaultText = "Floor Number";
         private int m_RoomNumber;
         private int m_FloorNumber;
+        private string m_RoomType = "";
         public AddRoomMenu()
         {
             InitializeComponent();
+
+            foreach (var type in RoomManager.GetInstance().GetRoomTypes())
+            {
+                Cmb_RoomType.Items.Add(type);
+            }
         }
 
         public void SetMainWindow(MainWindow currentWindow)
@@ -47,7 +53,7 @@ namespace User_Interface
 
         private void Btn_Add_OnClick(object sender, RoutedEventArgs e)
         {
-            RoomManager.GetInstance().CreateRoom(Tb_RoomName.Text, Tb_RoomDesc.Text, Tb_RoomType.Text,
+            RoomManager.GetInstance().CreateRoom(Tb_RoomName.Text, Tb_RoomDesc.Text, m_RoomType,
                 m_FloorNumber, m_RoomNumber, Guid.NewGuid(),
                 MallManager.GetInstance().CurrentMall.Name);
             RoomsMenu menu = new RoomsMenu();
@@ -106,29 +112,6 @@ namespace User_Interface
         }
         #endregion
 
-        #region Room type text box functions
-        private void Tb_RoomType_OnGotFocus(object sender, RoutedEventArgs e)
-        {
-            if (Tb_RoomType.Text == m_TypeDefaultText)
-            {
-                Tb_RoomType.Text = "";
-            }
-        }
-
-        private void Tb_RoomType_OnLostFocus(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrEmpty(Tb_RoomType.Text))
-            {
-                Tb_RoomType.Text = m_TypeDefaultText;
-            }
-        }
-
-        private void Tb_RoomType_OnTextChanged(object sender, TextChangedEventArgs e)
-        {
-            Validate();
-        }
-        #endregion
-
         #region Room number text box functions
         private void Tb_RoomNumber_OnGotFocus(object sender, RoutedEventArgs e)
         {
@@ -177,11 +160,11 @@ namespace User_Interface
 
         private void Validate()
         {
-            if (Tb_RoomName != null && Tb_RoomDesc != null && Tb_RoomType != null && Tb_RoomNumber != null && Tb_FloorNumber != null && Btn_Add != null)
+            if (Tb_RoomName != null && Tb_RoomDesc != null && Tb_RoomNumber != null && Tb_FloorNumber != null && Btn_Add != null)
             {
                 bool nameOk = Tb_RoomName.Text != m_NameDefaultText && !string.IsNullOrEmpty(Tb_RoomName.Text);
                 bool descOk = Tb_RoomDesc.Text != m_DescDefaultText && !string.IsNullOrEmpty(Tb_RoomDesc.Text);
-                bool typeOk = Tb_RoomType.Text != m_TypeDefaultText && !string.IsNullOrEmpty(Tb_RoomType.Text);
+                bool typeOk = !string.IsNullOrEmpty(m_RoomType);
                 bool numberOk = Tb_RoomNumber.Text != m_NumberDefaultText && int.TryParse(Tb_RoomNumber.Text, out m_RoomNumber);
                 bool floorOk = Tb_FloorNumber.Text != m_FloorDefaultText && int.TryParse(Tb_FloorNumber.Text, out m_FloorNumber);
 
@@ -190,21 +173,25 @@ namespace User_Interface
                     Btn_Add.IsEnabled = true;
                     Lb_NameError.Content = "";
                     Lb_DescError.Content = "";
-                    Lb_TypeError.Content = "";
+                    Lb_RoomTypeError.Content = "";
                     Lb_RoomNumberError.Content = "";
                     Lb_FloorNumberError.Content = "";
                 }
                 else
                 {
                     Btn_Add.IsEnabled = false;
-
                     Lb_NameError.Content = !nameOk ? m_CurrentMainWindow.Strings["RoomNameInvalid"] : "";
                     Lb_DescError.Content = !descOk ? m_CurrentMainWindow.Strings["RoomDescInvalid"] : "";
-                    Lb_TypeError.Content = !typeOk ? m_CurrentMainWindow.Strings["RoomTypeInvalid"] : "";
+                    Lb_RoomTypeError.Content = !typeOk ? m_CurrentMainWindow.Strings["RoomTypeInvalid"] : "";
                     Lb_RoomNumberError.Content = !numberOk ? m_CurrentMainWindow.Strings["MustBeANumberError"] : "";
                     Lb_FloorNumberError.Content = !floorOk ? m_CurrentMainWindow.Strings["MustBeANumberError"] : "";
                 }
             }
+        }
+
+        private void Cmb_RoomType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            m_RoomType = Cmb_RoomType.SelectedItem.ToString();
         }
     }
 }
