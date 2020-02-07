@@ -52,30 +52,14 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Button Grid.Row="0" Grid.Column="1" x:Name="Btn_Add" VerticalAlignment="Center" HorizontalAlignment="Center" Width="186" Height="47" Click="Btn_Add_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center" IsEnabled="False">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
-                    </Style>
-                </Button.Resources>
-                <Button.Effect>
-                    <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
-                </Button.Effect>
+            <Button Grid.Row="0" Template="{StaticResource OrangeHighLight}" Grid.Column="1" x:Name="Btn_Add" VerticalAlignment="Center" HorizontalAlignment="Center" Width="186" Height="47" Click="Btn_Add_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center" IsEnabled="False">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,5,0">
                     <Image Source="Resources/Icons/Add_Icon.png" VerticalAlignment="Center" Margin="0,0,5,0" Height="40"></Image>
                     <TextBlock Text="Add" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </Button>
 
-            <Button Grid.Row="0" Grid.Column="2" x:Name="Btn_Cancel" VerticalAlignment="Center" HorizontalAlignment="Center" Width="176" Height="47" Click="Btn_Cancel_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource CancelTip}">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
-                    </Style>
-                </Button.Resources>
-                <Button.Effect>
-                    <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
-                </Button.Effect>
+            <Button Grid.Row="0" Template="{StaticResource OrangeHighLight}" Grid.Column="2" x:Name="Btn_Cancel" VerticalAlignment="Center" HorizontalAlignment="Center" Width="176" Height="47" Click="Btn_Cancel_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource CancelTip}">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Image Source="Resources/Icons/Cancel_Icon.png" VerticalAlignment="Center" Margin="0,0,5,0" Height="40"></Image>
                     <TextBlock Text="Cancel" VerticalAlignment="Center"></TextBlock>
