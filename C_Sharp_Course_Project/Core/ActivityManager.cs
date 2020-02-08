@@ -88,7 +88,12 @@ namespace Core
             //}
 
             RoomManager roomManager = RoomManager.GetInstance();
-            if(Activities.ContainsKey(activityToAdd.Id) || !roomManager.AddActivity(activityToAdd.CorrespondingRoom, activityToAdd.Id,mallName))
+            if (activityToAdd.CorrespondingRoom == MallManager.GetInstance().CurrentMall.Id && !Activities.ContainsKey(activityToAdd.Id))
+            {
+                MallManager.GetInstance().CurrentMall.AssociatedActivities.Add(activityToAdd.Id);
+                SerializationManager.SaveMalls(MallManager.GetInstance().Malls);
+            }
+            else if(Activities.ContainsKey(activityToAdd.Id) || !roomManager.AddActivity(activityToAdd.CorrespondingRoom, activityToAdd.Id,mallName))
             {
                 return false;
             }

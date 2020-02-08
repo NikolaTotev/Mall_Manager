@@ -23,28 +23,36 @@ namespace User_Interface
     {
         private MainWindow m_CurrentMainWindow;
         private IAppView m_PreviousView;
+        private StringBuilder sb;
+        private List<ActivityListItem> activities;
         public MallActivities()
         {
             InitializeComponent();
+            sb = new StringBuilder();
             Lv_Activities.SelectionMode = SelectionMode.Multiple;
-
-            foreach (var activity in ActivityManager.GetInstance().Activities)
+            activities = new List<ActivityListItem>();
+            foreach (var activityId in MallManager.GetInstance().CurrentMall.AssociatedActivities)
             {
-                ListViewItem itemToAdd = new ListViewItem
-                {
-                    Tag = activity.Key,
-                    Content = activity.Value.Description,
-                    Name = activity.Value.CurActivityStatus.ToString()
-                };
-                Lv_Activities.Items.Add(itemToAdd);
+                ActivityListItem itemToAdd = new ActivityListItem();
+                Activity currentActivity = ActivityManager.GetInstance().Activities[activityId];
+                itemToAdd.ActivityId = currentActivity.Id;
+                itemToAdd.Description = currentActivity.Description;
+                itemToAdd.Category = currentActivity.Category;
+                itemToAdd.SetStatusColor(currentActivity.CurActivityStatus);
+                activities.Add(itemToAdd);
             }
+
+            DataContext = activities;
+
+            sb.Append(MallManager.GetInstance().CurrentMall.Name);
+            sb.Append(" - activities");
+            Lbl_MallName.Content = sb.ToString();
         }
 
         private void Btn_Add_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
-            //AddActivityMenu menuToDisplay = new AddActivityMenu();
-            //m_CurrentMainWindow.ChangeView(menuToDisplay, this);
+            AddActivityMenu menuToDisplay = new AddActivityMenu(MallManager.GetInstance().CurrentMall.Id);
+            m_CurrentMainWindow.ChangeView(menuToDisplay, this);
         }
 
         private void Btn_Stats_OnClick(object sender, RoutedEventArgs e)
@@ -57,9 +65,10 @@ namespace User_Interface
             if (Lv_Activities.SelectedItems.Count <= 0) return;
             for (var i = Lv_Activities.SelectedItems.Count - 1; i >= 0; i--)
             {
-                ListViewItem itemToDelete = (ListViewItem)Lv_Activities.SelectedItems[i];
-                ActivityManager.GetInstance().DeleteActivity((Guid)itemToDelete.Tag, MallManager.GetInstance().CurrentMall.Name);
-                Lv_Activities.Items.Remove(itemToDelete);
+                ActivityListItem itemToDelete = (ActivityListItem)Lv_Activities.SelectedItems[i];
+                ActivityManager.GetInstance().DeleteActivity(itemToDelete.ActivityId, MallManager.GetInstance().CurrentMall.Name);
+                activities.Remove(itemToDelete);
+                Lv_Activities.Items.Refresh();
             }
         }
 
@@ -68,9 +77,10 @@ namespace User_Interface
             if (Lv_Activities.SelectedItems.Count <= 0) return;
             for (var i = Lv_Activities.SelectedItems.Count - 1; i >= 0; i--)
             {
-                ListViewItem item = (ListViewItem)Lv_Activities.SelectedItems[i];
-                ActivityManager.GetInstance().Activities[(Guid)item.Tag].CurActivityStatus =
-                    ActivityStatus.Failed;  //Should change to CurrentMall.Name
+                ActivityListItem item = (ActivityListItem)Lv_Activities.SelectedItems[i];
+                item.SetStatusColor(ActivityStatus.Failed);
+                ActivityManager.GetInstance().EditActivity(mallName: MallManager.GetInstance().CurrentMall.Name, activityId: item.ActivityId, status: ActivityStatus.Failed);
+                Lv_Activities.Items.Refresh();
             }
         }
 
@@ -79,15 +89,19 @@ namespace User_Interface
             if (Lv_Activities.SelectedItems.Count <= 0) return;
             for (var i = Lv_Activities.SelectedItems.Count - 1; i >= 0; i--)
             {
-                ListViewItem item = (ListViewItem)Lv_Activities.SelectedItems[i];
-                ActivityManager.GetInstance().Activities[(Guid)item.Tag].CurActivityStatus =
-                    ActivityStatus.Finished;  //Should change to CurrentMall.Name
+                ActivityListItem item = (ActivityListItem)Lv_Activities.SelectedItems[i];
+                item.SetStatusColor(ActivityStatus.Finished);
+                ActivityManager.GetInstance().EditActivity(mallName: MallManager.GetInstance().CurrentMall.Name, activityId: item.ActivityId, status: ActivityStatus.Finished);
+                Lv_Activities.Items.Refresh();
             }
         }
 
         private void Btn_Deselect_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            foreach (ActivityListItem item in Lv_Activities.Items)
+            {
+                item.IsSelected = false;
+            }
         }
 
         private void Btn_MarkAsInProgress_OnClick(object sender, RoutedEventArgs e)
@@ -95,9 +109,10 @@ namespace User_Interface
             if (Lv_Activities.SelectedItems.Count <= 0) return;
             for (var i = Lv_Activities.SelectedItems.Count - 1; i >= 0; i--)
             {
-                ListViewItem item = (ListViewItem)Lv_Activities.SelectedItems[i];
-                ActivityManager.GetInstance().Activities[(Guid)item.Tag].CurActivityStatus =
-                    ActivityStatus.InProgress;  //Should change to CurrentMall.Name
+                ActivityListItem item = (ActivityListItem)Lv_Activities.SelectedItems[i];
+                item.SetStatusColor(ActivityStatus.InProgress);
+                ActivityManager.GetInstance().EditActivity(mallName: MallManager.GetInstance().CurrentMall.Name, activityId: item.ActivityId, status: ActivityStatus.InProgress);
+                Lv_Activities.Items.Refresh();
             }
         }
 
@@ -106,16 +121,16 @@ namespace User_Interface
             if (Lv_Activities.SelectedItems.Count <= 0) return;
             for (var i = Lv_Activities.SelectedItems.Count - 1; i >= 0; i--)
             {
-                ListViewItem item = (ListViewItem)Lv_Activities.SelectedItems[i];
-                ActivityManager.GetInstance().Activities[(Guid)item.Tag].CurActivityStatus =
-                    ActivityStatus.Scheduled;  //Should change to CurrentMall.Name
+                ActivityListItem item = (ActivityListItem)Lv_Activities.SelectedItems[i];
+                item.SetStatusColor(ActivityStatus.Scheduled);
+                ActivityManager.GetInstance().EditActivity(mallName: MallManager.GetInstance().CurrentMall.Name, activityId: item.ActivityId, status: ActivityStatus.Scheduled);
+                Lv_Activities.Items.Refresh();
             }
         }
 
         private void Btn_SelectAll_OnClick(object sender, RoutedEventArgs e)
         {
             Lv_Activities.SelectAll();
-            //It selects every item but they are not marked in the UI
         }
 
         public void SetMainWindow(MainWindow currentWindow)
@@ -126,6 +141,11 @@ namespace User_Interface
         public void SetPreviousView(IAppView previousElement)
         {
             m_PreviousView = previousElement;
+        }
+
+        private void Lv_Activities_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
