@@ -137,7 +137,15 @@ namespace Core
             RoomManager roomManager = RoomManager.GetInstance();
             if(!roomManager.DeleteActivity(Activities[activityId].CorrespondingRoom, activityId, mallName))
             {
-                return false;
+                if (Activities[activityId].CorrespondingRoom == MallManager.GetInstance().CurrentMall.Id && MallManager.GetInstance().CurrentMall.AssociatedActivities.Contains(activityId)) 
+                {
+                    MallManager.GetInstance().CurrentMall.AssociatedActivities.Remove(activityId);
+                    SerializationManager.SaveMalls(MallManager.GetInstance().Malls);
+                }
+                else
+                {
+                    return false;
+                }
             }
 
             Activities.Remove(activityId);
