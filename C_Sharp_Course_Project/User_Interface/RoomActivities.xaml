@@ -32,7 +32,7 @@
                 <ListView ItemsSource="{Binding}" x:Name="Lv_Activities" Grid.Column="0" Grid.Row="0" Background="White" Effect="{StaticResource DropShadow}"  Margin="20" SelectionChanged="Lv_Activities_SelectionChanged">
                     <ListView.Resources>
                         <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="15"></Setter>
+                            <Setter Property="CornerRadius" Value="10"></Setter>
                         </Style>
                     </ListView.Resources>
                     <ListView.ItemContainerStyle>
@@ -127,7 +127,7 @@
                         </Button>
 
                         <Button x:Name="Btn_MarkAsScheduled"  Template="{StaticResource OrangeHighLight}" Grid.Row="0" Grid.Column="1" Click="Btn_MarkAsScheduled_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
-                           <Rectangle  Height="30" Width="30" Fill="{StaticResource ScheduledTask}"/>
+                            <Rectangle  Height="30" Width="30" Fill="{StaticResource ScheduledTask}"/>
                         </Button>
 
                         <Button x:Name="Btn_MarkAsInProgress"  Template="{StaticResource OrangeHighLight}" Grid.Row="0" Grid.Column="2" Click="Btn_MarkAsInProgress_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
@@ -139,11 +139,11 @@
                         </Button>
 
                         <Button x:Name="Btn_MarkAsCompleted"  Template="{StaticResource OrangeHighLight}" Grid.Row="1" Grid.Column="1" Click="Btn_MarkAsCompleted_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
-                          <Rectangle  Height="30" Width="30" Fill="{StaticResource Completed}"/>
+                            <Rectangle  Height="30" Width="30" Fill="{StaticResource Completed}"/>
                         </Button>
 
                         <Button x:Name="Btn_MarkAsFailed"  Template="{StaticResource OrangeHighLight}" Grid.Row="1" Grid.Column="2" Click="Btn_MarkAsFailed_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
-                           <Rectangle  Height="30" Width="30" Fill="{StaticResource FailedTask}"/>
+                            <Rectangle  Height="30" Width="30" Fill="{StaticResource FailedTask}"/>
                         </Button>
 
                     </Grid>
@@ -172,7 +172,7 @@
                         </Button>
 
                         <Button Grid.Row="1" Grid.Column="0" Template="{StaticResource OrangeHighLight}" x:Name="Btn_Delete" VerticalAlignment="Center" HorizontalAlignment="Center" Width="176" Height="47" Click="Btn_Delete_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource CancelTip}">
-                           <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <Image Source="Resources/Icons/Delete_Icon.png" VerticalAlignment="Center" Margin="0,0,5,0" Height="40"></Image>
                                 <TextBlock Text="Delete" VerticalAlignment="Center"></TextBlock>
                             </StackPanel>
