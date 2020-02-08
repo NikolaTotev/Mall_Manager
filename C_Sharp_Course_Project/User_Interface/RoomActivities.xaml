@@ -96,7 +96,7 @@
                             <GridViewColumn Header="Status" Width="90">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Rectangle x:Name="Status" Fill="{StaticResource FailedTask}" VerticalAlignment="Center" HorizontalAlignment="Center"  Width="20" Height="20"/>
+                                        <Rectangle x:Name="Status" Fill="{Binding StatusColor}" VerticalAlignment="Center" HorizontalAlignment="Center"  Width="20" Height="20"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>

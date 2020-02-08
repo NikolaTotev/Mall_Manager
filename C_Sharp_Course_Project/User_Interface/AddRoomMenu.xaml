@@ -49,7 +49,7 @@
 
         <StackPanel x:Name="Sp_RoomType_Cmb" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal">
-                <Label x:Name="Lb_RoomType" Content="Select Activity Category" FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Light" FontSize="15" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent"/>
+                <Label x:Name="Lb_RoomType" Content="Select Room Type" FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Light" FontSize="15" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent"/>
                 <Label x:Name="Lb_RoomTypeError" FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Light" FontSize="15" Foreground="{StaticResource FailedTask}" BorderBrush="Transparent"/>
             </StackPanel>
             <ComboBox x:Name="Cmb_RoomType" Width="384" Height="32" HorizontalAlignment="Center"  HorizontalContentAlignment="Center" SelectionChanged="Cmb_RoomType_SelectionChanged"/>

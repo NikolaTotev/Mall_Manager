@@ -30,9 +30,16 @@ namespace User_Interface
         {
             InitializeComponent();
             m_CurrentRoomID = currentRoomId;
-            foreach (var category in ActivityManager.GetInstance().GetCategories())
+            if (ActivityManager.GetInstance().GetCategories() != null)
             {
-                Cmb_ActivityCat.Items.Add(category);
+                foreach (var category in ActivityManager.GetInstance().GetCategories())
+                {
+                    Cmb_ActivityCat.Items.Add(category);
+                }
+            }
+            else
+            {
+                Cmb_ActivityCat.Items.Add("Other");
             }
         }
 
@@ -101,8 +108,17 @@ namespace User_Interface
             string descText = Tb_Desc.Text;
             Activity activityToAdd = new Activity(Guid.NewGuid(), m_CurrentRoomID, m_CurrentCategory, false, descText, ActivityStatus.Scheduled, Cal_StartDate.DisplayDate, Cal_EndDate.DisplayDate);
             ActivityManager.GetInstance().AddActivity(activityToAdd, MallManager.GetInstance().CurrentMall.Name);
-            RoomActivities newActivitiesPage = new RoomActivities(m_CurrentRoomID, RoomManager.GetInstance().Rooms[m_CurrentRoomID]);
-            m_CurrentMainWindow.ChangeView(newActivitiesPage, this);
+            if (m_CurrentRoomID == MallManager.GetInstance().CurrentMall.Id)
+            {
+                MallActivities mallActivitiesPage = new MallActivities();
+                m_CurrentMainWindow.ChangeView(mallActivitiesPage, this);
+            }
+            else
+            {
+                RoomActivities newActivitiesPage =
+                    new RoomActivities(m_CurrentRoomID, RoomManager.GetInstance().Rooms[m_CurrentRoomID]);
+                m_CurrentMainWindow.ChangeView(newActivitiesPage, this);
+            }
         }
 
         private void Cmb_ActivityCat_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
