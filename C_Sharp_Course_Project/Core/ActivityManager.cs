@@ -22,6 +22,7 @@ namespace Core
         private ActivityConfig m_Config;
         public Dictionary<Guid, Activity> Activities { get; set; }
 
+        public event EventHandler ActivityAdded;
 
         private ActivityManager()
         {
@@ -41,7 +42,7 @@ namespace Core
             return m_Config.Categories;
         }
 
-        public bool AddNewCategory(string category,string mallName)
+        public bool AddNewCategory(string category, string mallName)
         {
             if (category == null)
             {
@@ -59,7 +60,7 @@ namespace Core
             return true;
         }
 
-        public bool AddNewTemplate(string category, string description,string mallName)
+        public bool AddNewTemplate(string category, string description, string mallName)
         {
             if (category == null || description == null)
             {
@@ -67,13 +68,13 @@ namespace Core
                 return false;
             }
 
-            Activity newActivityTemplate = new Activity(Guid.Empty , Guid.Empty, category, true, description);
+            Activity newActivityTemplate = new Activity(Guid.Empty, Guid.Empty, category, true, description);
             m_Config.Templates.Add(newActivityTemplate);
             SerializationManager.SaveActivityConfigFile(m_Config, mallName);
             return true;
         }
 
-        public bool AddActivity(Activity activityToAdd,string mallName)
+        public bool AddActivity(Activity activityToAdd, string mallName)
         {
             //if (newId == null || category == null || description == null || corespRoom == null)
             //{
@@ -93,13 +94,13 @@ namespace Core
                 MallManager.GetInstance().CurrentMall.AssociatedActivities.Add(activityToAdd.Id);
                 SerializationManager.SaveMalls(MallManager.GetInstance().Malls);
             }
-            else if(Activities.ContainsKey(activityToAdd.Id) || !roomManager.AddActivity(activityToAdd.CorrespondingRoom, activityToAdd.Id,mallName))
+            else if (Activities.ContainsKey(activityToAdd.Id) || !roomManager.AddActivity(activityToAdd.CorrespondingRoom, activityToAdd.Id, mallName))
             {
                 return false;
             }
 
             Activities.Add(activityToAdd.Id, activityToAdd);
-            SerializationManager.SaveActivities(Activities,mallName);
+            SerializationManager.SaveActivities(Activities, mallName);
             return true;
         }
 
@@ -127,7 +128,7 @@ namespace Core
             SerializationManager.SaveActivities(Activities, mallName);
         }
 
-        public bool DeleteActivity(Guid activityId,string mallName)
+        public bool DeleteActivity(Guid activityId, string mallName)
         {
             if (!Activities.ContainsKey(activityId))
             {
@@ -135,9 +136,9 @@ namespace Core
             }
 
             RoomManager roomManager = RoomManager.GetInstance();
-            if(!roomManager.DeleteActivity(Activities[activityId].CorrespondingRoom, activityId, mallName))
+            if (!roomManager.DeleteActivity(Activities[activityId].CorrespondingRoom, activityId, mallName))
             {
-                if (Activities[activityId].CorrespondingRoom == MallManager.GetInstance().CurrentMall.Id && MallManager.GetInstance().CurrentMall.AssociatedActivities.Contains(activityId)) 
+                if (Activities[activityId].CorrespondingRoom == MallManager.GetInstance().CurrentMall.Id && MallManager.GetInstance().CurrentMall.AssociatedActivities.Contains(activityId))
                 {
                     MallManager.GetInstance().CurrentMall.AssociatedActivities.Remove(activityId);
                     SerializationManager.SaveMalls(MallManager.GetInstance().Malls);
@@ -151,7 +152,7 @@ namespace Core
             Activities.Remove(activityId);
             SerializationManager.SaveActivities(Activities, mallName);
             return true;
-            
+
         }
 
         public Dictionary<Guid, string> GetActivities()
@@ -171,5 +172,10 @@ namespace Core
             return activityDictionary;
         }
 
+        
+        protected virtual void OnActivityAdded()
+        {
+            ActivityAdded?.Invoke(this, EventArgs.Empty);
+        }
     }
 }

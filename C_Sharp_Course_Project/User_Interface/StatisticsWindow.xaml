@@ -1,0 +1,17 @@
+﻿<Window x:Class="User_Interface.StatisticsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:User_Interface"
+        mc:Ignorable="d"
+        Title="StatisticsWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="Lb_Test" Content="Test"></Label>
+        <Button x:Name="Btn_Load" Grid.Column="1" Margin="100,150,100,150" Content="Buttony McButtonface" Click="Btn_Load_OnClick"></Button>
+    </Grid>
+</Window>

@@ -28,7 +28,15 @@ namespace User_Interface
         {
             InitializeComponent();
             LoadMallList();
+           // this.Loaded += (sender, args) => ActivityManager.GetInstance().ActivityAdded += OnActivityAdded;
+           // this.Unloaded += (sender, args) => ActivityManager.GetInstance().ActivityAdded -= OnActivityAdded;
         }
+
+        private void OnActivityAdded(object sender, EventArgs e)
+        {
+          //  throw new NotImplementedException();
+        }
+
 
         public void LoadMallList()
         {
@@ -42,16 +50,21 @@ namespace User_Interface
             foreach (var mall in MallManager.GetInstance().GetMalls())
             {
                 string mallName = mall.Value.Split()[0];
-                BigButton newBigButton = new BigButton("pack://application:,,,/Resources/Icons/StoreFront_Icon.png", mallName, mall.Key);
-                this.AddHandler(BigButton.ClickChangeEvent, new RoutedEventHandler(OnButtonClick));
+                BigButton newBigButton = new BigButton("pack://application:,,,/Resources/Icons/StoreFront_Icon.png", mallName);
+                newBigButton.Tag = mall.Key;
+                AddHandler(BigButton.ClickedEvent, new RoutedEventHandler(OnMallChanged));
                 Sp_MallBtns.Children.Add(newBigButton);
             }
         }
 
-        private void OnButtonClick(object sender, RoutedEventArgs args)
+        private void OnMallChanged(object sender, RoutedEventArgs args)
         {
-            MallMenu mallMenu = new MallMenu();
-            m_CurrentMainWindow.ChangeView(mallMenu, this);
+            if (args.OriginalSource is BigButton button)
+            {
+                MallManager.GetInstance().ChangeCurrentMall((Guid)button.Tag);
+                MallMenu mallMenu = new MallMenu();
+                m_CurrentMainWindow.ChangeView(mallMenu, this);
+            }
         }
 
         private void Btn_Add_OnClick(object sender, RoutedEventArgs e)

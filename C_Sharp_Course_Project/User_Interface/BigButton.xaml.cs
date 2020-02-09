@@ -21,35 +21,32 @@ namespace User_Interface
     /// </summary>
     public partial class BigButton : UserControl
     {
-        private Guid m_MallId;
-
-        public static readonly RoutedEvent ClickChangeEvent = EventManager.RegisterRoutedEvent("ClickChangeEvent", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(BigButton));
+        public static readonly RoutedEvent ClickedEvent = EventManager.RegisterRoutedEvent("ClickedEvent", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(BigButton));
         // Provide CLR accessors for the event
+        
         public event RoutedEventHandler Click
         {
-            add { AddHandler(ClickChangeEvent, value); }
-            remove { RemoveHandler(ClickChangeEvent, value); }
+            add => AddHandler(ClickedEvent, value);
+            remove => RemoveHandler(ClickedEvent, value);
         }
         //public delegate bool ChangeMall (Guid mallId);
         //ChangeMall handler;
-        public BigButton(string imageSource, string buttonText, Guid mallId)
+        public BigButton(string imageSource, string buttonText)
         {
             InitializeComponent();
-            m_MallId = mallId;
             Tb_ButtonName.Text = buttonText;
             Img_ButtonImage.Source = new BitmapImage(new Uri(imageSource));
         }
 
-        void RaiseClickEvent()
+        void RaiseClickedEvent()
         {
-            RoutedEventArgs newEventArgs = new RoutedEventArgs(ClickChangeEvent);
+            RoutedEventArgs newEventArgs = new RoutedEventArgs(ClickedEvent) {Source = this};
             RaiseEvent(newEventArgs);
         }
 
         public void Button_Click(object sender, RoutedEventArgs e)
         {
-            MallManager.GetInstance().ChangeCurrentMall(m_MallId);
-            RaiseClickEvent();
+            RaiseClickedEvent();
         }
     }
 }
