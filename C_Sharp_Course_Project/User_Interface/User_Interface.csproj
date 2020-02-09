@@ -93,6 +93,9 @@
     <Compile Include="RoomsMenu.xaml.cs">
       <DependentUpon>RoomsMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SimpleBarGraph.xaml.cs">
+      <DependentUpon>SimpleBarGraph.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SpacePage.xaml.cs">
       <DependentUpon>SpacePage.xaml</DependentUpon>
     </Compile>
@@ -100,6 +103,7 @@
       <DependentUpon>StatisticsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="URIManager.cs" />
+    <Compile Include="VisualizationPreProcessor.cs" />
     <Page Include="AddActivityMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -156,6 +160,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\StringResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SimpleBarGraph.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
