@@ -45,8 +45,8 @@ namespace User_Interface
             DataContext = activities;
 
             sb.Append(MallManager.GetInstance().CurrentMall.Name);
-            sb.Append(" - activities");
-            Lbl_MallName.Content = sb.ToString();
+            sb.Append(" - Activities");
+            Lb_Header.Content = sb.ToString();
         }
 
         private void Btn_Add_OnClick(object sender, RoutedEventArgs e)
