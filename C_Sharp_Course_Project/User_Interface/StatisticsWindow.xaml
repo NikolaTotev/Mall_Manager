@@ -6,12 +6,6 @@
         xmlns:local="clr-namespace:User_Interface"
         mc:Ignorable="d"
         Title="StatisticsWindow" Height="450" Width="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Label x:Name="Lb_Test" Content="Test"></Label>
-        <Button x:Name="Btn_Load" Grid.Column="1" Margin="100,150,100,150" Content="Buttony McButtonface" Click="Btn_Load_OnClick"></Button>
+    <Grid x:Name="G_MainGrid">
     </Grid>
 </Window>

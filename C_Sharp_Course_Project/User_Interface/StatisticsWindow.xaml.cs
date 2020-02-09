@@ -12,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Core;
+using LiveCharts;
 
 namespace User_Interface
 {
@@ -22,60 +24,77 @@ namespace User_Interface
     {
         delegate void SetLabelText(Label lbl, string text);
         private BackgroundWorker m_Worker;
-
-
-        public StatisticsWindow()
+        private Guid m_RoomId;
+        private SimpleBarGraph m_currentGraph;
+        public StatisticsWindow(Guid roomId)
         {
+
             InitializeComponent();
-            m_Worker = new BackgroundWorker {WorkerReportsProgress = true};
+            m_RoomId = roomId;
+            m_currentGraph = new SimpleBarGraph(VisualizationPreProcessor.BasicActivityInfo(m_RoomId));
+            G_MainGrid.Children.Add(m_currentGraph);
+
+            this.Loaded += (sender, args) => ActivityManager.GetInstance().ActivitiesChanged += OnActivityAdded;
+            this.Unloaded += (sender, args) => ActivityManager.GetInstance().ActivitiesChanged -= OnActivityAdded;
+
+            m_Worker = new BackgroundWorker { WorkerReportsProgress = true };
             m_Worker.DoWork += (worker, args) =>
             {
                 //this will be executed on a background worker thread
                 if (!args.Cancel)
                 {
-                    args.Result = DoSomething((int) args.Argument, worker as BackgroundWorker);
+                    args.Result = ProcessCurrentData((int)args.Argument, worker as BackgroundWorker);
                 }
             };
             m_Worker.ProgressChanged += (o, args) =>
             {
                 //this will be executed on the main UI thread
-                Lb_Test.Content = $"Calculating... {args.ProgressPercentage}%";
+                // Lb_Test.Content = $"Calculating... {args.ProgressPercentage}%";
             };
             m_Worker.RunWorkerCompleted += (o, args) =>
             {
                 //this will be executed on the main UI thread
                 if (args.Error != null)
                 {
-                    Lb_Test.Content = $"Error!!! {args.Error.Message}";
+                    //Lb_Test.Content = $"Error!!! {args.Error.Message}";
                 }
                 else if (args.Cancelled)
                 {
-                    Lb_Test.Content = "The operations was canceled";
+                    //Lb_Test.Content = "The operations was canceled";
                 }
                 else
                 {
-                    Lb_Test.Content = $"Done! The Value is {args.Result}";
+                    m_currentGraph.UpdateData(args.Result as SeriesCollection);
                 }
             };
         }
 
-        private void Btn_Load_OnClick(object sender, RoutedEventArgs e)
+        //private void OnActivityAdded(object sender, EventArgs e)
+        //{
+        //    m_currentGraph.UpdateData(VisualizationPreProcessor.BasicActivityInfo(m_RoomId));
+        //}
+
+
+        private void OnActivityAdded(object sender, EventArgs e)
         {
-            //var thing = DoSomething();
             if (!m_Worker.IsBusy)
             {
-                Lb_Test.Content = "Calculating...";
-                int stargingValue = 5;
+                //Lb_Test.Content = "Calculating...";
                 m_Worker.RunWorkerAsync(5);
             }
         }
 
-
-        
-
-        private int DoSomething(int startingValue, BackgroundWorker worker)
+        private void Btn_Load_OnClick(object sender, RoutedEventArgs e)
         {
-            //this will be called by the background worker on the background worker thread
+            if (!m_Worker.IsBusy)
+            {
+                //Lb_Test.Content = "Calculating...";
+                m_Worker.RunWorkerAsync(5);
+            }
+        }
+
+        private SeriesCollection ProcessCurrentData(int startingValue, BackgroundWorker worker)
+        {
             int thing = 1;
             decimal total = 1000000000;
             for (int i = 0; i < total; i++)
@@ -84,15 +103,14 @@ namespace User_Interface
                 if (i != 0 && i % 10000000 == 0)
                 {
                     decimal prc = (i / total) * 100M;
-                    worker.ReportProgress((int) prc);
+                    worker.ReportProgress((int)prc);
                     if (worker.CancellationPending)
                     {
                         break;
                     }
                 }
             }
-
-            return thing + startingValue;
+            return VisualizationPreProcessor.BasicActivityInfo(m_RoomId);
         }
     }
 }
