@@ -48,6 +48,7 @@ namespace User_Interface
             };
             m_Worker.ProgressChanged += (o, args) =>
             {
+                ///Testing code used in demo will be removed later do not touch.
                 //this will be executed on the main UI thread
                 // Lb_Test.Content = $"Calculating... {args.ProgressPercentage}%";
             };
@@ -56,10 +57,12 @@ namespace User_Interface
                 //this will be executed on the main UI thread
                 if (args.Error != null)
                 {
+                    ///Testing code used in demo will be removed later do not touch.
                     //Lb_Test.Content = $"Error!!! {args.Error.Message}";
                 }
                 else if (args.Cancelled)
                 {
+                    ///Testing code used in demo will be removed later do not touch.
                     //Lb_Test.Content = "The operations was canceled";
                 }
                 else
@@ -69,16 +72,12 @@ namespace User_Interface
             };
         }
 
-        //private void OnActivityAdded(object sender, EventArgs e)
-        //{
-        //    m_currentGraph.UpdateData(VisualizationPreProcessor.BasicActivityInfo(m_RoomId));
-        //}
-
-
+       
         private void OnActivityAdded(object sender, EventArgs e)
         {
             if (!m_Worker.IsBusy)
             {
+                ///Testing code used in demo will be removed later do not touch.
                 //Lb_Test.Content = "Calculating...";
                 m_Worker.RunWorkerAsync(5);
             }
@@ -88,6 +87,7 @@ namespace User_Interface
         {
             if (!m_Worker.IsBusy)
             {
+                ///Testing code used in demo will be removed later do not touch.
                 //Lb_Test.Content = "Calculating...";
                 m_Worker.RunWorkerAsync(5);
             }
@@ -95,21 +95,22 @@ namespace User_Interface
 
         private SeriesCollection ProcessCurrentData(int startingValue, BackgroundWorker worker)
         {
-            int thing = 1;
-            decimal total = 1000000000;
-            for (int i = 0; i < total; i++)
-            {
-                thing++;
-                if (i != 0 && i % 10000000 == 0)
-                {
-                    decimal prc = (i / total) * 100M;
-                    worker.ReportProgress((int)prc);
-                    if (worker.CancellationPending)
-                    {
-                        break;
-                    }
-                }
-            }
+            ///Testing code used in demo will be removed later do not touch.
+            //int thing = 1;
+            //decimal total = 1000000000;
+            //for (int i = 0; i < total; i++)
+            //{
+            //    thing++;
+            //    if (i != 0 && i % 10000000 == 0)
+            //    {
+            //        decimal prc = (i / total) * 100M;
+            //        worker.ReportProgress((int)prc);
+            //        if (worker.CancellationPending)
+            //        {
+            //            break;
+            //        }
+            //    }
+            //}
             return VisualizationPreProcessor.BasicActivityInfo(m_RoomId);
         }
     }
