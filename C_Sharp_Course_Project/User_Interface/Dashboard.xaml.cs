@@ -28,8 +28,8 @@ namespace User_Interface
         {
             InitializeComponent();
             LoadMallList();
-           // this.Loaded += (sender, args) => ActivityManager.GetInstance().ActivityAdded += OnActivityAdded;
-           // this.Unloaded += (sender, args) => ActivityManager.GetInstance().ActivityAdded -= OnActivityAdded;
+           // this.Loaded += (sender, args) => ActivityManager.GetInstance().ActivitiesChanged += OnActivitiesChanged;
+           // this.Unloaded += (sender, args) => ActivityManager.GetInstance().ActivitiesChanged -= OnActivitiesChanged;
         }
 
         private void OnActivityAdded(object sender, EventArgs e)
