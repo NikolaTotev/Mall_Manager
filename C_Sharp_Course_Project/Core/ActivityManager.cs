@@ -22,7 +22,7 @@ namespace Core
         private ActivityConfig m_Config;
         public Dictionary<Guid, Activity> Activities { get; set; }
 
-        public event EventHandler ActivityAdded;
+        public event EventHandler ActivitiesChanged;
 
         private ActivityManager()
         {
@@ -76,18 +76,6 @@ namespace Core
 
         public bool AddActivity(Activity activityToAdd, string mallName)
         {
-            //if (newId == null || category == null || description == null || corespRoom == null)
-            //{
-            //    ExceptionManager.OnNullParamsToFunction("Add activity");
-            //    return false;
-            //}
-
-            //if (startDate > endDate)
-            //{
-            //    ExceptionManager.OnInvalidDate(); //Maybe other exception Invalid Date
-            //    return false;
-            //}
-
             RoomManager roomManager = RoomManager.GetInstance();
             if (activityToAdd.CorrespondingRoom == MallManager.GetInstance().CurrentMall.Id && !Activities.ContainsKey(activityToAdd.Id))
             {
@@ -101,6 +89,7 @@ namespace Core
 
             Activities.Add(activityToAdd.Id, activityToAdd);
             SerializationManager.SaveActivities(Activities, mallName);
+            OnActivitiesChanged();
             return true;
         }
 
@@ -126,6 +115,7 @@ namespace Core
             }
 
             SerializationManager.SaveActivities(Activities, mallName);
+            OnActivitiesChanged();
         }
 
         public bool DeleteActivity(Guid activityId, string mallName)
@@ -151,6 +141,7 @@ namespace Core
 
             Activities.Remove(activityId);
             SerializationManager.SaveActivities(Activities, mallName);
+            OnActivitiesChanged();
             return true;
 
         }
@@ -173,9 +164,9 @@ namespace Core
         }
 
         
-        protected virtual void OnActivityAdded()
+        protected virtual void OnActivitiesChanged()
         {
-            ActivityAdded?.Invoke(this, EventArgs.Empty);
+            ActivitiesChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }
