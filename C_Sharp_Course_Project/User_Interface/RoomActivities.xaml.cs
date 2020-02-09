@@ -61,7 +61,7 @@ namespace User_Interface
 
         private void Btn_Stats_OnClick(object sender, RoutedEventArgs e)
         {
-            StatisticsWindow win2 = new StatisticsWindow();
+            StatisticsWindow win2 = new StatisticsWindow(m_CurrentRoomID);
             win2.Show();
         }
 
