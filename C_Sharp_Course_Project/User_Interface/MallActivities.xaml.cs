@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,47 +50,39 @@ namespace User_Interface
             sb.Append(MallManager.GetInstance().CurrentMall.Name);
             sb.Append(" - Activities");
             Lb_Header.Content = sb.ToString();
-            RunStatistics();
+            LoadQuickStats();
         }
 
-        private void RunStatistics()
+        private void LoadQuickStats()
         {
-            SeriesCollection statistics = new SeriesCollection();
+            BackgroundWorker initWorker = new BackgroundWorker { WorkerReportsProgress = true };
 
-            PieSeries scheduled = new PieSeries();
-            scheduled.LabelPoint = PieChartStatistics.PointLabel;
-            scheduled.Title = "Scheduled";
-            scheduled.Values = new ChartValues<int> { activities.Where(x => x.Status == ActivityStatus.Scheduled).Select(x => x).ToList().Count };
-            scheduled.Fill = (Brush)Application.Current.Resources["ScheduledTask"];
-            scheduled.DataLabels = true;
-            statistics.Add(scheduled);
+            initWorker.DoWork += (worker, args) =>
+            {
+                if (!args.Cancel) args.Result = VisualizationPreProcessor.GetMallActivityInfoData();
+            };
 
-            PieSeries inProgress = new PieSeries();
-            inProgress.LabelPoint = PieChartStatistics.PointLabel;
-            inProgress.Title = "In Progress";
-            inProgress.Values = new ChartValues<int> { activities.Where(x => x.Status == ActivityStatus.InProgress).Select(x => x).ToList().Count };
-            inProgress.Fill = (Brush)Application.Current.Resources["InProgressTask"];
-            inProgress.DataLabels = true;
-            statistics.Add(inProgress);
+            initWorker.ProgressChanged += (o, args) => { };
+            initWorker.RunWorkerCompleted += (o, args) =>
+            {
+                if (args.Error != null)
+                {
 
-            PieSeries finished = new PieSeries();
-            finished.LabelPoint = PieChartStatistics.PointLabel;
-            finished.Title = "Completed";
-            finished.Values = new ChartValues<int>
-                {activities.Where(x => x.Status == ActivityStatus.Finished).Select(x => x).ToList().Count};
-            finished.Fill = (Brush)Application.Current.Resources["Completed"];
-            finished.DataLabels = true;
-            statistics.Add(finished);
+                }
+                else if (args.Cancelled)
+                {
 
-            PieSeries failed = new PieSeries();
-            failed.LabelPoint = PieChartStatistics.PointLabel;
-            failed.Title = "Failed";
-            failed.Values = new ChartValues<int> { activities.Where(x => x.Status == ActivityStatus.Failed).Select(x => x).ToList().Count };
-            failed.Fill = (Brush)Application.Current.Resources["FailedTask"];
-            failed.DataLabels = true;
-            statistics.Add(failed);
+                }
+                else
+                {
+                    PieChartStatistics.UpdateData(VisualizationPreProcessor.GenerateBasicActivityPieGraphics(args.Result as IList<(string Title, int Value, ActivityStatus Status)>, PieChartStatistics.PointLabel));
+                }
+            };
 
-            PieChartStatistics.UpdateData(statistics);
+            if (!initWorker.IsBusy)
+            {
+                initWorker.RunWorkerAsync();
+            }
         }
 
         private void Btn_Add_OnClick(object sender, RoutedEventArgs e)
@@ -113,7 +106,7 @@ namespace User_Interface
                 activities.Remove(itemToDelete);
                 Lv_Activities.Items.Refresh();
             }
-            RunStatistics();
+            LoadQuickStats();
         }
 
         private void Btn_MarkAsFailed_OnClick(object sender, RoutedEventArgs e)
@@ -127,7 +120,7 @@ namespace User_Interface
                 ActivityManager.GetInstance().EditActivity(mallName: MallManager.GetInstance().CurrentMall.Name, activityId: item.ActivityId, status: ActivityStatus.Failed);
                 Lv_Activities.Items.Refresh();
             }
-            RunStatistics();
+            LoadQuickStats();
         }
 
         private void Btn_MarkAsCompleted_OnClick(object sender, RoutedEventArgs e)
@@ -141,7 +134,7 @@ namespace User_Interface
                 ActivityManager.GetInstance().EditActivity(mallName: MallManager.GetInstance().CurrentMall.Name, activityId: item.ActivityId, status: ActivityStatus.Finished);
                 Lv_Activities.Items.Refresh();
             }
-            RunStatistics();
+            LoadQuickStats();
         }
 
         private void Btn_Deselect_OnClick(object sender, RoutedEventArgs e)
@@ -163,7 +156,7 @@ namespace User_Interface
                 ActivityManager.GetInstance().EditActivity(mallName: MallManager.GetInstance().CurrentMall.Name, activityId: item.ActivityId, status: ActivityStatus.InProgress);
                 Lv_Activities.Items.Refresh();
             }
-            RunStatistics();
+            LoadQuickStats();
         }
 
         private void Btn_MarkAsScheduled_OnClick(object sender, RoutedEventArgs e)
@@ -177,7 +170,7 @@ namespace User_Interface
                 ActivityManager.GetInstance().EditActivity(mallName: MallManager.GetInstance().CurrentMall.Name, activityId: item.ActivityId, status: ActivityStatus.Scheduled);
                 Lv_Activities.Items.Refresh();
             }
-            RunStatistics();
+            LoadQuickStats();
         }
 
         private void Btn_SelectAll_OnClick(object sender, RoutedEventArgs e)

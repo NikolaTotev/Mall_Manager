@@ -27,7 +27,7 @@ namespace User_Interface
         {
             InitializeComponent();
             PointLabel = chartPoint =>
-                string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);
+                $"{chartPoint.Y} ({chartPoint.Participation:P})";
             DataContext = this;
         }
 
