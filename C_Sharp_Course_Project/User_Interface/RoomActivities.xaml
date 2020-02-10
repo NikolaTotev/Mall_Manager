@@ -25,8 +25,8 @@
             </Grid.ColumnDefinitions>
             <Border Grid.Column="1" Background="White" Margin="27,20,27,20" Effect="{StaticResource DropShadow}"  CornerRadius="70" Padding="10 10 10 10">
                 <StackPanel>
-                    <Label Content="Quick Stats" FontSize="40" HorizontalAlignment="Center"/>
-                    <local:SimplePieChart x:Name="PieChartStatistics" Height="390"/>
+                    <Label Content="Quick Stats" HorizontalAlignment="Center" FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Bold" FontSize="30" Foreground="{StaticResource NavyBlueBase}"/>
+                    <local:SimplePieChart x:Name="PieChartStatistics" Margin="20" Height="390"/>
                 </StackPanel>
             </Border>
             <Grid Grid.Column="0">
