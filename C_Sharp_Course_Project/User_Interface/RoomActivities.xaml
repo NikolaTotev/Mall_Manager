@@ -23,7 +23,12 @@
                 <ColumnDefinition Width="1.9*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Border Grid.Column="1" Background="White" Margin="27,20,27,20" Effect="{StaticResource DropShadow}"  CornerRadius="70"></Border>
+            <Border Grid.Column="1" Background="White" Margin="27,20,27,20" Effect="{StaticResource DropShadow}"  CornerRadius="70" Padding="10 10 10 10">
+                <StackPanel>
+                    <Label Content="Quick Stats" FontSize="40" HorizontalAlignment="Center"/>
+                    <local:SimplePieChart x:Name="PieChartStatistics" Height="390"/>
+                </StackPanel>
+            </Border>
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2.5*"></RowDefinition>

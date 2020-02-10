@@ -96,6 +96,9 @@
     <Compile Include="SimpleBarGraph.xaml.cs">
       <DependentUpon>SimpleBarGraph.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SimplePieChart.xaml.cs">
+      <DependentUpon>SimplePieChart.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SpacePage.xaml.cs">
       <DependentUpon>SpacePage.xaml</DependentUpon>
     </Compile>
@@ -164,6 +167,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SimpleBarGraph.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SimplePieChart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
