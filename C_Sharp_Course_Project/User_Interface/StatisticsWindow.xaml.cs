@@ -44,7 +44,14 @@ namespace User_Interface
 
             initWorker.DoWork += (worker, args) =>
             {
-                if (!args.Cancel) args.Result = VisualizationPreProcessor.GetRoomActivityInfoData(m_RoomId);
+                if (MallManager.GetInstance().Malls.ContainsKey(m_RoomId))
+                {
+                    if (!args.Cancel) args.Result = VisualizationPreProcessor.GetMallAssociatedActivityInfoData(m_RoomId);
+                }
+                else
+                {
+                    if (!args.Cancel) args.Result = VisualizationPreProcessor.GetRoomActivityInfoData(m_RoomId);
+                }
             };
 
             initWorker.ProgressChanged += (o, args) => { };
@@ -161,6 +168,9 @@ namespace User_Interface
 
         private IList<(string Title, int Value, ActivityStatus Status)> ProcessCurrentData(int startingValue, BackgroundWorker worker)
         {
+            if (MallManager.GetInstance().Malls.ContainsKey(m_RoomId))
+                return VisualizationPreProcessor.GetMallAssociatedActivityInfoData(m_RoomId);
+
             return VisualizationPreProcessor.GetRoomActivityInfoData(m_RoomId);
         }
     }
