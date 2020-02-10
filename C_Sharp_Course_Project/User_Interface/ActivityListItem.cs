@@ -13,13 +13,13 @@ namespace User_Interface
 {
     class ActivityListItem : INotifyPropertyChanged
     {
-        private bool _isSelected;
+        private bool m_IsSelected;
         public bool IsSelected
         {
-            get { return _isSelected; }
+            get { return m_IsSelected; }
             set
             {
-                _isSelected = value;
+                m_IsSelected = value;
                 OnPropertyChanged("IsSelected");
             }
         }

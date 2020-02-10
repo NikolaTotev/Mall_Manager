@@ -5,6 +5,7 @@ using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -24,11 +25,29 @@ namespace User_Interface
     {
         private MainWindow m_CurrentMainWindow;
         private IAppView m_PreviousView;
+        private List<RoomListItem> m_Rooms;
         public RoomsMenu()
         {
             InitializeComponent();
             Lbl_MallName.Content = MallManager.GetInstance().CurrentMall.Name;
-            LoadRentalSpaces();
+            
+            Lv_RentalSpaces.SelectionMode = SelectionMode.Multiple;
+            m_Rooms = new List<RoomListItem>();
+            foreach (Room room in RoomManager.GetInstance().Rooms.Values.ToList())
+            {
+                RoomListItem itemToAdd = new RoomListItem
+                {
+                    RoomId = room.Id,
+                    RoomName = room.Name,
+                    Description = room.Description,
+                    RoomFloor = room.Floor.ToString(),
+                    RoomNumber = room.RoomNumber.ToString(),
+                    DateCreated = room.CreateDate.ToShortDateString(),
+                    LastEdited = room.LastEditDate.ToShortDateString()
+                };
+                m_Rooms.Add(itemToAdd);
+            }
+            DataContext = m_Rooms;
         }
 
         public void LoadRentalSpaces()
@@ -80,17 +99,30 @@ namespace User_Interface
 
         private void Btn_DeleteRentalSpace_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (Lv_RentalSpaces.SelectedItems.Count <= 0) return;
+            for (var i = Lv_RentalSpaces.SelectedItems.Count - 1; i >= 0; i--)
+            {
+                RoomListItem itemToDelete = (RoomListItem)Lv_RentalSpaces.SelectedItems[i];
+                RoomManager.GetInstance().DeleteRoom(itemToDelete.RoomId, MallManager.GetInstance().CurrentMall.Name);
+                m_Rooms.Remove(itemToDelete);
+                Lv_RentalSpaces.Items.Refresh();
+            }
         }
 
         private void Btn_SelectAll_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            foreach (RoomListItem item in Lv_RentalSpaces.Items)
+            {
+                item.IsSelected = true;
+            }
         }
 
         private void Btn_DeselectAllSelected_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            foreach (RoomListItem item in Lv_RentalSpaces.Items)
+            {
+                item.IsSelected = false;
+            }
         }
     }
 }

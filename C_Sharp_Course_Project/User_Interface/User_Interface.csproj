@@ -90,6 +90,7 @@
     <Compile Include="RoomInfoPage.xaml.cs">
       <DependentUpon>RoomInfoPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RoomListItem.cs" />
     <Compile Include="RoomsMenu.xaml.cs">
       <DependentUpon>RoomsMenu.xaml</DependentUpon>
     </Compile>

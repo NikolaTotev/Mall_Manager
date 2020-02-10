@@ -28,16 +28,16 @@ namespace User_Interface
         private IAppView m_PreviousView;
         private Guid m_CurrentRoomID;
         private Room m_CurrentRoom;
-        private StringBuilder sb;
-        private List<ActivityListItem> activities;
+        private readonly StringBuilder m_Sb;
+        private readonly List<ActivityListItem> m_Activities;
         public RoomActivities(Guid currentRoomId, Room currentRoom)
         {
             InitializeComponent();
-            sb = new StringBuilder();
+            m_Sb = new StringBuilder();
             m_CurrentRoomID = currentRoomId;
             m_CurrentRoom = currentRoom;
             Lv_Activities.SelectionMode = SelectionMode.Multiple;
-            activities = new List<ActivityListItem>();
+            m_Activities = new List<ActivityListItem>();
             foreach (var activityId in m_CurrentRoom.Activities)
             {
                 ActivityListItem itemToAdd = new ActivityListItem();
@@ -47,14 +47,14 @@ namespace User_Interface
                 itemToAdd.Category = currentActivity.Category;
                 itemToAdd.Status = currentActivity.CurActivityStatus;
                 itemToAdd.SetStatusColor(currentActivity.CurActivityStatus);
-                activities.Add(itemToAdd);
+                m_Activities.Add(itemToAdd);
             }
 
-            DataContext = activities;
+            DataContext = m_Activities;
 
-            sb.Append(m_CurrentRoom.Name);
-            sb.Append(" - activities");
-            Lb_Header.Content = sb.ToString();
+            m_Sb.Append(m_CurrentRoom.Name);
+            m_Sb.Append(" - activities");
+            Lb_Header.Content = m_Sb.ToString();
             LoadQuickStats();
         }
 
@@ -109,7 +109,7 @@ namespace User_Interface
             {
                 ActivityListItem itemToDelete = (ActivityListItem)Lv_Activities.SelectedItems[i];
                 ActivityManager.GetInstance().DeleteActivity(itemToDelete.ActivityId, MallManager.GetInstance().CurrentMall.Name);
-                activities.Remove(itemToDelete);
+                m_Activities.Remove(itemToDelete);
                 Lv_Activities.Items.Refresh();
             }
             LoadQuickStats();

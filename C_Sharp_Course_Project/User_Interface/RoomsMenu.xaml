@@ -35,15 +35,93 @@
 
         </Border>
 
-        <ListView x:Name="Lv_RentalSpaces" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" Grid.Row="2" SelectionChanged="Lv_RentalSpaces_SelectionChanged" Margin="0,0,0,20">
+        <ListView ItemsSource="{Binding}" x:Name="Lv_RentalSpaces"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" Grid.Row="2" SelectionChanged="Lv_RentalSpaces_SelectionChanged" Margin="0,0,0,20">
             <ListView.Resources>
                 <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="20"></Setter>
+                    <Setter Property="CornerRadius" Value="10"></Setter>
                 </Style>
             </ListView.Resources>
-            <ListView.Effect>
-                <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
-            </ListView.Effect>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="IsSelected" Value="{Binding IsSelected}"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+
+            <ListView.View>
+                <GridView>
+                    <GridView.ColumnHeaderContainerStyle>
+                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                            <Setter Property="Background" Value="White"></Setter>
+                            <Setter Property="Foreground" Value="{StaticResource NavyBlueBase}"></Setter>
+                            <Setter Property="BorderBrush" Value="{x:Null}"></Setter>
+                            <Setter Property="BorderThickness" Value="0"></Setter>
+                            <Setter Property="Margin" Value="0"></Setter>
+                            <Setter Property="Padding" Value="0"></Setter>
+                            <Setter Property="FontFamily" Value="{StaticResource Montserrat}"></Setter>
+                            <Setter Property="FontWeight" Value="Medium"></Setter>
+                            <Setter Property="FontSize" Value="20"></Setter>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="{StaticResource OrangeButtonHighlight}" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+
+                    </GridView.ColumnHeaderContainerStyle>
+                    <GridViewColumn Width="40">
+                        <GridViewColumn.CellTemplate >
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding IsSelected}" BorderBrush="{StaticResource OrangeAccent}" BorderThickness="3" FontSize="20" >
+                                    <CheckBox.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="3"></Setter>
+                                        </Style>
+                                    </CheckBox.Resources>
+                                </CheckBox>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Room name" Width="270">
+
+                        <GridViewColumn.CellTemplate>
+
+                            <DataTemplate>
+
+                                <TextBlock x:Name="Tbl_Name" HorizontalAlignment="Center" Text="{Binding RoomName}" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="20" Foreground="{StaticResource NavyBlueBase}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Number"  Width="140">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock x:Name="Tbl_Number" HorizontalAlignment="Center" Text="{Binding RoomNumber}" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="20" Foreground="{StaticResource NavyBlueBase}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Floor"  Width="140">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock x:Name="Tbl_Floor" HorizontalAlignment="Center" Text="{Binding RoomFloor}" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="20" Foreground="{StaticResource NavyBlueBase}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Date Created"  Width="200">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock x:Name="Tbl_DateCreated" HorizontalAlignment="Center" Text="{Binding DateCreated}" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="20" Foreground="{StaticResource NavyBlueBase}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Last Edited"  Width="200">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock x:Name="Tbl_LastEdited" HorizontalAlignment="Center" Text="{Binding LastEdited}" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="20" Foreground="{StaticResource NavyBlueBase}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
         </ListView>
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
