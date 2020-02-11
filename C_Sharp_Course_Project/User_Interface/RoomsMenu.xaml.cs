@@ -124,5 +124,16 @@ namespace User_Interface
                 item.IsSelected = false;
             }
         }
+
+        private void RoomItem_OnDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            RoomListItem item = ((ListViewItem)sender).Content as RoomListItem;
+            if (item == null)
+            {
+                return;
+            }
+            SpacePage space = new SpacePage(item.RoomId);
+            m_CurrentMainWindow.ChangeView(space, this);
+        }
     }
 }
