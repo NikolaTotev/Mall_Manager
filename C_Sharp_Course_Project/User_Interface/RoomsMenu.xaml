@@ -25,10 +25,9 @@
                 <Button Template="{StaticResource BackButton}" x:Name="Btn_Back" Margin="0,5,15,5" Background="Transparent" Click="Btn_Back_OnClick">
                     <Image Source="Resources/Icons/NavigateBack_Icon.png" VerticalAlignment="Center" Margin="0,-10,0,-10" Height="40"></Image>
                 </Button>
-                <TextBlock x:Name="Tbl_MallName" Text="/Mall Name/"></TextBlock>
+                <TextBlock x:Name="Tbl_HeaderText" Text="/Mall Name/ - Rental Spaces"></TextBlock>
             </StackPanel>
         </Label>
-
 
         <Border BorderBrush="Transparent" Background="White" BorderThickness="2" VerticalAlignment="Center" Effect="{StaticResource DropShadow}" CornerRadius="10" Grid.Row="1" Padding="3"  Margin="300,0,300,0">
             <StackPanel Margin="5"

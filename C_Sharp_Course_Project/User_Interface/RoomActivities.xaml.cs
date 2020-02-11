@@ -26,19 +26,18 @@ namespace User_Interface
     {
         private MainWindow m_CurrentMainWindow;
         private IAppView m_PreviousView;
-        private Guid m_CurrentRoomID;
-        private Room m_CurrentRoom;
-        private readonly StringBuilder m_Sb;
+        private IAppView m_NextView;
+        private readonly Guid m_CurrentRoomId;
         private readonly List<ActivityListItem> m_Activities;
         public RoomActivities(Guid currentRoomId, Room currentRoom)
         {
             InitializeComponent();
-            m_Sb = new StringBuilder();
-            m_CurrentRoomID = currentRoomId;
-            m_CurrentRoom = currentRoom;
+            var sb = new StringBuilder();
+            m_CurrentRoomId = currentRoomId;
+            var currentRoom1 = currentRoom;
             Lv_Activities.SelectionMode = SelectionMode.Multiple;
             m_Activities = new List<ActivityListItem>();
-            foreach (var activityId in m_CurrentRoom.Activities)
+            foreach (var activityId in currentRoom1.Activities)
             {
                 ActivityListItem itemToAdd = new ActivityListItem();
                 Activity currentActivity = ActivityManager.GetInstance().Activities[activityId];
@@ -52,9 +51,9 @@ namespace User_Interface
 
             DataContext = m_Activities;
 
-            m_Sb.Append(m_CurrentRoom.Name);
-            m_Sb.Append(" - activities");
-            Lb_Header.Content = m_Sb.ToString();
+            sb.Append(currentRoom1.Name);
+            sb.Append(" - Activities");
+            Tbl_HeaderText.Text = sb.ToString();
             LoadQuickStats();
         }
 
@@ -64,7 +63,7 @@ namespace User_Interface
 
             initWorker.DoWork += (worker, args) =>
             {
-                if (!args.Cancel) args.Result = VisualizationPreProcessor.GetRoomActivityInfoData(m_CurrentRoomID);
+                if (!args.Cancel) args.Result = VisualizationPreProcessor.GetRoomActivityInfoData(m_CurrentRoomId);
             };
 
             initWorker.ProgressChanged += (o, args) => { };
@@ -72,15 +71,21 @@ namespace User_Interface
             {
                 if (args.Error != null)
                 {
-
+                    Lb_StatsLoading.Content = "Error Loading Statistics.";
+                    Lb_StatsLoading.Foreground = Brushes.IndianRed;
                 }
                 else if (args.Cancelled)
                 {
-
+                    Lb_StatsLoading.Content = "Error Loading Statistics.";
+                    Lb_StatsLoading.Foreground = Brushes.IndianRed;
                 }
                 else
                 {
-                    PieChartStatistics.UpdateData(VisualizationPreProcessor.GenerateBasicActivityPieGraphics(args.Result as IList<(string Title, int Value, ActivityStatus Status)>, PieChartStatistics.PointLabel));
+                    if (args.Result is IList<(string Title, int Value, ActivityStatus Status)> statList)
+                    {
+                        Sp_QuickStats.Children.Remove(Lb_StatsLoading);
+                        PieChartStatistics.UpdateData(VisualizationPreProcessor.GenerateBasicActivityPieGraphics(args.Result as IList<(string Title, int Value, ActivityStatus Status)>, PieChartStatistics.PointLabel));
+                    }
                 }
             };
 
@@ -92,13 +97,13 @@ namespace User_Interface
 
         private void Btn_Add_OnClick(object sender, RoutedEventArgs e)
         {
-            AddActivityMenu menuToDisplay = new AddActivityMenu(m_CurrentRoomID);
-            m_CurrentMainWindow.ChangeView(menuToDisplay, this);
+            AddActivityMenu menuToDisplay = new AddActivityMenu(m_CurrentRoomId);
+            m_CurrentMainWindow.ChangeViewForward(menuToDisplay, this);
         }
 
         private void Btn_Stats_OnClick(object sender, RoutedEventArgs e)
         {
-            StatisticsWindow win2 = new StatisticsWindow(m_CurrentRoomID);
+            StatisticsWindow win2 = new StatisticsWindow(m_CurrentRoomId);
             win2.Show();
         }
 
@@ -121,7 +126,6 @@ namespace User_Interface
             for (var i = Lv_Activities.SelectedItems.Count - 1; i >= 0; i--)
             {
                 ActivityListItem item = (ActivityListItem)Lv_Activities.SelectedItems[i];
-                //  item.Status = ActivityStatus.Failed;
                 item.SetStatusColor(ActivityStatus.Failed);
                 ActivityManager.GetInstance().EditActivity(mallName: MallManager.GetInstance().CurrentMall.Name, activityId: item.ActivityId, status: ActivityStatus.Failed);
                 Lv_Activities.Items.Refresh();
@@ -135,7 +139,6 @@ namespace User_Interface
             for (var i = Lv_Activities.SelectedItems.Count - 1; i >= 0; i--)
             {
                 ActivityListItem item = (ActivityListItem)Lv_Activities.SelectedItems[i];
-                //item.Status = ActivityStatus.Finished;
                 item.SetStatusColor(ActivityStatus.Finished);
                 ActivityManager.GetInstance().EditActivity(mallName: MallManager.GetInstance().CurrentMall.Name, activityId: item.ActivityId, status: ActivityStatus.Finished);
                 Lv_Activities.Items.Refresh();
@@ -189,14 +192,24 @@ namespace User_Interface
             m_CurrentMainWindow = currentWindow;
         }
 
-        public void SetPreviousView(IAppView previousElement)
+        public void SetPreviousView(IAppView previousView)
         {
-            m_PreviousView = previousElement;
+            m_PreviousView = previousView;
+        }
+
+        public void SetNextView(IAppView nextView)
+        {
+            m_NextView = nextView;
         }
 
         private void Lv_Activities_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void Btn_Back_OnClick(object sender, RoutedEventArgs e)
+        {
+            m_CurrentMainWindow.ChangeViewBackward(m_PreviousView, this);
         }
     }
 }

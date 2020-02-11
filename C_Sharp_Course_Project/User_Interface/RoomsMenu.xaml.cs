@@ -25,12 +25,13 @@ namespace User_Interface
     {
         private MainWindow m_CurrentMainWindow;
         private IAppView m_PreviousView;
-        private List<RoomListItem> m_Rooms;
+        private IAppView m_NextView;
+        private readonly List<RoomListItem> m_Rooms;
         public RoomsMenu()
         {
             InitializeComponent();
-            Tbl_MallName.Text = MallManager.GetInstance().CurrentMall.Name;
-            
+            Tbl_HeaderText.Text = MallManager.GetInstance().CurrentMall.Name + " - Rental Spaces";
+
             Lv_RentalSpaces.SelectionMode = SelectionMode.Multiple;
             m_Rooms = new List<RoomListItem>();
             foreach (Room room in RoomManager.GetInstance().Rooms.Values.ToList())
@@ -57,7 +58,7 @@ namespace User_Interface
             {
                 ListViewItem itemToAdd = new ListViewItem();
                 itemToAdd.Tag = rentalSpace.Key;
-                
+
                 if (rentalSpace.Value is Room currentRoom)
                 {
                     itemToAdd.Content = currentRoom.Name;
@@ -71,15 +72,20 @@ namespace User_Interface
             m_CurrentMainWindow = currentWindow;
         }
 
-        public void SetPreviousView(IAppView previousElement)
+        public void SetPreviousView(IAppView previousView)
         {
-            m_PreviousView = previousElement;
+            m_PreviousView = previousView;
+        }
+
+        public void SetNextView(IAppView nextView)
+        {
+            m_NextView = nextView;
         }
 
         private void Btn_AddRentalSpace_Click(object sender, RoutedEventArgs e)
         {
             AddRoomMenu addRoom = new AddRoomMenu();
-            m_CurrentMainWindow.ChangeView(addRoom, this);
+            m_CurrentMainWindow.ChangeViewForward(addRoom, this);
         }
 
         private void Lv_RentalSpaces_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -91,9 +97,9 @@ namespace User_Interface
             //        SpacePage space = new SpacePage((Guid)currentSelection.Tag);
             //        space.SetMainWindow(m_CurrentMainWindow);
             //        space.SetPreviousView(this);
-            //        m_CurrentMainWindow.ChangeView(space, this);
+            //        m_CurrentMainWindow.ChangeViewForward(space, this);
             //    }
-                
+
             //}
         }
 
@@ -132,15 +138,15 @@ namespace User_Interface
                 SpacePage space = new SpacePage(currentSelection.RoomId);
                 space.SetMainWindow(m_CurrentMainWindow);
                 space.SetPreviousView(this);
-                m_CurrentMainWindow.ChangeView(space, this);
+                m_CurrentMainWindow.ChangeViewForward(space, this);
             }
         }
 
         private void Btn_Back_OnClick(object sender, RoutedEventArgs e)
         {
-            m_CurrentMainWindow.ChangeView(m_PreviousView, this);
+            m_CurrentMainWindow.ChangeViewBackward(m_PreviousView, this);
         }
-        
+
 
         private void RoomItem_OnDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -150,7 +156,7 @@ namespace User_Interface
                 return;
             }
             SpacePage space = new SpacePage(item.RoomId);
-            m_CurrentMainWindow.ChangeView(space, this);
+            m_CurrentMainWindow.ChangeViewForward(space, this);
         }
     }
 }

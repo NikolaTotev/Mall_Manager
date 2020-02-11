@@ -23,6 +23,7 @@ namespace User_Interface
     {
         private MainWindow m_CurrentMainWindow;
         private IAppView m_PreviousView;
+        private IAppView m_NextView;
         private Guid m_CurrentRoomID;
         private string m_CurrentCategory;
         private bool m_ValidDate;
@@ -48,14 +49,19 @@ namespace User_Interface
             m_CurrentMainWindow = currentWindow;
         }
 
-        public void SetPreviousView(IAppView previousElement)
+        public void SetPreviousView(IAppView previousView)
         {
-            m_PreviousView = previousElement;
+            m_PreviousView = previousView;
+        }
+
+        public void SetNextView(IAppView nextView)
+        {
+            m_NextView = nextView;
         }
 
         private void Btn_Cancel_OnClick(object sender, RoutedEventArgs e)
         {
-            m_CurrentMainWindow.ChangeView(m_PreviousView, this);
+            m_CurrentMainWindow.ChangeViewForward(m_PreviousView, this);
         }
 
 
@@ -111,13 +117,13 @@ namespace User_Interface
             if (m_CurrentRoomID == MallManager.GetInstance().CurrentMall.Id)
             {
                 MallActivities mallActivitiesPage = new MallActivities();
-                m_CurrentMainWindow.ChangeView(mallActivitiesPage, this);
+                m_CurrentMainWindow.ChangeViewForward(mallActivitiesPage, this);
             }
             else
             {
                 RoomActivities newActivitiesPage =
                     new RoomActivities(m_CurrentRoomID, RoomManager.GetInstance().Rooms[m_CurrentRoomID]);
-                m_CurrentMainWindow.ChangeView(newActivitiesPage, this);
+                m_CurrentMainWindow.ChangeViewForward(newActivitiesPage, this);
             }
         }
 

@@ -26,14 +26,15 @@ namespace User_Interface
     {
         private MainWindow m_CurrentMainWindow;
         private IAppView m_PreviousView;
+        private IAppView m_NextView;
         private StringBuilder sb;
-        private List<ActivityListItem> activities;
+        private readonly List<ActivityListItem> m_Activities;
         public MallActivities()
         {
             InitializeComponent();
             sb = new StringBuilder();
             Lv_Activities.SelectionMode = SelectionMode.Multiple;
-            activities = new List<ActivityListItem>();
+            m_Activities = new List<ActivityListItem>();
             foreach (var activityId in MallManager.GetInstance().CurrentMall.AssociatedActivities)
             {
                 ActivityListItem itemToAdd = new ActivityListItem();
@@ -42,14 +43,14 @@ namespace User_Interface
                 itemToAdd.Description = currentActivity.Description;
                 itemToAdd.Category = currentActivity.Category;
                 itemToAdd.SetStatusColor(currentActivity.CurActivityStatus);
-                activities.Add(itemToAdd);
+                m_Activities.Add(itemToAdd);
             }
 
-            DataContext = activities;
+            DataContext = m_Activities;
 
             sb.Append(MallManager.GetInstance().CurrentMall.Name);
             sb.Append(" - Activities");
-            Lb_Header.Content = sb.ToString();
+            Tbl_HeaderText.Text = sb.ToString();
             LoadQuickStats();
         }
 
@@ -67,14 +68,17 @@ namespace User_Interface
             {
                 if (args.Error != null)
                 {
-
+                    Lb_StatsLoading.Content = "Error Loading Statistics.";
+                    Lb_StatsLoading.Foreground = Brushes.IndianRed;
                 }
                 else if (args.Cancelled)
                 {
-
+                    Lb_StatsLoading.Content = "Error Loading Statistics.";
+                    Lb_StatsLoading.Foreground = Brushes.IndianRed;
                 }
                 else
                 {
+                    Sp_QuickStats.Children.Remove(Lb_StatsLoading);
                     PieChartStatistics.UpdateData(VisualizationPreProcessor.GenerateBasicActivityPieGraphics(args.Result as IList<(string Title, int Value, ActivityStatus Status)>, PieChartStatistics.PointLabel));
                 }
             };
@@ -88,7 +92,7 @@ namespace User_Interface
         private void Btn_Add_OnClick(object sender, RoutedEventArgs e)
         {
             AddActivityMenu menuToDisplay = new AddActivityMenu(MallManager.GetInstance().CurrentMall.Id);
-            m_CurrentMainWindow.ChangeView(menuToDisplay, this);
+            m_CurrentMainWindow.ChangeViewForward(menuToDisplay, this);
         }
 
         private void Btn_Stats_OnClick(object sender, RoutedEventArgs e)
@@ -104,7 +108,7 @@ namespace User_Interface
             {
                 ActivityListItem itemToDelete = (ActivityListItem)Lv_Activities.SelectedItems[i];
                 ActivityManager.GetInstance().DeleteActivity(itemToDelete.ActivityId, MallManager.GetInstance().CurrentMall.Name);
-                activities.Remove(itemToDelete);
+                m_Activities.Remove(itemToDelete);
                 Lv_Activities.Items.Refresh();
             }
             LoadQuickStats();
@@ -184,14 +188,24 @@ namespace User_Interface
             m_CurrentMainWindow = currentWindow;
         }
 
-        public void SetPreviousView(IAppView previousElement)
+        public void SetPreviousView(IAppView previousView)
         {
-            m_PreviousView = previousElement;
+            m_PreviousView = previousView;
+        }
+
+        public void SetNextView(IAppView nextView)
+        {
+            m_NextView = nextView;
         }
 
         private void Lv_Activities_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void Btn_Back_OnClick(object sender, RoutedEventArgs e)
+        {
+            m_CurrentMainWindow.ChangeViewBackward(m_PreviousView, this);
         }
     }
 }

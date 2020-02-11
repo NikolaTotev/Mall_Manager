@@ -23,8 +23,9 @@ namespace User_Interface
     {
         private MainWindow m_CurrentMainWindow;
         private IAppView m_PreviousView;
-        private Room m_CurrentRoom;
-        private StringBuilder m_StringBuilder = new StringBuilder();
+        private IAppView m_NextView;
+        private readonly Room m_CurrentRoom;
+        private readonly StringBuilder m_StringBuilder = new StringBuilder();
         public RoomInfoPage(Room currentRoom)
         {
             InitializeComponent();
@@ -32,11 +33,11 @@ namespace User_Interface
 
             m_StringBuilder.Append(m_CurrentRoom.Name);
             m_StringBuilder.Append(" - Information");
-            Lb_Header.Content = m_StringBuilder.ToString();
+            Tbl_HeaderText.Text = m_StringBuilder.ToString();
             Tb_Name.Text = m_CurrentRoom.Name;
             Tb_Desc.Text = m_CurrentRoom.Description;
             Lb_DateCreated.Content = m_CurrentRoom.CreateDate.ToShortDateString();
-            Lb_LastEdited.Content= m_CurrentRoom.LastEditDate.ToShortDateString();
+            Lb_LastEdited.Content = m_CurrentRoom.LastEditDate.ToShortDateString();
 
             foreach (var type in RoomManager.GetInstance().GetRoomTypes())
             {
@@ -47,7 +48,7 @@ namespace User_Interface
 
         private void Btn_Close_OnClick(object sender, RoutedEventArgs e)
         {
-            m_CurrentMainWindow.ChangeView(m_PreviousView, this);
+            m_CurrentMainWindow.ChangeViewForward(m_PreviousView, this);
         }
 
         public void SetMainWindow(MainWindow currentWindow)
@@ -55,14 +56,25 @@ namespace User_Interface
             m_CurrentMainWindow = currentWindow;
         }
 
-        public void SetPreviousView(IAppView previousElement)
+        public void SetPreviousView(IAppView previousView)
         {
-            m_PreviousView = previousElement;
+            m_PreviousView = previousView;
         }
 
+        public void SetNextView(IAppView nextView)
+        {
+            m_NextView = nextView;
+        }
+
+        //TODO Complete Save functionality.
         private void Btn_Save_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            string newName = Tb_Name.Text;
+            string newDesc = Tb_Desc.Text;
+            string newType = Cmb_RoomType.SelectionBoxItemStringFormat;
+            //int newNumber;
+            //int newFloor;
+            //RoomManager.GetInstance().EditRoom(MallManager.GetInstance().CurrentMall.Name, m_CurrentRoom.Id,Tb_Name.Text,Tb_Desc.Text,Cmb_RoomType.SelectionBoxItemStringFormat);
         }
 
         private void Tb_Desc_OnTextChanged(object sender, TextChangedEventArgs e)
@@ -71,6 +83,11 @@ namespace User_Interface
 
         private void Tb_Name_OnTextChanged(object sender, TextChangedEventArgs e)
         {
+        }
+
+        private void Btn_Back_OnClick(object sender, RoutedEventArgs e)
+        {
+            m_CurrentMainWindow.ChangeViewBackward(m_PreviousView, this);
         }
     }
 }

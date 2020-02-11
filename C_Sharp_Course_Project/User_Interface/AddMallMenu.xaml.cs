@@ -22,7 +22,8 @@ namespace User_Interface
     public partial class AddMallMenu : UserControl, IAppView
     {
         private MainWindow m_CurrentMainWindow;
-        private IAppView m_PreviousElement;
+        private IAppView m_PreviousView;
+        private IAppView m_NextView;
         public AddMallMenu()
         {
             InitializeComponent();
@@ -33,15 +34,20 @@ namespace User_Interface
             m_CurrentMainWindow = currentWindow;
         }
 
-        public void SetPreviousView(IAppView previousElement)
+        public void SetPreviousView(IAppView previousView)
         {
-            m_PreviousElement = previousElement;
+            m_PreviousView = previousView;
+        }
+
+        public void SetNextView(IAppView nextView)
+        {
+            m_NextView = nextView;
         }
 
         private void Btn_Cancel_OnClick(object sender, RoutedEventArgs e)
         {
 
-            m_CurrentMainWindow.ChangeView(m_PreviousElement, this);
+            m_CurrentMainWindow.ChangeViewForward(m_PreviousView, this);
         }
 
         private void Btn_Add_OnClick(object sender, RoutedEventArgs e)
@@ -51,7 +57,7 @@ namespace User_Interface
             Dashboard newDash = new Dashboard();
             newDash.SetPreviousView(this);
             newDash.SetMainWindow(m_CurrentMainWindow);
-            m_CurrentMainWindow.ChangeView(newDash, this);
+            m_CurrentMainWindow.ChangeViewForward(newDash, this);
         }
 
         private void Tb_Name_GotFocus(object sender, RoutedEventArgs e)

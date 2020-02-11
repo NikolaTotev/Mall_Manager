@@ -29,7 +29,7 @@ namespace User_Interface
             InitializeComponent();
             m_CurrentManager = ProgramManager.GetInstance();
             Dashboard startDash = new Dashboard();
-            ChangeView(startDash, null);
+            ChangeViewForward(startDash, null);
             Strings.Source= new Uri("pack://application:,,,/Resources/StringResources.xaml");
         }
 
@@ -38,13 +38,27 @@ namespace User_Interface
 
         }
 
-        public void ChangeView(IAppView viewToLoad, IAppView previousToSave)
+        public void ChangeViewForward(IAppView viewToLoad, IAppView previousToSave)
         {
             if (viewToLoad != null)
             {
                 p_StartPanel.Children.Clear();
                 viewToLoad.SetMainWindow(this);
                 viewToLoad.SetPreviousView(previousToSave);
+                if (viewToLoad is UIElement elementToAdd)
+                {
+                    p_StartPanel.Children.Add(elementToAdd);
+                }
+            }
+        }
+
+        public void ChangeViewBackward(IAppView viewToLoad, IAppView nextView)
+        {
+            if (viewToLoad != null)
+            {
+                p_StartPanel.Children.Clear();
+                viewToLoad.SetMainWindow(this);
+                viewToLoad.SetNextView(nextView);
                 if (viewToLoad is UIElement elementToAdd)
                 {
                     p_StartPanel.Children.Add(elementToAdd);

@@ -23,10 +23,11 @@ namespace User_Interface
     {
         private MainWindow m_CurrentMainWindow;
         private IAppView m_PreviousView;
+        private IAppView m_NextView;
         public MallMenu()
         {
             InitializeComponent();
-            Tbl_MallName.Text = MallManager.GetInstance().CurrentMall.Name;
+            Tbl_HeaderText.Text = MallManager.GetInstance().CurrentMall.Name;
         }
 
         public void SetMainWindow(MainWindow currentWindow)
@@ -34,15 +35,20 @@ namespace User_Interface
             m_CurrentMainWindow = currentWindow;
         }
 
-        public void SetPreviousView(IAppView previousElement)
+        public void SetPreviousView(IAppView previousView)
         {
-            m_PreviousView = previousElement;
+            m_PreviousView = previousView;
+        }
+
+        public void SetNextView(IAppView nextView)
+        {
+            m_NextView = nextView;
         }
 
         private void Btn_RentalSpaces_Click(object sender, RoutedEventArgs e)
         {
             RoomsMenu rooms = new RoomsMenu();
-            m_CurrentMainWindow.ChangeView(rooms, this);
+            m_CurrentMainWindow.ChangeViewForward(rooms, this);
         }
 
         private void Btn_Statistics_OnClick(object sender, RoutedEventArgs e)
@@ -52,13 +58,13 @@ namespace User_Interface
 
         private void Btn_ActivityOverview_OnClick(object sender, RoutedEventArgs e)
         {
-           MallActivities mallActivities = new MallActivities();
-           m_CurrentMainWindow.ChangeView(mallActivities, this);
+            MallActivities mallActivities = new MallActivities();
+            m_CurrentMainWindow.ChangeViewForward(mallActivities, this);
         }
 
         private void Btn_Back_OnClick(object sender, RoutedEventArgs e)
         {
-            m_CurrentMainWindow.ChangeView(m_PreviousView, this);
+            m_CurrentMainWindow.ChangeViewBackward(m_PreviousView, this);
         }
     }
 }

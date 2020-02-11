@@ -23,6 +23,7 @@ namespace User_Interface
     {
         private MainWindow m_CurrentMainWindow;
         private IAppView m_PreviousView;
+        private IAppView m_NextView;
 
         public Dashboard()
         {
@@ -63,14 +64,14 @@ namespace User_Interface
             {
                 MallManager.GetInstance().ChangeCurrentMall((Guid)button.Tag);
                 MallMenu mallMenu = new MallMenu();
-                m_CurrentMainWindow.ChangeView(mallMenu, this);
+                m_CurrentMainWindow.ChangeViewForward(mallMenu, this);
             }
         }
 
         private void Btn_Add_OnClick(object sender, RoutedEventArgs e)
         {
             AddMallMenu addMall = new AddMallMenu();
-            m_CurrentMainWindow.ChangeView(addMall,this);
+            m_CurrentMainWindow.ChangeViewForward(addMall,this);
         }
 
         public void SetMainWindow(MainWindow currentWindow)
@@ -78,9 +79,14 @@ namespace User_Interface
             m_CurrentMainWindow = currentWindow;
         }
 
-        public void SetPreviousView(IAppView previousElement)
+        public void SetPreviousView(IAppView previousView)
         {
-            m_PreviousView = previousElement;
+            m_PreviousView = previousView;
+        }
+
+        public void SetNextView(IAppView nextView)
+        {
+            m_NextView = nextView;
         }
     }
 }

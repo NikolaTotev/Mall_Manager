@@ -27,7 +27,7 @@
                 <Button Template="{StaticResource BackButton}" x:Name="Btn_Back" Margin="0,5,15,5" Background="Transparent" Click="Btn_Back_OnClick">
                     <Image Source="Resources/Icons/NavigateBack_Icon.png" VerticalAlignment="Center" Margin="0,-10,0,-10" Height="40"></Image>
                 </Button>
-                <TextBlock x:Name="Tbl_MallName" Text="/Mall Name/"></TextBlock>
+                <TextBlock x:Name="Tbl_HeaderText" Text="/Mall Name/"></TextBlock>
             </StackPanel>
         </Label>
         <Button x:Name="Btn_RentalSpaces"  Template="{StaticResource BigOrangeHighlight}"  Click="Btn_RentalSpaces_Click"  BorderBrush="Transparent"  VerticalAlignment="Center" HorizontalAlignment="Center" Padding="45,10,45,5" Grid.Column="0" Grid.Row="1"   Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Light" FontSize="35" Foreground="{StaticResource NavyBlueBase}"  Width="260" Height="260">

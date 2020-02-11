@@ -22,7 +22,8 @@ namespace User_Interface
     public partial class AddRoomMenu : UserControl, IAppView
     {
         private MainWindow m_CurrentMainWindow;
-        private IAppView m_PreviousElement;
+        private IAppView m_PreviousView;
+        private IAppView m_NextView;
         private readonly string m_NameDefaultText = "Room Name";
         private readonly string m_DescDefaultText = "Room Description";
         private readonly string m_TypeDefaultText = "Room Type";
@@ -46,9 +47,14 @@ namespace User_Interface
             m_CurrentMainWindow = currentWindow;
         }
 
-        public void SetPreviousView(IAppView previousElement)
+        public void SetPreviousView(IAppView previousView)
         {
-            m_PreviousElement = previousElement;
+            m_PreviousView = previousView;
+        }
+
+        public void SetNextView(IAppView nextView)
+        {
+            m_NextView = nextView;
         }
 
         private void Btn_Add_OnClick(object sender, RoutedEventArgs e)
@@ -57,12 +63,12 @@ namespace User_Interface
                 m_FloorNumber, m_RoomNumber, Guid.NewGuid(),
                 MallManager.GetInstance().CurrentMall.Name);
             RoomsMenu menu = new RoomsMenu();
-            m_CurrentMainWindow.ChangeView(menu, this);
+            m_CurrentMainWindow.ChangeViewForward(menu, this);
         }
 
         private void Btn_Cancel_OnClick(object sender, RoutedEventArgs e)
         {
-            m_CurrentMainWindow.ChangeView(m_PreviousElement, this);
+            m_CurrentMainWindow.ChangeViewForward(m_PreviousView, this);
         }
 
         #region  Room name text box functions 

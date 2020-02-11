@@ -11,12 +11,19 @@
             <RowDefinition Height="85*"></RowDefinition>
             <RowDefinition Height="500*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label x:Name="Lb_Header" Content="/Space name - Space Activities/" Grid.Row="0" VerticalContentAlignment="Center" Background="{StaticResource NavyBlueBase}"  FontSize="45" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" Foreground="AliceBlue" FontWeight="SemiBold" Margin="0,0,0,10" Padding="25,0,0,0" Effect="{StaticResource DropShadow}" >
+        <Label x:Name="Lbl_Header" VerticalContentAlignment="Center" Grid.Row="0" Background="{StaticResource NavyBlueBase}"  FontSize="45" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" Foreground="AliceBlue" FontWeight="SemiBold" Margin="0,0,0,10" Padding="20,0,0,0" >
             <Label.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="0,0,30,30"></Setter>
+                    <Setter Property="Effect" Value="{StaticResource DropShadow}"></Setter>
                 </Style>
             </Label.Resources>
+            <StackPanel Orientation="Horizontal">
+                <Button Template="{StaticResource BackButton}" x:Name="Btn_Back" Margin="0,5,15,5" Background="Transparent" Click="Btn_Back_OnClick">
+                    <Image Source="Resources/Icons/NavigateBack_Icon.png" VerticalAlignment="Center" Margin="0,-10,0,-10" Height="40"></Image>
+                </Button>
+                <TextBlock x:Name="Tbl_HeaderText" Text="/Space Name/ - Activities"></TextBlock>
+            </StackPanel>
         </Label>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -24,9 +31,10 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Border Grid.Column="1" Background="White" Margin="27,20,27,20" Effect="{StaticResource DropShadow}"  CornerRadius="70" Padding="10 10 10 10">
-                <StackPanel>
+                <StackPanel x:Name="Sp_QuickStats">
                     <Label Content="Quick Stats" HorizontalAlignment="Center" FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Bold" FontSize="30" Foreground="{StaticResource NavyBlueBase}"/>
-                    <local:SimplePieChart x:Name="PieChartStatistics" Margin="20" Height="390"/>
+                    <Label x:Name="Lb_StatsLoading"  Content="Loading..." HorizontalAlignment="Center" FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="SemiBold" FontSize="20" Foreground="{StaticResource FailedTask}"/>
+                    <local:SimplePieChart x:Name="PieChartStatistics" Margin="20,0,20,0" Height="396"/>
                 </StackPanel>
             </Border>
             <Grid Grid.Column="0">
