@@ -73,7 +73,7 @@ namespace User_Interface
 
         private void Btn_Cancel_OnClick(object sender, RoutedEventArgs e)
         {
-            m_CurrentMainWindow.ReturnFromAddMenu(m_PreviousView, m_PreviousView);
+            m_CurrentMainWindow.ReturnFromAddMenu(m_PreviousView, m_PreviousView.GetPreviousView());
         }
 
         #region  Room name text box functions 

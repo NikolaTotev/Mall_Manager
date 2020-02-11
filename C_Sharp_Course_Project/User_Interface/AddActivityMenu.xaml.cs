@@ -31,16 +31,9 @@ namespace User_Interface
         {
             InitializeComponent();
             m_CurrentRoomID = currentRoomId;
-            if (ActivityManager.GetInstance().GetCategories() != null)
+            foreach (var category in ActivityManager.GetInstance().GetCategories())
             {
-                foreach (var category in ActivityManager.GetInstance().GetCategories())
-                {
-                    Cmb_ActivityCat.Items.Add(category);
-                }
-            }
-            else
-            {
-                Cmb_ActivityCat.Items.Add("Other");
+                Cmb_ActivityCat.Items.Add(category);
             }
         }
 

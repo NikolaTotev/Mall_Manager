@@ -48,7 +48,7 @@ namespace User_Interface
 
         private void Btn_Close_OnClick(object sender, RoutedEventArgs e)
         {
-            m_CurrentMainWindow.ChangeViewForward(m_PreviousView, this);
+            m_CurrentMainWindow.ChangeViewBackward(m_PreviousView, this);
         }
 
         public void SetMainWindow(MainWindow currentWindow)

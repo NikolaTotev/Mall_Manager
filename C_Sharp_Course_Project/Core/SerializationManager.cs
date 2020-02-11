@@ -208,6 +208,7 @@ namespace Core
                 ActivityConfig activityConfigToReturn = new ActivityConfig();
                 activityConfigToReturn.Categories.Add("Cleaning");
                 activityConfigToReturn.Categories.Add("Maintenance");
+                activityConfigToReturn.Categories.Add("Other");
                 ExceptionManager.OnFileNotFound(GenActivityConfigName(mallName));
                 SaveActivityConfigFile(activityConfigToReturn, mallName);
                 return activityConfigToReturn;
@@ -236,6 +237,7 @@ namespace Core
                 roomConfigToReturn.RoomTypes.Add("Store");
                 roomConfigToReturn.RoomTypes.Add("Restaurant");
                 roomConfigToReturn.RoomTypes.Add("Bathroom");
+                roomConfigToReturn.RoomTypes.Add("Other");
                 ExceptionManager.OnFileNotFound(GenRoomConfigName(mallName));
                 SaveRoomConfigFile(roomConfigToReturn, mallName);
                 return roomConfigToReturn;
