@@ -206,6 +206,8 @@ namespace Core
             if (!File.Exists(GenActivityConfigName(mallName)))
             {
                 ActivityConfig activityConfigToReturn = new ActivityConfig();
+                activityConfigToReturn.Categories.Add("Cleaning");
+                activityConfigToReturn.Categories.Add("Maintenance");
                 ExceptionManager.OnFileNotFound(GenActivityConfigName(mallName));
                 SaveActivityConfigFile(activityConfigToReturn, mallName);
                 return activityConfigToReturn;
@@ -231,6 +233,9 @@ namespace Core
             if (!File.Exists(GenRoomConfigName(mallName)))
             {
                 RoomConfig roomConfigToReturn = new RoomConfig();
+                roomConfigToReturn.RoomTypes.Add("Store");
+                roomConfigToReturn.RoomTypes.Add("Restaurant");
+                roomConfigToReturn.RoomTypes.Add("Bathroom");
                 ExceptionManager.OnFileNotFound(GenRoomConfigName(mallName));
                 SaveRoomConfigFile(roomConfigToReturn, mallName);
                 return roomConfigToReturn;

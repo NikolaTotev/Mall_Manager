@@ -103,7 +103,7 @@ namespace User_Interface
 
         private void Btn_Stats_OnClick(object sender, RoutedEventArgs e)
         {
-            StatisticsWindow win2 = new StatisticsWindow(m_CurrentRoomId);
+            StatisticsWindow win2 = new StatisticsWindow(m_CurrentRoomId, false);
             win2.Show();
         }
 
@@ -202,6 +202,10 @@ namespace User_Interface
             m_NextView = nextView;
         }
 
+        public IAppView GetPreviousView()
+        {
+            return m_PreviousView;
+        }
         private void Lv_Activities_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 

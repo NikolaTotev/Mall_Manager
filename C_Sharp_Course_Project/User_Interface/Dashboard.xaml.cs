@@ -88,5 +88,10 @@ namespace User_Interface
         {
             m_NextView = nextView;
         }
+
+        public IAppView GetPreviousView()
+        {
+            return m_PreviousView;
+        }
     }
 }

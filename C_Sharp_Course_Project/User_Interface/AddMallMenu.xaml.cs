@@ -44,10 +44,15 @@ namespace User_Interface
             m_NextView = nextView;
         }
 
+        public IAppView GetPreviousView()
+        {
+            return m_PreviousView;
+        }
+
         private void Btn_Cancel_OnClick(object sender, RoutedEventArgs e)
         {
 
-            m_CurrentMainWindow.ChangeViewForward(m_PreviousView, this);
+            m_CurrentMainWindow.ReturnFromAddMenu(m_PreviousView,m_PreviousView.GetPreviousView());
         }
 
         private void Btn_Add_OnClick(object sender, RoutedEventArgs e)
@@ -57,7 +62,7 @@ namespace User_Interface
             Dashboard newDash = new Dashboard();
             newDash.SetPreviousView(this);
             newDash.SetMainWindow(m_CurrentMainWindow);
-            m_CurrentMainWindow.ChangeViewForward(newDash, this);
+            m_CurrentMainWindow.ReturnFromAddMenu(newDash,m_PreviousView.GetPreviousView());
         }
 
         private void Tb_Name_GotFocus(object sender, RoutedEventArgs e)

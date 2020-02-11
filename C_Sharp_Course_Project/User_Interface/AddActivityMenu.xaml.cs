@@ -59,11 +59,15 @@ namespace User_Interface
             m_NextView = nextView;
         }
 
-        private void Btn_Cancel_OnClick(object sender, RoutedEventArgs e)
+        public IAppView GetPreviousView()
         {
-            m_CurrentMainWindow.ChangeViewForward(m_PreviousView, this);
+            return m_PreviousView;
         }
 
+        private void Btn_Cancel_OnClick(object sender, RoutedEventArgs e)
+        {
+            m_CurrentMainWindow.ReturnFromAddMenu(m_PreviousView, m_PreviousView.GetPreviousView());
+        }
 
         private void Tb_Desc_OnGotFocus(object sender, RoutedEventArgs e)
         {
@@ -86,7 +90,7 @@ namespace User_Interface
             Validate();
         }
 
-      public void Validate()
+        public void Validate()
         {
             if (Tb_Desc != null && Btn_Add != null)
             {
@@ -117,13 +121,14 @@ namespace User_Interface
             if (m_CurrentRoomID == MallManager.GetInstance().CurrentMall.Id)
             {
                 MallActivities mallActivitiesPage = new MallActivities();
-                m_CurrentMainWindow.ChangeViewForward(mallActivitiesPage, this);
+                m_CurrentMainWindow.ReturnFromAddMenu(mallActivitiesPage, m_PreviousView.GetPreviousView());
+
             }
             else
             {
                 RoomActivities newActivitiesPage =
                     new RoomActivities(m_CurrentRoomID, RoomManager.GetInstance().Rooms[m_CurrentRoomID]);
-                m_CurrentMainWindow.ChangeViewForward(newActivitiesPage, this);
+                m_CurrentMainWindow.ReturnFromAddMenu(newActivitiesPage, m_PreviousView.GetPreviousView());
             }
         }
 
@@ -141,7 +146,7 @@ namespace User_Interface
         {
             ValidateDate();
         }
-        
+
         private void ValidateDate()
         {
             if (Cal_StartDate.SelectedDate <= Cal_EndDate.SelectedDate)
@@ -158,6 +163,6 @@ namespace User_Interface
             }
         }
 
-       
+
     }
 }

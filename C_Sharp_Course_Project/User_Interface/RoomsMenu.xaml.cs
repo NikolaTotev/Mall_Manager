@@ -82,6 +82,11 @@ namespace User_Interface
             m_NextView = nextView;
         }
 
+        public IAppView GetPreviousView()
+        {
+            return m_PreviousView;
+        }
+
         private void Btn_AddRentalSpace_Click(object sender, RoutedEventArgs e)
         {
             AddRoomMenu addRoom = new AddRoomMenu();

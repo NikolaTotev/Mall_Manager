@@ -65,5 +65,19 @@ namespace User_Interface
                 }
             }
         }
+
+        public void ReturnFromAddMenu(IAppView viewToReturnTo, IAppView previousViewValueToRestore)
+        {
+            if (viewToReturnTo != null)
+            {
+                p_StartPanel.Children.Clear();
+                viewToReturnTo.SetMainWindow(this);
+                viewToReturnTo.SetPreviousView(previousViewValueToRestore);
+                if (viewToReturnTo is UIElement elementToAdd)
+                {
+                    p_StartPanel.Children.Add(elementToAdd);
+                }
+            }
+        }
     }
 }

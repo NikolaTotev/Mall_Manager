@@ -8,5 +8,7 @@ namespace User_Interface
         void SetPreviousView(IAppView previousView);
 
         void SetNextView(IAppView nextView);
+
+        IAppView GetPreviousView();
     }
 }

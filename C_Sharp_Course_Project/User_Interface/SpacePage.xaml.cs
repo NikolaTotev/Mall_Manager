@@ -49,6 +49,11 @@ namespace User_Interface
             m_NextView = nextView;
         }
 
+        public IAppView GetPreviousView()
+        {
+            return m_PreviousView;
+        }
+
         private void Btn_Activities_OnClick(object sender, RoutedEventArgs e)
         {
             RoomActivities activitiesPageToLoad = new RoomActivities(m_CurrentRoomId, m_CurrentRoom);

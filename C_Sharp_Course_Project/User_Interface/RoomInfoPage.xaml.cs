@@ -66,6 +66,11 @@ namespace User_Interface
             m_NextView = nextView;
         }
 
+        public IAppView GetPreviousView()
+        {
+            return m_PreviousView;
+        }
+
         //TODO Complete Save functionality.
         private void Btn_Save_OnClick(object sender, RoutedEventArgs e)
         {

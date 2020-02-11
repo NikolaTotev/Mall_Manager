@@ -24,15 +24,16 @@ namespace User_Interface
     {
         delegate void SetLabelText(Label lbl, string text);
         private BackgroundWorker m_Worker;
-
+        private bool m_CallingFromMall;
         private Guid m_RoomId;
         private SimpleBarGraph m_currentGraph;
-        public StatisticsWindow(Guid roomId)
+        public StatisticsWindow(Guid roomId, bool callingFromMall)
         {
 
             InitializeComponent();
             WorkerThreadInitialization();
             m_RoomId = roomId;
+            m_CallingFromMall = callingFromMall;
             this.Loaded += (sender, args) => ActivityManager.GetInstance().ActivitiesChanged += OnActivityInfoChanged;
             this.Unloaded += (sender, args) => ActivityManager.GetInstance().ActivitiesChanged -= OnActivityInfoChanged;
             GraphInitialization();
@@ -44,9 +45,9 @@ namespace User_Interface
 
             initWorker.DoWork += (worker, args) =>
             {
-                if (MallManager.GetInstance().Malls.ContainsKey(m_RoomId))
+                if (m_CallingFromMall)
                 {
-                    if (!args.Cancel) args.Result = VisualizationPreProcessor.GetMallAssociatedActivityInfoData(m_RoomId);
+                    if (!args.Cancel) args.Result = VisualizationPreProcessor.GetMallActivityInfoData();
                 }
                 else
                 {
@@ -92,9 +93,13 @@ namespace User_Interface
             m_Worker.DoWork += (worker, args) =>
             {
                 //this will be executed on a background worker thread
-                if (!args.Cancel)
+                if (m_CallingFromMall)
                 {
-                    args.Result = ProcessCurrentData((int)args.Argument, worker as BackgroundWorker);
+                    if (!args.Cancel) args.Result = VisualizationPreProcessor.GetMallActivityInfoData();
+                }
+                else
+                {
+                    if (!args.Cancel) args.Result = VisualizationPreProcessor.GetRoomActivityInfoData(m_RoomId);
                 }
             };
             m_Worker.ProgressChanged += (o, args) =>
@@ -166,12 +171,14 @@ namespace User_Interface
            //}*/
         }
 
-        private IList<(string Title, int Value, ActivityStatus Status)> ProcessCurrentData(int startingValue, BackgroundWorker worker)
+        private IList<(string Title, int Value, ActivityStatus Status)> ProcessCurrentDataAsRoom(int startingValue, BackgroundWorker worker)
         {
-            if (MallManager.GetInstance().Malls.ContainsKey(m_RoomId))
-                return VisualizationPreProcessor.GetMallAssociatedActivityInfoData(m_RoomId);
+           return VisualizationPreProcessor.GetRoomActivityInfoData(m_RoomId);
+        }
 
-            return VisualizationPreProcessor.GetRoomActivityInfoData(m_RoomId);
+        private IList<(string Title, int Value, ActivityStatus Status)> ProcessCurrentDataAsMall(int startingValue, BackgroundWorker worker)
+        {
+            return VisualizationPreProcessor.GetMallActivityInfoData();
         }
     }
 }

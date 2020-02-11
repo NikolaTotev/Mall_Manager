@@ -57,18 +57,23 @@ namespace User_Interface
             m_NextView = nextView;
         }
 
+        public IAppView GetPreviousView()
+        {
+            return m_PreviousView;
+        }
+
         private void Btn_Add_OnClick(object sender, RoutedEventArgs e)
         {
             RoomManager.GetInstance().CreateRoom(Tb_RoomName.Text, Tb_RoomDesc.Text, m_RoomType,
                 m_FloorNumber, m_RoomNumber, Guid.NewGuid(),
                 MallManager.GetInstance().CurrentMall.Name);
             RoomsMenu menu = new RoomsMenu();
-            m_CurrentMainWindow.ChangeViewForward(menu, this);
+            m_CurrentMainWindow.ReturnFromAddMenu(menu,m_PreviousView.GetPreviousView());
         }
 
         private void Btn_Cancel_OnClick(object sender, RoutedEventArgs e)
         {
-            m_CurrentMainWindow.ChangeViewForward(m_PreviousView, this);
+            m_CurrentMainWindow.ReturnFromAddMenu(m_PreviousView, m_PreviousView);
         }
 
         #region  Room name text box functions 
