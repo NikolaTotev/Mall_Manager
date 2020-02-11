@@ -22,7 +22,7 @@ namespace User_Interface
                 foreach (var (title, value, status) in data)
                 {
                     mySeries.Add(new ColumnSeries
-                    { Title = title, Values = new ChartValues<int> { value }, Fill = GetChartColor(status)});
+                    { Title = title, Values = new ChartValues<int> { value }, Fill = GetChartColor(status) });
                 }
             }
 
@@ -97,7 +97,7 @@ namespace User_Interface
         public static IList<(string Title, int Value, ActivityStatus Status)> GetMallActivityInfoData()
         {
             List<Activity> activities = ActivityManager.GetInstance().Activities.Values.ToList();
-           
+
             var scheduled = activities.Where(a => a.CurActivityStatus is ActivityStatus.Scheduled).ToList().Count;
             var inProgress = activities.Where(a => a.CurActivityStatus is ActivityStatus.InProgress).ToList().Count;
             var completed = activities.Where(a => a.CurActivityStatus is ActivityStatus.Finished).ToList().Count;
@@ -114,5 +114,29 @@ namespace User_Interface
             return res;
         }
 
+        public static IList<(string Title, int Value, ActivityStatus Status)> GetMallAssociatedActivityInfoData(Guid mallId)
+        {
+            List<Guid> activityIds = MallManager.GetInstance().Malls[mallId].AssociatedActivities;
+            List<Activity> activities = new List<Activity>();
+            foreach (var activity in activityIds)
+            {
+                activities.Add(ActivityManager.GetInstance().Activities[activity]);
+            }
+
+            var scheduled = activities.Where(a => a.CurActivityStatus is ActivityStatus.Scheduled).ToList().Count;
+            var inProgress = activities.Where(a => a.CurActivityStatus is ActivityStatus.InProgress).ToList().Count;
+            var completed = activities.Where(a => a.CurActivityStatus is ActivityStatus.Finished).ToList().Count;
+            var failed = activities.Where(a => a.CurActivityStatus is ActivityStatus.Failed).ToList().Count;
+
+            var res = new List<(string Title, int Value, ActivityStatus Status)>
+            {
+                (Title: "Scheduled", Value: scheduled, Status: ActivityStatus.Scheduled),
+                (Title: "In Progress", Value: inProgress, Status: ActivityStatus.InProgress),
+                (Title: "Completed", Value: completed, Status: ActivityStatus.Finished),
+                (Title: "Failed", Value: failed, Status: ActivityStatus.Failed)
+            };
+
+            return res;
+        }
     }
 }

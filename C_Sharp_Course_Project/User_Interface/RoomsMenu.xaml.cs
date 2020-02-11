@@ -140,5 +140,17 @@ namespace User_Interface
         {
             m_CurrentMainWindow.ChangeView(m_PreviousView, this);
         }
+        
+
+        private void RoomItem_OnDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            RoomListItem item = ((ListViewItem)sender).Content as RoomListItem;
+            if (item == null)
+            {
+                return;
+            }
+            SpacePage space = new SpacePage(item.RoomId);
+            m_CurrentMainWindow.ChangeView(space, this);
+        }
     }
 }

@@ -93,7 +93,8 @@ namespace User_Interface
 
         private void Btn_Stats_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            StatisticsWindow win2 = new StatisticsWindow(MallManager.GetInstance().CurrentMall.Id);
+            win2.Show();
         }
 
         private void Btn_Delete_OnClick(object sender, RoutedEventArgs e)
