@@ -29,7 +29,7 @@ namespace User_Interface
         public RoomsMenu()
         {
             InitializeComponent();
-            Lbl_MallName.Content = MallManager.GetInstance().CurrentMall.Name;
+            Tbl_MallName.Text = MallManager.GetInstance().CurrentMall.Name;
             
             Lv_RentalSpaces.SelectionMode = SelectionMode.Multiple;
             m_Rooms = new List<RoomListItem>();
@@ -84,17 +84,17 @@ namespace User_Interface
 
         private void Lv_RentalSpaces_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (Lv_RentalSpaces.SelectedIndex >= 0 && Lv_RentalSpaces.SelectedIndex < Lv_RentalSpaces.Items.Count)
-            {
-                if (Lv_RentalSpaces.SelectedItem is ListViewItem currentSelection)
-                {
-                    SpacePage space = new SpacePage((Guid)currentSelection.Tag);
-                    space.SetMainWindow(m_CurrentMainWindow);
-                    space.SetPreviousView(this);
-                    m_CurrentMainWindow.ChangeView(space, this);
-                }
+            //if (Lv_RentalSpaces.SelectedIndex >= 0 && Lv_RentalSpaces.SelectedIndex < Lv_RentalSpaces.Items.Count)
+            //{
+            //    if (Lv_RentalSpaces.SelectedItem is ListViewItem currentSelection)
+            //    {
+            //        SpacePage space = new SpacePage((Guid)currentSelection.Tag);
+            //        space.SetMainWindow(m_CurrentMainWindow);
+            //        space.SetPreviousView(this);
+            //        m_CurrentMainWindow.ChangeView(space, this);
+            //    }
                 
-            }
+            //}
         }
 
         private void Btn_DeleteRentalSpace_OnClick(object sender, RoutedEventArgs e)
@@ -123,6 +123,22 @@ namespace User_Interface
             {
                 item.IsSelected = false;
             }
+        }
+
+        private void Lv_RentalSpaces_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (Lv_RentalSpaces.SelectedItem is RoomListItem currentSelection)
+            {
+                SpacePage space = new SpacePage(currentSelection.RoomId);
+                space.SetMainWindow(m_CurrentMainWindow);
+                space.SetPreviousView(this);
+                m_CurrentMainWindow.ChangeView(space, this);
+            }
+        }
+
+        private void Btn_Back_OnClick(object sender, RoutedEventArgs e)
+        {
+            m_CurrentMainWindow.ChangeView(m_PreviousView, this);
         }
     }
 }

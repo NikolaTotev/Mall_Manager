@@ -26,7 +26,7 @@ namespace User_Interface
         public MallMenu()
         {
             InitializeComponent();
-            Lbl_MallName.Content = MallManager.GetInstance().CurrentMall.Name;
+            Tbl_MallName.Text = MallManager.GetInstance().CurrentMall.Name;
         }
 
         public void SetMainWindow(MainWindow currentWindow)
@@ -54,6 +54,11 @@ namespace User_Interface
         {
            MallActivities mallActivities = new MallActivities();
            m_CurrentMainWindow.ChangeView(mallActivities, this);
+        }
+
+        private void Btn_Back_OnClick(object sender, RoutedEventArgs e)
+        {
+            m_CurrentMainWindow.ChangeView(m_PreviousView, this);
         }
     }
 }

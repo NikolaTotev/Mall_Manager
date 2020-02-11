@@ -253,5 +253,8 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\Search_Icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\NavigateBack_Icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
