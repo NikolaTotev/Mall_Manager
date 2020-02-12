@@ -25,6 +25,12 @@ namespace Core
             return m_Instance ?? (m_Instance = new RoomManager());
         }
 
+        public void ReloadManager()
+        {
+            Rooms = SerializationManager.GetRooms(MallManager.GetInstance().CurrentMall.Name);
+            m_Config = SerializationManager.GetRoomConfig(MallManager.GetInstance().CurrentMall.Name);
+        }
+
         public List<string> GetRoomTypes()
         {
             return m_Config.RoomTypes;

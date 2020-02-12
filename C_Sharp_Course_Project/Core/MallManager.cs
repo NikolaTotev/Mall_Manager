@@ -86,6 +86,8 @@ namespace Core
 
             CurrentMall = Malls[mallId];
             ProgramManager.GetInstance().CompleteInitialization();
+            RoomManager.GetInstance().ReloadManager();
+            ActivityManager.GetInstance().ReloadManager();
             return true;
         }
 

@@ -32,6 +32,12 @@ namespace Core
             Activities = SerializationManager.GetActivities(MallManager.GetInstance().CurrentMall.Name);
         }
 
+        public void ReloadManager()
+        {
+            m_Config = SerializationManager.GetActivityConfig(MallManager.GetInstance().CurrentMall.Name);
+            Activities = SerializationManager.GetActivities(MallManager.GetInstance().CurrentMall.Name);
+        }
+
         public static ActivityManager GetInstance()
         {
             return m_Instance ?? (m_Instance = new ActivityManager());
