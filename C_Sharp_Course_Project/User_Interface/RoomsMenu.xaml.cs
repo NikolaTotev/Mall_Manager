@@ -136,17 +136,6 @@ namespace User_Interface
             }
         }
 
-        private void Lv_RentalSpaces_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            if (Lv_RentalSpaces.SelectedItem is RoomListItem currentSelection)
-            {
-                SpacePage space = new SpacePage(currentSelection.RoomId);
-                space.SetMainWindow(m_CurrentMainWindow);
-                space.SetPreviousView(this);
-                m_CurrentMainWindow.ChangeViewForward(space, this);
-            }
-        }
-
         private void Btn_Back_OnClick(object sender, RoutedEventArgs e)
         {
             m_CurrentMainWindow.ChangeViewBackward(m_PreviousView, this);

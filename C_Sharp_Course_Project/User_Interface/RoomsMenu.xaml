@@ -41,7 +41,7 @@
 
         </Border>
 
-        <ListView ItemsSource="{Binding}" x:Name="Lv_RentalSpaces" MouseDoubleClick="Lv_RentalSpaces_OnMouseDoubleClick"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" Grid.Row="2" SelectionChanged="Lv_RentalSpaces_SelectionChanged" Margin="0,0,0,20">
+        <ListView ItemsSource="{Binding}" x:Name="Lv_RentalSpaces" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" Grid.Row="2" SelectionChanged="Lv_RentalSpaces_SelectionChanged" Margin="0,0,0,20">
             <ListView.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"></Setter>
