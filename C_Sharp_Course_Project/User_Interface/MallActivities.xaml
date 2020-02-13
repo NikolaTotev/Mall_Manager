@@ -7,18 +7,37 @@
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="1000" Background="White">
     <Grid>
+        <!--#region Main Grid Setup-->
         <Grid.RowDefinitions>
             <RowDefinition Height="85*"></RowDefinition>
             <RowDefinition Height="500*"></RowDefinition>
         </Grid.RowDefinitions>
+        <!--#endregion-->
+
+        <!--#region Page Header -->
         <Label x:Name="Lbl_Header" VerticalContentAlignment="Center" Grid.Row="0" Background="{StaticResource NavyBlueBase}"  FontSize="45" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" Foreground="AliceBlue" FontWeight="SemiBold" Margin="0,0,0,10" Padding="20,0,0,0" >
+            <!--#region Header Setup-->
+            <Label.ToolTip>
+                <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
+                    <ToolTip.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"></Setter>
+                        </Style>
+                    </ToolTip.Resources>
+                    <TextBlock FontFamily="{StaticResource Montserrat}" Text="{StaticResource LbCurrentMallActivities}" FontWeight="{StaticResource StandardToolTipFontWeight}" FontStyle="{StaticResource StandardToolTipFontStyle}" Foreground="{StaticResource NavyBlueBase}" FontSize="10"/>
+                </ToolTip>
+            </Label.ToolTip>
             <Label.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="0,0,30,30"></Setter>
                     <Setter Property="Effect" Value="{StaticResource DropShadow}"></Setter>
                 </Style>
             </Label.Resources>
+            <!--#endregion-->
+
+            <!--#region Header Children-->
             <StackPanel Orientation="Horizontal">
+                <!--#region Back Button-->
                 <Button Template="{StaticResource BackButton}" x:Name="Btn_Back" Margin="0,5,15,5" Background="Transparent" Click="Btn_Back_OnClick">
                     <Button.ToolTip>
                         <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
@@ -32,14 +51,24 @@
                     </Button.ToolTip>
                     <Image Source="Resources/Icons/NavigateBack_Icon.png" VerticalAlignment="Center" Margin="0,-10,0,-10" Height="40"></Image>
                 </Button>
+                <!--#endregion-->
                 <TextBlock x:Name="Tbl_HeaderText" Text="/Mall Name/ - Activities"></TextBlock>
             </StackPanel>
+            <!--#endregion-->
         </Label>
+        <!--#endregion-->
+
+        <!--#region Main SubGrid-->
         <Grid Grid.Row="1">
+
+            <!--#region Main Grid Setup-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1.9*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
+            <!--#endregion-->
+
+            <!--#region Quick Stats Panel-->
             <Border Grid.Column="1" Background="White" Margin="27,20,27,20" Effect="{StaticResource DropShadow}"  CornerRadius="70" Padding="10 10 10 10">
                 <StackPanel x:Name="Sp_QuickStats">
                     <Label Content="Quick Stats" HorizontalAlignment="Center" FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Bold" FontSize="30" Foreground="{StaticResource NavyBlueBase}"/>
@@ -47,25 +76,29 @@
                     <local:SimplePieChart x:Name="PieChartStatistics" Margin="20,0,20,0" Height="414"/>
                 </StackPanel>
             </Border>
+            <!--#endregion-->
+
+            <!--#region Left SubGrid-->
             <Grid Grid.Column="0">
+                <!--#region Left SubGrid Setup -->
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2.5*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
+                <!--#endregion-->
+
+                <!--#region ListView-->
                 <ListView ItemsSource="{Binding}" x:Name="Lv_Activities" Grid.Column="0" Grid.Row="0" Background="White" Effect="{StaticResource DropShadow}"  Margin="20" SelectionChanged="Lv_Activities_SelectionChanged">
-                    <ListView.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="15"></Setter>
-                        </Style>
-                    </ListView.Resources>
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="IsSelected" Value="{Binding IsSelected}"/>
                         </Style>
                     </ListView.ItemContainerStyle>
 
+                    <!--#region ListView View Grid Setup-->
                     <ListView.View>
                         <GridView>
+                            <!--#region ListVeiw Styling-->
                             <GridView.ColumnHeaderContainerStyle>
                                 <Style TargetType="{x:Type GridViewColumnHeader}">
                                     <Setter Property="Background" Value="White"></Setter>
@@ -86,6 +119,9 @@
                                 </Style>
 
                             </GridView.ColumnHeaderContainerStyle>
+                            <!--#endregion-->
+
+                            <!--#region Checkbox List Column-->
                             <GridViewColumn Width="40">
                                 <GridViewColumn.CellTemplate >
                                     <DataTemplate>
@@ -99,12 +135,12 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
+                            <!--#endregion-->
+
+                            <!--#region Description Column-->
                             <GridViewColumn Header="Description" Width="270">
-
                                 <GridViewColumn.CellTemplate>
-
                                     <DataTemplate>
-
                                         <TextBlock x:Name="Description" HorizontalAlignment="Center" Text="{Binding Description}" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="20" Foreground="{StaticResource NavyBlueBase}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
@@ -116,6 +152,9 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
+                            <!--#endregion-->
+
+                            <!--#region Status Column-->
                             <GridViewColumn Header="Status" Width="90">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
@@ -123,16 +162,26 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
+                            <!--#endregion-->
                         </GridView>
                     </ListView.View>
+                    <!--#endregion-->
 
                 </ListView>
+                <!--#endregion-->
+
+                <!--#region Buttons SubGrid-->
                 <Grid Grid.Row="1">
+                    <!--#region Buttons SubGrid Setup-->
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="1.8*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
+                    <!--#endregion-->
+
+                    <!--#region Status Buttons SubGrid-->
                     <Grid Grid.Column="0" Margin="20,0,0,0">
+                        <!--#region Status Buttons SubGrid Setup-->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -143,31 +192,111 @@
                             <RowDefinition Height="*"></RowDefinition>
                             <RowDefinition Height="*"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Button x:Name="Btn_SelectAll"  Template="{StaticResource OrangeHighLight}" Grid.Row="0" Grid.Column="0" Click="Btn_SelectAll_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
+                        <!--#endregion-->
+
+                        <!--#region Status Buttons-->
+                        <!--#region Button Select All-->
+                        <Button x:Name="Btn_SelectAll"  Template="{StaticResource OrangeHighLight}" Grid.Row="0" Grid.Column="0" Click="Btn_SelectAll_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent"  HorizontalContentAlignment="Center">
+                            <Button.ToolTip>
+                                <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
+                                    <ToolTip.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="10"></Setter>
+                                        </Style>
+                                    </ToolTip.Resources>
+                                    <TextBlock FontFamily="{StaticResource Montserrat}" Text="{StaticResource BtnSelectAllTip}" FontWeight="{StaticResource StandardToolTipFontWeight}" FontStyle="{StaticResource StandardToolTipFontStyle}" Foreground="{StaticResource NavyBlueBase}" FontSize="10"/>
+                                </ToolTip>
+                            </Button.ToolTip>
                             <Image Source="Resources/Icons/SelectAll_Icon.png" VerticalAlignment="Center" Margin="0,0,0,0" Height="40"></Image>
                         </Button>
+                        <!--#endregion-->
 
-                        <Button x:Name="Btn_MarkAsScheduled"  Template="{StaticResource OrangeHighLight}" Grid.Row="0" Grid.Column="1" Click="Btn_MarkAsScheduled_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
+                        <!--#region Button Mark as Scheduled-->
+                        <Button x:Name="Btn_MarkAsScheduled"  Template="{StaticResource OrangeHighLight}" Grid.Row="0" Grid.Column="1" Click="Btn_MarkAsScheduled_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent"  HorizontalContentAlignment="Center">
+                            <Button.ToolTip>
+                                <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
+                                    <ToolTip.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="10"></Setter>
+                                        </Style>
+                                    </ToolTip.Resources>
+                                    <TextBlock FontFamily="{StaticResource Montserrat}" Text="{StaticResource BtnMarkActivityAsScheduled}" FontWeight="{StaticResource StandardToolTipFontWeight}" FontStyle="{StaticResource StandardToolTipFontStyle}" Foreground="{StaticResource NavyBlueBase}" FontSize="10"/>
+                                </ToolTip>
+                            </Button.ToolTip>
                             <Rectangle  Height="30" Width="30" Fill="{StaticResource ScheduledTask}"/>
                         </Button>
+                        <!--#endregion-->
 
-                        <Button x:Name="Btn_MarkAsInProgress"  Template="{StaticResource OrangeHighLight}" Grid.Row="0" Grid.Column="2" Click="Btn_MarkAsInProgress_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
+                        <!--#region Button Mark as In Progress-->
+                        <Button x:Name="Btn_MarkAsInProgress"  Template="{StaticResource OrangeHighLight}" Grid.Row="0" Grid.Column="2" Click="Btn_MarkAsInProgress_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent"  HorizontalContentAlignment="Center">
+                            <Button.ToolTip>
+                                <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
+                                    <ToolTip.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="10"></Setter>
+                                        </Style>
+                                    </ToolTip.Resources>
+                                    <TextBlock FontFamily="{StaticResource Montserrat}" Text="{StaticResource BtnMarkActivityAsInProgress}" FontWeight="{StaticResource StandardToolTipFontWeight}" FontStyle="{StaticResource StandardToolTipFontStyle}" Foreground="{StaticResource NavyBlueBase}" FontSize="10"/>
+                                </ToolTip>
+                            </Button.ToolTip>
                             <Rectangle  Height="30" Width="30" Fill="{StaticResource InProgressTask}"/>
                         </Button>
+                        <!--#endregion-->
 
-                        <Button x:Name="Btn_Deselect"  Template="{StaticResource OrangeHighLight}" Grid.Row="1" Grid.Column="0" Click="Btn_Deselect_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
+                        <!--#region Button Deselect All-->
+                        <Button x:Name="Btn_Deselect"  Template="{StaticResource OrangeHighLight}" Grid.Row="1" Grid.Column="0" Click="Btn_Deselect_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent"  HorizontalContentAlignment="Center">
+                            <Button.ToolTip>
+                                <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
+                                    <ToolTip.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="10"></Setter>
+                                        </Style>
+                                    </ToolTip.Resources>
+                                    <TextBlock FontFamily="{StaticResource Montserrat}" Text="{StaticResource BtnDeselectAllTip}" FontWeight="{StaticResource StandardToolTipFontWeight}" FontStyle="{StaticResource StandardToolTipFontStyle}" Foreground="{StaticResource NavyBlueBase}" FontSize="10"/>
+                                </ToolTip>
+                            </Button.ToolTip>
                             <Image Source="Resources/Icons/Deselect_Icon.png" VerticalAlignment="Center" Margin="0,0,0,0" Height="40"></Image>
                         </Button>
+                        <!--#endregion-->
 
-                        <Button x:Name="Btn_MarkAsCompleted"  Template="{StaticResource OrangeHighLight}" Grid.Row="1" Grid.Column="1" Click="Btn_MarkAsCompleted_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
+                        <!--#region Button Mark as Completed-->
+                        <Button x:Name="Btn_MarkAsCompleted"  Template="{StaticResource OrangeHighLight}" Grid.Row="1" Grid.Column="1" Click="Btn_MarkAsCompleted_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent"  HorizontalContentAlignment="Center">
+                            <Button.ToolTip>
+                                <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
+                                    <ToolTip.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="10"></Setter>
+                                        </Style>
+                                    </ToolTip.Resources>
+                                    <TextBlock FontFamily="{StaticResource Montserrat}" Text="{StaticResource BtnMarkActivityAsCompleted}" FontWeight="{StaticResource StandardToolTipFontWeight}" FontStyle="{StaticResource StandardToolTipFontStyle}" Foreground="{StaticResource NavyBlueBase}" FontSize="10"/>
+                                </ToolTip>
+                            </Button.ToolTip>
                             <Rectangle  Height="30" Width="30" Fill="{StaticResource Completed}"/>
                         </Button>
+                        <!--#endregion-->
 
-                        <Button x:Name="Btn_MarkAsFailed"  Template="{StaticResource OrangeHighLight}" Grid.Row="1" Grid.Column="2" Click="Btn_MarkAsFailed_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
+                        <!--#region Button Mark as Failed-->
+                        <Button x:Name="Btn_MarkAsFailed"  Template="{StaticResource OrangeHighLight}" Grid.Row="1" Grid.Column="2" Click="Btn_MarkAsFailed_OnClick" Margin="0,0,20,25" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent"  HorizontalContentAlignment="Center">
+                            <Button.ToolTip>
+                                <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
+                                    <ToolTip.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="10"></Setter>
+                                        </Style>
+                                    </ToolTip.Resources>
+                                    <TextBlock FontFamily="{StaticResource Montserrat}" Text="{StaticResource BtnMarkActivityAsFailed}" FontWeight="{StaticResource StandardToolTipFontWeight}" FontStyle="{StaticResource StandardToolTipFontStyle}" Foreground="{StaticResource NavyBlueBase}" FontSize="10"/>
+                                </ToolTip>
+                            </Button.ToolTip>
                             <Rectangle  Height="30" Width="30" Fill="{StaticResource FailedTask}"/>
                         </Button>
+                        <!--#endregion-->
+                        <!--#endregion-->
                     </Grid>
+                    <!--#endregion-->
+
+                    <!--#region Action Buttons SubGrid-->
                     <Grid Grid.Column="1" Margin="0,0,20,25">
+                        <!--#region Action Buttons SubGrid Setup-->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -176,30 +305,75 @@
                             <RowDefinition Height="*"></RowDefinition>
                             <RowDefinition Height="*"></RowDefinition>
                         </Grid.RowDefinitions>
+                        <!--#endregion-->
 
-                        <Button Grid.Row="0" Grid.Column="0"  Template="{StaticResource OrangeHighLight}" x:Name="Btn_Add" VerticalAlignment="Center" HorizontalAlignment="Center" Width="176" Height="47" Click="Btn_Add_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource CancelTip}">
+                        <!--#region Add Button-->
+                        <Button Grid.Row="0" Grid.Column="0"  Template="{StaticResource OrangeHighLight}" x:Name="Btn_Add" VerticalAlignment="Center" HorizontalAlignment="Center" Width="176" Height="47" Click="Btn_Add_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent">
+                            <Button.ToolTip>
+                                <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
+                                    <ToolTip.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="10"></Setter>
+                                        </Style>
+                                    </ToolTip.Resources>
+                                    <TextBlock FontFamily="{StaticResource Montserrat}" Text="{StaticResource BtnOpenAddActivityMenu}" FontWeight="{StaticResource StandardToolTipFontWeight}" FontStyle="{StaticResource StandardToolTipFontStyle}" Foreground="{StaticResource NavyBlueBase}" FontSize="10"/>
+                                </ToolTip>
+                            </Button.ToolTip>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <Image Source="Resources/Icons/Add_Icon.png" VerticalAlignment="Center" Margin="0,0,5,0" Height="40"></Image>
                                 <TextBlock Text="Add" VerticalAlignment="Center"></TextBlock>
                             </StackPanel>
                         </Button>
+                        <!--#endregion-->
 
-                        <Button Grid.Row="0" Grid.Column="1" Template="{StaticResource OrangeHighLight}" x:Name="Btn_Stats" VerticalAlignment="Center" HorizontalAlignment="Center" Width="176" Height="47" Click="Btn_Stats_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource CancelTip}">
+                        <!--#region Stat Button-->
+                        <Button Grid.Row="0" Grid.Column="1" Template="{StaticResource OrangeHighLight}" x:Name="Btn_Stats" VerticalAlignment="Center" HorizontalAlignment="Center" Width="176" Height="47" Click="Btn_Stats_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent">
+                            <Button.ToolTip>
+                                <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
+                                    <ToolTip.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="10"></Setter>
+                                        </Style>
+                                    </ToolTip.Resources>
+                                    <TextBlock FontFamily="{StaticResource Montserrat}" Text="{StaticResource BtnOpenMallStats}" FontWeight="{StaticResource StandardToolTipFontWeight}" FontStyle="{StaticResource StandardToolTipFontStyle}" Foreground="{StaticResource NavyBlueBase}" FontSize="10"/>
+                                </ToolTip>
+                            </Button.ToolTip>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <Image Source="Resources/Icons/Statistics_Icon.png" VerticalAlignment="Center" Margin="0,0,5,0" Height="40"></Image>
                                 <TextBlock Text="Stats" VerticalAlignment="Center"></TextBlock>
                             </StackPanel>
                         </Button>
+                        <!--#endregion-->
 
-                        <Button Grid.Row="1" Grid.Column="0" Template="{StaticResource OrangeHighLight}" x:Name="Btn_Delete" VerticalAlignment="Center" HorizontalAlignment="Center" Width="176" Height="47" Click="Btn_Delete_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource CancelTip}">
+                        <!--#region Delete Button-->
+                        <Button Grid.Row="1" Grid.Column="0" Template="{StaticResource OrangeHighLight}" x:Name="Btn_Delete" VerticalAlignment="Center" HorizontalAlignment="Center" Width="176" Height="47" Click="Btn_Delete_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent">
+                            <Button.ToolTip>
+                                <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
+                                    <ToolTip.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="10"></Setter>
+                                        </Style>
+                                    </ToolTip.Resources>
+                                    <TextBlock FontFamily="{StaticResource Montserrat}" Text="{StaticResource BtnDeleteActivity}" FontWeight="{StaticResource StandardToolTipFontWeight}" FontStyle="{StaticResource StandardToolTipFontStyle}" Foreground="{StaticResource NavyBlueBase}" FontSize="10"/>
+                                </ToolTip>
+                            </Button.ToolTip>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <Image Source="Resources/Icons/Delete_Icon.png" VerticalAlignment="Center" Margin="0,0,5,0" Height="40"></Image>
                                 <TextBlock Text="Delete" VerticalAlignment="Center"></TextBlock>
                             </StackPanel>
                         </Button>
+                        <!--#endregion-->
+
                     </Grid>
+                    <!--#endregion-->
                 </Grid>
+                <!--#endregion-->
+
             </Grid>
+            <!--#endregion-->
+
         </Grid>
+        <!--#endregion-->
     </Grid>
+
 </UserControl>

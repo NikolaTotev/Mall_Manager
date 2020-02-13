@@ -8,7 +8,7 @@
              d:DesignHeight="650" d:DesignWidth="1000" Background="White">
 
     <Grid>
-        <!--#region-->
+        <!--#region Grid Setup-->
         <Grid.RowDefinitions>
             <RowDefinition Height="4*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
@@ -107,7 +107,6 @@
                 </StackPanel>
             </Button>
             <!--#endregion-->
-
         </Grid>
         <!--#endregion-->
     </Grid>

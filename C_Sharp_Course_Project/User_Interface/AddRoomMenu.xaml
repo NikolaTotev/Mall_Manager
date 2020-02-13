@@ -8,6 +8,7 @@
              d:DesignHeight="650" d:DesignWidth="1000" Background="White">
 
     <Grid>
+        <!--#region Grid Setup-->
         <Grid.RowDefinitions>
             <RowDefinition Height="4*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
@@ -17,9 +18,15 @@
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="4*"></RowDefinition>
         </Grid.RowDefinitions>
+        <!--#endregion-->
+
         <Label Content="Create room" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"  HorizontalContentAlignment="Center" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="50" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" Width="384"/>
+
+        <!--#region Room Name Input Group-->
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label x:Name="Lb_NameError"  FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Light" FontSize="15" Foreground="{StaticResource FailedTask}" BorderBrush="Transparent"/>
+
+            <!--#region Room Name TextBox-->
             <TextBox x:Name="Tb_RoomName"  Height="32" TextWrapping="Wrap" Text="Room Name" Width="384" Padding="5" VerticalContentAlignment="Center" BorderBrush="Transparent" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="15" Foreground="{StaticResource TextboxPrompt}" GotFocus="Tb_RoomName_OnGotFocus" LostFocus="Tb_RoomName_OnLostFocus" TextChanged="Tb_RoomName_OnTextChanged" >
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
@@ -30,11 +37,16 @@
                     <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
                 </TextBox.Effect>
             </TextBox>
+            <!--#endregion-->
+
         </StackPanel>
+        <!--#endregion-->
 
-
+        <!--#region Room Description Input Group-->
         <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Label x:Name="Lb_DescError" FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Light" FontSize="15" Foreground="{StaticResource FailedTask}" BorderBrush="Transparent"/>
+
+            <!--#region Room Desctiption Textbox-->
             <TextBox x:Name="Tb_RoomDesc" Height="32" TextWrapping="Wrap" Padding="5" VerticalContentAlignment="Center" Text="Room Description" Canvas.Top="361" Width="384" BorderBrush="Transparent" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="15" Foreground="{StaticResource TextboxPrompt}" GotFocus="Tb_RoomDesc_OnGotFocus" LostFocus="Tb_RoomDesc_OnLostFocus" TextChanged="Tb_RoomDesc_OnTextChanged" >
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
@@ -45,8 +57,12 @@
                     <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
                 </TextBox.Effect>
             </TextBox>
-        </StackPanel>
+            <!--#endregion-->
 
+        </StackPanel>
+        <!--#endregion-->
+
+        <!--#region Room Type Input Group-->
         <StackPanel x:Name="Sp_RoomType_Cmb" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal">
                 <Label x:Name="Lb_RoomType" Content="Select Room Type" FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Light" FontSize="15" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent"/>
@@ -54,10 +70,13 @@
             </StackPanel>
             <ComboBox x:Name="Cmb_RoomType" Width="384" Height="32" HorizontalAlignment="Center"  HorizontalContentAlignment="Center" SelectionChanged="Cmb_RoomType_SelectionChanged"/>
         </StackPanel>
+        <!--#endregion-->
 
-
+        <!--#region Room Number Input Group-->
         <StackPanel Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Label x:Name="Lb_RoomNumberError" FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Light" FontSize="15" Foreground="{StaticResource FailedTask}" BorderBrush="Transparent"/>
+
+            <!--#region Room Number Textbox-->
             <TextBox x:Name="Tb_RoomNumber" Height="32" TextWrapping="Wrap" Padding="5" VerticalContentAlignment="Center" Text="Room Number" Width="384" BorderBrush="Transparent" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="15" Foreground="{StaticResource TextboxPrompt}" GotFocus="Tb_RoomNumber_OnGotFocus" LostFocus="Tb_RoomNumber_OnLostFocus" TextChanged="Tb_RoomNumber_OnTextChanged" >
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
@@ -68,10 +87,16 @@
                     <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
                 </TextBox.Effect>
             </TextBox>
-        </StackPanel>
+            <!--#endregion-->
 
+        </StackPanel>
+        <!--#endregion-->
+
+        <!--#region Floor Number Input Group-->
         <StackPanel Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Label x:Name="Lb_FloorNumberError" FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Light" FontSize="15" Foreground="{StaticResource FailedTask}" BorderBrush="Transparent"/>
+
+            <!--#region Floor Textbox-->
             <TextBox x:Name="Tb_FloorNumber" Height="32" TextWrapping="Wrap" Padding="5" VerticalContentAlignment="Center" Text="Floor Number" Width="384" BorderBrush="Transparent" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="15" Foreground="{StaticResource TextboxPrompt}" GotFocus="Tb_FloorNumber_OnGotFocus" LostFocus="Tb_FloorNumber_OnLostFocus" TextChanged="Tb_FloorNumber_OnTextChanged" >
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
@@ -82,8 +107,14 @@
                     <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
                 </TextBox.Effect>
             </TextBox>
+            <!--#endregion-->
+
         </StackPanel>
+        <!--#endregion-->
+
+        <!--#region Button Group-->
         <Grid Grid.Row="6" Margin="0,10,0,0">
+            <!--#region Grid Setup-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -93,21 +124,50 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Button Grid.Row="0" Grid.Column="1" Template="{StaticResource OrangeHighLight}" x:Name="Btn_Add"  BorderBrush="Transparent" VerticalAlignment="Center" HorizontalAlignment="Center" Width="186" Height="47" Click="Btn_Add_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}"  ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center" IsEnabled="False">
+            <!--#endregion-->
+
+            <!--#region Add button-->
+            <Button Grid.Row="0" Grid.Column="1" Template="{StaticResource OrangeHighLight}" x:Name="Btn_Add"  BorderBrush="Transparent" VerticalAlignment="Center" HorizontalAlignment="Center" Width="186" Height="47" Click="Btn_Add_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" HorizontalContentAlignment="Center" IsEnabled="False">
+
+                <Button.ToolTip>
+                    <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
+                        <ToolTip.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"></Setter>
+                            </Style>
+                        </ToolTip.Resources>
+                        <TextBlock FontFamily="{StaticResource Montserrat}" Text="{StaticResource BtnAddRoom}" FontWeight="{StaticResource StandardToolTipFontWeight}" FontStyle="{StaticResource StandardToolTipFontStyle}" Foreground="{StaticResource NavyBlueBase}" FontSize="10"/>
+                    </ToolTip>
+                </Button.ToolTip>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,5,0">
                     <Image Source="Resources/Icons/Add_Icon.png" VerticalAlignment="Center" Margin="0,0,5,0" Height="40"></Image>
                     <TextBlock Text="Add" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </Button>
+            <!--#endregion-->
 
-            <Button Grid.Row="0" Grid.Column="2"  Template="{StaticResource OrangeHighLight}" x:Name="Btn_Cancel" VerticalAlignment="Center" HorizontalAlignment="Center" Width="176" Height="47" Click="Btn_Cancel_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource CancelTip}">
-
+            <!--#region Cancel Button-->
+            <Button Grid.Row="0" Grid.Column="2"  Template="{StaticResource OrangeHighLight}" x:Name="Btn_Cancel" VerticalAlignment="Center" HorizontalAlignment="Center" Width="176" Height="47" Click="Btn_Cancel_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent">
+                <Button.ToolTip>
+                    <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
+                        <ToolTip.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"></Setter>
+                            </Style>
+                        </ToolTip.Resources>
+                        <TextBlock FontFamily="{StaticResource Montserrat}" Text="{StaticResource BtnCancelAddRoom}" FontWeight="{StaticResource StandardToolTipFontWeight}" FontStyle="{StaticResource StandardToolTipFontStyle}" Foreground="{StaticResource NavyBlueBase}" FontSize="10"/>
+                    </ToolTip>
+                </Button.ToolTip>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Image Source="Resources/Icons/Cancel_Icon.png" VerticalAlignment="Center" Margin="0,0,5,0" Height="40"></Image>
                     <TextBlock Text="Cancel" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </Button>
+            <!--#endregion-->
+
         </Grid>
+        <!--#endregion-->
+
     </Grid>
 
 </UserControl>

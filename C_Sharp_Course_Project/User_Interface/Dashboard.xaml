@@ -7,20 +7,52 @@
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="1000" Background="White">
     <Grid>
+        <!--#region Grid Setup-->
         <Grid.RowDefinitions>
             <RowDefinition Height="155*"></RowDefinition>
             <RowDefinition Height="103*"></RowDefinition>
             <RowDefinition Height="363*"></RowDefinition>
         </Grid.RowDefinitions>
+        <!--#endregion-->
+
+        <!--#region Decoration Text Group-->
         <TextBlock Grid.Row="0" Foreground="{StaticResource NavyBlueBase}" Text="Welcome!" TextAlignment="Center" Margin="52,90,52,10" FontSize="40" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Regular"/>
         <TextBlock Grid.Row="1" Foreground="{StaticResource NavyBlueBase}" Text="Select Location" TextAlignment="Center"  FontSize="64" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="SemiBold" Margin="0,0,0,10" />
-       <StackPanel x:Name="Sp_MallBtns" Grid.Row="2" Margin="0,50,0,50" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
-           <Button x:Name="Btn_Add" Style="{StaticResource BigRoundedButton}" Margin="5" Click="Btn_Add_OnClick" ToolTip="{StaticResource BtnOpenAddMenu}">
-               <StackPanel>
-                   <Image Source="Resources/Icons/Add_Icon.png" Width="130" Height="130" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                   <TextBlock Text="Add" TextAlignment="Center" FontSize="40" Foreground="{StaticResource NavyBlueBase}" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Regular" Margin="0,0,0,20"/>
-               </StackPanel>
-           </Button>
+        <!--#endregion-->
+
+        <!--#region Mall Button Group-->
+        <StackPanel x:Name="Sp_MallBtns" Grid.Row="2" Margin="0,50,0,50" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+            <!--#region Add Button-->
+            <Button x:Name="Btn_Add" Style="{StaticResource BigRoundedButton}" Margin="5" Click="Btn_Add_OnClick">
+                <Button.ToolTip>
+                    <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="5000">
+                        <ToolTip.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"></Setter>
+                            </Style>
+                        </ToolTip.Resources>
+                        <StackPanel>
+                            <TextBlock FontFamily="{StaticResource Montserrat}" FontWeight="Bold" FontStyle="Normal" Foreground="{StaticResource OrangeAccent}" FontSize="15">
+                               Adding a mall:
+                            </TextBlock>
+
+                            <Border BorderBrush="{StaticResource NavyBlueBase}" BorderThickness="0,1,0,0" Margin="0,8" />
+
+                            <TextBlock FontFamily="{StaticResource Montserrat}" FontWeight="SemiBold" FontStyle="Normal" Foreground="{StaticResource NavyBlueBase}" FontSize="10">
+                               * You may add up to 2 malls. <LineBreak/>
+                               * Deleting malls is done, through the settings panel <LineBreak/> (Upper right of this window)
+                            </TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </Button.ToolTip>
+                <StackPanel>
+                    <Image Source="Resources/Icons/Add_Icon.png" Width="130" Height="130" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="Add" TextAlignment="Center" FontSize="40" Foreground="{StaticResource NavyBlueBase}" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Regular" Margin="0,0,0,20"/>
+                </StackPanel>
+            </Button>
+            <!--#endregion-->
+
         </StackPanel>
+        <!--#endregion-->
     </Grid>
 </UserControl>
