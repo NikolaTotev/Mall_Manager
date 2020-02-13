@@ -42,35 +42,41 @@
                 <Image Source="Resources/Icons/CommandMode_Icon.png" VerticalAlignment="Center" Margin="10,0,10,0" Height="20"></Image>
             </Button>
             <Label x:Name="Lb_CommandModeStatus" Content="Command mode active" VerticalAlignment="Center" FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="SemiBold" FontSize="15" Foreground="{StaticResource OrangeAccent}" Visibility="Hidden"/>
-            <Button x:Name="Btn_CommandModeHelp"  Template="{StaticResource OrangeHighLight}" Background="White" Height="Auto" Margin="0,15,5,15" Visibility="Hidden" ToolTipService.ShowDuration="15000">
+            <Button x:Name="Btn_CommandModeHelp" Template="{StaticResource OrangeHighLight}" Background="White" Height="Auto" Margin="0,15,5,15" Visibility="Hidden" ToolTipService.ShowDuration="15000">
                 <Button.ToolTip>
-                    <TextBlock>
-                       Available commands:
-                        <LineBreak /> 
-                        1. Room type
-                       <LineBreak /> 
-                            - $ T {Parameter Text} 
-                        <LineBreak /> 
-                        <LineBreak /> 
-                        2. Date Created
-                       <LineBreak /> 
-                            - $ DC {Date Parameter mm/dd/yyyy}
-                       <LineBreak /> 
-                       <LineBreak /> 
-                       3. Date Last Edited
-                       <LineBreak /> 
-                            - $ DLE {Date Parameter mm/dd/yyyy}
-                       <LineBreak /> 
-                       <LineBreak /> 
-                       4. Room Floor 
-                       <LineBreak /> 
-                       - $ RF {Parameter Number}
-                       <LineBreak /> 
-                       <LineBreak /> 
-                       4. Room Number
-                       <LineBreak /> 
-                            - $ RN {Parameter Number}
-                    </TextBlock>
+                    <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}">
+                        <ToolTip.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"></Setter>
+                            </Style>
+                        </ToolTip.Resources>
+                        <StackPanel>
+                            <TextBlock FontFamily="{StaticResource Montserrat}" FontWeight="Bold" FontStyle="Normal" Foreground="{StaticResource OrangeAccent}" FontSize="15">
+                            Available commands:
+                            </TextBlock>
+                            <Border BorderBrush="{StaticResource NavyBlueBase}" BorderThickness="0,1,0,0" Margin="0,8" />
+
+                            <TextBlock FontFamily="{StaticResource Montserrat}" FontWeight="SemiBold" FontStyle="Normal" Foreground="{StaticResource NavyBlueBase}" FontSize="10">
+                            1. Room type <LineBreak /> $ T {Parameter Text} <LineBreak />
+                            </TextBlock>
+
+                            <TextBlock FontFamily="{StaticResource Montserrat}" FontWeight="SemiBold" FontStyle="Normal" Foreground="{StaticResource NavyBlueBase}" FontSize="10">
+                             2. Date Created <LineBreak /> $ DC {Date Parameter mm/dd/yyyy} <LineBreak />
+                            </TextBlock>
+
+                            <TextBlock FontFamily="{StaticResource Montserrat}" FontWeight="SemiBold" FontStyle="Normal" Foreground="{StaticResource NavyBlueBase}" FontSize="10">
+                            3. Date Last Edited <LineBreak /> $ DLE {Date Parameter mm/dd/yyyy} <LineBreak />
+                            </TextBlock>
+
+                            <TextBlock FontFamily="{StaticResource Montserrat}" FontWeight="SemiBold" FontStyle="Normal" Foreground="{StaticResource NavyBlueBase}" FontSize="10">
+                            4. Room Floor <LineBreak /> $ RF {Parameter Number} <LineBreak />
+                            </TextBlock>
+
+                            <TextBlock FontFamily="{StaticResource Montserrat}" FontWeight="SemiBold" FontStyle="Normal" Foreground="{StaticResource NavyBlueBase}" FontSize="10">
+                            5. Room Number <LineBreak /> $ RN {Parameter Number}
+                            </TextBlock>
+                        </StackPanel>
+                    </ToolTip>
                 </Button.ToolTip>
                 <Image Source="Resources/Icons/Help_Icon.png" VerticalAlignment="Center" Margin="5,0,5,0" Height="20"></Image>
             </Button>
@@ -78,7 +84,17 @@
 
 
 
-        <ListView ItemsSource="{Binding}" x:Name="Lv_RentalSpaces" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" Grid.Row="2"  Margin="0,0,0,20">
+        <ListView ItemsSource="{Binding}" x:Name="Lv_RentalSpaces" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" Grid.Row="2" Margin="0,0,0,20">
+            <ListView.ToolTip>
+                <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.HasDropShadow="True" ToolTipService.ShowDuration="2000" ToolTipService.InitialShowDelay="0">
+                    <ToolTip.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"></Setter>
+                        </Style>
+                    </ToolTip.Resources>
+                    <TextBlock FontFamily="{StaticResource Montserrat}" Text="{StaticResource LvDoubleClickToOpen}" FontWeight="{StaticResource StandardToolTipFontWeight}" FontStyle="{StaticResource StandardToolTipFontStyle}" Foreground="{StaticResource NavyBlueBase}" FontSize="10"/>
+                </ToolTip>
+            </ListView.ToolTip>
             <ListView.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"></Setter>
@@ -180,25 +196,65 @@
                 <ColumnDefinition Width="2*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Button x:Name="Btn_AddRentalSpace" Template="{StaticResource OrangeHighLight}" Grid.Column="4" Click="Btn_AddRentalSpace_Click"  Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
+            <Button x:Name="Btn_AddRentalSpace" ToolTipService.InitialShowDelay="1000" Template="{StaticResource OrangeHighLight}" Grid.Column="4" Click="Btn_AddRentalSpace_Click"  Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" HorizontalContentAlignment="Center">
+                <Button.ToolTip>
+                    <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}">
+                        <ToolTip.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"></Setter>
+                            </Style>
+                        </ToolTip.Resources>
+                        <TextBlock FontFamily="{StaticResource Montserrat}" Text="{StaticResource BtnAddRoomTip}" FontWeight="{StaticResource StandardToolTipFontWeight}" FontStyle="{StaticResource StandardToolTipFontStyle}" Foreground="{StaticResource NavyBlueBase}" FontSize="10"/>
+                    </ToolTip>
+                </Button.ToolTip>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,5,0">
                     <Image Source="Resources/Icons/Add_Icon.png" VerticalAlignment="Center" Margin="0,0,5,0" Height="40"></Image>
                     <TextBlock Text="Add" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </Button>
 
-            <Button x:Name="Btn_DeleteRentalSpace" Template="{StaticResource OrangeHighLight}" Grid.Column="6" Click="Btn_DeleteRentalSpace_OnClick"  Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
+            <Button x:Name="Btn_DeleteRentalSpace" ToolTipService.InitialShowDelay="1000" Template="{StaticResource OrangeHighLight}" Grid.Column="6" Click="Btn_DeleteRentalSpace_OnClick"  Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" HorizontalContentAlignment="Center">
+                <Button.ToolTip>
+                    <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}">
+                        <ToolTip.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"></Setter>
+                            </Style>
+                        </ToolTip.Resources>
+                        <TextBlock FontFamily="{StaticResource Montserrat}" Text="{StaticResource BtnRemoveRoomTip}" FontWeight="{StaticResource StandardToolTipFontWeight}" FontStyle="{StaticResource StandardToolTipFontStyle}" Foreground="{StaticResource NavyBlueBase}" FontSize="10"/>
+                    </ToolTip>
+                </Button.ToolTip>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,5,0">
                     <Image Source="Resources/Icons/Delete_Icon.png" VerticalAlignment="Center" Margin="0,0,5,0" Height="40"></Image>
                     <TextBlock Text="Delete" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </Button>
 
-            <Button x:Name="Btn_SelectAll" Template="{StaticResource OrangeHighLight}" Grid.Column="1" Click="Btn_SelectAll_OnClick" Margin="10,5,10,0" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
+            <Button x:Name="Btn_SelectAll" Template="{StaticResource OrangeHighLight}" Grid.Column="1" Click="Btn_SelectAll_OnClick" Margin="10,5,10,0" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="{StaticResource StandardToolTipFontStyle}" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" HorizontalContentAlignment="Center">
+                <Button.ToolTip>
+                    <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}">
+                        <ToolTip.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"></Setter>
+                            </Style>
+                        </ToolTip.Resources>
+                        <TextBlock FontFamily="{StaticResource Montserrat}" Text="{StaticResource BtnSelectAllTip}" FontWeight="{StaticResource StandardToolTipFontWeight}" FontStyle="{StaticResource StandardToolTipFontStyle}" Foreground="{StaticResource NavyBlueBase}" FontSize="10"/>
+                    </ToolTip>
+                </Button.ToolTip>
                 <Image Source="Resources/Icons/SelectAll_Icon.png" VerticalAlignment="Center" Margin="0,0,0,0" Height="40"></Image>
             </Button>
 
-            <Button x:Name="Btn_DeselectAllSelected" Template="{StaticResource OrangeHighLight}" Grid.Column="2" Click="Btn_DeselectAllSelected_OnClick" Margin="10,5,10,0" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
+            <Button x:Name="Btn_DeselectAllSelected" Template="{StaticResource OrangeHighLight}" Grid.Column="2" Click="Btn_DeselectAllSelected_OnClick" Margin="10,5,10,0" Background="White" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent"  HorizontalContentAlignment="Center">
+                <Button.ToolTip>
+                    <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}">
+                        <ToolTip.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"></Setter>
+                            </Style>
+                        </ToolTip.Resources>
+                        <TextBlock FontFamily="{StaticResource Montserrat}" Text="{StaticResource BtnDeselectAllTip}" FontWeight="{StaticResource StandardToolTipFontWeight}" FontStyle="{StaticResource StandardToolTipFontStyle}" Foreground="{StaticResource NavyBlueBase}" FontSize="10"/>
+                    </ToolTip>
+                </Button.ToolTip>
                 <Image Source="Resources/Icons/Deselect_Icon.png" VerticalAlignment="Center" Margin="0,0,0,0" Height="40"></Image>
             </Button>
         </Grid>
