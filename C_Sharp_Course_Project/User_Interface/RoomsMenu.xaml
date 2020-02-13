@@ -34,7 +34,7 @@
                         Orientation="Horizontal">
 
                 <Image Source="Resources/Icons/Search_Icon.png" Height="18" Opacity="0.5"/>
-                <TextBox  x:Name="Tb_Search" BorderBrush="Transparent" Text="Search"  Margin="3 0 0 0" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="15" Foreground="{StaticResource TextboxPrompt}" Width="359"/>
+                <TextBox  x:Name="Tb_Search" BorderBrush="Transparent" Text="Search"  Margin="3 0 0 0" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="15" Foreground="{StaticResource TextboxPrompt}" Width="359" TextChanged="Tb_Search_OnTextChanged" GotFocus="Tb_Search_OnGotFocus" LostFocus="Tb_Search_OnLostFocus"/>
 
             </StackPanel>
 

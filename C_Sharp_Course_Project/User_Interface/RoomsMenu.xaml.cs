@@ -152,5 +152,31 @@ namespace User_Interface
             SpacePage space = new SpacePage(item.RoomId);
             m_CurrentMainWindow.ChangeViewForward(space, this);
         }
+
+        private void Tb_Search_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(Tb_Search.Text) && Tb_Search.Text != "Search")
+            {
+                Lv_RentalSpaces.ItemsSource = m_Rooms.Where(room => room.RoomName.StartsWith(Tb_Search.Text));
+            }
+            else
+            {
+                if (m_Rooms != null)
+                {
+                    Lv_RentalSpaces.ItemsSource = m_Rooms;
+                }
+            }
+
+        }
+
+        private void Tb_Search_OnGotFocus(object sender, RoutedEventArgs e)
+        {
+            Tb_Search.Text = "";
+        }
+
+        private void Tb_Search_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            Tb_Search.Text = "Search";
+        }
     }
 }
