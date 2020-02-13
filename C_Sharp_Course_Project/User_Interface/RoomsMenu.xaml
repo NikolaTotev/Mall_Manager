@@ -23,6 +23,16 @@
             </Label.Resources>
             <StackPanel Orientation="Horizontal">
                 <Button Template="{StaticResource BackButton}" x:Name="Btn_Back" Margin="0,5,15,5" Background="Transparent" Click="Btn_Back_OnClick">
+                    <Button.ToolTip>
+                        <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
+                            <ToolTip.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"></Setter>
+                                </Style>
+                            </ToolTip.Resources>
+                            <TextBlock FontFamily="{StaticResource Montserrat}" Text="{StaticResource BtnBack}" FontWeight="{StaticResource StandardToolTipFontWeight}" FontStyle="{StaticResource StandardToolTipFontStyle}" Foreground="{StaticResource NavyBlueBase}" FontSize="10"/>
+                        </ToolTip>
+                    </Button.ToolTip>
                     <Image Source="Resources/Icons/NavigateBack_Icon.png" VerticalAlignment="Center" Margin="0,-10,0,-10" Height="40"></Image>
                 </Button>
                 <TextBlock x:Name="Tbl_HeaderText" Text="/Mall Name/ - Rental Spaces"></TextBlock>
@@ -38,7 +48,17 @@
                     <TextBox  x:Name="Tb_Search" BorderBrush="Transparent" Text="Search"  Margin="3 0 0 0" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="15" Foreground="{StaticResource TextboxPrompt}" Width="359" TextChanged="Tb_Search_OnTextChanged" GotFocus="Tb_Search_OnGotFocus" LostFocus="Tb_Search_OnLostFocus"/>
                 </StackPanel>
             </Border>
-            <Button x:Name="Btn_EnterCommandMode" Click="Btn_EnterCommandMode_OnClick" Template="{StaticResource OrangeHighLight}" Background="White" Height="Auto" Margin="0,15,5,15" ToolTip="Enter command mode for advanced filtering.">
+            <Button x:Name="Btn_EnterCommandMode" Click="Btn_EnterCommandMode_OnClick" Template="{StaticResource OrangeHighLight}" Background="White" Height="Auto" Margin="0,15,5,15">
+                <Button.ToolTip>
+                    <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
+                        <ToolTip.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"></Setter>
+                            </Style>
+                        </ToolTip.Resources>
+                        <TextBlock FontFamily="{StaticResource Montserrat}" Text="{StaticResource BtnCommandModeEnter}" FontWeight="{StaticResource StandardToolTipFontWeight}" FontStyle="{StaticResource StandardToolTipFontStyle}" Foreground="{StaticResource NavyBlueBase}" FontSize="10"/>
+                    </ToolTip>
+                </Button.ToolTip>
                 <Image Source="Resources/Icons/CommandMode_Icon.png" VerticalAlignment="Center" Margin="10,0,10,0" Height="20"></Image>
             </Button>
             <Label x:Name="Lb_CommandModeStatus" Content="Command mode active" VerticalAlignment="Center" FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="SemiBold" FontSize="15" Foreground="{StaticResource OrangeAccent}" Visibility="Hidden"/>
@@ -193,12 +213,13 @@
                 <ColumnDefinition Width="0.1*"></ColumnDefinition>
 
                 <ColumnDefinition Width="1.3*"></ColumnDefinition>
-                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                <ColumnDefinition Width="1.5*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
             <Button x:Name="Btn_AddRentalSpace" ToolTipService.InitialShowDelay="1000" Template="{StaticResource OrangeHighLight}" Grid.Column="4" Click="Btn_AddRentalSpace_Click"  Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" HorizontalContentAlignment="Center">
                 <Button.ToolTip>
-                    <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}">
+                    <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
                         <ToolTip.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="10"></Setter>
@@ -215,7 +236,7 @@
 
             <Button x:Name="Btn_DeleteRentalSpace" ToolTipService.InitialShowDelay="1000" Template="{StaticResource OrangeHighLight}" Grid.Column="6" Click="Btn_DeleteRentalSpace_OnClick"  Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" HorizontalContentAlignment="Center">
                 <Button.ToolTip>
-                    <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}">
+                    <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
                         <ToolTip.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="10"></Setter>
@@ -229,10 +250,41 @@
                     <TextBlock Text="Delete" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </Button>
+            <Image x:Name="Img_DeleteInfo" Source="Resources/Icons/HelpLowRes_Icon.png" VerticalAlignment="Center" Grid.Column="7" Margin="5,0,30,0" Height="30" Visibility="Hidden">
+                <Image.ToolTip>
+                    <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="12000">
+                        <ToolTip.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"></Setter>
+                            </Style>
+                        </ToolTip.Resources>
+                        <StackPanel>
+                            <TextBlock FontFamily="{StaticResource Montserrat}" FontWeight="Bold" FontStyle="Normal" Foreground="{StaticResource OrangeAccent}" FontSize="15">
+                            Space deletion information:
+                            </TextBlock>
+                            <Border BorderBrush="{StaticResource NavyBlueBase}" BorderThickness="0,1,0,0" Margin="0,8" />
+
+                            <TextBlock FontFamily="{StaticResource Montserrat}" FontWeight="SemiBold" FontStyle="Normal" Foreground="{StaticResource NavyBlueBase}" FontSize="10">
+                             Attention: A room is deleted only if no activities are associated with it. <LineBreak/>
+                            </TextBlock>
+                            
+                            <TextBlock FontFamily="{StaticResource Montserrat}" FontWeight="SemiBold" FontStyle="Normal" Foreground="{StaticResource NavyBlueBase}" FontSize="10">
+                                If a room you selected has not been deleted, <LineBreak/> please ensure all of its activities and try to delete again.
+                            </TextBlock>
+
+                            <Border BorderBrush="{StaticResource NavyBlueBase}" BorderThickness="0,1,0,0" Margin="0,8" />
+
+                            <TextBlock FontFamily="{StaticResource Montserrat}" FontWeight="SemiBold" FontStyle="Normal" Foreground="{StaticResource NavyBlueBase}" FontSize="10">
+                                If a room with no associated activities still can't be deleted, <LineBreak/>  please reference the program Wiki for more troubleshooting information.
+                            </TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </Image.ToolTip>
+            </Image>
 
             <Button x:Name="Btn_SelectAll" Template="{StaticResource OrangeHighLight}" Grid.Column="1" Click="Btn_SelectAll_OnClick" Margin="10,5,10,0" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="{StaticResource StandardToolTipFontStyle}" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" HorizontalContentAlignment="Center">
                 <Button.ToolTip>
-                    <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}">
+                    <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
                         <ToolTip.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="10"></Setter>
@@ -246,7 +298,7 @@
 
             <Button x:Name="Btn_DeselectAllSelected" Template="{StaticResource OrangeHighLight}" Grid.Column="2" Click="Btn_DeselectAllSelected_OnClick" Margin="10,5,10,0" Background="White" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent"  HorizontalContentAlignment="Center">
                 <Button.ToolTip>
-                    <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}">
+                    <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}"  ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
                         <ToolTip.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="10"></Setter>

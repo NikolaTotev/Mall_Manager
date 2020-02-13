@@ -102,9 +102,16 @@ namespace User_Interface
             for (var i = Lv_RentalSpaces.SelectedItems.Count - 1; i >= 0; i--)
             {
                 RoomListItem itemToDelete = (RoomListItem)Lv_RentalSpaces.SelectedItems[i];
-                RoomManager.GetInstance().DeleteRoom(itemToDelete.RoomId, MallManager.GetInstance().CurrentMall.Name);
-                m_Rooms.Remove(itemToDelete);
-                Lv_RentalSpaces.Items.Refresh();
+                if (RoomManager.GetInstance().DeleteRoom(itemToDelete.RoomId, MallManager.GetInstance().CurrentMall.Name))
+                {
+                    m_Rooms.Remove(itemToDelete);
+                    Lv_RentalSpaces.Items.Refresh();
+                    Img_DeleteInfo.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    Img_DeleteInfo.Visibility = Visibility.Visible;
+                }
             }
         }
 
