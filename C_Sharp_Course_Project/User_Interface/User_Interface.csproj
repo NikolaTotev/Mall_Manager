@@ -262,5 +262,8 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\Help_Icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\HelpLowRes_Icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

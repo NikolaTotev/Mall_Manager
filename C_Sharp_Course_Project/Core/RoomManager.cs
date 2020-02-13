@@ -120,9 +120,14 @@ namespace Core
                 return false;
             }
 
-            Rooms.Remove(roomToRemove);
-            SerializationManager.SaveRooms(Rooms, mallName);
-            return true;
+            if (Rooms[roomToRemove].Activities.Count == 0)
+            {
+                Rooms.Remove(roomToRemove);
+                SerializationManager.SaveRooms(Rooms, mallName);
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>

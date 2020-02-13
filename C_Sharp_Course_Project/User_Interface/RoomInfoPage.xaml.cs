@@ -26,6 +26,9 @@ namespace User_Interface
         private IAppView m_NextView;
         private readonly Room m_CurrentRoom;
         private readonly StringBuilder m_StringBuilder = new StringBuilder();
+        private bool m_InputOk;
+        private int m_Floor;
+        private int m_Number;
         public RoomInfoPage(Room currentRoom)
         {
             InitializeComponent();
@@ -36,6 +39,8 @@ namespace User_Interface
             Tbl_HeaderText.Text = m_StringBuilder.ToString();
             Tb_Name.Text = m_CurrentRoom.Name;
             Tb_Desc.Text = m_CurrentRoom.Description;
+            Tb_Floor.Text = m_CurrentRoom.Floor.ToString();
+            Tb_Number.Text = m_CurrentRoom.RoomNumber.ToString();
             Lb_DateCreated.Content = m_CurrentRoom.CreateDate.ToShortDateString();
             Lb_LastEdited.Content = m_CurrentRoom.LastEditDate.ToShortDateString();
 
@@ -44,11 +49,6 @@ namespace User_Interface
                 Cmb_RoomType.Items.Add(type);
             }
             Cmb_RoomType.Text = m_CurrentRoom.Type;
-        }
-
-        private void Btn_Close_OnClick(object sender, RoutedEventArgs e)
-        {
-            m_CurrentMainWindow.ChangeViewBackward(m_PreviousView, this);
         }
 
         public void SetMainWindow(MainWindow currentWindow)
@@ -71,28 +71,56 @@ namespace User_Interface
             return m_PreviousView;
         }
 
-        //TODO Complete Save functionality.
+        private void Btn_Close_OnClick(object sender, RoutedEventArgs e)
+        {
+            m_CurrentMainWindow.ChangeViewBackward(m_PreviousView, this);
+        }
+
         private void Btn_Save_OnClick(object sender, RoutedEventArgs e)
         {
             string newName = Tb_Name.Text;
             string newDesc = Tb_Desc.Text;
             string newType = Cmb_RoomType.SelectionBoxItemStringFormat;
-            //int newNumber;
-            //int newFloor;
-            //RoomManager.GetInstance().EditRoom(MallManager.GetInstance().CurrentMall.Name, m_CurrentRoom.Id,Tb_Name.Text,Tb_Desc.Text,Cmb_RoomType.SelectionBoxItemStringFormat);
-        }
-
-        private void Tb_Desc_OnTextChanged(object sender, TextChangedEventArgs e)
-        {
-        }
-
-        private void Tb_Name_OnTextChanged(object sender, TextChangedEventArgs e)
-        {
+            if (m_InputOk)
+            {
+                RoomManager.GetInstance().EditRoom(MallManager.GetInstance().CurrentMall.Name, m_CurrentRoom.Id, Tb_Name.Text, Tb_Desc.Text, Cmb_RoomType.SelectionBoxItemStringFormat, m_Floor, m_Number);
+                m_CurrentMainWindow.ChangeViewBackward(m_PreviousView, this);
+            }
         }
 
         private void Btn_Back_OnClick(object sender, RoutedEventArgs e)
         {
             m_CurrentMainWindow.ChangeViewBackward(m_PreviousView, this);
+        }
+
+        private void Tb_Floor_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!int.TryParse(Tb_Floor.Text, out m_Floor))
+            {
+                Tb_Floor.Background = (Brush)Application.Current.Resources["InputError"];
+                Tb_Floor.BorderBrush = Brushes.Transparent;
+                m_InputOk = false;
+            }
+            else
+            {
+                Tb_Floor.Background = Brushes.White;
+                m_InputOk = true;
+            }
+        }
+
+        private void Tb_Number_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!int.TryParse(Tb_Number.Text, out m_Number))
+            {
+                Tb_Number.Background = (Brush)Application.Current.Resources["InputError"];
+                Tb_Number.BorderBrush = Brushes.Transparent;
+                m_InputOk = false;
+            }
+            else
+            {
+                Tb_Number.Background = Brushes.White;
+                m_InputOk = true;
+            }
         }
     }
 }

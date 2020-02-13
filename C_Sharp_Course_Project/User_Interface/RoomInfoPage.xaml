@@ -21,6 +21,16 @@
             </Label.Resources>
             <StackPanel Orientation="Horizontal">
                 <Button Template="{StaticResource BackButton}" x:Name="Btn_Back" Margin="0,5,15,5" Background="Transparent" Click="Btn_Back_OnClick">
+                    <Button.ToolTip>
+                        <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
+                            <ToolTip.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"></Setter>
+                                </Style>
+                            </ToolTip.Resources>
+                            <TextBlock FontFamily="{StaticResource Montserrat}" Text="{StaticResource BtnBack}" FontWeight="{StaticResource StandardToolTipFontWeight}" FontStyle="{StaticResource StandardToolTipFontStyle}" Foreground="{StaticResource NavyBlueBase}" FontSize="10"/>
+                        </ToolTip>
+                    </Button.ToolTip>
                     <Image Source="Resources/Icons/NavigateBack_Icon.png" VerticalAlignment="Center" Margin="0,-10,0,-10" Height="40"></Image>
                 </Button>
                 <TextBlock x:Name="Tbl_HeaderText" Text="/Space Name/ - Information"></TextBlock>
@@ -50,8 +60,8 @@
             <TextBlock Grid.Column="0" Grid.Row="5" Text="Last edited"  Margin="20,20,0,0" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="SemiBold" FontSize="35" Foreground="{StaticResource NavyBlueBase}" ></TextBlock>
 
             <StackPanel x:Name="Sp_NameTb"  Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Label x:Name="Lb_NameError" Content="Name error" FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Light" FontSize="15" Foreground="{StaticResource FailedTask}" BorderBrush="Transparent"/>
-                <TextBox x:Name="Tb_Name" TextWrapping="Wrap"  Text="Name" Width="620" Padding="2" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="Transparent" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="30" Foreground="{StaticResource TextboxPrompt}" TextChanged="Tb_Name_OnTextChanged" >
+                <Label x:Name="Lb_NameError" Content="" FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Light" FontSize="15" Foreground="{StaticResource FailedTask}" BorderBrush="Transparent"/>
+                <TextBox x:Name="Tb_Name" TextWrapping="Wrap"  Text="Name" Width="620" Padding="2" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="Transparent" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="30" Foreground="{StaticResource TextboxPrompt}">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="10"/>
@@ -64,8 +74,8 @@
             </StackPanel>
 
             <StackPanel x:Name="Sp_DescTb"  Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Label x:Name="Lb_DescError" Content="Desc error" FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Light" FontSize="15" Foreground="{StaticResource FailedTask}" BorderBrush="Transparent"/>
-                <TextBox x:Name="Tb_Desc" TextWrapping="Wrap"  Text="Description" Width="620" Padding="2" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="Transparent" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="30" Foreground="{StaticResource TextboxPrompt}" TextChanged="Tb_Desc_OnTextChanged" >
+                <Label x:Name="Lb_DescError" Content="" FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Light" FontSize="15" Foreground="{StaticResource FailedTask}" BorderBrush="Transparent"/>
+                <TextBox x:Name="Tb_Desc" TextWrapping="Wrap"  Text="Description" Width="620" Padding="2" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="Transparent" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="30" Foreground="{StaticResource TextboxPrompt}" >
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="10"/>
@@ -100,11 +110,27 @@
 
 
                 <TextBlock  Grid.Column="0" TextAlignment="Center" VerticalAlignment="Center" Text="Floor: " FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Light" FontSize="35" Foreground="{StaticResource NavyBlueBase}" ></TextBlock>
-                <TextBlock  Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center" Text="Store number:" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Light" FontSize="35" Foreground="{StaticResource NavyBlueBase}" ></TextBlock>
-                <ComboBox Grid.Column="1" Width="100" Margin="-20,20,-20,20">
-                </ComboBox>
-                <ComboBox Grid.Column="3"  Width="100" Margin="-20,20,-20,20"></ComboBox>
-
+                <TextBlock  Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center" Text="Space number:" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Light" FontSize="35" Foreground="{StaticResource NavyBlueBase}" ></TextBlock>
+                <TextBox x:Name="Tb_Floor" Grid.Column="1" Width="100" Margin="-20,20,-20,20" Padding="2" Foreground="{StaticResource TextboxPrompt}" TextChanged="Tb_Floor_OnTextChanged" Background="White" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="Transparent" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="25" >
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </TextBox.Resources>
+                    <TextBox.Effect>
+                        <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+                    </TextBox.Effect>
+                </TextBox>
+                <TextBox x:Name="Tb_Number" Grid.Column="3" Width="100" Margin="-20,20,-20,20" Padding="2" Foreground="{StaticResource TextboxPrompt}" TextChanged="Tb_Number_OnTextChanged" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="Transparent" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="25" >
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </TextBox.Resources>
+                    <TextBox.Effect>
+                        <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+                    </TextBox.Effect>
+                </TextBox>
             </Grid>
 
 
@@ -142,16 +168,35 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <Button x:Name="Btn_Save" Template="{StaticResource OrangeHighLight}" Grid.Column="0" Click="Btn_Save_OnClick" Margin="15" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
-                  
+                <Button x:Name="Btn_Save" Template="{StaticResource OrangeHighLight}" Grid.Column="0" Click="Btn_Save_OnClick" Margin="15" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" HorizontalContentAlignment="Center">
+                    <Button.ToolTip>
+                        <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
+                            <ToolTip.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"></Setter>
+                                </Style>
+                            </ToolTip.Resources>
+                            <TextBlock FontFamily="{StaticResource Montserrat}" Text="{StaticResource BtnSave}" FontWeight="{StaticResource StandardToolTipFontWeight}" FontStyle="{StaticResource StandardToolTipFontStyle}" Foreground="{StaticResource NavyBlueBase}" FontSize="10"/>
+                        </ToolTip>
+                    </Button.ToolTip>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,5,0">
                         <Image Source="Resources/Icons/Save_Icon.png" VerticalAlignment="Center" Margin="0,0,5,0" Height="40"></Image>
                         <TextBlock Text="Save" VerticalAlignment="Center"></TextBlock>
                     </StackPanel>
                 </Button>
 
-                <Button x:Name="Btn_Close" Template="{StaticResource OrangeHighLight}" Grid.Column="1" Click="Btn_Close_OnClick" Margin="15" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center">
-                   <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,5,0">
+                <Button x:Name="Btn_Close" Template="{StaticResource OrangeHighLight}" Grid.Column="1" Click="Btn_Close_OnClick" Margin="15" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" HorizontalContentAlignment="Center">
+                    <Button.ToolTip>
+                        <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
+                            <ToolTip.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"></Setter>
+                                </Style>
+                            </ToolTip.Resources>
+                            <TextBlock FontFamily="{StaticResource Montserrat}" Text="{StaticResource BtnCancel}" FontWeight="{StaticResource StandardToolTipFontWeight}" FontStyle="{StaticResource StandardToolTipFontStyle}" Foreground="{StaticResource NavyBlueBase}" FontSize="10"/>
+                        </ToolTip>
+                    </Button.ToolTip>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,5,0">
                         <Image Source="Resources/Icons/Cancel_Icon.png" VerticalAlignment="Center" Margin="0,0,5,0" Height="40"></Image>
                         <TextBlock Text="Close" VerticalAlignment="Center"></TextBlock>
                     </StackPanel>
