@@ -36,7 +36,7 @@ namespace Core
                 ExceptionManager.OnNullParamsToFunction("Add mall");
                 return false;
             }
-            
+
             if (Malls.ContainsKey(mallToAdd.Id))
             {
                 return false;
@@ -49,6 +49,11 @@ namespace Core
             return true;
         }
 
+        public void ClearActivities()
+        {
+            CurrentMall.AssociatedActivities.Clear();
+            SerializationManager.SaveMalls(Malls);
+        }
         public bool RemoveMall(Guid mallId)
         {
             if (!Malls.ContainsKey(mallId))
@@ -74,7 +79,7 @@ namespace Core
                 mallToEdit.Description = mallDescription;
             }
 
-            //Serialization Manager Save;
+            SerializationManager.SaveMalls(Malls);
         }
 
         public bool ChangeCurrentMall(Guid mallId)

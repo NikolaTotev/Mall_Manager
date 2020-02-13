@@ -48,6 +48,21 @@ namespace Core
             return m_Config.Categories;
         }
 
+        public void ClearActivities()
+        {
+            Activities.Clear();
+            MallManager.GetInstance().ClearActivities();
+            RoomManager.GetInstance().ClearRoomActivities();
+            SerializationManager.SaveActivities(Activities, MallManager.GetInstance().CurrentMall.Name);
+        }
+
+        public void ClearRoomActivities(Room room)
+        {
+            while (room.Activities.Count > 0)
+            {
+                DeleteActivity(room.Activities[0], MallManager.GetInstance().CurrentMall.Name);
+            }
+        }
         public bool AddNewCategory(string category, string mallName)
         {
             if (category == null)

@@ -24,6 +24,7 @@
         <Brush x:Key="FailedTask">#F5AC72</Brush>
         <Brush x:Key="UndefinedTask">#A2A9B9</Brush>
         <Brush x:Key="InputError">#FFFFD5D5</Brush>
+        <Brush x:Key="WarningRed">#FF6363</Brush>
 
 
 
@@ -42,6 +43,9 @@
 
         <system:String x:Key="BtnOpenAddActivityMenu">Opens "Add activity" menu.</system:String>
         <system:String x:Key="BtnDeleteActivity">Deletes selected activity(ies).</system:String>
+        <system:String x:Key="BtnSaveMallSettings">Saves mall settings. Does not close window.</system:String>
+        <system:String x:Key="BtnClearActivities">Removes all activities from mall.</system:String>
+        <system:String x:Key="BtnClearRooms">Removes all rooms from mall.</system:String>
 
 
 
@@ -127,6 +131,43 @@
         </Style>
 
 
+        <ControlTemplate x:Key="TabButton" TargetType="{x:Type Button}">
+
+            <Grid>
+                <Image Source="{TemplateBinding Tag}" Stretch="Fill"/>
+                <Border x:Name="border" CornerRadius="0,0,20,20" BorderBrush="Transparent" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                    <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+                    </Border.Effect>
+                </Border>
+
+            </Grid>
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="Button.IsDefaulted" Value="True" >
+                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" TargetName="border" Value="{DynamicResource OrangeButtonHighlight}" />
+                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource OrangeAccent}"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" TargetName="border" Value="{DynamicResource OrangeButtonPressed}"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource NavyBlueBase}"/>
+                </Trigger>
+                <Trigger Property="ToggleButton.IsChecked" Value="True">
+                    <Setter Property="Background" TargetName="border" Value="#FFBCDDEE"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="#FF245A83"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" TargetName="border" Value="#FFF4F4F4"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="#FFADB2B5"/>
+                    <Setter Property="Foreground" Value="#FF838383"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
         <ControlTemplate x:Key="RoundedButtonTemplate" TargetType="{x:Type Button}">
 
             <Grid Height="200" Width="200">
@@ -170,6 +211,43 @@
             <Grid>
                 <Image Source="{TemplateBinding Tag}" Stretch="Fill"/>
                 <Border x:Name="border" CornerRadius="10" BorderBrush="Transparent" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                    <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+                    </Border.Effect>
+                </Border>
+
+            </Grid>
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="Button.IsDefaulted" Value="True" >
+                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" TargetName="border" Value="{DynamicResource OrangeButtonHighlight}" />
+                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource OrangeAccent}"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" TargetName="border" Value="{DynamicResource OrangeButtonPressed}"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource NavyBlueBase}"/>
+                </Trigger>
+                <Trigger Property="ToggleButton.IsChecked" Value="True">
+                    <Setter Property="Background" TargetName="border" Value="#FFBCDDEE"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="#FF245A83"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" TargetName="border" Value="#FFF4F4F4"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="#FFADB2B5"/>
+                    <Setter Property="Foreground" Value="#FF838383"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        
+        <ControlTemplate x:Key="WarningButton" TargetType="{x:Type Button}">
+
+            <Grid>
+                <Image Source="{TemplateBinding Tag}" Stretch="Fill"/>
+                <Border x:Name="border" CornerRadius="10" BorderBrush="{StaticResource WarningRed}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
                     <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                     <Border.Effect>
                         <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>

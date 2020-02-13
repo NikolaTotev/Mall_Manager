@@ -79,5 +79,15 @@ namespace User_Interface
                 }
             }
         }
+
+        public void AddOverlay(UIElement overlay)
+        {
+            p_StartPanel.Children.Add(overlay);
+        }
+
+        public void RemoveOverlay(UIElement overlay)
+        {
+            p_StartPanel.Children.Remove(overlay);
+        }
     }
 }

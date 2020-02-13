@@ -108,6 +108,15 @@ namespace Core
             SerializationManager.SaveRooms(Rooms, mallName);
         }
 
+        public void ClearRoomActivities()
+        {
+            foreach (var room in Rooms)
+            {
+                room.Value.Activities.Clear();
+            }
+            SerializationManager.SaveRooms(Rooms,MallManager.GetInstance().CurrentMall.Name);
+        }
+
         /// <summary>
         /// Deletes a room from the Rooms and then saves the updated dictionary.
         /// </summary>
@@ -122,12 +131,29 @@ namespace Core
 
             if (Rooms[roomToRemove].Activities.Count == 0)
             {
+                foreach (var room in Rooms)
+                {
+                    foreach (var valueActivity in room.Value.Activities)
+                    {
+                        ActivityManager.GetInstance().DeleteActivity(valueActivity, MallManager.GetInstance().CurrentMall.Name);
+                    }
+                }
                 Rooms.Remove(roomToRemove);
                 SerializationManager.SaveRooms(Rooms, mallName);
                 return true;
             }
 
             return false;
+        }
+
+        public void ClearRooms()
+        {
+            foreach (var room in Rooms)
+            {
+                ActivityManager.GetInstance().ClearRoomActivities(room.Value);
+            }
+            Rooms.Clear();
+            SerializationManager.SaveRooms(Rooms, MallManager.GetInstance().CurrentMall.Name);
         }
 
         /// <summary>

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Mall Manager" Height="650" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
 
-    <DockPanel x:Name="p_StartPanel">
+    <Grid x:Name="p_StartPanel">
        
-    </DockPanel>
+    </Grid>
 </Window>
