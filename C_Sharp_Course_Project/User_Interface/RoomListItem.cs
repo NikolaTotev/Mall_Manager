@@ -20,6 +20,7 @@ namespace User_Interface
 
         public Guid RoomId { get; set; }
         public string Type { get; set; }
+        public string NumberOfActivities { get; set; }
         public string RoomName { get; set; }
         public string Description { get; set; }
         public string RoomNumber { get; set; }

@@ -20,6 +20,16 @@
             </Label.Resources>
             <StackPanel Orientation="Horizontal">
                 <Button Template="{StaticResource BackButton}" x:Name="Btn_Back" Margin="0,5,15,5" Background="Transparent" Click="Btn_Back_OnClick">
+                    <Button.ToolTip>
+                        <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
+                            <ToolTip.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"></Setter>
+                                </Style>
+                            </ToolTip.Resources>
+                            <TextBlock FontFamily="{StaticResource Montserrat}" Text="{StaticResource BtnBack}" FontWeight="{StaticResource StandardToolTipFontWeight}" FontStyle="{StaticResource StandardToolTipFontStyle}" Foreground="{StaticResource NavyBlueBase}" FontSize="10"/>
+                        </ToolTip>
+                    </Button.ToolTip>
                     <Image Source="Resources/Icons/NavigateBack_Icon.png" VerticalAlignment="Center" Margin="0,-10,0,-10" Height="40"></Image>
                 </Button>
                 <TextBlock x:Name="Tbl_HeaderText" Text="/Mall Name/ - Activities"></TextBlock>

@@ -26,7 +26,6 @@
         <Brush x:Key="InputError">#FFFFD5D5</Brush>
 
 
-        <system:String x:Key="BtnAddMallTip">Adds a new mall based on your input.</system:String>
         <system:String x:Key="BtnAddRoomTip">Opens add room menu.</system:String>
         <system:String x:Key="BtnRemoveRoomTip">Deletes selected room(s).</system:String>
         <system:String x:Key="BtnSelectAllTip">Selects all items in the list.</system:String>
@@ -35,17 +34,39 @@
         <system:String x:Key="BtnBack">Go to previous page.</system:String>
         <system:String x:Key="BtnSave">All edited fields are saved.</system:String>
         <system:String x:Key="BtnCancel">Edits not saved. Returns to previous page.</system:String>
+
+
+
+        <system:String x:Key="BtnOpenRentalSpaces">Shows all rental spaces for the mall.</system:String>
+        <system:String x:Key="BtnOpenMallActivities">Opens list of activities for the mall</system:String>
+        <system:String x:Key="BtnOpenMallStats">Opens statistics menu for the mall</system:String>
+
+        <system:String x:Key="BtnAddRoomActivity">Saves the current activity. Returns to previous page.</system:String>
+        <system:String x:Key="BtnCancelAddRoomActivity">Returns to previous page page.</system:String>  
         
+        <system:String x:Key="BtnAddMall">Saves the current mall. Returns to previous page.</system:String>
+        <system:String x:Key="BtnCancelAddMall">Returns to previous page.</system:String>
         
+   
+        <system:String x:Key="CalStartDateInput">Select a date before or equal to the end date.</system:String>
+        <system:String x:Key="CalEndDateInput">Select a date after or equal to the start date.</system:String>
+
+        <system:String x:Key="LbCurrentMall">Shows which mall is currently open</system:String>
+
+
+        
+        <system:String x:Key="CmbSelectRoomType">Click to view and select available room types.</system:String>
+        <system:String x:Key="CmdSelectActivityType">Click to view and select available activity types.</system:String>
+
+        
+
         <system:String x:Key="LvDoubleClickToOpen">Double click item to open.</system:String>
 
 
 
         <system:String x:Key="CancelTip">Returns to previous page.</system:String>
         <system:String x:Key="BtnOpenAddMenu">Opens add menu</system:String>
-        <system:String x:Key="BtnOpenRentalSpaces">Shows all rental spaces for the mall.</system:String>
-        <system:String x:Key="BtnOpenMallActivities">Opens list of activities for the mall</system:String>
-        <system:String x:Key="BtnOpenMallStats">Opens statistics menu for the mall</system:String>
+        
         <FontStyle x:Key="StandardToolTipFontStyle">Italic</FontStyle>
         <FontWeight x:Key="StandardToolTipFontWeight">SemiBold</FontWeight>
         <system:Int32 x:Key="StandardToolTipShowDuration">1500</system:Int32>

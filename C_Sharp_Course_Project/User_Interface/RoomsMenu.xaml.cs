@@ -42,6 +42,7 @@ namespace User_Interface
                     RoomId = room.Id,
                     Type = room.Type,
                     RoomName = room.Name,
+                    NumberOfActivities = room.Activities.Count.ToString(),
                     Description = room.Description,
                     RoomFloor = room.Floor.ToString(),
                     RoomNumber = room.RoomNumber.ToString(),
@@ -152,7 +153,7 @@ namespace User_Interface
         {
             if (m_CommandModeActive)
             {
-                if (Tb_Search.Text.Length > 4)
+                if (Tb_Search.Text.Length > 4 && Tb_Search.Text.StartsWith("$"))
                 {
                     if (Tb_Search.Text.StartsWith("$ T"))
                     {
@@ -183,7 +184,17 @@ namespace User_Interface
                         string commandParam = Tb_Search.Text.Split(' ')[2];
                         Lv_RentalSpaces.ItemsSource = m_Rooms.Where(room => room.RoomNumber == commandParam);
                     }
+
+                    if (Tb_Search.Text.StartsWith("$ NA"))
+                    {
+                        string commandParam = Tb_Search.Text.Split(' ')[2];
+                        Lv_RentalSpaces.ItemsSource = m_Rooms.Where(room => room.NumberOfActivities == commandParam);
+                    }
                 }
+                //else if (Tb_Search.Text.StartsWith("$A"))
+                //{
+
+                //}
                 else
                 {
                     Lv_RentalSpaces.ItemsSource = m_Rooms;
@@ -205,6 +216,13 @@ namespace User_Interface
                 }
             }
         }
+
+        //private List<RoomListItem> SecondarySorting(List<string> commands, List<string> parameters)
+        //{
+        //    List<RoomListItem> sortedList = new List<RoomListItem>();
+
+        //    sortedList = m_Rooms.Where(room=>)
+        //}
 
         private void Tb_Search_OnGotFocus(object sender, RoutedEventArgs e)
         {

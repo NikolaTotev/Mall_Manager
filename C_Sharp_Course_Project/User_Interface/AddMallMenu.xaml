@@ -8,15 +8,21 @@
              d:DesignHeight="650" d:DesignWidth="1000" Background="White">
 
     <Grid>
+        <!--#region-->
         <Grid.RowDefinitions>
             <RowDefinition Height="4*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="4*"></RowDefinition>
         </Grid.RowDefinitions>
+        <!--#endregion-->
+
         <Label Content="Create mall" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="50" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" Width="384"/>
+       
+        <!--#region Name input group-->
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label Content="Please name your mall." FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Light" FontSize="15" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent"/>
+            <!--#region Name Textbox-->
             <TextBox x:Name="Tb_MallName" Height="32" TextWrapping="Wrap" Text="Mall Name" Width="384" Padding="5" VerticalContentAlignment="Center" BorderBrush="Transparent" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="15" Foreground="{StaticResource TextboxPrompt}" GotFocus="Tb_Name_GotFocus" LostFocus="Tb_Name_LostFocus" TextChanged="Tb_MallName_TextChanged" >
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
@@ -27,9 +33,14 @@
                     <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
                 </TextBox.Effect>
             </TextBox>
+            <!--#endregion-->
         </StackPanel>
+        <!--#endregion-->
+
+        <!--#region Description Input Group-->
         <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Label Content="Write a short description of the mall." FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Light" FontSize="15" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent"/>
+            <!--#region Description Textox-->
             <TextBox x:Name="Tb_MallDesc" Height="32" TextWrapping="Wrap" Padding="5" VerticalContentAlignment="Center" Text="Mall Description" Canvas.Top="361" Width="384" BorderBrush="Transparent" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="15" Foreground="{StaticResource TextboxPrompt}" GotFocus="Tb_Desc_GotFocus" LostFocus="Tb_MallDesc_LostFocus" TextChanged="Tb_MallDesc_TextChanged" >
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
@@ -40,8 +51,13 @@
                     <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
                 </TextBox.Effect>
             </TextBox>
+            <!--#endregion-->
         </StackPanel>
+        <!--#endregion-->
+
+        <!--#region Button Group-->
         <Grid Grid.Row="3">
+            <!--#region Gird Setup-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -52,19 +68,47 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Button Grid.Row="0" Grid.Column="1" Template="{StaticResource OrangeHighLight}" x:Name="Btn_Add" VerticalAlignment="Center" HorizontalAlignment="Center" Width="186" Height="47" Click="Btn_Add_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource BtnAddMallTip}" HorizontalContentAlignment="Center" IsEnabled="False">
-               <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,5,0">
+            <!--#endregion-->
+
+            <!--#region Add Button-->
+            <Button Grid.Row="0" Grid.Column="1" Template="{StaticResource OrangeHighLight}" x:Name="Btn_Add" VerticalAlignment="Center" HorizontalAlignment="Center" Width="186" Height="47" Click="Btn_Add_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" HorizontalContentAlignment="Center" IsEnabled="False">
+                <Button.ToolTip>
+                    <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
+                        <ToolTip.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"></Setter>
+                            </Style>
+                        </ToolTip.Resources>
+                        <TextBlock FontFamily="{StaticResource Montserrat}" Text="{StaticResource BtnAddMall}" FontWeight="{StaticResource StandardToolTipFontWeight}" FontStyle="{StaticResource StandardToolTipFontStyle}" Foreground="{StaticResource NavyBlueBase}" FontSize="10"/>
+                    </ToolTip>
+                </Button.ToolTip>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,5,0">
                     <Image Source="Resources/Icons/Add_Icon.png" VerticalAlignment="Center" Margin="0,0,5,0" Height="40"></Image>
                     <TextBlock Text="Add" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </Button>
+            <!--#endregion-->
 
-            <Button Grid.Row="0" Grid.Column="2" Template="{StaticResource OrangeHighLight}" x:Name="Btn_Cancel" VerticalAlignment="Center" HorizontalAlignment="Center" Width="176" Height="47" Click="Btn_Cancel_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" ToolTip="{StaticResource CancelTip}">
-               <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <!--#region Cancel Button-->
+            <Button Grid.Row="0" Grid.Column="2" Template="{StaticResource OrangeHighLight}" x:Name="Btn_Cancel" VerticalAlignment="Center" HorizontalAlignment="Center" Width="176" Height="47" Click="Btn_Cancel_OnClick" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent">
+                <Button.ToolTip>
+                    <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
+                        <ToolTip.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"></Setter>
+                            </Style>
+                        </ToolTip.Resources>
+                        <TextBlock FontFamily="{StaticResource Montserrat}" Text="{StaticResource BtnCancelAddMall}" FontWeight="{StaticResource StandardToolTipFontWeight}" FontStyle="{StaticResource StandardToolTipFontStyle}" Foreground="{StaticResource NavyBlueBase}" FontSize="10"/>
+                    </ToolTip>
+                </Button.ToolTip>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Image Source="Resources/Icons/Cancel_Icon.png" VerticalAlignment="Center" Margin="0,0,5,0" Height="40"></Image>
                     <TextBlock Text="Cancel" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </Button>
+            <!--#endregion-->
+
         </Grid>
+        <!--#endregion-->
     </Grid>
 </UserControl>

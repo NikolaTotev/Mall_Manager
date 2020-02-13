@@ -74,6 +74,7 @@
                             <TextBlock FontFamily="{StaticResource Montserrat}" FontWeight="Bold" FontStyle="Normal" Foreground="{StaticResource OrangeAccent}" FontSize="15">
                             Available commands:
                             </TextBlock>
+
                             <Border BorderBrush="{StaticResource NavyBlueBase}" BorderThickness="0,1,0,0" Margin="0,8" />
 
                             <TextBlock FontFamily="{StaticResource Montserrat}" FontWeight="SemiBold" FontStyle="Normal" Foreground="{StaticResource NavyBlueBase}" FontSize="10">
@@ -93,7 +94,17 @@
                             </TextBlock>
 
                             <TextBlock FontFamily="{StaticResource Montserrat}" FontWeight="SemiBold" FontStyle="Normal" Foreground="{StaticResource NavyBlueBase}" FontSize="10">
-                            5. Room Number <LineBreak /> $ RN {Parameter Number}
+                            5. Room Number <LineBreak /> $ RN {Parameter Number} <LineBreak />
+                            </TextBlock>
+
+                            <TextBlock FontFamily="{StaticResource Montserrat}" FontWeight="SemiBold" FontStyle="Normal" Foreground="{StaticResource NavyBlueBase}" FontSize="10">
+                                6. Number of Activities <LineBreak /> $ NA {Parameter Number}
+                            </TextBlock>
+
+                            <Border BorderBrush="{StaticResource NavyBlueBase}" BorderThickness="0,1,0,0" Margin="0,8" />
+
+                            <TextBlock FontFamily="{StaticResource Montserrat}" FontWeight="SemiBold" FontStyle="Normal" Foreground="{StaticResource NavyBlueBase}" FontSize="10">
+                               If no activities show, <LineBreak/> either the command is wrong, <LineBreak/> or no results using <LineBreak/> the query were found.
                             </TextBlock>
                         </StackPanel>
                     </ToolTip>
@@ -149,7 +160,7 @@
                         </Style>
 
                     </GridView.ColumnHeaderContainerStyle>
-                    <GridViewColumn Width="40">
+                    <GridViewColumn Width="35">
                         <GridViewColumn.CellTemplate >
                             <DataTemplate>
                                 <CheckBox IsChecked="{Binding IsSelected}" BorderBrush="{StaticResource OrangeAccent}" BorderThickness="3" FontSize="20" >
@@ -162,7 +173,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Room name" Width="270">
+                    <GridViewColumn Header="Room name" Width="250">
 
                         <GridViewColumn.CellTemplate>
 
@@ -172,28 +183,35 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Number"  Width="140">
+                    <GridViewColumn Header="Activities"  Width="110">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock x:Name="Tbl_Number" HorizontalAlignment="Center" Text="{Binding NumberOfActivities}" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="20" Foreground="{StaticResource NavyBlueBase}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Number"  Width="110">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock x:Name="Tbl_Number" HorizontalAlignment="Center" Text="{Binding RoomNumber}" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="20" Foreground="{StaticResource NavyBlueBase}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Floor"  Width="140">
+                    <GridViewColumn Header="Floor"  Width="80">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock x:Name="Tbl_Floor" HorizontalAlignment="Center" Text="{Binding RoomFloor}" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="20" Foreground="{StaticResource NavyBlueBase}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Date Created"  Width="200">
+                    <GridViewColumn Header="Date Created"  Width="170">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock x:Name="Tbl_DateCreated" HorizontalAlignment="Center" Text="{Binding DateCreated}" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="20" Foreground="{StaticResource NavyBlueBase}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Last Edited"  Width="200">
+                    <GridViewColumn Header="Last Edited"  Width="170">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock x:Name="Tbl_LastEdited" HorizontalAlignment="Center" Text="{Binding LastEdited}" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="20" Foreground="{StaticResource NavyBlueBase}"/>
@@ -250,7 +268,7 @@
                     <TextBlock Text="Delete" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </Button>
-            <Image x:Name="Img_DeleteInfo" Source="Resources/Icons/HelpLowRes_Icon.png" VerticalAlignment="Center" Grid.Column="7" Margin="5,0,30,0" Height="30" Visibility="Hidden">
+            <Image x:Name="Img_DeleteInfo" Source="Resources/Icons/WarningLowRes_Icon.png" VerticalAlignment="Center" Grid.Column="7" Margin="5,0,30,0" Height="30" Visibility="Hidden">
                 <Image.ToolTip>
                     <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="12000">
                         <ToolTip.Resources>
