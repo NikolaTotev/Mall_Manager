@@ -256,5 +256,11 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\NavigateBack_Icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\CommandMode_Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Help_Icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

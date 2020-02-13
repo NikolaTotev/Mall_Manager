@@ -27,6 +27,7 @@ namespace User_Interface
         private IAppView m_PreviousView;
         private IAppView m_NextView;
         private readonly List<RoomListItem> m_Rooms;
+        private bool m_CommandModeActive;
         public RoomsMenu()
         {
             InitializeComponent();
@@ -39,6 +40,7 @@ namespace User_Interface
                 RoomListItem itemToAdd = new RoomListItem
                 {
                     RoomId = room.Id,
+                    Type = room.Type,
                     RoomName = room.Name,
                     Description = room.Description,
                     RoomFloor = room.Floor.ToString(),
@@ -49,6 +51,7 @@ namespace User_Interface
                 m_Rooms.Add(itemToAdd);
             }
             DataContext = m_Rooms;
+            m_CommandModeActive = false;
         }
 
         public void LoadRentalSpaces()
@@ -91,21 +94,6 @@ namespace User_Interface
         {
             AddRoomMenu addRoom = new AddRoomMenu();
             m_CurrentMainWindow.ChangeViewForward(addRoom, this);
-        }
-
-        private void Lv_RentalSpaces_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //if (Lv_RentalSpaces.SelectedIndex >= 0 && Lv_RentalSpaces.SelectedIndex < Lv_RentalSpaces.Items.Count)
-            //{
-            //    if (Lv_RentalSpaces.SelectedItem is ListViewItem currentSelection)
-            //    {
-            //        SpacePage space = new SpacePage((Guid)currentSelection.Tag);
-            //        space.SetMainWindow(m_CurrentMainWindow);
-            //        space.SetPreviousView(this);
-            //        m_CurrentMainWindow.ChangeViewForward(space, this);
-            //    }
-
-            //}
         }
 
         private void Btn_DeleteRentalSpace_OnClick(object sender, RoutedEventArgs e)
@@ -155,18 +143,60 @@ namespace User_Interface
 
         private void Tb_Search_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(Tb_Search.Text) && Tb_Search.Text != "Search")
+            if (m_CommandModeActive)
             {
-                Lv_RentalSpaces.ItemsSource = m_Rooms.Where(room => room.RoomName.StartsWith(Tb_Search.Text));
-            }
-            else
-            {
-                if (m_Rooms != null)
+                if (Tb_Search.Text.Length > 4)
+                {
+                    if (Tb_Search.Text.StartsWith("$ T"))
+                    {
+                        string commandParam = Tb_Search.Text.Split(' ')[2];
+                        Lv_RentalSpaces.ItemsSource = m_Rooms.Where(room => room.Type == commandParam);
+                    }
+
+                    if (Tb_Search.Text.StartsWith("$ DC") && Tb_Search.Text.Contains("/"))
+                    {
+                        string commandParam = Tb_Search.Text.Split(' ')[2];
+                        Lv_RentalSpaces.ItemsSource = m_Rooms.Where(room => room.DateCreated == commandParam);
+                    }
+
+                    if (Tb_Search.Text.StartsWith("$ DLE") && Tb_Search.Text.Contains("/"))
+                    {
+                        string commandParam = Tb_Search.Text.Split(' ')[2];
+                        Lv_RentalSpaces.ItemsSource = m_Rooms.Where(room => room.LastEdited == commandParam);
+                    }
+
+                    if (Tb_Search.Text.StartsWith("$ RF"))
+                    {
+                        string commandParam = Tb_Search.Text.Split(' ')[2];
+                        Lv_RentalSpaces.ItemsSource = m_Rooms.Where(room => room.RoomFloor == commandParam);
+                    }
+
+                    if (Tb_Search.Text.StartsWith("$ RN"))
+                    {
+                        string commandParam = Tb_Search.Text.Split(' ')[2];
+                        Lv_RentalSpaces.ItemsSource = m_Rooms.Where(room => room.RoomNumber == commandParam);
+                    }
+                }
+                else
                 {
                     Lv_RentalSpaces.ItemsSource = m_Rooms;
                 }
             }
+            else
+            {
 
+                if (!string.IsNullOrEmpty(Tb_Search.Text) && Tb_Search.Text != "Search")
+                {
+                    Lv_RentalSpaces.ItemsSource = m_Rooms.Where(room => room.RoomName.StartsWith(Tb_Search.Text));
+                }
+                else
+                {
+                    if (m_Rooms != null)
+                    {
+                        Lv_RentalSpaces.ItemsSource = m_Rooms;
+                    }
+                }
+            }
         }
 
         private void Tb_Search_OnGotFocus(object sender, RoutedEventArgs e)
@@ -177,6 +207,29 @@ namespace User_Interface
         private void Tb_Search_OnLostFocus(object sender, RoutedEventArgs e)
         {
             Tb_Search.Text = "Search";
+        }
+
+        private void Btn_EnterCommandMode_OnClick(object sender, RoutedEventArgs e)
+        {
+            m_CommandModeActive = !m_CommandModeActive;
+            if (m_CommandModeActive)
+            {
+                Btn_EnterCommandMode.Background = (Brush)Application.Current.Resources["OrangeButtonHighlight"];
+                Lb_CommandModeStatus.Visibility = Visibility.Visible;
+                Btn_CommandModeHelp.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                Lv_RentalSpaces.ItemsSource = m_Rooms;
+                Btn_EnterCommandMode.Background = Brushes.White;
+                Lb_CommandModeStatus.Visibility = Visibility.Hidden;
+                Btn_CommandModeHelp.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void Btn_CommandModeHelp_OnClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

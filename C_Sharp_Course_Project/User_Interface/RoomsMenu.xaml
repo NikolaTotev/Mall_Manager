@@ -29,19 +29,27 @@
             </StackPanel>
         </Label>
 
-        <Border BorderBrush="Transparent" Background="White" BorderThickness="2" VerticalAlignment="Center" Effect="{StaticResource DropShadow}" CornerRadius="10" Grid.Row="1" Padding="3"  Margin="300,0,300,0">
-            <StackPanel Margin="5"
-                        Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
+            <Border BorderBrush="Transparent" Background="White" BorderThickness="2" VerticalAlignment="Center" HorizontalAlignment="Center" Effect="{StaticResource DropShadow}" CornerRadius="10" Padding="3"  Margin="100,0,15,0">
+                <StackPanel Margin="5"
+                            Orientation="Horizontal">
 
-                <Image Source="Resources/Icons/Search_Icon.png" Height="18" Opacity="0.5"/>
-                <TextBox  x:Name="Tb_Search" BorderBrush="Transparent" Text="Search"  Margin="3 0 0 0" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="15" Foreground="{StaticResource TextboxPrompt}" Width="359" TextChanged="Tb_Search_OnTextChanged" GotFocus="Tb_Search_OnGotFocus" LostFocus="Tb_Search_OnLostFocus"/>
+                    <Image Source="Resources/Icons/Search_Icon.png" Height="18" Opacity="0.5"/>
+                    <TextBox  x:Name="Tb_Search" BorderBrush="Transparent" Text="Search"  Margin="3 0 0 0" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="15" Foreground="{StaticResource TextboxPrompt}" Width="359" TextChanged="Tb_Search_OnTextChanged" GotFocus="Tb_Search_OnGotFocus" LostFocus="Tb_Search_OnLostFocus"/>
+                </StackPanel>
+            </Border>
+            <Button x:Name="Btn_EnterCommandMode" Click="Btn_EnterCommandMode_OnClick" Template="{StaticResource OrangeHighLight}" Background="White" Height="Auto" Margin="0,15,5,15" ToolTip="Enter command mode for advanced filtering."> 
+                <Image Source="Resources/Icons/CommandMode_Icon.png" VerticalAlignment="Center" Margin="10,0,10,0" Height="20"></Image>
+            </Button>
+            <Label x:Name="Lb_CommandModeStatus" Content="Command mode active" VerticalAlignment="Center" FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="SemiBold" FontSize="15" Foreground="{StaticResource OrangeAccent}" Visibility="Hidden"/>
+            <Button x:Name="Btn_CommandModeHelp" Click="Btn_CommandModeHelp_OnClick" Template="{StaticResource OrangeHighLight}" Background="White" Height="Auto" Margin="0,15,5,15" ToolTip="Enter command mode for advanced filtering." Visibility="Hidden">
+                <Image Source="Resources/Icons/Help_Icon.png" VerticalAlignment="Center" Margin="5,0,5,0" Height="20"></Image>
+            </Button>
+        </StackPanel>
+        
 
-            </StackPanel>
 
-
-        </Border>
-
-        <ListView ItemsSource="{Binding}" x:Name="Lv_RentalSpaces" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" Grid.Row="2" SelectionChanged="Lv_RentalSpaces_SelectionChanged" Margin="0,0,0,20">
+        <ListView ItemsSource="{Binding}" x:Name="Lv_RentalSpaces" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" Grid.Row="2"  Margin="0,0,0,20">
             <ListView.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"></Setter>
