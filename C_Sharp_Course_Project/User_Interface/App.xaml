@@ -51,6 +51,16 @@
 
         <!--#endregion-->
 
+        <!--#region Room Info Page Tool Tips-->
+
+        <!--#endregion-->
+
+        <!--#region Space Page Tool Tips-->
+        <system:String x:Key="BtnOpenRoomActivities">Opens activity page for the room.</system:String>
+        <system:String x:Key="BtnOpenRoomInfo">Opens info page for the room.</system:String>
+        <!--#endregion-->
+
+
 
         <system:String x:Key="BtnAddRoomTip">Opens add room menu.</system:String>
         <system:String x:Key="BtnRemoveRoomTip">Deletes selected room(s).</system:String>
@@ -59,7 +69,7 @@
 
         <system:String x:Key="BtnCommandModeEnter">Enter command mode for advanced filtering.</system:String>
         <system:String x:Key="BtnBack">Go to previous page.</system:String>
-        <system:String x:Key="BtnSave">All edited fields are saved.</system:String>
+        <system:String x:Key="BtnSave">All edited fields are saved. Returns to previoius page.</system:String>
         <system:String x:Key="BtnCancel">Edits not saved. Returns to previous page.</system:String>
 
 

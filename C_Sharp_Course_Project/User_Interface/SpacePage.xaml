@@ -7,18 +7,27 @@
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="1000" Background="White">
     <Grid>
+        <!--#region Main Grid Setup-->
         <Grid.RowDefinitions>
             <RowDefinition Height="85*"></RowDefinition>
             <RowDefinition Height="500*"></RowDefinition>
         </Grid.RowDefinitions>
+        <!--#endregion-->
+
+        <!--#region Page Header-->
         <Label x:Name="Lbl_Header" VerticalContentAlignment="Center" Grid.Row="0" Background="{StaticResource NavyBlueBase}"  FontSize="45" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" Foreground="AliceBlue" FontWeight="SemiBold" Margin="0,0,0,10" Padding="20,0,0,0" >
+            <!--#region Header Setup-->
             <Label.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="0,0,30,30"></Setter>
                     <Setter Property="Effect" Value="{StaticResource DropShadow}"></Setter>
                 </Style>
             </Label.Resources>
+            <!--#endregion-->
+
+            <!--#region Header Children-->
             <StackPanel Orientation="Horizontal">
+                <!--#region Back Button-->
                 <Button Template="{StaticResource BackButton}" x:Name="Btn_Back" Margin="0,5,15,5" Background="Transparent" Click="Btn_Back_OnClick">
                     <Button.ToolTip>
                         <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
@@ -32,29 +41,61 @@
                     </Button.ToolTip>
                     <Image Source="Resources/Icons/NavigateBack_Icon.png" VerticalAlignment="Center" Margin="0,-10,0,-10" Height="40"></Image>
                 </Button>
+                <!--#endregion-->
+
                 <TextBlock x:Name="Tbl_HeaderText" Text="/Space Name/"></TextBlock>
             </StackPanel>
+            <!--#endregion-->
         </Label>
+        <!--#endregion-->
 
+        <!--#region Main SubGrid-->
         <Grid Grid.Row="1">
+            <!--#region Main SubGrid Setup-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
+            <!--#endregion-->
 
+            <!--#region Button Open Activities-->
             <Button x:Name="Btn_Activities" Template="{StaticResource BigOrangeHighlight}" Margin="160,0,0,0" Grid.Column="0" BorderBrush="Transparent"  VerticalAlignment="Center" HorizontalAlignment="Center" Padding="45,10,45,5"  Grid.Row="1"   Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Light" FontSize="35" Foreground="{StaticResource NavyBlueBase}"  Width="260" Height="260" Click="Btn_Activities_OnClick">
+                <Button.ToolTip>
+                    <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
+                        <ToolTip.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"></Setter>
+                            </Style>
+                        </ToolTip.Resources>
+                        <TextBlock FontFamily="{StaticResource Montserrat}" Text="{StaticResource BtnOpenRoomActivities}" FontWeight="{StaticResource StandardToolTipFontWeight}" FontStyle="{StaticResource StandardToolTipFontStyle}" Foreground="{StaticResource NavyBlueBase}" FontSize="10"/>
+                    </ToolTip>
+                </Button.ToolTip>
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Image Source="Resources/Icons/Event_Icon.png" VerticalAlignment="Center"  Height="120"></Image>
                     <TextBlock Text="Activities" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,10,0,0"  TextAlignment="Center"></TextBlock>
                 </StackPanel>
             </Button>
+            <!--#endregion-->
+
+            <!--#region Button Open Space Info-->
             <Button x:Name="Btn_SpaceInfo" Template="{StaticResource BigOrangeHighlight}" Margin="-160,0,0,0" Grid.Column="1" BorderBrush="Transparent"  VerticalAlignment="Center" HorizontalAlignment="Center" Padding="45,10,45,5"  Grid.Row="1"   Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Light" FontSize="35" Foreground="{StaticResource NavyBlueBase}" Click="Btn_SpaceInfo_OnClick" Width="260" Height="260">
-                
+                <Button.ToolTip>
+                    <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
+                        <ToolTip.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"></Setter>
+                            </Style>
+                        </ToolTip.Resources>
+                        <TextBlock FontFamily="{StaticResource Montserrat}" Text="{StaticResource BtnOpenRoomInfo}" FontWeight="{StaticResource StandardToolTipFontWeight}" FontStyle="{StaticResource StandardToolTipFontStyle}" Foreground="{StaticResource NavyBlueBase}" FontSize="10"/>
+                    </ToolTip>
+                </Button.ToolTip>
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Image Source="Resources/Icons/Info_Icon.png" VerticalAlignment="Center"  Height="120"></Image>
                     <TextBlock Text="Space Info" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,10,0,0"  TextAlignment="Center"></TextBlock>
                 </StackPanel>
             </Button>
+            <!--#endregion-->
         </Grid>
+        <!--#endregion-->
     </Grid>
 </UserControl>
