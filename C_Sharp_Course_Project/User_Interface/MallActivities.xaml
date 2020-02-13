@@ -17,16 +17,6 @@
         <!--#region Page Header -->
         <Label x:Name="Lbl_Header" VerticalContentAlignment="Center" Grid.Row="0" Background="{StaticResource NavyBlueBase}"  FontSize="45" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" Foreground="AliceBlue" FontWeight="SemiBold" Margin="0,0,0,10" Padding="20,0,0,0" >
             <!--#region Header Setup-->
-            <Label.ToolTip>
-                <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
-                    <ToolTip.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="10"></Setter>
-                        </Style>
-                    </ToolTip.Resources>
-                    <TextBlock FontFamily="{StaticResource Montserrat}" Text="{StaticResource LbCurrentMallActivities}" FontWeight="{StaticResource StandardToolTipFontWeight}" FontStyle="{StaticResource StandardToolTipFontStyle}" Foreground="{StaticResource NavyBlueBase}" FontSize="10"/>
-                </ToolTip>
-            </Label.ToolTip>
             <Label.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="0,0,30,30"></Setter>
@@ -121,7 +111,7 @@
                             </GridView.ColumnHeaderContainerStyle>
                             <!--#endregion-->
 
-                            <!--#region Checkbox List Column-->
+                            <!--#region Checkbox Column-->
                             <GridViewColumn Width="40">
                                 <GridViewColumn.CellTemplate >
                                     <DataTemplate>

@@ -7,18 +7,25 @@
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="1000" Background="White">
     <Grid>
+        <!--#region Main Grid Setup-->
         <Grid.RowDefinitions>
             <RowDefinition Height="85*"></RowDefinition>
             <RowDefinition Height="500*"></RowDefinition>
         </Grid.RowDefinitions>
+        <!--#endregion-->
 
+        <!--#region Page Header-->
         <Label x:Name="Lbl_Header" VerticalContentAlignment="Center" Grid.Row="0" Background="{StaticResource NavyBlueBase}"  FontSize="45" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" Foreground="AliceBlue" FontWeight="SemiBold" Margin="0,0,0,10" Padding="20,0,0,0" >
+            <!--#region Header Setup-->
             <Label.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="0,0,30,30"></Setter>
                     <Setter Property="Effect" Value="{StaticResource DropShadow}"></Setter>
                 </Style>
             </Label.Resources>
+            <!--#endregion-->
+
+            <!--#region Header Children-->
             <StackPanel Orientation="Horizontal">
                 <Button Template="{StaticResource BackButton}" x:Name="Btn_Back" Margin="0,5,15,5" Background="Transparent" Click="Btn_Back_OnClick">
                     <Button.ToolTip>
@@ -35,9 +42,13 @@
                 </Button>
                 <TextBlock x:Name="Tbl_HeaderText" Text="/Space Name/ - Information"></TextBlock>
             </StackPanel>
+            <!--#endregion-->
         </Label>
+        <!--#endregion-->
 
+        <!--#region SubGrid-->
         <Grid Grid.Row="1">
+            <!--#region SubGrid Setup-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="2*"></ColumnDefinition>
@@ -51,16 +62,22 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
+            <!--#endregion-->
 
+
+            <!--#region Textbox Labels-->
             <TextBlock Grid.Column="0" Grid.Row="0" Text="Space Name"   Margin="20,20,0,0" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="SemiBold" FontSize="35" Foreground="{StaticResource NavyBlueBase}"></TextBlock>
             <TextBlock Grid.Column="0" Grid.Row="1" Text="Description"  Margin="20,20,0,0" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="SemiBold" FontSize="35" Foreground="{StaticResource NavyBlueBase}"></TextBlock>
             <TextBlock Grid.Column="0" Grid.Row="2" Text="Room Type"    Margin="20,20,0,0" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="SemiBold" FontSize="35" Foreground="{StaticResource NavyBlueBase}"></TextBlock>
             <TextBlock Grid.Column="0" Grid.Row="3" Text="Location"     Margin="20,20,0,0" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="SemiBold" FontSize="35" Foreground="{StaticResource NavyBlueBase}"></TextBlock>
             <TextBlock Grid.Column="0" Grid.Row="4" Text="Date Created" Margin="20,20,0,0" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="SemiBold" FontSize="35" Foreground="{StaticResource NavyBlueBase}"></TextBlock>
             <TextBlock Grid.Column="0" Grid.Row="5" Text="Last edited"  Margin="20,20,0,0" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="SemiBold" FontSize="35" Foreground="{StaticResource NavyBlueBase}" ></TextBlock>
+            <!--#endregion-->
 
+            <!--#region Name Input Group-->
             <StackPanel x:Name="Sp_NameTb"  Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Label x:Name="Lb_NameError" Content="" FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Light" FontSize="15" Foreground="{StaticResource FailedTask}" BorderBrush="Transparent"/>
+                <!--#region Name TextBox-->
                 <TextBox x:Name="Tb_Name" TextWrapping="Wrap"  Text="Name" Width="620" Padding="2" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="Transparent" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="30" Foreground="{StaticResource TextboxPrompt}">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -71,10 +88,14 @@
                         <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
                     </TextBox.Effect>
                 </TextBox>
+                <!--#endregion-->
             </StackPanel>
+            <!--#endregion-->
 
+            <!--#region Description Input Group-->
             <StackPanel x:Name="Sp_DescTb"  Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Label x:Name="Lb_DescError" Content="" FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Light" FontSize="15" Foreground="{StaticResource FailedTask}" BorderBrush="Transparent"/>
+                <!--#region Description TextBox-->
                 <TextBox x:Name="Tb_Desc" TextWrapping="Wrap"  Text="Description" Width="620" Padding="2" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="Transparent" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="30" Foreground="{StaticResource TextboxPrompt}" >
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -85,32 +106,26 @@
                         <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
                     </TextBox.Effect>
                 </TextBox>
+                <!--#endregion-->
             </StackPanel>
+            <!--#endregion-->
 
-            <ComboBox x:Name="Cmb_RoomType" Grid.Column="1" Grid.Row="2" Width="450" HorizontalAlignment="Center"  HorizontalContentAlignment="Center" Margin="0,20,0,20">
-                <ComboBoxItem Name="Item1">Item1</ComboBoxItem>
-                <ComboBoxItem Name="Item2">Item2</ComboBoxItem>
-                <ComboBoxItem Name="Item3">Item3</ComboBoxItem>
-                <ComboBoxItem Name="Item4">Item4</ComboBoxItem>
-                <ComboBoxItem Name="Item5">Item5</ComboBoxItem>
-                <ComboBoxItem Name="Item6">Item6</ComboBoxItem>
-                <ComboBoxItem Name="Item7">Item7</ComboBoxItem>
-                <ComboBoxItem Name="Item8">Item8</ComboBoxItem>
-                <ComboBoxItem Name="Item9">Item9</ComboBoxItem>
-                <ComboBoxItem Name="Item10">Item10</ComboBoxItem>
-            </ComboBox>
+            <ComboBox x:Name="Cmb_RoomType" Grid.Column="1" Grid.Row="2" Width="450" HorizontalAlignment="Center"  HorizontalContentAlignment="Center" Margin="0,20,0,20"/>
 
+            <!--#region Location Input Group-->
             <Grid Grid.Column="1" Grid.Row="3">
+                <!--#region Location Group Setup-->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="2*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
+                <!--#endregion-->
 
-
+                <!--#region Floor Input Group-->
                 <TextBlock  Grid.Column="0" TextAlignment="Center" VerticalAlignment="Center" Text="Floor: " FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Light" FontSize="35" Foreground="{StaticResource NavyBlueBase}" ></TextBlock>
-                <TextBlock  Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center" Text="Space number:" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Light" FontSize="35" Foreground="{StaticResource NavyBlueBase}" ></TextBlock>
+                
                 <TextBox x:Name="Tb_Floor" Grid.Column="1" Width="100" Margin="-20,20,-20,20" Padding="2" Foreground="{StaticResource TextboxPrompt}" TextChanged="Tb_Floor_OnTextChanged" Background="White" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="Transparent" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="25" >
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -121,6 +136,11 @@
                         <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
                     </TextBox.Effect>
                 </TextBox>
+                <!--#endregion-->
+
+                <!--#region Room Number Input Group-->
+                <TextBlock  Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center" Text="Space number:" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Light" FontSize="35" Foreground="{StaticResource NavyBlueBase}" ></TextBlock>
+
                 <TextBox x:Name="Tb_Number" Grid.Column="3" Width="100" Margin="-20,20,-20,20" Padding="2" Foreground="{StaticResource TextboxPrompt}" TextChanged="Tb_Number_OnTextChanged" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="Transparent" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="25" >
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -131,9 +151,11 @@
                         <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
                     </TextBox.Effect>
                 </TextBox>
+                <!--#endregion-->
             </Grid>
+            <!--#endregion-->
 
-
+            <!--#region Date Created Display Group-->
             <StackPanel x:Name="Sp_DateCreatedLb"  Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Label x:Name="Lb_DateCreated"  Background="White" Content="mm/dd/yyyy" Width="620" Padding="5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="30" Foreground="{StaticResource TextboxPrompt}">
                     <Label.Resources>
@@ -146,7 +168,9 @@
                     </Label.Effect>
                 </Label>
             </StackPanel>
+            <!--#endregion-->
 
+            <!--#region Date Last Edited Display Group-->
             <StackPanel x:Name="Sp_LastEditedLb"  Grid.Column="1" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Label x:Name="Lb_LastEdited"  Background="White" Content="mm/dd/yyyy" Width="620" Padding="5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center"  FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="30" Foreground="{StaticResource TextboxPrompt}">
                     <Label.Resources>
@@ -159,15 +183,19 @@
                     </Label.Effect>
                 </Label>
             </StackPanel>
+            <!--#endregion-->
 
-
+            <!--#region Button Group-->
             <Grid Grid.Row="6" Grid.Column="1">
+                <!--#region Button Group Setup-->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
+                <!--#endregion-->
 
+                <!--#region Save Button-->
                 <Button x:Name="Btn_Save" Template="{StaticResource OrangeHighLight}" Grid.Column="0" Click="Btn_Save_OnClick" Margin="15" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" HorizontalContentAlignment="Center">
                     <Button.ToolTip>
                         <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
@@ -184,7 +212,9 @@
                         <TextBlock Text="Save" VerticalAlignment="Center"></TextBlock>
                     </StackPanel>
                 </Button>
+                <!--#endregion-->
 
+                <!--#region Cancel Button-->
                 <Button x:Name="Btn_Close" Template="{StaticResource OrangeHighLight}" Grid.Column="1" Click="Btn_Close_OnClick" Margin="15" Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="25" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" HorizontalContentAlignment="Center">
                     <Button.ToolTip>
                         <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
@@ -201,9 +231,10 @@
                         <TextBlock Text="Close" VerticalAlignment="Center"></TextBlock>
                     </StackPanel>
                 </Button>
-
+                <!--#endregion-->
             </Grid>
-
+            <!--#endregion-->
         </Grid>
+        <!--#endregion-->
     </Grid>
 </UserControl>

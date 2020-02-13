@@ -37,9 +37,18 @@
         <system:String x:Key="BtnMarkActivityAsCompleted">Marks selected activity(ies) as "Completed".</system:String>
         <system:String x:Key="BtnMarkActivityAsFailed">Marks all selected activity(ies) as "Failed".</system:String>
 
-        <system:String x:Key="BtnOpenAddActivityMenu">Opens "Add activity" menu.</system:String>
         <system:String x:Key="BtnOpenMallStatsMenu">Opens mall statistics menu.</system:String>
+        <!--#endregion-->
+
+        <system:String x:Key="BtnOpenAddActivityMenu">Opens "Add activity" menu.</system:String>
         <system:String x:Key="BtnDeleteActivity">Deletes selected activity(ies).</system:String>
+
+
+
+        <!--#region Room Activities Page Tool Tips-->
+        <system:String x:Key="LbCurrentSpaceActivities">Shows which room's activities you are viewing.</system:String>
+        <system:String x:Key="BtnOpenRoomStatsMenu">Opens add room statistics menu.</system:String>
+
         <!--#endregion-->
 
 
