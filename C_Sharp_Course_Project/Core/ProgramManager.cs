@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Core
 {
-
     public class ProgramManager
     {
         private static ProgramManager m_Instance;
@@ -22,6 +21,11 @@ namespace Core
             m_MallManagerInstance = MallManager.GetInstance();
         }
 
+        /// <summary>
+        /// Singleton pattern. Gets the instance of the ProgramManager if there is one.
+        /// If one doesn't exist a new one is created.
+        /// </summary>
+        /// <returns></returns>
         public static ProgramManager GetInstance() {
             if (m_Instance == null)
             {
@@ -30,6 +34,9 @@ namespace Core
             return m_Instance;
         }
 
+        /// <summary>
+        /// Completes initialization of the remaining managers after a mall is opened.
+        /// </summary>
         public void CompleteInitialization()
         {
             m_ActivityManagerInstance = ActivityManager.GetInstance();

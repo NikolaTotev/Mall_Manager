@@ -55,25 +55,27 @@ namespace User_Interface
         private void Btn_RentalSpaces_Click(object sender, RoutedEventArgs e)
         {
             RoomsMenu rooms = new RoomsMenu();
-            m_SettingsWindow.Close();
+            m_SettingsWindow?.Close();
             m_CurrentMainWindow.ChangeViewForward(rooms, this);
         }
 
         private void Btn_Statistics_OnClick(object sender, RoutedEventArgs e)
         {
-            m_SettingsWindow.Close();
+            m_SettingsWindow?.Close();
         }
 
         private void Btn_ActivityOverview_OnClick(object sender, RoutedEventArgs e)
         {
             MallActivities mallActivities = new MallActivities();
-            m_SettingsWindow.Close();
+
+            m_SettingsWindow?.Close();
+
             m_CurrentMainWindow.ChangeViewForward(mallActivities, this);
         }
 
         private void Btn_Back_OnClick(object sender, RoutedEventArgs e)
         {
-            m_SettingsWindow.Close();
+            m_SettingsWindow?.Close();
             m_CurrentMainWindow.ChangeViewBackward(m_PreviousView, this);
         }
         private void Btn_Settings_OnClick(object sender, RoutedEventArgs e)

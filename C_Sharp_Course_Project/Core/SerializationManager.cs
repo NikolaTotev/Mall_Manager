@@ -62,6 +62,30 @@ namespace Core
             }
         }
 
+        public static void RenameFiles(string oldName, string newName)
+        {
+            if (File.Exists(GenActivitySaveName(oldName)))
+            {
+                System.IO.File.Move(GenActivitySaveName(oldName), GenActivitySaveName(newName));
+            }
+
+            if (File.Exists(GenRoomSaveName(oldName)))
+            {
+                System.IO.File.Move(GenRoomSaveName(oldName), GenRoomSaveName(newName));
+            }
+
+            if (File.Exists(GenActivityConfigName(oldName)))
+            {
+                System.IO.File.Move(GenActivityConfigName(oldName), GenActivityConfigName(newName));
+            }
+
+            if (File.Exists(GenRoomConfigName(oldName)))
+            {
+                System.IO.File.Move(GenRoomConfigName(oldName), GenRoomConfigName(newName));
+            }
+
+        }
+
         #region Name gen functions
         public static string GenRoomSaveName(string mallName)
         {

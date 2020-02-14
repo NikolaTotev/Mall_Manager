@@ -17,8 +17,8 @@ namespace Core
 
     public class ActivityManager
     {
-        private ProgramManager m_CurrentManager;
         private static ActivityManager m_Instance;
+        private ProgramManager m_CurrentManager;
         private ActivityConfig m_Config;
         public Dictionary<Guid, Activity> Activities { get; set; }
 
@@ -32,69 +32,18 @@ namespace Core
             Activities = SerializationManager.GetActivities(MallManager.GetInstance().CurrentMall.Name);
         }
 
+        public static ActivityManager GetInstance()
+        {
+            return m_Instance ?? (m_Instance = new ActivityManager());
+        }
+
         public void ReloadManager()
         {
             m_Config = SerializationManager.GetActivityConfig(MallManager.GetInstance().CurrentMall.Name);
             Activities = SerializationManager.GetActivities(MallManager.GetInstance().CurrentMall.Name);
         }
 
-        public static ActivityManager GetInstance()
-        {
-            return m_Instance ?? (m_Instance = new ActivityManager());
-        }
-
-        public List<string> GetCategories()
-        {
-            return m_Config.Categories;
-        }
-
-        public void ClearActivities()
-        {
-            Activities.Clear();
-            MallManager.GetInstance().ClearActivities();
-            RoomManager.GetInstance().ClearRoomActivities();
-            SerializationManager.SaveActivities(Activities, MallManager.GetInstance().CurrentMall.Name);
-        }
-
-        public void ClearRoomActivities(Room room)
-        {
-            while (room.Activities.Count > 0)
-            {
-                DeleteActivity(room.Activities[0], MallManager.GetInstance().CurrentMall.Name);
-            }
-        }
-        public bool AddNewCategory(string category, string mallName)
-        {
-            if (category == null)
-            {
-                ExceptionManager.OnNullParamsToFunction(nameof(AddNewCategory));
-                return false;
-            }
-
-            if (m_Config.Categories.Contains(category))
-            {
-                ExceptionManager.OnCreateDuplicateCategory(category);
-                return false;
-            }
-            m_Config.Categories.Add(category);
-            SerializationManager.SaveActivityConfigFile(m_Config, mallName);
-            return true;
-        }
-
-        public bool AddNewTemplate(string category, string description, string mallName)
-        {
-            if (category == null || description == null)
-            {
-                ExceptionManager.OnNullParamsToFunction("Add New Activity Template");
-                return false;
-            }
-
-            Activity newActivityTemplate = new Activity(Guid.Empty, Guid.Empty, category, true, description);
-            m_Config.Templates.Add(newActivityTemplate);
-            SerializationManager.SaveActivityConfigFile(m_Config, mallName);
-            return true;
-        }
-
+   
         public bool AddActivity(Activity activityToAdd, string mallName)
         {
             RoomManager roomManager = RoomManager.GetInstance();
@@ -114,7 +63,9 @@ namespace Core
             return true;
         }
 
-        public void EditActivity(string mallName, Guid activityId, string category = null, string description = null, ActivityStatus status = ActivityStatus.Undefined, DateTime startDate = default(DateTime), DateTime endDate = default(DateTime))
+        public void EditActivity(Guid activityId, string category = null, string description = null,
+            ActivityStatus status = ActivityStatus.Undefined, DateTime startDate = default(DateTime),
+            DateTime endDate = default(DateTime))
         {
             Activity activityToEdit = Activities[activityId];
             if (category != null)
@@ -135,11 +86,29 @@ namespace Core
                 activityToEdit.EndTime = endDate;
             }
 
-            SerializationManager.SaveActivities(Activities, mallName);
+            SerializationManager.SaveActivities(Activities, MallManager.GetInstance().CurrentMallName);
             OnActivitiesChanged();
         }
 
-        public bool DeleteActivity(Guid activityId, string mallName)
+
+        public void EditActivityStatus(Guid activityId, ActivityStatus status)
+        {
+            Activity activityToEdit = Activities[activityId];
+            if (status != ActivityStatus.Undefined)
+            {
+                activityToEdit.CurActivityStatus = status;
+            }
+            SerializationManager.SaveActivities(Activities, MallManager.GetInstance().CurrentMallName);
+            OnActivitiesChanged();
+        }
+
+
+        /// <summary>
+        /// Deletes activity from given and mall ID
+        /// </summary>
+        /// <param name="activityId"></param>
+        /// <returns></returns>
+        public bool DeleteActivity(Guid activityId)
         {
             if (!Activities.ContainsKey(activityId))
             {
@@ -147,7 +116,7 @@ namespace Core
             }
 
             RoomManager roomManager = RoomManager.GetInstance();
-            if (!roomManager.DeleteActivity(Activities[activityId].CorrespondingRoom, activityId, mallName))
+            if (!roomManager.DeleteActivity(Activities[activityId].CorrespondingRoom, activityId))
             {
                 if (Activities[activityId].CorrespondingRoom == MallManager.GetInstance().CurrentMall.Id && MallManager.GetInstance().CurrentMall.AssociatedActivities.Contains(activityId))
                 {
@@ -161,10 +130,65 @@ namespace Core
             }
 
             Activities.Remove(activityId);
-            SerializationManager.SaveActivities(Activities, mallName);
+            SerializationManager.SaveActivities(Activities, MallManager.GetInstance().CurrentMallName);
             OnActivitiesChanged();
             return true;
+        }
 
+        public void ClearActivities()
+        {
+            Activities.Clear();
+            MallManager.GetInstance().ClearActivities();
+            RoomManager.GetInstance().ClearRoomActivities();
+            SerializationManager.SaveActivities(Activities, MallManager.GetInstance().CurrentMall.Name);
+        }
+
+        public void ClearRoomActivities(Room room)
+        {
+            while (room.Activities.Count > 0)
+            {
+                DeleteActivity(room.Activities[0]);
+            }
+        }
+
+
+        public bool AddNewCategory(string category, string mallName)
+        {
+            if (category == null)
+            {
+                ExceptionManager.OnNullParamsToFunction(nameof(AddNewCategory));
+                return false;
+            }
+
+            if (m_Config.Categories.Contains(category))
+            {
+                ExceptionManager.OnCreateDuplicateCategory(category);
+                return false;
+            }
+            m_Config.Categories.Add(category);
+            SerializationManager.SaveActivityConfigFile(m_Config, mallName);
+            return true;
+        }
+
+
+        public List<string> GetCategories()
+        {
+            return m_Config.Categories;
+        }
+
+
+        public bool AddNewTemplate(string category, string description, string mallName)
+        {
+            if (category == null || description == null)
+            {
+                ExceptionManager.OnNullParamsToFunction("Add New Activity Template");
+                return false;
+            }
+
+            Activity newActivityTemplate = new Activity(Guid.Empty, Guid.Empty, category, true, description);
+            m_Config.Templates.Add(newActivityTemplate);
+            SerializationManager.SaveActivityConfigFile(m_Config, mallName);
+            return true;
         }
 
         public Dictionary<Guid, string> GetActivities()
@@ -184,7 +208,6 @@ namespace Core
             return activityDictionary;
         }
 
-        
         protected virtual void OnActivitiesChanged()
         {
             ActivitiesChanged?.Invoke(this, EventArgs.Empty);

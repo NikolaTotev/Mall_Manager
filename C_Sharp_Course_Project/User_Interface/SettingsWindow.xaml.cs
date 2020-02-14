@@ -30,7 +30,13 @@ namespace User_Interface
 
         private void Btn_Save_OnClick(object sender, RoutedEventArgs e)
         {
-            MallManager.GetInstance().EditMall(MallManager.GetInstance().CurrentMall.Id, Tb_Name.Text, Tb_Desc.Text);
+            if (string.IsNullOrWhiteSpace(Tb_Name.Text))
+            {
+                SerializationManager.RenameFiles(MallManager.GetInstance().CurrentMallName, Tb_Name.Text);
+                Mall editedMall = new Mall(MallManager.GetInstance().CurrentMall.Id, Tb_Name.Text, Tb_Desc.Text);
+                MallManager.GetInstance().EditMall(editedMall);
+            }
+            
         }
 
         private void Btn_ClearRooms_OnClick(object sender, RoutedEventArgs e)

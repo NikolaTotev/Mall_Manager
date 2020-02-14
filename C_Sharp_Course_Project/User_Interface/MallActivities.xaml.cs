@@ -29,6 +29,7 @@ namespace User_Interface
         private IAppView m_NextView;
         private StringBuilder sb;
         private readonly List<ActivityListItem> m_Activities;
+
         public MallActivities()
         {
             InitializeComponent();
@@ -107,7 +108,7 @@ namespace User_Interface
             for (var i = Lv_Activities.SelectedItems.Count - 1; i >= 0; i--)
             {
                 ActivityListItem itemToDelete = (ActivityListItem)Lv_Activities.SelectedItems[i];
-                ActivityManager.GetInstance().DeleteActivity(itemToDelete.ActivityId, MallManager.GetInstance().CurrentMall.Name);
+                ActivityManager.GetInstance().DeleteActivity(itemToDelete.ActivityId);
                 m_Activities.Remove(itemToDelete);
                 Lv_Activities.Items.Refresh();
             }
@@ -122,7 +123,7 @@ namespace User_Interface
                 ActivityListItem item = (ActivityListItem)Lv_Activities.SelectedItems[i];
                 item.Status = ActivityStatus.Failed;
                 item.SetStatusColor(ActivityStatus.Failed);
-                ActivityManager.GetInstance().EditActivity(mallName: MallManager.GetInstance().CurrentMall.Name, activityId: item.ActivityId, status: ActivityStatus.Failed);
+                ActivityManager.GetInstance().EditActivity(activityId: item.ActivityId, status: ActivityStatus.Failed);
                 Lv_Activities.Items.Refresh();
             }
             LoadQuickStats();
@@ -136,7 +137,7 @@ namespace User_Interface
                 ActivityListItem item = (ActivityListItem)Lv_Activities.SelectedItems[i];
                 item.Status = ActivityStatus.Finished;
                 item.SetStatusColor(ActivityStatus.Finished);
-                ActivityManager.GetInstance().EditActivity(mallName: MallManager.GetInstance().CurrentMall.Name, activityId: item.ActivityId, status: ActivityStatus.Finished);
+                ActivityManager.GetInstance().EditActivity(activityId: item.ActivityId, status: ActivityStatus.Finished);
                 Lv_Activities.Items.Refresh();
             }
             LoadQuickStats();
@@ -158,7 +159,7 @@ namespace User_Interface
                 ActivityListItem item = (ActivityListItem)Lv_Activities.SelectedItems[i];
                 item.Status = ActivityStatus.InProgress;
                 item.SetStatusColor(ActivityStatus.InProgress);
-                ActivityManager.GetInstance().EditActivity(mallName: MallManager.GetInstance().CurrentMall.Name, activityId: item.ActivityId, status: ActivityStatus.InProgress);
+                ActivityManager.GetInstance().EditActivity(activityId: item.ActivityId, status: ActivityStatus.InProgress);
                 Lv_Activities.Items.Refresh();
             }
             LoadQuickStats();
@@ -172,7 +173,7 @@ namespace User_Interface
                 ActivityListItem item = (ActivityListItem)Lv_Activities.SelectedItems[i];
                 item.Status = ActivityStatus.Scheduled;
                 item.SetStatusColor(ActivityStatus.Scheduled);
-                ActivityManager.GetInstance().EditActivity(mallName: MallManager.GetInstance().CurrentMall.Name, activityId: item.ActivityId, status: ActivityStatus.Scheduled);
+                ActivityManager.GetInstance().EditActivity(activityId: item.ActivityId, status: ActivityStatus.Scheduled);
                 Lv_Activities.Items.Refresh();
             }
             LoadQuickStats();

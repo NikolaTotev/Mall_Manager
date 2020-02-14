@@ -135,7 +135,7 @@ namespace Core
                 {
                     foreach (var valueActivity in room.Value.Activities)
                     {
-                        ActivityManager.GetInstance().DeleteActivity(valueActivity, MallManager.GetInstance().CurrentMall.Name);
+                        ActivityManager.GetInstance().DeleteActivity(valueActivity);
                     }
                 }
                 Rooms.Remove(roomToRemove);
@@ -183,7 +183,7 @@ namespace Core
         /// <param name="roomToRemoveFrom"></param>
         /// <param name="activityToRemove"></param>
         /// <returns>Returns true if the operation completed successfully and false if it failed.</returns>
-        public bool DeleteActivity(Guid roomToRemoveFrom, Guid activityToRemove, string mallName)
+        public bool DeleteActivity(Guid roomToRemoveFrom, Guid activityToRemove)
         {
             if (!Rooms.ContainsKey(roomToRemoveFrom))
             {
@@ -198,7 +198,7 @@ namespace Core
             }
 
             roomToEdit.Activities.Remove(activityToRemove);
-            SerializationManager.SaveRooms(Rooms, mallName);
+            SerializationManager.SaveRooms(Rooms, MallManager.GetInstance().CurrentMallName);
             return true;
         }
 
