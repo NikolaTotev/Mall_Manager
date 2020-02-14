@@ -91,12 +91,12 @@ namespace Core
                 currentRoom.Description = description;
             }
 
-            if (floorNumber != Int32.MaxValue)
+            if (floorNumber != int.MaxValue)
             {
                 currentRoom.Floor = floorNumber;
             }
 
-            if (roomNumber != Int32.MaxValue)
+            if (roomNumber != int.MaxValue)
             {
                 currentRoom.RoomNumber = roomNumber;
             }
