@@ -99,13 +99,15 @@ namespace User_Interface
         private void Btn_Delete_OnClick(object sender, RoutedEventArgs e)
         {
             if (Lv_Activities.SelectedItems.Count <= 0) return;
+            List<Guid> activitiesToDelete = new List<Guid>(); 
             for (var i = Lv_Activities.SelectedItems.Count - 1; i >= 0; i--)
             {
                 ActivityListItem itemToDelete = (ActivityListItem)Lv_Activities.SelectedItems[i];
-                ActivityManager.GetInstance().DeleteActivity(itemToDelete.ActivityId);
+                activitiesToDelete.Add(itemToDelete.ActivityId);
                 m_Activities.Remove(itemToDelete);
                 Lv_Activities.Items.Refresh();
             }
+            ActivityManager.GetInstance().DeleteActivities(activitiesToDelete);
             LoadQuickStats();
         }
 

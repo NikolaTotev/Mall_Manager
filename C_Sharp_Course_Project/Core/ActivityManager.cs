@@ -113,7 +113,7 @@ namespace Core
         /// </summary>
         /// <param name="activityId"></param>
         /// <returns></returns>
-        public bool DeleteActivity(Guid activityId)
+        private bool DeleteActivity(Guid activityId)
         {
             if (!Activities.ContainsKey(activityId))
             {
@@ -135,9 +135,20 @@ namespace Core
             }
 
             Activities.Remove(activityId);
+            return true;
+        }
+
+        public bool DeleteActivities(List<Guid> activitiesGuids)
+        {
+            bool result = true;
+            foreach (var activity in activitiesGuids)
+            {
+                result = result && DeleteActivity(activity);
+            }
+
             SerializationManager.SaveActivities(Activities, MallManager.GetInstance().CurrentMallName);
             OnActivitiesChanged();
-            return true;
+            return result;
         }
 
         public void ClearActivities()
