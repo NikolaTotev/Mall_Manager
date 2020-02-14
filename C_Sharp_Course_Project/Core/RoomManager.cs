@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Core
 {
@@ -118,7 +116,7 @@ namespace Core
             {
                 room.Value.Activities.Clear();
             }
-            SerializationManager.SaveRooms(Rooms,MallManager.GetInstance().CurrentMall.Name);
+            SerializationManager.SaveRooms(Rooms, MallManager.GetInstance().CurrentMall.Name);
         }
 
         /// <summary>
@@ -135,13 +133,6 @@ namespace Core
 
             if (Rooms[roomToRemove].Activities.Count == 0)
             {
-                //foreach (var room in Rooms)
-                //{
-                //    foreach (var valueActivity in room.Value.Activities)
-                //    {
-                //        ActivityManager.GetInstance().DeleteActivity(valueActivity);
-                //    }
-                //}
                 Rooms.Remove(roomToRemove);
                 SerializationManager.SaveRooms(Rooms, mallName);
                 OnRoomsChanged();
@@ -212,7 +203,7 @@ namespace Core
 
         public void AddRoomType(string typeToAdd)
         {
-            m_Config.RoomTypes.Add(typeToAdd); 
+            m_Config.RoomTypes.Add(typeToAdd);
             SerializationManager.SaveRoomConfigFile(m_Config, MallManager.GetInstance().CurrentMallName);
             m_Config = SerializationManager.GetRoomConfig(MallManager.GetInstance().CurrentMall.Name);
 
