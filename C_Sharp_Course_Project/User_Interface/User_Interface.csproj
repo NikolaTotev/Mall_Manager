@@ -77,6 +77,9 @@
     <Compile Include="AddRoomMenu.xaml.cs">
       <DependentUpon>AddRoomMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HeatMap.xaml.cs">
+      <DependentUpon>HeatMap.xaml</DependentUpon>
+    </Compile>
     <Compile Include="IAppView.cs" />
     <Compile Include="BigButton.xaml.cs">
       <DependentUpon>BigButton.xaml</DependentUpon>
@@ -86,6 +89,9 @@
     </Compile>
     <Compile Include="MallMenu.xaml.cs">
       <DependentUpon>MallMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MallStatisticsWindow.xaml.cs">
+      <DependentUpon>MallStatisticsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="RoomActivities.xaml.cs">
       <DependentUpon>RoomActivities.xaml</DependentUpon>
@@ -130,6 +136,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="HeatMap.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -154,6 +164,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MallMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MallStatisticsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

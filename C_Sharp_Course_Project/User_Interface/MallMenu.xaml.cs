@@ -47,6 +47,8 @@ namespace User_Interface
 
         private void Btn_Statistics_OnClick(object sender, RoutedEventArgs e)
         {
+            MallStatisticsWindow statWindow = new MallStatisticsWindow();
+            statWindow.Show();
             m_SettingsWindow?.Close();
         }
 

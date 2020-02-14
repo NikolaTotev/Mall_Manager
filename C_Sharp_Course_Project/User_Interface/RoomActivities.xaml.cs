@@ -76,10 +76,10 @@ namespace User_Interface
                 }
                 else
                 {
-                    if (args.Result is IList<(string Title, int Value, ActivityStatus Status)>)
+                    if (args.Result is IList<(string Title, List<int> Value, ActivityStatus Status)>)
                     {
                         Sp_QuickStats.Children.Remove(Lb_StatsLoading);
-                        PieChartStatistics.UpdateData(VisualizationPreProcessor.GenerateBasicActivityPieGraphics(args.Result as IList<(string Title, int Value, ActivityStatus Status)>, PieChartStatistics.PointLabel));
+                        PieChartStatistics.UpdateData(VisualizationPreProcessor.GenerateBasicActivityPieGraphics(args.Result as IList<(string Title, List<int> Value, ActivityStatus Status)>));
                     }
                 }
             };
@@ -163,6 +163,7 @@ namespace User_Interface
             for (var i = Lv_Activities.SelectedItems.Count - 1; i >= 0; i--)
             {
                 ActivityListItem item = (ActivityListItem)Lv_Activities.SelectedItems[i];
+
                 item.SetStatusColor(ActivityStatus.Failed);
                 ActivityManager.GetInstance().EditActivityStatus(activityId: item.ActivityId, status: ActivityStatus.Failed);
                 Lv_Activities.Items.Refresh();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using System.Windows;
 using System.Windows.Media;
 using Core;
 using LiveCharts;
+using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 
 
@@ -14,7 +16,7 @@ namespace User_Interface
 {
     public static class VisualizationPreProcessor
     {
-        public static SeriesCollection GenerateBasicActivityColumnGraphics(IList<(string Title, int Value, ActivityStatus Status)> data)
+        public static SeriesCollection GenerateBasicActivityColumnGraphics(IList<(string Title, List<int> Values, ActivityStatus Status)> data)
         {
             SeriesCollection mySeries = new SeriesCollection();
             if (data != null)
@@ -22,27 +24,26 @@ namespace User_Interface
                 foreach (var (title, value, status) in data)
                 {
                     mySeries.Add(new ColumnSeries
-                    { Title = title, Values = new ChartValues<int> { value }, Fill = GetChartColor(status) });
+                    { Title = title, Values = new ChartValues<int> (value), Fill = GetChartColor(status)});
                 }
             }
 
             return mySeries;
         }
 
-        public static SeriesCollection GenerateBasicActivityPieGraphics(IList<(string Title, int Value, ActivityStatus Status)> data, Func<ChartPoint, string> lbPoint)
+        public static SeriesCollection GenerateBasicActivityPieGraphics(IList<(string Title, List<int> Value, ActivityStatus Status)> data)
         {
             SeriesCollection mySeries = new SeriesCollection();
             if (data != null)
             {
-                foreach (var (title, value, status) in data)
+                foreach (var (title, values, status) in data)
                 {
                     mySeries.Add(new PieSeries
                     {
                         Title = title,
-                        Values = new ChartValues<int> { value },
+                        Values = new ChartValues<int> {values.Sum()},
                         Fill = GetChartColor(status),
-                        DataLabels = true,
-                        LabelPoint = lbPoint
+                        DataLabels = true
                     });
                 }
             }
@@ -69,7 +70,7 @@ namespace User_Interface
             }
         }
 
-        public static IList<(string Title, int Value, ActivityStatus Status)> GetRoomActivityInfoData(Guid roomId)
+        public static IList<(string Title, List<int> Values, ActivityStatus Status)> GetRoomActivityInfoData(Guid roomId)
         {
             List<Guid> activityIds = RoomManager.GetInstance().Rooms[roomId].Activities;
             List<Activity> activities = new List<Activity>();
@@ -78,49 +79,95 @@ namespace User_Interface
                 activities.Add(ActivityManager.GetInstance().Activities[activity]);
             }
 
-            var scheduled = activities.Where(a => a.CurActivityStatus is ActivityStatus.Scheduled).ToList().Count;
-            var inProgress = activities.Where(a => a.CurActivityStatus is ActivityStatus.InProgress).ToList().Count;
-            var completed = activities.Where(a => a.CurActivityStatus is ActivityStatus.Finished).ToList().Count;
-            var failed = activities.Where(a => a.CurActivityStatus is ActivityStatus.Failed).ToList().Count;
-
-            var res = new List<(string Title, int Value, ActivityStatus Status)>
+            List<int> scheduled = new List<int>
             {
-                (Title: "Scheduled", Value: scheduled, Status: ActivityStatus.Scheduled),
-                (Title: "In Progress", Value: inProgress,Status: ActivityStatus.InProgress),
-                (Title: "Completed", Value: completed,Status: ActivityStatus.Finished),
-                (Title: "Failed", Value: failed,Status: ActivityStatus.Failed)
+                activities.Where(a => a.Category == "Cleaning")
+                    .Where(a => a.CurActivityStatus is ActivityStatus.Scheduled).ToList().Count,
+                activities.Where(a => a.Category == "Maintenance")
+                    .Where(a => a.CurActivityStatus is ActivityStatus.Scheduled).ToList().Count,
+                activities.Where(a => a.Category == "Other")
+                    .Where(a => a.CurActivityStatus is ActivityStatus.Scheduled).ToList().Count
+            };
+            List<int> inProgress = new List<int>
+            {
+                activities.Where(a => a.Category == "Cleaning")
+                    .Where(a => a.CurActivityStatus is ActivityStatus.InProgress).ToList().Count,
+                activities.Where(a => a.Category == "Maintenance")
+                    .Where(a => a.CurActivityStatus is ActivityStatus.InProgress).ToList().Count,
+                activities.Where(a => a.Category == "Other")
+                    .Where(a => a.CurActivityStatus is ActivityStatus.InProgress).ToList().Count
+            };
+            List<int> completed = new List<int>
+            {
+                activities.Where(a => a.Category == "Cleaning")
+                    .Where(a => a.CurActivityStatus is ActivityStatus.Finished).ToList().Count,
+                activities.Where(a => a.Category == "Maintenance")
+                    .Where(a => a.CurActivityStatus is ActivityStatus.Finished).ToList().Count,
+                activities.Where(a => a.Category == "Other")
+                    .Where(a => a.CurActivityStatus is ActivityStatus.Finished).ToList().Count
+            };
+            List<int> failed = new List<int>
+            {
+                activities.Where(a => a.Category == "Cleaning")
+                    .Where(a => a.CurActivityStatus is ActivityStatus.Failed).ToList().Count,
+                activities.Where(a => a.Category == "Maintenance")
+                    .Where(a => a.CurActivityStatus is ActivityStatus.Failed).ToList().Count,
+                activities.Where(a => a.Category == "Other")
+                    .Where(a => a.CurActivityStatus is ActivityStatus.Failed).ToList().Count
+            };
+
+            var res = new List<(string Title, List<int> Values, ActivityStatus Status)>
+            {
+                (Title: "Scheduled", Values: scheduled, Status: ActivityStatus.Scheduled),
+                (Title: "In Progress", Values: inProgress,Status: ActivityStatus.InProgress),
+                (Title: "Completed", Values: completed,Status: ActivityStatus.Finished),
+                (Title: "Failed", Values: failed,Status: ActivityStatus.Failed)
             };
 
             return res;
         }
 
-        public static IList<(string Title, int Value, ActivityStatus Status)> GetMallActivityInfoData()
+        public static (List<string> rooms, ChartValues<HeatPoint>)? GetMallActivityInfoData()
         {
-            List<Guid> mallActivities = MallManager.GetInstance().CurrentMall.AssociatedActivities;
+            List<Activity> activities = ActivityManager.GetInstance().Activities.Values.ToList();
+            List<Room> rooms = RoomManager.GetInstance().Rooms.Values.ToList();
+            Mall currentMall = MallManager.GetInstance().CurrentMall;
 
-            List<Activity> activities = new List<Activity>();
-            foreach (var mallActivity in mallActivities)
+            List<string> roomNames = new List<string>();
+            ChartValues<HeatPoint> points = new ChartValues<HeatPoint>();
+
+            //Mall Activities
+            roomNames.Add(currentMall.Name);
+            int counter = 0;
+            points.Add(new HeatPoint(0,counter,
+                activities.Where(a => a.CorrespondingRoom == currentMall.Id).Where(a => a.CurActivityStatus is ActivityStatus.Scheduled).ToList().Count));
+            points.Add(new HeatPoint(1, counter, 
+                activities.Where(a => a.CorrespondingRoom == currentMall.Id).Where(a => a.CurActivityStatus is ActivityStatus.InProgress).ToList().Count));
+            points.Add(new HeatPoint(2, counter, 
+                activities.Where(a => a.CorrespondingRoom == currentMall.Id).Where(a => a.CurActivityStatus is ActivityStatus.Finished).ToList().Count));
+            points.Add(new HeatPoint(3, counter, 
+                activities.Where(a => a.CorrespondingRoom == currentMall.Id).Where(a => a.CurActivityStatus is ActivityStatus.Failed).ToList().Count));
+            counter++;
+
+            //Rooms Activities
+            foreach (var room in rooms)
             {
-                activities.Add(ActivityManager.GetInstance().Activities[mallActivity]);
+                roomNames.Add(room.Name);
+                points.Add(new HeatPoint(0, counter,
+                    activities.Where(a => a.CorrespondingRoom == room.Id).Where(a => a.CurActivityStatus is ActivityStatus.Scheduled).ToList().Count));
+                points.Add(new HeatPoint(1, counter,
+                    activities.Where(a => a.CorrespondingRoom == room.Id).Where(a => a.CurActivityStatus is ActivityStatus.InProgress).ToList().Count));
+                points.Add(new HeatPoint(2, counter,
+                    activities.Where(a => a.CorrespondingRoom == room.Id).Where(a => a.CurActivityStatus is ActivityStatus.Finished).ToList().Count));
+                points.Add(new HeatPoint(3, counter,
+                    activities.Where(a => a.CorrespondingRoom == room.Id).Where(a => a.CurActivityStatus is ActivityStatus.Failed).ToList().Count));
+                counter++;
+
             }
-            
-            var scheduled = activities.Where(a => a.CurActivityStatus is ActivityStatus.Scheduled).ToList().Count;
-            var inProgress = activities.Where(a => a.CurActivityStatus is ActivityStatus.InProgress).ToList().Count;
-            var completed = activities.Where(a => a.CurActivityStatus is ActivityStatus.Finished).ToList().Count;
-            var failed = activities.Where(a => a.CurActivityStatus is ActivityStatus.Failed).ToList().Count;
-
-            var res = new List<(string Title, int Value, ActivityStatus Status)>
-            {
-                (Title: "Scheduled", Value: scheduled, Status: ActivityStatus.Scheduled),
-                (Title: "In Progress", Value: inProgress,Status: ActivityStatus.InProgress),
-                (Title: "Completed", Value: completed,Status: ActivityStatus.Finished),
-                (Title: "Failed", Value: failed,Status: ActivityStatus.Failed)
-            };
-
-            return res;
+            return (roomNames, points);
         }
 
-        public static IList<(string Title, int Value, ActivityStatus Status)> GetMallAssociatedActivityInfoData(Guid mallId)
+        public static IList<(string Title, List<int> Value, ActivityStatus Status)> GetMallAssociatedActivityInfoData(Guid mallId)
         {
             List<Guid> activityIds = MallManager.GetInstance().Malls[mallId].AssociatedActivities;
             List<Activity> activities = new List<Activity>();
@@ -129,12 +176,44 @@ namespace User_Interface
                 activities.Add(ActivityManager.GetInstance().Activities[activity]);
             }
 
-            var scheduled = activities.Where(a => a.CurActivityStatus is ActivityStatus.Scheduled).ToList().Count;
-            var inProgress = activities.Where(a => a.CurActivityStatus is ActivityStatus.InProgress).ToList().Count;
-            var completed = activities.Where(a => a.CurActivityStatus is ActivityStatus.Finished).ToList().Count;
-            var failed = activities.Where(a => a.CurActivityStatus is ActivityStatus.Failed).ToList().Count;
+            List<int> scheduled = new List<int>
+            {
+                activities.Where(a => a.Category == "Cleaning")
+                    .Where(a => a.CurActivityStatus is ActivityStatus.Scheduled).ToList().Count,
+                activities.Where(a => a.Category == "Maintenance")
+                    .Where(a => a.CurActivityStatus is ActivityStatus.Scheduled).ToList().Count,
+                activities.Where(a => a.Category == "Other")
+                    .Where(a => a.CurActivityStatus is ActivityStatus.Scheduled).ToList().Count
+            };
+            List<int> inProgress = new List<int>
+            {
+                activities.Where(a => a.Category == "Cleaning")
+                    .Where(a => a.CurActivityStatus is ActivityStatus.InProgress).ToList().Count,
+                activities.Where(a => a.Category == "Maintenance")
+                    .Where(a => a.CurActivityStatus is ActivityStatus.InProgress).ToList().Count,
+                activities.Where(a => a.Category == "Other")
+                    .Where(a => a.CurActivityStatus is ActivityStatus.InProgress).ToList().Count
+            };
+            List<int> completed = new List<int>
+            {
+                activities.Where(a => a.Category == "Cleaning")
+                    .Where(a => a.CurActivityStatus is ActivityStatus.Finished).ToList().Count,
+                activities.Where(a => a.Category == "Maintenance")
+                    .Where(a => a.CurActivityStatus is ActivityStatus.Finished).ToList().Count,
+                activities.Where(a => a.Category == "Other")
+                    .Where(a => a.CurActivityStatus is ActivityStatus.Finished).ToList().Count
+            };
+            List<int> failed = new List<int>
+            {
+                activities.Where(a => a.Category == "Cleaning")
+                    .Where(a => a.CurActivityStatus is ActivityStatus.Failed).ToList().Count,
+                activities.Where(a => a.Category == "Maintenance")
+                    .Where(a => a.CurActivityStatus is ActivityStatus.Failed).ToList().Count,
+                activities.Where(a => a.Category == "Other")
+                    .Where(a => a.CurActivityStatus is ActivityStatus.Failed).ToList().Count
+            };
 
-            var res = new List<(string Title, int Value, ActivityStatus Status)>
+            var res = new List<(string Title, List<int> Value, ActivityStatus Status)>
             {
                 (Title: "Scheduled", Value: scheduled, Status: ActivityStatus.Scheduled),
                 (Title: "In Progress", Value: inProgress, Status: ActivityStatus.InProgress),

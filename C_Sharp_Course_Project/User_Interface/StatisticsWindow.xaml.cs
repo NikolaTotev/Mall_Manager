@@ -35,7 +35,7 @@ namespace User_Interface
             {
                 if (m_CallingFromMall)
                 {
-                    if (!args.Cancel) args.Result = VisualizationPreProcessor.GetMallActivityInfoData();
+                    if (!args.Cancel) args.Result = VisualizationPreProcessor.GetMallAssociatedActivityInfoData(m_RoomId);
                 }
                 else
                 {
@@ -56,7 +56,7 @@ namespace User_Interface
                  }
                  else
                  {
-                     m_CurrentGraph = new SimpleBarGraph(VisualizationPreProcessor.GenerateBasicActivityColumnGraphics(args.Result as IList<(string Title, int Value, ActivityStatus Status)>));
+                     m_CurrentGraph = new SimpleBarGraph(VisualizationPreProcessor.GenerateBasicActivityColumnGraphics(args.Result as IList<(string Title, List<int> Value, ActivityStatus Status)>));
                      Thickness margin = m_CurrentGraph.Margin;
                      double margins = 20;
                      margin.Top = margins;
@@ -77,13 +77,13 @@ namespace User_Interface
 
         private void WorkerThreadInitialization()
         {
-            m_Worker = new BackgroundWorker { WorkerReportsProgress = true };
+            m_Worker = new BackgroundWorker { WorkerReportsProgress = true};
             m_Worker.DoWork += (worker, args) =>
             {
                 //this will be executed on a background worker thread
                 if (m_CallingFromMall)
                 {
-                    if (!args.Cancel) args.Result = VisualizationPreProcessor.GetMallActivityInfoData();
+                    if (!args.Cancel) args.Result = VisualizationPreProcessor.GetMallAssociatedActivityInfoData(m_RoomId);
                 }
                 else
                 {
@@ -107,7 +107,7 @@ namespace User_Interface
                 }
                 else
                 {
-                    m_CurrentGraph.UpdateData(VisualizationPreProcessor.GenerateBasicActivityColumnGraphics(args.Result as IList<(string Title, int Value, ActivityStatus Status)>));
+                    m_CurrentGraph.UpdateData(VisualizationPreProcessor.GenerateBasicActivityColumnGraphics(args.Result as IList<(string Title, List<int> Value, ActivityStatus Status)>));
                 }
             };
         }

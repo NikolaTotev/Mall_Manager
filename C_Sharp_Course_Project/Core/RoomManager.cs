@@ -14,6 +14,8 @@ namespace Core
 
         private RoomConfig m_Config;
 
+        public event EventHandler RoomsChanged;
+
         private RoomManager()
         {
             Rooms = SerializationManager.GetRooms(MallManager.GetInstance().CurrentMall.Name);
@@ -63,6 +65,7 @@ namespace Core
 
             Rooms.Add(newRoomGuid, newRoom);
             SerializationManager.SaveRooms(Rooms, mallName);
+            OnRoomsChanged();
             return true;
         }
 
@@ -106,6 +109,7 @@ namespace Core
             }
 
             SerializationManager.SaveRooms(Rooms, mallName);
+            OnRoomsChanged();
         }
 
         public void ClearRoomActivities()
@@ -140,6 +144,7 @@ namespace Core
                 }
                 Rooms.Remove(roomToRemove);
                 SerializationManager.SaveRooms(Rooms, mallName);
+                OnRoomsChanged();
                 return true;
             }
 
@@ -173,6 +178,7 @@ namespace Core
             Room roomToEdit = Rooms[roomToAddTo];
             roomToEdit.Activities.Add(activityToAdd);
             SerializationManager.SaveRooms(Rooms, mallName);
+            OnRoomsChanged();
             return true;
         }
 
@@ -199,6 +205,7 @@ namespace Core
 
             roomToEdit.Activities.Remove(activityToRemove);
             SerializationManager.SaveRooms(Rooms, MallManager.GetInstance().CurrentMallName);
+            OnRoomsChanged();
             return true;
         }
 
@@ -228,6 +235,11 @@ namespace Core
             }
 
             return roomDictionary;
+        }
+
+        protected virtual void OnRoomsChanged()
+        {
+            RoomsChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

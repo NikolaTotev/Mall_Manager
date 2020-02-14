@@ -33,22 +33,5 @@ namespace Core
             Activities = new List<Guid>(); 
         }
 
-        public void EditRoom(string name = null, string description = null, string type = null)
-        {
-            LastEditDate = DateTime.UtcNow;
-            if (name != null)
-            {
-                Name = name;
-            }
-            if (description != null)
-            {
-                Description = description;
-            }
-            if (type != null)
-            {
-                Type = type;
-            }
-        }
-        //TODO constructors, and methods for editing rooms and deleting, and list of activities for this room
     }
 }
