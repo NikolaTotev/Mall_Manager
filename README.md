@@ -103,7 +103,7 @@ You can also view statistics from the ***"Quick Stats"*** panel or open the full
 ### Mall statistics page
  This is the mall statistics page. Here you can view statistics about the mall.
  
-<img src="https://github.com/NikolaTotev/C_Sharp_Course_Project/blob/master/ReadMe_Images/UI/MalStatsWindow.png?raw=true">
+<img src="https://github.com/NikolaTotev/C_Sharp_Course_Project/blob/master/ReadMe_Images/UI/MallStatsWindow.png?raw=true">
 
 ## Adding/Editing/Removing
 Below are all of the supported ***Add***, ***Edit*** & ***Remove*** operations that are supported. (This is not the final list of operations, the rest are put as **"future development opportunities"**)
