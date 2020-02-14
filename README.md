@@ -30,7 +30,9 @@
 # Installation
 ## Standard .exe installation
 The easiest way to start Mall Manager is to download this repository. That is done like this:
+
 <img src="https://github.com/NikolaTotev/C_Sharp_Course_Project/blob/master/ReadMe_Images/Downloading.png?raw=true" width="512" height="396.5">
+
 After downloading the repository locate the .zip file on your computer and extract it.
 Once the the extraction is completed locate the ***"Exe Lanucher"*** Folder:
 
