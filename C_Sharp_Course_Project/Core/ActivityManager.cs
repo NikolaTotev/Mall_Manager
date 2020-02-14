@@ -149,7 +149,7 @@ namespace Core
         }
 
 
-        public bool AddNewCategory(string category, string mallName)
+        public bool AddNewCategory(string category)
         {
             if (category == null)
             {
@@ -163,7 +163,7 @@ namespace Core
                 return false;
             }
             m_Config.Categories.Add(category);
-            SerializationManager.SaveActivityConfigFile(m_Config, mallName);
+            SerializationManager.SaveActivityConfigFile(m_Config, MallManager.GetInstance().CurrentMallName);
             return true;
         }
 

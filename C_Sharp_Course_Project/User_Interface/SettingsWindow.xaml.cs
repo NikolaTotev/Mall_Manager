@@ -36,7 +36,7 @@ namespace User_Interface
                 Mall editedMall = new Mall(MallManager.GetInstance().CurrentMall.Id, Tb_Name.Text, Tb_Desc.Text);
                 MallManager.GetInstance().EditMall(editedMall);
             }
-            
+
         }
 
         private void Btn_ClearRooms_OnClick(object sender, RoutedEventArgs e)
@@ -71,6 +71,54 @@ namespace User_Interface
         {
             Lb_ActivityNumberValue.Content = ActivityManager.GetInstance().Activities.Count.ToString();
             Lb_RoomNumberValue.Content = RoomManager.GetInstance().Rooms.Count.ToString();
+        }
+
+        private void Btn_AddRoomType_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Btn_RemoveRoomType_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Btn_RemoveActivityType_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(Tb_RoomType.Text))
+            {
+                RoomManager.GetInstance().AddRoomType(Tb_RoomType.Text);
+            }
+        }
+
+        private void Btn_AddActivityType_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(Tb_ActivityType.Text))
+            {
+                ActivityManager.GetInstance().AddNewCategory(Tb_ActivityType.Text);
+            }
+        }
+
+
+        private void Btn_MallSettings_OnClick(object sender, RoutedEventArgs e)
+        {
+            Grd_MallSettings.Visibility = Visibility.Visible;
+            Grd_RoomTypesConfig.Visibility = Visibility.Hidden;
+            Grd_ActivityTypesConfig.Visibility = Visibility.Hidden;
+        }
+
+        private void Btn_RoomConfigs_OnClick(object sender, RoutedEventArgs e)
+        {
+            Grd_MallSettings.Visibility = Visibility.Hidden;
+            Grd_RoomTypesConfig.Visibility = Visibility.Visible;
+            Grd_ActivityTypesConfig.Visibility = Visibility.Hidden;
+        }
+
+        private void Btn_ActivityConfigs_OnClick(object sender, RoutedEventArgs e)
+        {
+            Grd_MallSettings.Visibility = Visibility.Hidden;
+            Grd_RoomTypesConfig.Visibility = Visibility.Hidden;
+            Grd_ActivityTypesConfig.Visibility = Visibility.Visible;
         }
     }
 }

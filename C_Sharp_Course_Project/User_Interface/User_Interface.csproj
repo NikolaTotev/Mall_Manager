@@ -290,5 +290,8 @@
   <ItemGroup>
     <Resource Include="MallManager_ProgramIcon.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\StoreFrontLowRes_Icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
