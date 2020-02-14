@@ -212,7 +212,18 @@ namespace Core
 
         public void AddRoomType(string typeToAdd)
         {
-            m_Config.RoomTypes.Add(typeToAdd);
+            m_Config.RoomTypes.Add(typeToAdd); 
+            SerializationManager.SaveRoomConfigFile(m_Config, MallManager.GetInstance().CurrentMallName);
+            m_Config = SerializationManager.GetRoomConfig(MallManager.GetInstance().CurrentMall.Name);
+
+        }
+
+        public void RemoveRoomType(string typeToRemove)
+        {
+            m_Config.RoomTypes.Remove(typeToRemove);
+            SerializationManager.SaveRoomConfigFile(m_Config, MallManager.GetInstance().CurrentMallName);
+            m_Config = SerializationManager.GetRoomConfig(MallManager.GetInstance().CurrentMall.Name);
+
         }
 
         /// <summary>

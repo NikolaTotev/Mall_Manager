@@ -25,7 +25,8 @@ namespace User_Interface
             InitializeComponent();
             Tb_Name.Text = MallManager.GetInstance().CurrentMall.Name;
             Tb_Desc.Text = MallManager.GetInstance().CurrentMall.Description;
-            ReloadInfo();
+            ReloadMallInfo();
+            ReloadConfigInfo();
         }
 
         private void Btn_Save_OnClick(object sender, RoutedEventArgs e)
@@ -46,7 +47,7 @@ namespace User_Interface
             {
                 case MessageBoxResult.Yes:
                     RoomManager.GetInstance().ClearRooms();
-                    ReloadInfo();
+                    ReloadMallInfo();
                     break;
                 case MessageBoxResult.No:
                     break;
@@ -60,42 +61,69 @@ namespace User_Interface
             {
                 case MessageBoxResult.Yes:
                     ActivityManager.GetInstance().ClearActivities();
-                    ReloadInfo();
+                    ReloadMallInfo();
                     break;
                 case MessageBoxResult.No:
                     break;
             }
         }
 
-        private void ReloadInfo()
+        private void ReloadMallInfo()
         {
             Lb_ActivityNumberValue.Content = ActivityManager.GetInstance().Activities.Count.ToString();
             Lb_RoomNumberValue.Content = RoomManager.GetInstance().Rooms.Count.ToString();
         }
 
+
+        private void ReloadConfigInfo()
+        {
+            Lv_CurrentActivityTypes.ItemsSource = ActivityManager.GetInstance().GetCategories();
+            Lv_CurrentRoomTypes.ItemsSource = RoomManager.GetInstance().GetRoomTypes();
+        }
         private void Btn_AddRoomType_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (!string.IsNullOrEmpty(Tb_RoomType.Text) && !RoomManager.GetInstance().GetRoomTypes().Contains(Tb_RoomType.Text))
+            {
+                RoomManager.GetInstance().AddRoomType(Tb_RoomType.Text);
+                ReloadConfigInfo();
+            }
+            else
+            {
+                Tb_RoomType.Background = (Brush)Application.Current.Resources["InputError"];
+
+            }
         }
 
         private void Btn_RemoveRoomType_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (Lv_CurrentRoomTypes.SelectedItem != null)
+            {
+                string selectedItem = Lv_CurrentRoomTypes.SelectedItem.ToString();
+                RoomManager.GetInstance().RemoveRoomType(selectedItem);
+                ReloadConfigInfo();
+            }
         }
 
         private void Btn_RemoveActivityType_OnClick(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(Tb_RoomType.Text))
+            if (Lv_CurrentActivityTypes.SelectedItem != null)
             {
-                RoomManager.GetInstance().AddRoomType(Tb_RoomType.Text);
+                string selectedItem = Lv_CurrentActivityTypes.SelectedItem.ToString();
+                ActivityManager.GetInstance().RemoveCategory(selectedItem);
+                ReloadConfigInfo();
             }
         }
 
         private void Btn_AddActivityType_OnClick(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(Tb_ActivityType.Text))
+            if (!string.IsNullOrEmpty(Tb_ActivityType.Text) && !ActivityManager.GetInstance().GetCategories().Contains(Tb_ActivityType.Text))
             {
                 ActivityManager.GetInstance().AddNewCategory(Tb_ActivityType.Text);
+                ReloadConfigInfo();
+            }
+            else
+            {
+                Tb_RoomType.Background = (Brush)Application.Current.Resources["InputError"];
             }
         }
 

@@ -70,7 +70,7 @@
             </Button>
         </Grid>
 
-        <Grid x:Name="Grd_MallSettings" Grid.Row="1" Visibility="Hidden">
+        <Grid x:Name="Grd_MallSettings" Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.3*"></RowDefinition>
                 <RowDefinition Height="0.5*"></RowDefinition>
@@ -135,7 +135,7 @@
                     </StackPanel>
 
                     <!--#region Button Delete-->
-                    <Button x:Name="Btn_ClearActivities" Grid.Row="2"  HorizontalAlignment="Center" Padding="45,2,45,2" Margin="10,10,10,0" ToolTipService.InitialShowDelay="1000" Template="{StaticResource WarningButton}" BorderThickness="2" Click="Btn_ClearActivities_OnClick"  Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="15" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" HorizontalContentAlignment="Center">
+                    <Button x:Name="Btn_ClearActivities" Grid.Row="2"  HorizontalAlignment="Center" Padding="45,2,45,2" Margin="10,10,10,0" ToolTipService.InitialShowDelay="1000" Template="{StaticResource WarningButton}" BorderThickness="2" Click="Btn_ClearActivities_OnClick"  Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="15" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" HorizontalContentAlignment="Center" IsEnabled="False">
                         <Button.ToolTip>
                             <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="15000" ToolTipService.InitialShowDelay="0">
                                 <ToolTip.Resources>
@@ -188,7 +188,7 @@
                     </StackPanel>
 
                     <!--#region Button Delete-->
-                    <Button x:Name="Btn_ClearRooms"  Grid.Row="2" HorizontalAlignment="Center" Padding="45,2,45,2" Margin="10,10,10,0" ToolTipService.InitialShowDelay="0" Template="{StaticResource WarningButton}"  BorderThickness="2" Click="Btn_ClearRooms_OnClick"  Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="15" Foreground="{StaticResource NavyBlueBase}" HorizontalContentAlignment="Center">
+                    <Button x:Name="Btn_ClearRooms"  Grid.Row="2" HorizontalAlignment="Center" Padding="45,2,45,2" Margin="10,10,10,0" ToolTipService.InitialShowDelay="0" Template="{StaticResource WarningButton}"  BorderThickness="2" Click="Btn_ClearRooms_OnClick"  Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="15" Foreground="{StaticResource NavyBlueBase}" HorizontalContentAlignment="Center" IsEnabled="False">
                         <Button.ToolTip>
                             <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="15000" ToolTipService.InitialShowDelay="0">
                                 <ToolTip.Resources>
@@ -306,7 +306,7 @@
                 <!--#endregion-->
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
-                <ListView x:Name="Lv_CurrentTypes" Height="315" Margin="30,10,30,10" BorderThickness="2" FontStyle="Normal" FontWeight="Medium" FontSize="20" Padding="10">
+                <ListView x:Name="Lv_CurrentRoomTypes" Height="315" Margin="30,10,30,10" BorderThickness="2" FontStyle="Normal" FontWeight="Medium" FontSize="20" Padding="10">
                     <ListView.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="30"/>
@@ -345,9 +345,9 @@
             </Button>
         </Grid>
 
-        <Grid x:Name="Grd_ActivityTypesConfig" Grid.Row="1" Visibility="Visible">
+        <Grid x:Name="Grd_ActivityTypesConfig" Grid.Row="1" Visibility="Hidden">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="1.2*"></RowDefinition>
                 <RowDefinition Height="3*"></RowDefinition>
                 <RowDefinition Height=".6*"></RowDefinition>
             </Grid.RowDefinitions>

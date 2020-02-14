@@ -164,6 +164,26 @@ namespace Core
             }
             m_Config.Categories.Add(category);
             SerializationManager.SaveActivityConfigFile(m_Config, MallManager.GetInstance().CurrentMallName);
+            m_Config = SerializationManager.GetActivityConfig(MallManager.GetInstance().CurrentMall.Name);
+            return true;
+        }
+
+        public bool RemoveCategory(string category)
+        {
+            if (category == null)
+            {
+                ExceptionManager.OnNullParamsToFunction(nameof(AddNewCategory));
+                return false;
+            }
+
+            if (!m_Config.Categories.Contains(category))
+            {
+                ExceptionManager.OnCreateDuplicateCategory(category);
+                return false;
+            }
+            m_Config.Categories.Remove(category);
+            SerializationManager.SaveActivityConfigFile(m_Config, MallManager.GetInstance().CurrentMallName);
+            m_Config = SerializationManager.GetActivityConfig(MallManager.GetInstance().CurrentMall.Name);
             return true;
         }
 
