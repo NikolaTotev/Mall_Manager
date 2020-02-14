@@ -85,7 +85,7 @@ namespace User_Interface
                     .Where(a => a.CurActivityStatus is ActivityStatus.Scheduled).ToList().Count,
                 activities.Where(a => a.Category == "Maintenance")
                     .Where(a => a.CurActivityStatus is ActivityStatus.Scheduled).ToList().Count,
-                activities.Where(a => a.Category == "Other")
+                activities.Where(a => a.Category != "Cleaning" && a.Category != "Maintenance")
                     .Where(a => a.CurActivityStatus is ActivityStatus.Scheduled).ToList().Count
             };
             List<int> inProgress = new List<int>
@@ -94,7 +94,7 @@ namespace User_Interface
                     .Where(a => a.CurActivityStatus is ActivityStatus.InProgress).ToList().Count,
                 activities.Where(a => a.Category == "Maintenance")
                     .Where(a => a.CurActivityStatus is ActivityStatus.InProgress).ToList().Count,
-                activities.Where(a => a.Category == "Other")
+                activities.Where(a => a.Category != "Cleaning" && a.Category != "Maintenance")
                     .Where(a => a.CurActivityStatus is ActivityStatus.InProgress).ToList().Count
             };
             List<int> completed = new List<int>
@@ -103,7 +103,7 @@ namespace User_Interface
                     .Where(a => a.CurActivityStatus is ActivityStatus.Finished).ToList().Count,
                 activities.Where(a => a.Category == "Maintenance")
                     .Where(a => a.CurActivityStatus is ActivityStatus.Finished).ToList().Count,
-                activities.Where(a => a.Category == "Other")
+                activities.Where(a => a.Category != "Cleaning" && a.Category != "Maintenance")
                     .Where(a => a.CurActivityStatus is ActivityStatus.Finished).ToList().Count
             };
             List<int> failed = new List<int>
@@ -112,7 +112,7 @@ namespace User_Interface
                     .Where(a => a.CurActivityStatus is ActivityStatus.Failed).ToList().Count,
                 activities.Where(a => a.Category == "Maintenance")
                     .Where(a => a.CurActivityStatus is ActivityStatus.Failed).ToList().Count,
-                activities.Where(a => a.Category == "Other")
+                activities.Where(a => a.Category != "Cleaning" && a.Category != "Maintenance")
                     .Where(a => a.CurActivityStatus is ActivityStatus.Failed).ToList().Count
             };
 
@@ -182,7 +182,7 @@ namespace User_Interface
                     .Where(a => a.CurActivityStatus is ActivityStatus.Scheduled).ToList().Count,
                 activities.Where(a => a.Category == "Maintenance")
                     .Where(a => a.CurActivityStatus is ActivityStatus.Scheduled).ToList().Count,
-                activities.Where(a => a.Category == "Other")
+                activities.Where(a => a.Category != "Cleaning" && a.Category != "Maintenance")
                     .Where(a => a.CurActivityStatus is ActivityStatus.Scheduled).ToList().Count
             };
             List<int> inProgress = new List<int>
@@ -191,7 +191,7 @@ namespace User_Interface
                     .Where(a => a.CurActivityStatus is ActivityStatus.InProgress).ToList().Count,
                 activities.Where(a => a.Category == "Maintenance")
                     .Where(a => a.CurActivityStatus is ActivityStatus.InProgress).ToList().Count,
-                activities.Where(a => a.Category == "Other")
+                activities.Where(a => a.Category != "Cleaning" && a.Category != "Maintenance")
                     .Where(a => a.CurActivityStatus is ActivityStatus.InProgress).ToList().Count
             };
             List<int> completed = new List<int>
@@ -200,7 +200,7 @@ namespace User_Interface
                     .Where(a => a.CurActivityStatus is ActivityStatus.Finished).ToList().Count,
                 activities.Where(a => a.Category == "Maintenance")
                     .Where(a => a.CurActivityStatus is ActivityStatus.Finished).ToList().Count,
-                activities.Where(a => a.Category == "Other")
+                activities.Where(a => a.Category != "Cleaning" && a.Category != "Maintenance")
                     .Where(a => a.CurActivityStatus is ActivityStatus.Finished).ToList().Count
             };
             List<int> failed = new List<int>
@@ -209,7 +209,7 @@ namespace User_Interface
                     .Where(a => a.CurActivityStatus is ActivityStatus.Failed).ToList().Count,
                 activities.Where(a => a.Category == "Maintenance")
                     .Where(a => a.CurActivityStatus is ActivityStatus.Failed).ToList().Count,
-                activities.Where(a => a.Category == "Other")
+                activities.Where(a => a.Category != "Cleaning" && a.Category != "Maintenance")
                     .Where(a => a.CurActivityStatus is ActivityStatus.Failed).ToList().Count
             };
 
