@@ -7,7 +7,7 @@
 - [Installation](#installation)
 	- Standard .exe installation
 	- Downloading repo & building project in Visual Studio
-- [UI Walkthrough](#uiwalkthrough)
+- [UI Walkthrough](#UIWalkthrough)
 	- Dashboard
 	- Mall Menu
 		- Rental spaces menu
@@ -22,7 +22,7 @@
 	- Statistics
 	- Using command mode searching
 		
-- [Program Data Files](#programdatafiles)
+- [Program Data Files](#ProgramDataFiles)
 	- Location
 	- What they are used for
 ----------------------------------
