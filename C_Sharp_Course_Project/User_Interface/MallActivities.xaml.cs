@@ -1,39 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Core;
-using LiveCharts;
-using LiveCharts.Wpf;
 
 namespace User_Interface
 {
     /// <summary>
     /// Interaction logic for MallActivities.xaml
     /// </summary>
-    public partial class MallActivities : UserControl, IAppView
+    public partial class MallActivities : IAppView
     {
         private MainWindow m_CurrentMainWindow;
         private IAppView m_PreviousView;
-        private IAppView m_NextView;
-        private StringBuilder sb;
         private readonly List<ActivityListItem> m_Activities;
 
         public MallActivities()
         {
             InitializeComponent();
-            sb = new StringBuilder();
+            var sb = new StringBuilder();
             Lv_Activities.SelectionMode = SelectionMode.Multiple;
             m_Activities = new List<ActivityListItem>();
             foreach (var activityId in MallManager.GetInstance().CurrentMall.AssociatedActivities)
@@ -196,7 +183,7 @@ namespace User_Interface
 
         public void SetNextView(IAppView nextView)
         {
-            m_NextView = nextView;
+            //Implement as needed
         }
 
         public IAppView GetPreviousView()

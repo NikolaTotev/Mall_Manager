@@ -1,34 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Core;
-using LiveCharts;
-using LiveCharts.Wpf;
 
 namespace User_Interface
 {
     /// <summary>
     /// Interaction logic for RoomActivities.xaml
     /// </summary>
-    public partial class RoomActivities : UserControl, IAppView
+    public partial class RoomActivities : IAppView
     {
         private MainWindow m_CurrentMainWindow;
         private StatisticsWindow m_StatWinow;
 
         private IAppView m_PreviousView;
-        private IAppView m_NextView;
 
         private readonly Guid m_CurrentRoomId;
         private readonly List<ActivityListItem> m_Activities;
@@ -87,7 +76,7 @@ namespace User_Interface
                 }
                 else
                 {
-                    if (args.Result is IList<(string Title, int Value, ActivityStatus Status)> statList)
+                    if (args.Result is IList<(string Title, int Value, ActivityStatus Status)>)
                     {
                         Sp_QuickStats.Children.Remove(Lb_StatsLoading);
                         PieChartStatistics.UpdateData(VisualizationPreProcessor.GenerateBasicActivityPieGraphics(args.Result as IList<(string Title, int Value, ActivityStatus Status)>, PieChartStatistics.PointLabel));
@@ -208,7 +197,7 @@ namespace User_Interface
 
         public void SetNextView(IAppView nextView)
         {
-            m_NextView = nextView;
+            //Implement as needed
         }
 
         public IAppView GetPreviousView()

@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:User_Interface"
         mc:Ignorable="d"
-        Title="Mall Manager" Height="650" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
-    <Grid x:Name="p_StartPanel">
+        Title="Mall Manager" Height="650" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Closed="MainWindow_OnClosed">
+    <Grid x:Name="p_StartPanel" >
        
     </Grid>
 </Window>

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Core
 {
@@ -18,7 +16,6 @@ namespace Core
     public class ActivityManager
     {
         private static ActivityManager m_Instance;
-        private ProgramManager m_CurrentManager;
         private ActivityConfig m_Config;
         public Dictionary<Guid, Activity> Activities { get; set; }
 
@@ -27,7 +24,7 @@ namespace Core
         private ActivityManager()
         {
             m_Instance = this;
-            m_CurrentManager = ProgramManager.GetInstance();
+            ProgramManager.GetInstance();
             m_Config = SerializationManager.GetActivityConfig(MallManager.GetInstance().CurrentMall.Name);
             Activities = SerializationManager.GetActivities(MallManager.GetInstance().CurrentMall.Name);
         }
@@ -64,8 +61,8 @@ namespace Core
         }
 
         public void EditActivity(Guid activityId, string category = null, string description = null,
-            ActivityStatus status = ActivityStatus.Undefined, DateTime startDate = default(DateTime),
-            DateTime endDate = default(DateTime))
+            ActivityStatus status = ActivityStatus.Undefined, DateTime startDate = default,
+            DateTime endDate = default)
         {
             Activity activityToEdit = Activities[activityId];
             if (category != null)
@@ -80,7 +77,7 @@ namespace Core
             {
                 activityToEdit.CurActivityStatus = status;
             }
-            if (DateTime.Compare(startDate, default(DateTime)) != 0 && DateTime.Compare(endDate, default(DateTime)) != 0 && DateTime.Compare(startDate, endDate) < 0)
+            if (DateTime.Compare(startDate, default) != 0 && DateTime.Compare(endDate, default) != 0 && DateTime.Compare(startDate, endDate) < 0)
             {
                 activityToEdit.StartTime = startDate;
                 activityToEdit.EndTime = endDate;

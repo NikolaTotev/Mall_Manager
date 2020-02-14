@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
-using System.Windows.Input;
-using System.Windows.Forms;
-
 
 namespace Core
 {
@@ -16,14 +10,14 @@ namespace Core
     {
         //Base save path
         public static readonly string LocalAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        public static readonly string ProgramFolder = System.IO.Path.Combine(LocalAppDataPath, "MallManager_DATA");
+        public static readonly string ProgramFolder = Path.Combine(LocalAppDataPath, "MallManager_DATA");
 
         //Folder paths
-        public static readonly string MallSaves = System.IO.Path.Combine(ProgramFolder, "MallSaves");
-        public static readonly string ActivitySaves = System.IO.Path.Combine(ProgramFolder, "ActivitySaves");
-        public static readonly string ConfigFiles = System.IO.Path.Combine(ProgramFolder, "Config");
-        public static readonly string RoomSaves = System.IO.Path.Combine(ProgramFolder, "RoomSaves");
-        public static readonly string MallSavesFile = System.IO.Path.Combine(MallSaves, "Malls.json");
+        public static readonly string MallSaves = Path.Combine(ProgramFolder, "MallSaves");
+        public static readonly string ActivitySaves = Path.Combine(ProgramFolder, "ActivitySaves");
+        public static readonly string ConfigFiles = Path.Combine(ProgramFolder, "Config");
+        public static readonly string RoomSaves = Path.Combine(ProgramFolder, "RoomSaves");
+        public static readonly string MallSavesFile = Path.Combine(MallSaves, "Malls.json");
 
         //Base file names
         public static readonly string ActivitySaveFileBase = "Activities.json";
@@ -32,8 +26,8 @@ namespace Core
         public static readonly string RoomsSaveBase = "Rooms.json";
 
         //Utility variables
-        private static JsonSerializer m_Serializer = new JsonSerializer();
-        private static StringBuilder m_StringBuilder = new StringBuilder("");
+        private static readonly JsonSerializer m_Serializer = new JsonSerializer();
+        private static readonly StringBuilder StringBuilder = new StringBuilder("");
 
         public static void CheckForDirectories()
         {
@@ -66,22 +60,22 @@ namespace Core
         {
             if (File.Exists(GenActivitySaveName(oldName)))
             {
-                System.IO.File.Move(GenActivitySaveName(oldName), GenActivitySaveName(newName));
+                File.Move(GenActivitySaveName(oldName), GenActivitySaveName(newName));
             }
 
             if (File.Exists(GenRoomSaveName(oldName)))
             {
-                System.IO.File.Move(GenRoomSaveName(oldName), GenRoomSaveName(newName));
+                File.Move(GenRoomSaveName(oldName), GenRoomSaveName(newName));
             }
 
             if (File.Exists(GenActivityConfigName(oldName)))
             {
-                System.IO.File.Move(GenActivityConfigName(oldName), GenActivityConfigName(newName));
+                File.Move(GenActivityConfigName(oldName), GenActivityConfigName(newName));
             }
 
             if (File.Exists(GenRoomConfigName(oldName)))
             {
-                System.IO.File.Move(GenRoomConfigName(oldName), GenRoomConfigName(newName));
+                File.Move(GenRoomConfigName(oldName), GenRoomConfigName(newName));
             }
 
         }
@@ -89,34 +83,34 @@ namespace Core
         #region Name gen functions
         public static string GenRoomSaveName(string mallName)
         {
-            m_StringBuilder.Clear();
-            m_StringBuilder.Append(mallName);
-            m_StringBuilder.Append(RoomsSaveBase);
-            return System.IO.Path.Combine(RoomSaves, m_StringBuilder.ToString());
+            StringBuilder.Clear();
+            StringBuilder.Append(mallName);
+            StringBuilder.Append(RoomsSaveBase);
+            return Path.Combine(RoomSaves, StringBuilder.ToString());
         }
 
         public static string GenActivitySaveName(string mallName)
         {
-            m_StringBuilder.Clear();
-            m_StringBuilder.Append(mallName);
-            m_StringBuilder.Append(ActivitySaveFileBase);
-            return System.IO.Path.Combine(ActivitySaves, m_StringBuilder.ToString());
+            StringBuilder.Clear();
+            StringBuilder.Append(mallName);
+            StringBuilder.Append(ActivitySaveFileBase);
+            return Path.Combine(ActivitySaves, StringBuilder.ToString());
         }
 
         public static string GenActivityConfigName(string mallName)
         {
-            m_StringBuilder.Clear();
-            m_StringBuilder.Append(mallName);
-            m_StringBuilder.Append(ActivityConfigSaveBase);
-            return System.IO.Path.Combine(ConfigFiles, m_StringBuilder.ToString());
+            StringBuilder.Clear();
+            StringBuilder.Append(mallName);
+            StringBuilder.Append(ActivityConfigSaveBase);
+            return Path.Combine(ConfigFiles, StringBuilder.ToString());
         }
 
         public static string GenRoomConfigName(string mallName)
         {
-            m_StringBuilder.Clear();
-            m_StringBuilder.Append(mallName);
-            m_StringBuilder.Append(RoomConfigSaveBase);
-            return System.IO.Path.Combine(ConfigFiles, m_StringBuilder.ToString());
+            StringBuilder.Clear();
+            StringBuilder.Append(mallName);
+            StringBuilder.Append(RoomConfigSaveBase);
+            return Path.Combine(ConfigFiles, StringBuilder.ToString());
         }
 
         #endregion

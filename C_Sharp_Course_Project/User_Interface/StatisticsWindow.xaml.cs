@@ -1,32 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Core;
-using LiveCharts;
 
 namespace User_Interface
 {
     /// <summary>
     /// Interaction logic for StatisticsWindow.xaml
     /// </summary>
-    public partial class StatisticsWindow : Window
+    public partial class StatisticsWindow
     {
-        delegate void SetLabelText(Label lbl, string text);
         private BackgroundWorker m_Worker;
-        private bool m_CallingFromMall;
-        private Guid m_RoomId;
-        private SimpleBarGraph m_currentGraph;
+        private readonly bool m_CallingFromMall;
+        private readonly Guid m_RoomId;
+        private SimpleBarGraph m_CurrentGraph;
         public StatisticsWindow(Guid roomId, bool callingFromMall)
         {
 
@@ -34,8 +22,8 @@ namespace User_Interface
             WorkerThreadInitialization();
             m_RoomId = roomId;
             m_CallingFromMall = callingFromMall;
-            this.Loaded += (sender, args) => ActivityManager.GetInstance().ActivitiesChanged += OnActivityInfoChanged;
-            this.Unloaded += (sender, args) => ActivityManager.GetInstance().ActivitiesChanged -= OnActivityInfoChanged;
+            Loaded += (sender, args) => ActivityManager.GetInstance().ActivitiesChanged += OnActivityInfoChanged;
+            Unloaded += (sender, args) => ActivityManager.GetInstance().ActivitiesChanged -= OnActivityInfoChanged;
             GraphInitialization();
         }
 
@@ -68,16 +56,16 @@ namespace User_Interface
                  }
                  else
                  {
-                     m_currentGraph = new SimpleBarGraph(VisualizationPreProcessor.GenerateBasicActivityColumnGraphics(args.Result as IList<(string Title, int Value, ActivityStatus Status)>));
-                     Thickness margin = m_currentGraph.Margin;
+                     m_CurrentGraph = new SimpleBarGraph(VisualizationPreProcessor.GenerateBasicActivityColumnGraphics(args.Result as IList<(string Title, int Value, ActivityStatus Status)>));
+                     Thickness margin = m_CurrentGraph.Margin;
                      double margins = 20;
                      margin.Top = margins;
                      margin.Bottom = margins;
                      margin.Left = margins;
                      margin.Right = margins;
-                     m_currentGraph.Margin = margin;
+                     m_CurrentGraph.Margin = margin;
                      G_MainGrid.Children.Clear();
-                     G_MainGrid.Children.Add(m_currentGraph);
+                     G_MainGrid.Children.Add(m_CurrentGraph);
                  }
              };
 
@@ -104,26 +92,22 @@ namespace User_Interface
             };
             m_Worker.ProgressChanged += (o, args) =>
             {
-                ///Testing code used in demo will be removed later do not touch.
-                //this will be executed on the main UI thread
-                // Lb_Test.Content = $"Calculating... {args.ProgressPercentage}%";
+         
             };
             m_Worker.RunWorkerCompleted += (o, args) =>
             {
                 //this will be executed on the main UI thread
                 if (args.Error != null)
                 {
-                    ///Testing code used in demo will be removed later do not touch.
-                    //Lb_Test.Content = $"Error!!! {args.Error.Message}";
+         
                 }
                 else if (args.Cancelled)
                 {
-                    ///Testing code used in demo will be removed later do not touch.
-                    //Lb_Test.Content = "The operations was canceled";
+         
                 }
                 else
                 {
-                    m_currentGraph.UpdateData(VisualizationPreProcessor.GenerateBasicActivityColumnGraphics(args.Result as IList<(string Title, int Value, ActivityStatus Status)>));
+                    m_CurrentGraph.UpdateData(VisualizationPreProcessor.GenerateBasicActivityColumnGraphics(args.Result as IList<(string Title, int Value, ActivityStatus Status)>));
                 }
             };
         }
@@ -133,52 +117,8 @@ namespace User_Interface
         {
             if (!m_Worker.IsBusy)
             {
-                ///Testing code used in demo will be removed later do not touch.
-                //Lb_Test.Content = "Calculating...";
                 m_Worker.RunWorkerAsync(5);
             }
-        }
-
-        /// <summary>
-        /// WIP - DO NOT USE
-        /// </summary>
-        /// <param name="current"></param>
-        /// <param name="interval"></param>
-        /// <param name="total"></param>
-        /// <returns></returns>
-        private decimal PercentageCalculator(decimal current, decimal interval, decimal total)
-        {
-            if (current != 0 && current % interval == 0)
-            {
-                return (current / total) * 100M;
-            }
-            return 0;
-            /*
-           //int thing = 1;
-           //decimal total = 1000000000;
-           //for (int i = 0; i < total; i++)
-           //{
-           //    thing++;
-           //    if (i != 0 && i % 10000000 == 0)
-           //    {
-           //        decimal prc = (i / total) * 100M;
-           //        worker.ReportProgress((int)prc);
-           //        if (worker.CancellationPending)
-           //        {
-           //            break;
-           //        }
-           //    }
-           //}*/
-        }
-
-        private IList<(string Title, int Value, ActivityStatus Status)> ProcessCurrentDataAsRoom(int startingValue, BackgroundWorker worker)
-        {
-           return VisualizationPreProcessor.GetRoomActivityInfoData(m_RoomId);
-        }
-
-        private IList<(string Title, int Value, ActivityStatus Status)> ProcessCurrentDataAsMall(int startingValue, BackgroundWorker worker)
-        {
-            return VisualizationPreProcessor.GetMallActivityInfoData();
         }
     }
 }
