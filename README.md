@@ -1,3 +1,7 @@
+
+
+
+
 # Mall Manager Wiki
 
 - [Installation](#installation)
@@ -41,7 +45,8 @@ Building in Visual Studio requires a couple more steps.
 Being by again downloading & extracting the repository file. Once complete locate the ***"C_Sharp_Course_Project"*** folder:
 
 <img src="https://github.com/NikolaTotev/C_Sharp_Course_Project/blob/master/ReadMe_Images/VsFolder.png?raw=true">
-Open it and locate the only ***".sln"*** item inside:
+
+Open it and locate the only ***.sln*** item inside:
 
 <img src="https://github.com/NikolaTotev/C_Sharp_Course_Project/blob/master/ReadMe_Images/OpenSln.png?raw=true">
 
