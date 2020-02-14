@@ -135,13 +135,13 @@ namespace Core
 
             if (Rooms[roomToRemove].Activities.Count == 0)
             {
-                foreach (var room in Rooms)
-                {
-                    foreach (var valueActivity in room.Value.Activities)
-                    {
-                        ActivityManager.GetInstance().DeleteActivity(valueActivity);
-                    }
-                }
+                //foreach (var room in Rooms)
+                //{
+                //    foreach (var valueActivity in room.Value.Activities)
+                //    {
+                //        ActivityManager.GetInstance().DeleteActivity(valueActivity);
+                //    }
+                //}
                 Rooms.Remove(roomToRemove);
                 SerializationManager.SaveRooms(Rooms, mallName);
                 OnRoomsChanged();

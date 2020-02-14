@@ -118,13 +118,15 @@ namespace User_Interface
         private void Btn_MarkAsScheduled_OnClick(object sender, RoutedEventArgs e)
         {
             if (Lv_Activities.SelectedItems.Count <= 0) return;
+            List<Guid> activitiesToEdit = new List<Guid>();
             for (var i = Lv_Activities.SelectedItems.Count - 1; i >= 0; i--)
             {
                 ActivityListItem item = (ActivityListItem)Lv_Activities.SelectedItems[i];
                 item.SetStatusColor(ActivityStatus.Scheduled);
-                ActivityManager.GetInstance().EditActivityStatus(activityId: item.ActivityId, status: ActivityStatus.Scheduled);
+                activitiesToEdit.Add(item.ActivityId);
                 Lv_Activities.Items.Refresh();
             }
+            ActivityManager.GetInstance().EditActivitiesStatus(activitiesToEdit, ActivityStatus.Scheduled);
             LoadQuickStats();
         }
 
@@ -132,14 +134,16 @@ namespace User_Interface
         private void Btn_MarkAsInProgress_OnClick(object sender, RoutedEventArgs e)
         {
             if (Lv_Activities.SelectedItems.Count <= 0) return;
+            List<Guid> activitiesToEdit = new List<Guid>();
             for (var i = Lv_Activities.SelectedItems.Count - 1; i >= 0; i--)
             {
                 ActivityListItem item = (ActivityListItem)Lv_Activities.SelectedItems[i];
                 item.Status = ActivityStatus.InProgress;
                 item.SetStatusColor(ActivityStatus.InProgress);
-                ActivityManager.GetInstance().EditActivityStatus(activityId: item.ActivityId, status: ActivityStatus.InProgress);
+                activitiesToEdit.Add(item.ActivityId);
                 Lv_Activities.Items.Refresh();
             }
+            ActivityManager.GetInstance().EditActivitiesStatus(activitiesToEdit, ActivityStatus.InProgress);
             LoadQuickStats();
         }
 
@@ -147,27 +151,31 @@ namespace User_Interface
         private void Btn_MarkAsCompleted_OnClick(object sender, RoutedEventArgs e)
         {
             if (Lv_Activities.SelectedItems.Count <= 0) return;
+            List<Guid> activitiesToEdit = new List<Guid>();
             for (var i = Lv_Activities.SelectedItems.Count - 1; i >= 0; i--)
             {
                 ActivityListItem item = (ActivityListItem)Lv_Activities.SelectedItems[i];
                 item.SetStatusColor(ActivityStatus.Finished);
-                ActivityManager.GetInstance().EditActivityStatus(activityId: item.ActivityId, status: ActivityStatus.Finished);
+                activitiesToEdit.Add(item.ActivityId);
                 Lv_Activities.Items.Refresh();
             }
+            ActivityManager.GetInstance().EditActivitiesStatus(activitiesToEdit, ActivityStatus.Finished);
             LoadQuickStats();
         }
 
         private void Btn_MarkAsFailed_OnClick(object sender, RoutedEventArgs e)
         {
             if (Lv_Activities.SelectedItems.Count <= 0) return;
+            List<Guid> activitiesToEdit = new List<Guid>();
             for (var i = Lv_Activities.SelectedItems.Count - 1; i >= 0; i--)
             {
                 ActivityListItem item = (ActivityListItem)Lv_Activities.SelectedItems[i];
 
                 item.SetStatusColor(ActivityStatus.Failed);
-                ActivityManager.GetInstance().EditActivityStatus(activityId: item.ActivityId, status: ActivityStatus.Failed);
+                activitiesToEdit.Add(item.ActivityId);
                 Lv_Activities.Items.Refresh();
             }
+            ActivityManager.GetInstance().EditActivitiesStatus(activitiesToEdit, ActivityStatus.Failed);
             LoadQuickStats();
         }
 

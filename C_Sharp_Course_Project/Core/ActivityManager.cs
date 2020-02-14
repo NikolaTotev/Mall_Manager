@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Documents;
 
 namespace Core
 {
@@ -87,16 +88,23 @@ namespace Core
             OnActivitiesChanged();
         }
 
+        public void EditActivitiesStatus(List<Guid> activityId, ActivityStatus status)
+        {
+            foreach (var activity in activityId)
+            {
+                EditActivityStatus(activity, status);
+            }
+            SerializationManager.SaveActivities(Activities, MallManager.GetInstance().CurrentMallName);
+            OnActivitiesChanged();
+        }
 
-        public void EditActivityStatus(Guid activityId, ActivityStatus status)
+        private void EditActivityStatus(Guid activityId, ActivityStatus status)
         {
             Activity activityToEdit = Activities[activityId];
             if (status != ActivityStatus.Undefined)
             {
                 activityToEdit.CurActivityStatus = status;
             }
-            SerializationManager.SaveActivities(Activities, MallManager.GetInstance().CurrentMallName);
-            OnActivitiesChanged();
         }
 
 
