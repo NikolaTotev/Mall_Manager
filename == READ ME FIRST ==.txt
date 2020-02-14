@@ -1,0 +1,4 @@
+== NOTE == 
+In order to view the repository README.md properlly, please visit
+
+https://github.com/NikolaTotev/OOP-with-CS-Course-Project
