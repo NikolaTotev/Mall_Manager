@@ -9,14 +9,14 @@
     <Grid>
         <!--#region Grid Setup-->
         <Grid.RowDefinitions>
-            <RowDefinition Height="155*"></RowDefinition>
-            <RowDefinition Height="103*"></RowDefinition>
+            <RowDefinition Height="100*"></RowDefinition>
+            <RowDefinition Height="100*"></RowDefinition>
             <RowDefinition Height="363*"></RowDefinition>
+
         </Grid.RowDefinitions>
         <!--#endregion-->
-
         <!--#region Decoration Text Group-->
-        <TextBlock Grid.Row="0" Foreground="{StaticResource NavyBlueBase}" Text="Welcome!" TextAlignment="Center" Margin="52,90,52,10" FontSize="40" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Regular"/>
+        <TextBlock Grid.Row="0" VerticalAlignment="Center" Foreground="{StaticResource NavyBlueBase}" Text="Welcome!" TextAlignment="Center" Margin="52,0,52,0" FontSize="40" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Regular"/>
         <TextBlock Grid.Row="1" Foreground="{StaticResource NavyBlueBase}" Text="Select Location" TextAlignment="Center"  FontSize="64" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="SemiBold" Margin="0,0,0,10" />
         <!--#endregion-->
 
@@ -40,7 +40,7 @@
 
                             <TextBlock FontFamily="{StaticResource Montserrat}" FontWeight="SemiBold" FontStyle="Normal" Foreground="{StaticResource NavyBlueBase}" FontSize="10">
                                * You may add up to 2 malls. <LineBreak/>
-                               * Deleting malls is done, through the settings panel <LineBreak/> (Upper right of this window)
+                               * Deleting malls is done, through the settings panel <LineBreak/> (Bottom right of this window)
                             </TextBlock>
                         </StackPanel>
                     </ToolTip>
@@ -55,4 +55,5 @@
         </StackPanel>
         <!--#endregion-->
     </Grid>
+    
 </UserControl>

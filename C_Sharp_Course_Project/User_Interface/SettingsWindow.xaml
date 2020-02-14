@@ -1,0 +1,266 @@
+﻿<Window x:Class="User_Interface.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:User_Interface"
+        mc:Ignorable="d"
+        Title="SettingsWindow" Height="600" Width="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="15*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="Btn_MallSettings" Template="{StaticResource TabButton}" Margin="0,0,5,5" Background="White" Grid.Column="0"  Grid.ZIndex ="0" HorizontalContentAlignment="Center">
+                <Button.ToolTip>
+                    <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
+                        <ToolTip.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"></Setter>
+                            </Style>
+                        </ToolTip.Resources>
+                        <TextBlock FontFamily="{StaticResource Montserrat}" Text="{StaticResource BtnAddRoomTip}" FontWeight="{StaticResource StandardToolTipFontWeight}" FontStyle="{StaticResource StandardToolTipFontStyle}" Foreground="{StaticResource NavyBlueBase}" FontSize="10"/>
+                    </ToolTip>
+                </Button.ToolTip>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,5,0">
+                    <Image Source="Resources/Icons/Add_Icon.png" VerticalAlignment="Center" Margin="0,0,5,0" Height="20"></Image>
+                    <TextBlock Text="Mall Settings" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="Btn_RoomConfigs" Template="{StaticResource TabButton}" Margin="0,0,5,5"  Background="White" Grid.Column="1">
+                <Button.ToolTip>
+                    <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
+                        <ToolTip.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"></Setter>
+                            </Style>
+                        </ToolTip.Resources>
+                        <TextBlock FontFamily="{StaticResource Montserrat}" Text="{StaticResource BtnAddRoomTip}" FontWeight="{StaticResource StandardToolTipFontWeight}" FontStyle="{StaticResource StandardToolTipFontStyle}" Foreground="{StaticResource NavyBlueBase}" FontSize="10"/>
+                    </ToolTip>
+                </Button.ToolTip>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,5,0">
+                    <Image Source="Resources/Icons/Add_Icon.png" VerticalAlignment="Center" Margin="0,0,5,0" Height="20"></Image>
+                    <TextBlock Text="Room Config" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="Btn_ActivityConfigs" Template="{StaticResource TabButton}" Margin="0,0,5,5" Background="White" Grid.Column="2">
+                <Button.ToolTip>
+                    <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
+                        <ToolTip.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"></Setter>
+                            </Style>
+                        </ToolTip.Resources>
+                        <TextBlock FontFamily="{StaticResource Montserrat}" Text="{StaticResource BtnAddRoomTip}" FontWeight="{StaticResource StandardToolTipFontWeight}" FontStyle="{StaticResource StandardToolTipFontStyle}" Foreground="{StaticResource NavyBlueBase}" FontSize="10"/>
+                    </ToolTip>
+                </Button.ToolTip>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,5,0">
+                    <Image Source="Resources/Icons/Add_Icon.png" VerticalAlignment="Center" Margin="0,0,5,0" Height="20"></Image>
+                    <TextBlock Text="Activity Config" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Button>
+        </Grid>
+        <Grid x:Name="Grd_MallSettings" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.3*"></RowDefinition>
+                <RowDefinition Height="0.5*"></RowDefinition>
+                <RowDefinition Height="0.5*"></RowDefinition>
+                <RowDefinition Height="0.5*"></RowDefinition>
+                <RowDefinition Height="0.5*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="1.2*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <!--#region Name Input Group-->
+            <Label x:Name="Lb_Name" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" Content="Mall Name" Margin="20,0,0,0" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="SemiBold" FontSize="15" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent"/>
+            <StackPanel x:Name="Sp_NameTb" Grid.Row="0" Grid.Column="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,0,0,0">
+                <!--#region Name TextBox-->
+                <TextBox x:Name="Tb_Name" TextWrapping="Wrap"  Text="Description" Width="200" Padding="2" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="Transparent" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="20" Foreground="{StaticResource TextboxPrompt}" >
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </TextBox.Resources>
+                    <TextBox.Effect>
+                        <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+                    </TextBox.Effect>
+                </TextBox>
+                <!--#endregion-->
+            </StackPanel>
+            <!--#endregion-->
+
+            <!--#region Description Input Group-->
+            <Label x:Name="Lb_Desc" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="1" Content="Mall Description" Margin="20,0,20,0" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="SemiBold" FontSize="15" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent"/>
+            <StackPanel x:Name="Sp_DescTb" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                <!--#region Description TextBox-->
+                <TextBox x:Name="Tb_Desc" TextWrapping="Wrap"  Text="Description" Width="200" Padding="2" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="Transparent" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Medium" FontSize="20" Foreground="{StaticResource TextboxPrompt}" >
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </TextBox.Resources>
+                    <TextBox.Effect>
+                        <DropShadowEffect ShadowDepth="2" BlurRadius="15" Opacity="0.4" Direction="270"/>
+                    </TextBox.Effect>
+                </TextBox>
+                <!--#endregion-->
+            </StackPanel>
+            <!--#endregion-->
+
+            <!--#region Activity Management Group-->
+            <StackPanel Grid.Row="2" Grid.ColumnSpan="2">
+                <Grid Background="White">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Border BorderBrush="{StaticResource NavyBlueBase}" BorderThickness="0,1,0,0" Margin="0,8" />
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Label x:Name="Lb_ActivityNumber" VerticalAlignment="Center" HorizontalAlignment="Left"  Content="Total Activities" Margin="20,0,20,0" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="SemiBold" FontSize="15" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent"/>
+                        <Label x:Name="Lb_ActivityNumberValue" VerticalAlignment="Center" HorizontalAlignment="Left"  Content="/Number/" Margin="20,0,20,0" FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Bold" FontSize="15" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent"/>
+                    </StackPanel>
+
+                    <!--#region Button Delete-->
+                    <Button x:Name="Btn_ClearActivities" Grid.Row="2"  HorizontalAlignment="Center" Padding="45,2,45,2" Margin="10,10,10,0" ToolTipService.InitialShowDelay="1000" Template="{StaticResource WarningButton}" BorderThickness="2" Click="Btn_ClearActivities_OnClick"  Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="15" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" HorizontalContentAlignment="Center">
+                        <Button.ToolTip>
+                            <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="15000" ToolTipService.InitialShowDelay="0">
+                                <ToolTip.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="10"></Setter>
+                                    </Style>
+                                </ToolTip.Resources>
+                                <StackPanel>
+                                    <TextBlock FontFamily="{StaticResource Montserrat}" FontWeight="Bold" FontStyle="Normal" Foreground="{StaticResource WarningRed}" FontSize="15">
+                                        Warning:
+                                    </TextBlock>
+
+                                    <Border BorderBrush="{StaticResource NavyBlueBase}" BorderThickness="0,1,0,0" Margin="0,8" />
+
+                                    <TextBlock FontFamily="{StaticResource Montserrat}" FontWeight="SemiBold" FontStyle="Normal" Foreground="{StaticResource NavyBlueBase}" FontSize="10">
+                                        Clicking this button removes all activities from the mall! <LineBreak/>
+                                    </TextBlock>
+
+                                    <TextBlock FontFamily="{StaticResource Montserrat}" FontWeight="SemiBold" FontStyle="Normal" Foreground="{StaticResource WarningRed}" FontSize="10">
+                                        This action is NOT reversible! <LineBreak/>
+                                    </TextBlock>
+                                </StackPanel>
+                            </ToolTip>
+                        </Button.ToolTip>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,5,0">
+                            <Image Source="Resources/Icons/WarningLowRes_Icon.png" VerticalAlignment="Center" Margin="0,0,5,0" Height="30"></Image>
+                            <TextBlock Text="Clear All" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <!--#endregion-->
+
+                </Grid>
+            </StackPanel>
+
+            <!--#endregion-->
+
+            <!--#region Room Management Group-->
+            <StackPanel Grid.Row="3" Grid.ColumnSpan="2">
+                <Grid Background="White">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Border BorderBrush="{StaticResource NavyBlueBase}" BorderThickness="0,1,0,0" Margin="0,8" />
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Label x:Name="Lb_RoomNumber" VerticalAlignment="Center" HorizontalAlignment="Left"  Content="Total Rooms" Margin="20,0,20,0" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="SemiBold" FontSize="15" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent"/>
+                        <Label x:Name="Lb_RoomNumberValue" VerticalAlignment="Center" HorizontalAlignment="Left"  Content="/Number/" Margin="20,0,20,0" FontFamily="{StaticResource Montserrat}" FontStyle="Italic" FontWeight="Bold" FontSize="15" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent"/>
+                    </StackPanel>
+
+                    <!--#region Button Delete-->
+                    <Button x:Name="Btn_ClearRooms"  Grid.Row="2" HorizontalAlignment="Center" Padding="45,2,45,2" Margin="10,10,10,0" ToolTipService.InitialShowDelay="0" Template="{StaticResource WarningButton}"  BorderThickness="2" Click="Btn_ClearRooms_OnClick"  Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="15" Foreground="{StaticResource NavyBlueBase}" HorizontalContentAlignment="Center">
+                        <Button.ToolTip>
+                            <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="15000" ToolTipService.InitialShowDelay="0">
+                                <ToolTip.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="10"></Setter>
+                                    </Style>
+                                </ToolTip.Resources>
+                                <StackPanel>
+                                    <TextBlock FontFamily="{StaticResource Montserrat}" FontWeight="Bold" FontStyle="Normal" Foreground="{StaticResource WarningRed}" FontSize="15">
+                                    Warning:
+                                    </TextBlock>
+
+                                    <Border BorderBrush="{StaticResource NavyBlueBase}" BorderThickness="0,1,0,0" Margin="0,8" />
+
+                                    <TextBlock FontFamily="{StaticResource Montserrat}" FontWeight="SemiBold" FontStyle="Normal" Foreground="{StaticResource NavyBlueBase}" FontSize="10">
+                                    Clicking this button removes all rooms from the mall <LineBreak/> and all activities associated with them.
+                                    </TextBlock>
+
+                                    <TextBlock FontFamily="{StaticResource Montserrat}" FontWeight="SemiBold" FontStyle="Normal" Foreground="{StaticResource WarningRed}" FontSize="10">
+                                        This action is NOT reversible! <LineBreak/>
+                                    </TextBlock>
+                                </StackPanel>
+                            </ToolTip>
+                        </Button.ToolTip>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,5,0">
+                            <Image Source="Resources/Icons/WarningLowRes_Icon.png" VerticalAlignment="Center" Margin="0,0,5,0" Height="30"></Image>
+                            <TextBlock Text="Clear All" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <!--#endregion-->
+
+                </Grid>
+            </StackPanel>
+
+            <!--#endregion-->
+
+            <!--#region Room Management Group-->
+            <StackPanel Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Center">
+                <Grid Background="White">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    
+                    </Grid.RowDefinitions>
+                    <Border BorderBrush="{StaticResource NavyBlueBase}" BorderThickness="0,1,0,0" Margin="0,8" />
+
+                    <!--#region Button Delete-->
+                    <Button x:Name="Btn_Save" VerticalAlignment="Center" Grid.Row="1" HorizontalAlignment="Center" Padding="45,2,45,2" Margin="10,10,10,0" ToolTipService.InitialShowDelay="1000" Template="{StaticResource OrangeHighLight}"  Click="Btn_Save_OnClick"  Background="White" FontFamily="{StaticResource Montserrat}" FontStyle="Normal" FontWeight="Bold" FontSize="15" Foreground="{StaticResource NavyBlueBase}" BorderBrush="Transparent" HorizontalContentAlignment="Center">
+                        <Button.ToolTip>
+                            <ToolTip Background="White" BorderThickness="2" BorderBrush="{StaticResource NavyBlueBase}" ToolTipService.ShowDuration="{StaticResource StandardToolTipShowDuration}" ToolTipService.InitialShowDelay="{StaticResource StandardToolTipInitialDelayDuration}">
+                                <ToolTip.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="10"></Setter>
+                                    </Style>
+                                </ToolTip.Resources>
+                                <TextBlock FontFamily="{StaticResource Montserrat}" Text="{StaticResource BtnSaveMallSettings}" FontWeight="{StaticResource StandardToolTipFontWeight}" FontStyle="{StaticResource StandardToolTipFontStyle}" Foreground="{StaticResource NavyBlueBase}" FontSize="10"/>
+                            </ToolTip>
+                        </Button.ToolTip>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,5,0">
+                            <Image Source="Resources/Icons/Save_Icon.png" VerticalAlignment="Center" Margin="0,0,5,0" Height="30"></Image>
+                            <TextBlock Text="Save" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <!--#endregion-->
+
+                  
+                  
+
+                </Grid>
+            </StackPanel>
+
+            <!--#endregion-->
+
+        </Grid>
+    </Grid>
+</Window>

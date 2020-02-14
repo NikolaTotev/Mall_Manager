@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Automation.Peers;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Core;
 
 namespace User_Interface
@@ -21,11 +11,10 @@ namespace User_Interface
     /// <summary>
     /// Interaction logic for RoomsMenu.xaml
     /// </summary>
-    public partial class RoomsMenu : UserControl, IAppView
+    public partial class RoomsMenu : IAppView
     {
         private MainWindow m_CurrentMainWindow;
         private IAppView m_PreviousView;
-        private IAppView m_NextView;
         private readonly List<RoomListItem> m_Rooms;
         private bool m_CommandModeActive;
         public RoomsMenu()
@@ -60,8 +49,7 @@ namespace User_Interface
             Lv_RentalSpaces.Items.Clear();
             foreach (var rentalSpace in RoomManager.GetInstance().Rooms)
             {
-                ListViewItem itemToAdd = new ListViewItem();
-                itemToAdd.Tag = rentalSpace.Key;
+                ListViewItem itemToAdd = new ListViewItem {Tag = rentalSpace.Key};
 
                 if (rentalSpace.Value is Room currentRoom)
                 {
@@ -83,7 +71,7 @@ namespace User_Interface
 
         public void SetNextView(IAppView nextView)
         {
-            m_NextView = nextView;
+            //Implement as needed
         }
 
         public IAppView GetPreviousView()
@@ -140,12 +128,11 @@ namespace User_Interface
 
         private void RoomItem_OnDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            RoomListItem item = ((ListViewItem)sender).Content as RoomListItem;
-            if (item == null)
+            if (!(((ListViewItem)sender).Content is RoomListItem item))
             {
                 return;
             }
-            SpacePage space = new SpacePage(item.RoomId);
+            var space = new SpacePage(item.RoomId);
             m_CurrentMainWindow.ChangeViewForward(space, this);
         }
 
@@ -250,11 +237,6 @@ namespace User_Interface
                 Lb_CommandModeStatus.Visibility = Visibility.Hidden;
                 Btn_CommandModeHelp.Visibility = Visibility.Hidden;
             }
-        }
-
-        private void Btn_CommandModeHelp_OnClick(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

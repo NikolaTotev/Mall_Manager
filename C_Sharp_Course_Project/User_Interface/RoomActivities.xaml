@@ -77,7 +77,7 @@
                 <!--#endregion-->
 
                 <!--#region ListView-->
-                <ListView ItemsSource="{Binding}" x:Name="Lv_Activities" Grid.Column="0" Grid.Row="0" Background="White" Effect="{StaticResource DropShadow}"  Margin="20" SelectionChanged="Lv_Activities_SelectionChanged">
+                <ListView ItemsSource="{Binding}" x:Name="Lv_Activities" Grid.Column="0" Grid.Row="0" Background="White" Effect="{StaticResource DropShadow}"  Margin="20">
                     <!--#region ListView Setup-->
                     <ListView.Resources>
                         <Style TargetType="Border">

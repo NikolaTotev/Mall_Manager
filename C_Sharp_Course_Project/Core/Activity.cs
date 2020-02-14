@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace Core
 {
     public class Activity
     {
-        [JsonProperty]
-        public readonly Guid Id;
+        [JsonProperty] public readonly Guid Id;
         public string Category { get; set; }
         public string Description { get; set; }
         public Guid CorrespondingRoom { get; set; }
@@ -19,7 +14,9 @@ namespace Core
         public DateTime StartTime { get; set; }
         public bool IsTemplate { get; set; }
 
-        public Activity(Guid newId, Guid corespRoom, string category = " ", bool isTemplate = false, string description = " ", ActivityStatus status = ActivityStatus.Undefined,DateTime startDate = default(DateTime) ,DateTime endDate = default(DateTime))
+        public Activity(Guid newId, Guid corespRoom, string category = " ", bool isTemplate = false,
+            string description = " ", ActivityStatus status = ActivityStatus.Undefined,
+            DateTime startDate = default, DateTime endDate = default)
         {
             Id = newId;
             IsTemplate = isTemplate;

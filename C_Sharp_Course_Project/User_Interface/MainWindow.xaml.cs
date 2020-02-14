@@ -1,17 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Core;
 
 namespace User_Interface
@@ -21,23 +9,17 @@ namespace User_Interface
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ProgramManager m_CurrentManager;
         public readonly ResourceDictionary Strings = new ResourceDictionary();
         
         public MainWindow()
         {
             InitializeComponent();
-            m_CurrentManager = ProgramManager.GetInstance();
+            ProgramManager.GetInstance();
             Dashboard startDash = new Dashboard();
             ChangeViewForward(startDash, null);
             Strings.Source= new Uri("pack://application:,,,/Resources/StringResources.xaml");
         }
-
-        private void BigButton_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
+        
         public void ChangeViewForward(IAppView viewToLoad, IAppView previousToSave)
         {
             if (viewToLoad != null)
@@ -80,9 +62,19 @@ namespace User_Interface
             }
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        public void AddOverlay(UIElement overlay)
         {
-            System.Environment.Exit(0);
+            p_StartPanel.Children.Add(overlay);
+        }
+
+        public void RemoveOverlay(UIElement overlay)
+        {
+            p_StartPanel.Children.Remove(overlay);
+        }
+
+        private void MainWindow_OnClosed(object sender, EventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }

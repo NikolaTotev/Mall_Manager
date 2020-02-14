@@ -112,6 +112,15 @@ namespace Core
             OnRoomsChanged();
         }
 
+        public void ClearRoomActivities()
+        {
+            foreach (var room in Rooms)
+            {
+                room.Value.Activities.Clear();
+            }
+            SerializationManager.SaveRooms(Rooms,MallManager.GetInstance().CurrentMall.Name);
+        }
+
         /// <summary>
         /// Deletes a room from the Rooms and then saves the updated dictionary.
         /// </summary>
@@ -126,6 +135,13 @@ namespace Core
 
             if (Rooms[roomToRemove].Activities.Count == 0)
             {
+                foreach (var room in Rooms)
+                {
+                    foreach (var valueActivity in room.Value.Activities)
+                    {
+                        ActivityManager.GetInstance().DeleteActivity(valueActivity);
+                    }
+                }
                 Rooms.Remove(roomToRemove);
                 SerializationManager.SaveRooms(Rooms, mallName);
                 OnRoomsChanged();
@@ -133,6 +149,16 @@ namespace Core
             }
 
             return false;
+        }
+
+        public void ClearRooms()
+        {
+            foreach (var room in Rooms)
+            {
+                ActivityManager.GetInstance().ClearRoomActivities(room.Value);
+            }
+            Rooms.Clear();
+            SerializationManager.SaveRooms(Rooms, MallManager.GetInstance().CurrentMall.Name);
         }
 
         /// <summary>
@@ -163,7 +189,7 @@ namespace Core
         /// <param name="roomToRemoveFrom"></param>
         /// <param name="activityToRemove"></param>
         /// <returns>Returns true if the operation completed successfully and false if it failed.</returns>
-        public bool DeleteActivity(Guid roomToRemoveFrom, Guid activityToRemove, string mallName)
+        public bool DeleteActivity(Guid roomToRemoveFrom, Guid activityToRemove)
         {
             if (!Rooms.ContainsKey(roomToRemoveFrom))
             {
@@ -178,7 +204,7 @@ namespace Core
             }
 
             roomToEdit.Activities.Remove(activityToRemove);
-            SerializationManager.SaveRooms(Rooms, mallName);
+            SerializationManager.SaveRooms(Rooms, MallManager.GetInstance().CurrentMallName);
             OnRoomsChanged();
             return true;
         }

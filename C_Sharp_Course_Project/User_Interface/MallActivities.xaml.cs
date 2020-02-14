@@ -1,38 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Core;
-using LiveCharts;
-using LiveCharts.Wpf;
 
 namespace User_Interface
 {
     /// <summary>
     /// Interaction logic for MallActivities.xaml
     /// </summary>
-    public partial class MallActivities : UserControl, IAppView
+    public partial class MallActivities : IAppView
     {
         private MainWindow m_CurrentMainWindow;
         private IAppView m_PreviousView;
-        private IAppView m_NextView;
-        private StringBuilder sb;
         private readonly List<ActivityListItem> m_Activities;
+
         public MallActivities()
         {
             InitializeComponent();
-            sb = new StringBuilder();
+            var sb = new StringBuilder();
             Lv_Activities.SelectionMode = SelectionMode.Multiple;
             m_Activities = new List<ActivityListItem>();
             foreach (var activityId in MallManager.GetInstance().CurrentMall.AssociatedActivities)
@@ -107,7 +95,7 @@ namespace User_Interface
             for (var i = Lv_Activities.SelectedItems.Count - 1; i >= 0; i--)
             {
                 ActivityListItem itemToDelete = (ActivityListItem)Lv_Activities.SelectedItems[i];
-                ActivityManager.GetInstance().DeleteActivity(itemToDelete.ActivityId, MallManager.GetInstance().CurrentMall.Name);
+                ActivityManager.GetInstance().DeleteActivity(itemToDelete.ActivityId);
                 m_Activities.Remove(itemToDelete);
                 Lv_Activities.Items.Refresh();
             }
@@ -122,7 +110,7 @@ namespace User_Interface
                 ActivityListItem item = (ActivityListItem)Lv_Activities.SelectedItems[i];
                 item.Status = ActivityStatus.Failed;
                 item.SetStatusColor(ActivityStatus.Failed);
-                ActivityManager.GetInstance().EditActivity(mallName: MallManager.GetInstance().CurrentMall.Name, activityId: item.ActivityId, status: ActivityStatus.Failed);
+                ActivityManager.GetInstance().EditActivity(activityId: item.ActivityId, status: ActivityStatus.Failed);
                 Lv_Activities.Items.Refresh();
             }
             LoadQuickStats();
@@ -136,7 +124,7 @@ namespace User_Interface
                 ActivityListItem item = (ActivityListItem)Lv_Activities.SelectedItems[i];
                 item.Status = ActivityStatus.Finished;
                 item.SetStatusColor(ActivityStatus.Finished);
-                ActivityManager.GetInstance().EditActivity(mallName: MallManager.GetInstance().CurrentMall.Name, activityId: item.ActivityId, status: ActivityStatus.Finished);
+                ActivityManager.GetInstance().EditActivity(activityId: item.ActivityId, status: ActivityStatus.Finished);
                 Lv_Activities.Items.Refresh();
             }
             LoadQuickStats();
@@ -158,7 +146,7 @@ namespace User_Interface
                 ActivityListItem item = (ActivityListItem)Lv_Activities.SelectedItems[i];
                 item.Status = ActivityStatus.InProgress;
                 item.SetStatusColor(ActivityStatus.InProgress);
-                ActivityManager.GetInstance().EditActivity(mallName: MallManager.GetInstance().CurrentMall.Name, activityId: item.ActivityId, status: ActivityStatus.InProgress);
+                ActivityManager.GetInstance().EditActivity(activityId: item.ActivityId, status: ActivityStatus.InProgress);
                 Lv_Activities.Items.Refresh();
             }
             LoadQuickStats();
@@ -172,7 +160,7 @@ namespace User_Interface
                 ActivityListItem item = (ActivityListItem)Lv_Activities.SelectedItems[i];
                 item.Status = ActivityStatus.Scheduled;
                 item.SetStatusColor(ActivityStatus.Scheduled);
-                ActivityManager.GetInstance().EditActivity(mallName: MallManager.GetInstance().CurrentMall.Name, activityId: item.ActivityId, status: ActivityStatus.Scheduled);
+                ActivityManager.GetInstance().EditActivity(activityId: item.ActivityId, status: ActivityStatus.Scheduled);
                 Lv_Activities.Items.Refresh();
             }
             LoadQuickStats();
@@ -195,7 +183,7 @@ namespace User_Interface
 
         public void SetNextView(IAppView nextView)
         {
-            m_NextView = nextView;
+            //Implement as needed
         }
 
         public IAppView GetPreviousView()

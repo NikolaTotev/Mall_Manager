@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Core;
 
 namespace User_Interface
@@ -19,11 +9,10 @@ namespace User_Interface
     /// <summary>
     /// Interaction logic for RoomInfoPage.xaml
     /// </summary>
-    public partial class RoomInfoPage : UserControl, IAppView
+    public partial class RoomInfoPage : IAppView
     {
         private MainWindow m_CurrentMainWindow;
         private IAppView m_PreviousView;
-        private IAppView m_NextView;
         private readonly Room m_CurrentRoom;
         private readonly StringBuilder m_StringBuilder = new StringBuilder();
         private bool m_InputOk;
@@ -63,7 +52,7 @@ namespace User_Interface
 
         public void SetNextView(IAppView nextView)
         {
-            m_NextView = nextView;
+            //Implement as needed
         }
 
         public IAppView GetPreviousView()
@@ -78,9 +67,6 @@ namespace User_Interface
 
         private void Btn_Save_OnClick(object sender, RoutedEventArgs e)
         {
-            string newName = Tb_Name.Text;
-            string newDesc = Tb_Desc.Text;
-            string newType = Cmb_RoomType.SelectionBoxItemStringFormat;
             if (m_InputOk)
             {
                 RoomManager.GetInstance().EditRoom(MallManager.GetInstance().CurrentMall.Name, m_CurrentRoom.Id, Tb_Name.Text, Tb_Desc.Text, Cmb_RoomType.SelectionBoxItemStringFormat, m_Floor, m_Number);

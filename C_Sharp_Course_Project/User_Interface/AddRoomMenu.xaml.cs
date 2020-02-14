@@ -1,17 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Core;
 
 namespace User_Interface
@@ -19,14 +8,13 @@ namespace User_Interface
     /// <summary>
     /// Interaction logic for AddRoomMenu.xaml
     /// </summary>
+    // ReSharper disable once RedundantExtendsListEntry
     public partial class AddRoomMenu : UserControl, IAppView
     {
         private MainWindow m_CurrentMainWindow;
         private IAppView m_PreviousView;
-        private IAppView m_NextView;
         private readonly string m_NameDefaultText = "Room Name";
         private readonly string m_DescDefaultText = "Room Description";
-        private readonly string m_TypeDefaultText = "Room Type";
         private readonly string m_NumberDefaultText = "Room Number";
         private readonly string m_FloorDefaultText = "Floor Number";
         private int m_RoomNumber;
@@ -54,7 +42,7 @@ namespace User_Interface
 
         public void SetNextView(IAppView nextView)
         {
-            m_NextView = nextView;
+            //If Needed Implement
         }
 
         public IAppView GetPreviousView()
