@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,28 +16,27 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Core;
 using LiveCharts;
+using LiveCharts.Defaults;
 
 namespace User_Interface
 {
     /// <summary>
-    /// Interaction logic for StatisticsWindow.xaml
+    /// Interaction logic for MallStatisticsWindow.xaml
     /// </summary>
-    public partial class StatisticsWindow : Window
+    public partial class MallStatisticsWindow : Window
     {
-        delegate void SetLabelText(Label lbl, string text);
         private BackgroundWorker m_Worker;
-        private bool m_CallingFromMall;
-        private Guid m_RoomId;
-        private SimpleBarGraph m_currentGraph;
-        public StatisticsWindow(Guid roomId, bool callingFromMall)
+        private HeatMap m_currentGraph;
+
+        public MallStatisticsWindow()
         {
 
             InitializeComponent();
             WorkerThreadInitialization();
-            m_RoomId = roomId;
-            m_CallingFromMall = callingFromMall;
-            this.Loaded += (sender, args) => ActivityManager.GetInstance().ActivitiesChanged += OnActivityInfoChanged;
-            this.Unloaded += (sender, args) => ActivityManager.GetInstance().ActivitiesChanged -= OnActivityInfoChanged;
+            this.Loaded += (sender, args) => ActivityManager.GetInstance().ActivitiesChanged += OnInfoChanged;
+            this.Loaded += (sender, args) => RoomManager.GetInstance().RoomsChanged += OnInfoChanged;
+            this.Unloaded += (sender, args) => ActivityManager.GetInstance().ActivitiesChanged -= OnInfoChanged;
+            this.Unloaded += (sender, args) => RoomManager.GetInstance().RoomsChanged -= OnInfoChanged;
             GraphInitialization();
         }
 
@@ -45,41 +46,34 @@ namespace User_Interface
 
             initWorker.DoWork += (worker, args) =>
             {
-                if (m_CallingFromMall)
-                {
-                    if (!args.Cancel) args.Result = VisualizationPreProcessor.GetMallAssociatedActivityInfoData(m_RoomId);
-                }
-                else
-                {
-                    if (!args.Cancel) args.Result = VisualizationPreProcessor.GetRoomActivityInfoData(m_RoomId);
-                }
+                if (!args.Cancel) args.Result = VisualizationPreProcessor.GetMallActivityInfoData();
             };
 
             initWorker.ProgressChanged += (o, args) => { };
             initWorker.RunWorkerCompleted += (o, args) =>
-             {
-                 if (args.Error != null)
-                 {
+            {
+                if (args.Error != null)
+                {
 
-                 }
-                 else if (args.Cancelled)
-                 {
+                }
+                else if (args.Cancelled)
+                {
 
-                 }
-                 else
-                 {
-                     m_currentGraph = new SimpleBarGraph(VisualizationPreProcessor.GenerateBasicActivityColumnGraphics(args.Result as IList<(string Title, List<int> Value, ActivityStatus Status)>));
-                     Thickness margin = m_currentGraph.Margin;
-                     double margins = 20;
-                     margin.Top = margins;
-                     margin.Bottom = margins;
-                     margin.Left = margins;
-                     margin.Right = margins;
-                     m_currentGraph.Margin = margin;
-                     G_MainGrid.Children.Clear();
-                     G_MainGrid.Children.Add(m_currentGraph);
-                 }
-             };
+                }
+                else
+                {
+                    m_currentGraph = new HeatMap(args.Result as (List<string>, ChartValues<HeatPoint>)?);
+                    Thickness margin = m_currentGraph.Margin;
+                    double margins = 20;
+                    margin.Top = margins;
+                    margin.Bottom = margins;
+                    margin.Left = margins;
+                    margin.Right = margins;
+                    m_currentGraph.Margin = margin;
+                    G_MainGrid.Children.Clear();
+                    G_MainGrid.Children.Add(m_currentGraph);
+                }
+            };
 
             if (!initWorker.IsBusy)
             {
@@ -89,18 +83,11 @@ namespace User_Interface
 
         private void WorkerThreadInitialization()
         {
-            m_Worker = new BackgroundWorker { WorkerReportsProgress = true};
+            m_Worker = new BackgroundWorker { WorkerReportsProgress = true };
             m_Worker.DoWork += (worker, args) =>
             {
                 //this will be executed on a background worker thread
-                if (m_CallingFromMall)
-                {
-                    if (!args.Cancel) args.Result = VisualizationPreProcessor.GetMallAssociatedActivityInfoData(m_RoomId);
-                }
-                else
-                {
-                    if (!args.Cancel) args.Result = VisualizationPreProcessor.GetRoomActivityInfoData(m_RoomId);
-                }
+                if (!args.Cancel) args.Result = VisualizationPreProcessor.GetMallActivityInfoData();
             };
             m_Worker.ProgressChanged += (o, args) =>
             {
@@ -123,13 +110,13 @@ namespace User_Interface
                 }
                 else
                 {
-                    m_currentGraph.UpdateData(VisualizationPreProcessor.GenerateBasicActivityColumnGraphics(args.Result as IList<(string Title, List<int> Value, ActivityStatus Status)>));
+                    m_currentGraph.UpdateData(args.Result as (List<string>, ChartValues<HeatPoint>)?);
                 }
             };
         }
 
 
-        private void OnActivityInfoChanged(object sender, EventArgs e)
+        private void OnInfoChanged(object sender, EventArgs e)
         {
             if (!m_Worker.IsBusy)
             {
@@ -171,14 +158,14 @@ namespace User_Interface
            //}*/
         }
 
-        private IList<(string Title, List<int> Value, ActivityStatus Status)> ProcessCurrentDataAsRoom(int startingValue, BackgroundWorker worker)
-        {
-           return VisualizationPreProcessor.GetRoomActivityInfoData(m_RoomId);
-        }
+        //private IList<(string Title, int Value, ActivityStatus Status)> ProcessCurrentDataAsRoom(int startingValue, BackgroundWorker worker)
+        //{
+        //    return VisualizationPreProcessor.GetRoomActivityInfoData(m_RoomId);
+        //}
 
-        private IList<(string Title, List<int> Value, ActivityStatus Status)> ProcessCurrentDataAsMall(int startingValue, BackgroundWorker worker)
-        {
-            return VisualizationPreProcessor.GetMallAssociatedActivityInfoData(m_RoomId);
-        }
+        //private IList<(string Title, int Value, ActivityStatus Status)> ProcessCurrentDataAsMall(int startingValue, BackgroundWorker worker)
+        //{
+        //    return VisualizationPreProcessor.GetMallAssociatedActivityInfoData(m_RoomId);
+        //}
     }
 }

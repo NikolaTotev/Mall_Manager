@@ -60,7 +60,7 @@ namespace User_Interface
 
             initWorker.DoWork += (worker, args) =>
             {
-                if (!args.Cancel) args.Result = VisualizationPreProcessor.GetMallActivityInfoData();
+                if (!args.Cancel) args.Result = VisualizationPreProcessor.GetMallAssociatedActivityInfoData(MallManager.GetInstance().CurrentMall.Id);
             };
 
             initWorker.ProgressChanged += (o, args) => { };
@@ -79,7 +79,7 @@ namespace User_Interface
                 else
                 {
                     Sp_QuickStats.Children.Remove(Lb_StatsLoading);
-                    PieChartStatistics.UpdateData(VisualizationPreProcessor.GenerateBasicActivityPieGraphics(args.Result as IList<(string Title, int Value, ActivityStatus Status)>, PieChartStatistics.PointLabel));
+                    PieChartStatistics.UpdateData(VisualizationPreProcessor.GenerateBasicActivityPieGraphics(args.Result as IList<(string Title, List<int> Value, ActivityStatus Status)>));
                 }
             };
 

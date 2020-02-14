@@ -22,7 +22,7 @@ namespace User_Interface
     /// </summary>
     public partial class SimplePieChart : UserControl
     {
-        public Func<ChartPoint, string> PointLabel { get; set; }
+        private Func<ChartPoint, string> PointLabel { get; set; }
         public SimplePieChart()
         {
             InitializeComponent();
@@ -36,6 +36,7 @@ namespace User_Interface
             chart.Series.Clear();
             foreach (var item in collection)
             {
+                item.LabelPoint = PointLabel;
                 chart.Series.Add(item);
             }
         }

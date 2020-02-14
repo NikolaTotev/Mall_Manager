@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:User_Interface"
         mc:Ignorable="d"
-        Title="Mall Manager" Height="650" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Mall Manager" Height="650" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Closing="Window_Closing">
 
     <DockPanel x:Name="p_StartPanel">
        

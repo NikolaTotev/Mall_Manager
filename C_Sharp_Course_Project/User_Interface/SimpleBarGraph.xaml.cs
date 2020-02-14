@@ -28,7 +28,7 @@ namespace User_Interface
 
             SeriesCollection = activityData;
             Formatter = value => value.ToString("N");
-            
+            Labels = new[] {"Cleaning", "Maintenance", "Other"};
             DataContext = this;
         }
 
@@ -41,8 +41,9 @@ namespace User_Interface
                 SeriesCollection.Add(item);
             }
         }
-        public SeriesCollection SeriesCollection { get; set; }
-        public Func<double, string> Formatter { get; set; }
+        public SeriesCollection SeriesCollection { get; private set; }
+        public Func<double, string> Formatter { get; private set; }
+        public string[] Labels { get; private set; }
 
     }
 }

@@ -58,7 +58,8 @@ namespace User_Interface
 
         private void Btn_Statistics_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            MallStatisticsWindow statWindow = new MallStatisticsWindow();
+            statWindow.Show();
         }
 
         private void Btn_ActivityOverview_OnClick(object sender, RoutedEventArgs e)
