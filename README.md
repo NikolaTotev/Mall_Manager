@@ -40,7 +40,7 @@ Open it and run ***"User_Interface.exe"***. Thats it! You are now ready to use M
 
 ## Building in Visual Studio
 Building in Visual Studio requires a couple more steps. 
-Being by again downloading & extracting the repository file. Once complete locate the ***"C_Sharp_Course_Project"*** folder:
+Begin by again downloading & extracting the repository file. Once complete locate the ***"C_Sharp_Course_Project"*** folder:
 
 <img src="https://github.com/NikolaTotev/C_Sharp_Course_Project/blob/master/ReadMe_Images/VsFolder.png?raw=true">
 
