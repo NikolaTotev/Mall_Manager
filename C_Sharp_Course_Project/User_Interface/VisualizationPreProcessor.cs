@@ -96,8 +96,14 @@ namespace User_Interface
 
         public static IList<(string Title, int Value, ActivityStatus Status)> GetMallActivityInfoData()
         {
-            List<Activity> activities = ActivityManager.GetInstance().Activities.Values.ToList();
+            List<Guid> mallActivities = MallManager.GetInstance().CurrentMall.AssociatedActivities;
 
+            List<Activity> activities = new List<Activity>();
+            foreach (var mallActivity in mallActivities)
+            {
+                activities.Add(ActivityManager.GetInstance().Activities[mallActivity]);
+            }
+            
             var scheduled = activities.Where(a => a.CurActivityStatus is ActivityStatus.Scheduled).ToList().Count;
             var inProgress = activities.Where(a => a.CurActivityStatus is ActivityStatus.InProgress).ToList().Count;
             var completed = activities.Where(a => a.CurActivityStatus is ActivityStatus.Finished).ToList().Count;

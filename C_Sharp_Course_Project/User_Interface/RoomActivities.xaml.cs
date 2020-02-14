@@ -122,7 +122,7 @@ namespace User_Interface
             {
                 ActivityListItem item = (ActivityListItem)Lv_Activities.SelectedItems[i];
                 item.SetStatusColor(ActivityStatus.Scheduled);
-                ActivityManager.GetInstance().EditActivityStatus(activityId: item.ActivityId, status: ActivityStatus.Failed);
+                ActivityManager.GetInstance().EditActivityStatus(activityId: item.ActivityId, status: ActivityStatus.Scheduled);
                 Lv_Activities.Items.Refresh();
             }
             LoadQuickStats();
@@ -137,7 +137,7 @@ namespace User_Interface
                 ActivityListItem item = (ActivityListItem)Lv_Activities.SelectedItems[i];
                 item.Status = ActivityStatus.InProgress;
                 item.SetStatusColor(ActivityStatus.InProgress);
-                ActivityManager.GetInstance().EditActivityStatus(activityId: item.ActivityId, status: ActivityStatus.Failed);
+                ActivityManager.GetInstance().EditActivityStatus(activityId: item.ActivityId, status: ActivityStatus.InProgress);
                 Lv_Activities.Items.Refresh();
             }
             LoadQuickStats();
@@ -151,7 +151,7 @@ namespace User_Interface
             {
                 ActivityListItem item = (ActivityListItem)Lv_Activities.SelectedItems[i];
                 item.SetStatusColor(ActivityStatus.Finished);
-                ActivityManager.GetInstance().EditActivityStatus(activityId: item.ActivityId, status: ActivityStatus.Failed);
+                ActivityManager.GetInstance().EditActivityStatus(activityId: item.ActivityId, status: ActivityStatus.Finished);
                 Lv_Activities.Items.Refresh();
             }
             LoadQuickStats();

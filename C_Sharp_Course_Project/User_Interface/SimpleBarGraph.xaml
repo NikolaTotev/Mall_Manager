@@ -10,10 +10,10 @@
     <Grid>
         <wpf:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Left">
             <wpf:CartesianChart.AxisX>
-                <wpf:Axis Title="Salesman" Labels="{Binding Labels}"></wpf:Axis>
+                <wpf:Axis Title="Activity Types" Labels="{Binding Labels}"></wpf:Axis>
             </wpf:CartesianChart.AxisX>
             <wpf:CartesianChart.AxisY>
-                <wpf:Axis Title="Sold Apps" LabelFormatter="{Binding Formatter}"></wpf:Axis>
+                <wpf:Axis Title="Number of Given Activity Type" LabelFormatter="{Binding Formatter}"></wpf:Axis>
             </wpf:CartesianChart.AxisY>
         </wpf:CartesianChart>
     </Grid>
