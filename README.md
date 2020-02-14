@@ -71,6 +71,7 @@ These are showing because when downloading from Github, the nessecary NuGet pack
 The warnings should have gone away and you are ready to lanunch the program:
 ***1.*** Right-click on the User_Interface project
 ***2.*** From the menu select ***"Set StartUp Project"***
+
 <img src="https://github.com/NikolaTotev/C_Sharp_Course_Project/blob/master/ReadMe_Images/SettingAsStartupProj.png?raw=true">
 
 ***3.*** Press the **"Start"** button.
