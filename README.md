@@ -1,7 +1,3 @@
-
-
-
-
 # Mall Manager Wiki
 
 - [Installation](#installation)
@@ -45,7 +41,7 @@ Building in Visual Studio requires a couple more steps.
 Being by again downloading & extracting the repository file. Once complete locate the ***"C_Sharp_Course_Project"*** folder:
 
 <img src="https://github.com/NikolaTotev/C_Sharp_Course_Project/blob/master/ReadMe_Images/VsFolder.png?raw=true">
-Open it and locate the only ***.sln*** item inside:
+Open it and locate the only ***".sln"*** item inside:
 
 <img src="https://github.com/NikolaTotev/C_Sharp_Course_Project/blob/master/ReadMe_Images/OpenSln.png?raw=true">
 
@@ -61,13 +57,11 @@ Once you do it once, you may recieve it 2 more times. If you do execute the prev
 After that you should be greeted with an empty screen with the ***Solution Explorer*** at the top right of your screen.
 You may notice the following warning messages & green underlines:
 
-<img src="https://github.com/NikolaTotev/C_Sharp_Course_Project/blob/master/ReadMe_Images/NuGetErrors.png?raw=true
-">
+<img src="https://github.com/NikolaTotev/C_Sharp_Course_Project/blob/master/ReadMe_Images/NuGetErrors.png?raw=true">
 
 These are showing because when downloading from Github, the nessecary NuGet packages are not downloaded. This issue is easliy fixed by simply building the solution. This is done by right clicking the solution which will show the following menu, then click ***"Build Solution"*** :
 
-<img src="https://github.com/NikolaTotev/C_Sharp_Course_Project/blob/master/ReadMe_Images/BuildingSolution.png?raw=true
-">
+<img src="https://github.com/NikolaTotev/C_Sharp_Course_Project/blob/master/ReadMe_Images/BuildingSolution.png?raw=true">
 
 # UI Walkthrough
 ## Dashboard
