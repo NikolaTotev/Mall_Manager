@@ -1,5 +1,7 @@
+# Created By
+- Nikola Totev - FN 62271
+- Ivaylo Petkov - FN 62329
 # Mall Manager Wiki
-
 - [Installation](#installation)
 	- Standard .exe installation
 	- Downloading repo & building project in Visual Studio
@@ -20,6 +22,7 @@
 		
 - [Program Data Files](#program-data-files)
 	- Location
+	- What they are used for
 ----------------------------------
 
 # Installation
