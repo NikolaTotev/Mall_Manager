@@ -20,7 +20,6 @@
 		
 - [Program Data Files](#program-data-files)
 	- Location
-	- What they are used for
 ----------------------------------
 
 # Installation
