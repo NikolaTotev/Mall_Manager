@@ -80,18 +80,63 @@ The warnings should have gone away and you are ready to lanunch the program:
 
 # UI Walkthrough
 ## Dashboard
+This is the dashboard, from here you can create up to 2 malls or open a mall that is already created.
+
+<img src="https://github.com/NikolaTotev/C_Sharp_Course_Project/blob/master/ReadMe_Images/Starting.png?raw=true">
 
 ## Mall Menu
+Once you open a mall you are directed to this page. This is the mall menu. From here you can view:
+- The rental spaces of the mall
+- Activities for the mall as a whole
+- Statistics for the mall as a whole
+
+INSERT IMAGE
+
 ### Rental spaces menu
+This is the rental spaces menu. From here you can **Add** and **Remove** rental spaced from the mall. 
+You can also search by name or you can use  [CMS (Command Mode Search)](#using-command-mode-search-(CMS)) .
+
+INSERT IMAGE
+
 ### Mall activities menu
+This is the mall activities menu. From here you can **Add** and **Remove** activities from the current mall. 
+You can also view statistics from the ***"Quick Stats"*** panel or open the full statistics from the ***"Stats"*** button.
+
+INSERT IMAGE
+
 ### Mall statistics page
+ This is the mall statistics page. Here you can view statistics about the mall.
+ 
+INSERT IMAGE
 
 ## Adding/Editing/Removing
+Below are all of the supported ***Add***, ***Edit*** & ***Remove*** operations that are supported. (This is not the final list of operations, the rest are put as **"future development opportunities"**)
+
+**Note:** If not explicitly mentionted  the ***"Cancel"*** button returns you to the previous page and does not execute any operation
 ### Creating a mall
+Creating a mall is done through this window. The add button is active once all fields have a valid value.
+
+INSERT IMAGE
+
 ### Adding/Editing/Removing rental space
+- Adding a rental space is done through this menu. As before the ***"Add"*** button becomes active only when the fields have valid values.
+
+INSERT IMAGE
+
+- Removing a rental space is done by selecting the rental space(s) you want to delete from the Rental Spaces menu and clicking the ***"Delete"*** button.
+
+***Notice: Only spaces with 0 associated activities will be deleted.  If you attempt to delete a space that still have active activities you will recieve a warning.*** 
+
+INSERT IMAGE
+
 ### Adding/Removing activity
-#### For a mall 
-#### For a room
+There are two types of activity you can add:
+***1. For a mall:***  This associates the created activity only with the mall, not a specific room.
+***2. For a room:***  This associates the created activity only with the mall, not a specific room.
+Both use the same interface: *(The same rules about the ***"Add"*** button apply as before.)*
+
+INSERT IMAGE
+
 ### Statistics
 ### Using Command Mode Search (CMS)
 
