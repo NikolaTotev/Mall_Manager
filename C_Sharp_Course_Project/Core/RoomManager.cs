@@ -209,6 +209,12 @@ namespace Core
             return true;
         }
 
+
+        public void AddRoomType(string typeToAdd)
+        {
+            m_Config.RoomTypes.Add(typeToAdd);
+        }
+
         /// <summary>
         /// Returns a dictionary containing basic information about every room in the rooms dictionary.
         /// </summary>
