@@ -1,4 +1,4 @@
-# Created By
+## Created By
 - Nikola Totev - FN 62271
 - Ivaylo Petkov - FN 62329
 # Mall Manager Wiki
@@ -40,7 +40,7 @@ Open it and run ***"User_Interface.exe"***. Thats it! You are now ready to use M
 
 ## Building in Visual Studio
 Building in Visual Studio requires a couple more steps. 
-Begin by again downloading & extracting the repository file. Once complete locate the ***"C_Sharp_Course_Project"*** folder:
+Being by again downloading & extracting the repository file. Once complete locate the ***"C_Sharp_Course_Project"*** folder:
 
 <img src="https://github.com/NikolaTotev/C_Sharp_Course_Project/blob/master/ReadMe_Images/VsFolder.png?raw=true">
 
@@ -140,6 +140,10 @@ Removing an activity is done from the respective activities menus (for mall or r
 ### Statistics
 Mall manager offers a number of data visualizations. You can access them from the dedicated ***"Stats"*** buttons or you can view the ***"Quick Stats"*** on the activity pages.
 Below are some examples:
+
+<img src="https://github.com/NikolaTotev/OOP-with-CS-Course-Project/blob/master/ReadMe_Images/UI/RoomStatistics.png?raw=true">
+
+<img src="https://github.com/NikolaTotev/OOP-with-CS-Course-Project/blob/master/ReadMe_Images/UI/QuickStats.png?raw=true">
 
 ### Using Command Mode Search (CMS)
 CMS is a powerful filtering tool that you can use to manage large amounts of rental spaces in an instant. It is activated from the Rental Spaces menu ***(Button marked with "1")***
