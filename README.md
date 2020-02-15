@@ -2,7 +2,7 @@
 - Nikola Totev - FN 62271
 - Ivaylo Petkov - FN 62329
 # Literature/Other Resources
-- Programming .NET Components by Juval Lowy
+- Programming .NET Components 2nd Edition by Juval Lowy
 - stackoverflow.com
 # Mall Manager Wiki
 - [Installation](#installation)
